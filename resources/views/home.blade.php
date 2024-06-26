@@ -11,8 +11,9 @@
 <body class="flex flex-col min-h-screen bg-gray-100">
     <nav class="bg-yellow-600 p-4">
         <div class="container mx-auto flex justify-between items-center">
-            <div class="text-white font-bold">
-                <img src="{{ asset('img/logopkl.png') }}" alt="Logo" class="h-16"> Pemerintah Kota Pekalongan
+            <div class="text-white font-bold flex items-center">
+                <img src="{{ asset('img/logopkl.png') }}" alt="Logo" class="h-16 mr-3">
+                Pemerintah Kota Pekalongan
             </div>
             <ul class="flex space-x-10">
                 <li><a href="#" class="text-white">Beranda</a></li>
@@ -41,9 +42,40 @@
             </div>
         </div>
     </main>
-    <footer class="bg-gray-800 text-gray-300 py-4">
-        <div class="container mx-auto text-center">
-            &copy; {{ date('Y') }} Pemerintah Kota Pekalongan. All rights reserved.
+    <footer class="bg-yellow-600 text-gray-800 py-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="flex flex-col items-center md:items-start">
+                    <img src="{{ asset('img/logopkl.png') }}" alt="Logo" class="h-16 mb-2">
+                    <p class="text-white">Pemerintah Kota Pekalongan</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#"><img src="{{ asset('img/facebook.png') }}" alt="Facebook" class="h-6"></a>
+                        <a href="#"><img src="{{ asset('img/twitter.png') }}" alt="Twitter" class="h-6"></a>
+                        <a href="#"><img src="{{ asset('img/instagram.png') }}" alt="Instagram" class="h-6"></a>
+                        <a href="#"><img src="{{ asset('img/youtube.png') }}" alt="YouTube" class="h-6"></a>
+                    </div>
+                </div>
+                <div class="text-center md:text-left">
+                    <h2 class="text-white font-semibold mb-4">Link Terkait</h2>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-white hover:text-gray-200">KEMENPAN</a></li>
+                        <li><a href="#" class="text-white hover:text-gray-200">KEMENDAGRI</a></li>
+                        <li><a href="#" class="text-white hover:text-gray-200">PEMPROV JATENG</a></li>
+                        <li><a href="#" class="text-white hover:text-gray-200">KIP JATENG</a></li>
+                        <li><a href="#" class="text-white hover:text-gray-200">PORTAL SATU DATA</a></li>
+                        <li><a href="#" class="text-white hover:text-gray-200">KEBIJAKAN PRIVASI</a></li>
+                    </ul>
+                </div>
+                <div class="text-center md:text-left">
+                    <h2 class="text-white font-semibold mb-4">Alamat</h2>
+                    <p class="text-white">Jl. Mataram No.1, Podosugih, Kec. Pekalongan Bar., Kota Pekalongan, Jawa Tengah 51111</p>
+                    <p class="text-white mt-2"><a href="mailto:setda@pekalongankota.go.id" class="hover:text-gray-200">setda@pekalongankota.go.id</a></p>
+                    <p class="text-white mt-2"><a href="tel:+62285421093" class="hover:text-gray-200">(0285) 421093</a></p>
+                </div>
+            </div>
+            <div class="text-center mt-8 text-white">
+                &copy; {{ date('Y') }} Dinas Komunikasi dan Informatika Kota Pekalongan. All rights reserved.
+            </div>
         </div>
     </footer>
 
