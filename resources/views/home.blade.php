@@ -15,6 +15,22 @@
                 <img src="{{ asset('img/logopkl.png') }}" alt="Logo" class="h-16 mr-3">
                 Pemerintah Kota Pekalongan
             </div>
+            <div>
+                <!--Data Loop-->
+                 <template>
+
+                 </template>
+
+                 <!--Back/Next-->
+                  <div>
+
+                  </div>
+
+                  <!--Button-->
+                  <div>
+                    
+                  </div>
+            </div>
             <ul class="flex space-x-10">
                 <li><a href="#" class="text-white">Beranda</a></li>
                 <li><a href="#" class="text-white">Sekilas</a></li>
