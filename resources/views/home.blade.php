@@ -55,7 +55,6 @@
                 <!--Data Loop-->
                  <template x-for="slide in slides" :key="slide.id">
                     <div x-show="activeSlide === slide.id" class="p-24 h-80 flex items-center bg-slate-500 text-white rounded-lg"></div>
-                    
                  </template>
 
                  <!--Back/Next-->
