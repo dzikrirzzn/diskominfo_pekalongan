@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-gray-100">
+<body class="flex flex-col min-h-screen bg-gray-100">
     <nav class="bg-yellow-600 p-4">
         <div class="container mx-auto flex justify-between items-center">
             <div class="text-white font-bold">
@@ -26,19 +26,27 @@
             </ul>
         </div>
     </nav>
-    <main class="container mx-auto py-8">
-        <div class="bg-white shadow-md rounded-lg p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h1 class="text-xl font-bold">Wali kota dan Wakil Wali kota Pekalongan Tinjau TPA Degayu</h1>
-                    <p class="text-gray-600">Rencanakan Fasilitas Pengolahan Sampah</p>
+    <main class="flex-1">
+        <div class="container mx-auto py-8">
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-xl font-bold">Wali kota dan Wakil Wali kota Pekalongan Tinjau TPA Degayu</h1>
+                        <p class="text-gray-600">Rencanakan Fasilitas Pengolahan Sampah</p>
+                    </div>
                 </div>
-            </div>
-            <div class="mt-6">
-                <img src="path/to/image.jpg" alt="TPA Degayu" class="w-full h-64 object-cover rounded-lg">
+                <div class="mt-6">
+                    <img src="path/to/image.jpg" alt="TPA Degayu" class="w-full h-64 object-cover rounded-lg">
+                </div>
             </div>
         </div>
     </main>
+    <footer class="bg-gray-800 text-gray-300 py-4">
+        <div class="container mx-auto text-center">
+            &copy; {{ date('Y') }} Pemerintah Kota Pekalongan. All rights reserved.
+        </div>
+    </footer>
+
     @vite('resources/js/app.js')
 </body>
 
