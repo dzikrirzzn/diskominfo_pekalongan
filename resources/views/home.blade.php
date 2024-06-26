@@ -12,7 +12,7 @@
     <nav class="bg-yellow-600 p-4">
         <div class="container mx-auto flex justify-between items-center">
             <div class="text-white font-bold">
-                <img src="path/to/logo.png" alt="Pekalongan Logo" class="inline-block h-8">
+                <img src="public/img/logopkl.png" alt="Pekalongan Logo" class="inline-block h-8">
                 Pemerintah Kota Pekalongan
             </div>
             <ul class="flex space-x-10">
