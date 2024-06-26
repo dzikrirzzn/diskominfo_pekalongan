@@ -15,22 +15,6 @@
                 <img src="{{ asset('img/logopkl.png') }}" alt="Logo" class="h-16 mr-3">
                 Pemerintah Kota Pekalongan
             </div>
-            <div>
-                <!--Data Loop-->
-                 <template>
-
-                 </template>
-
-                 <!--Back/Next-->
-                  <div>
-
-                  </div>
-
-                  <!--Button-->
-                  <div>
-                    
-                  </div>
-            </div>
             <ul class="flex space-x-10">
                 <li><a href="#" class="text-white">Beranda</a></li>
                 <li><a href="#" class="text-white">Sekilas</a></li>
@@ -55,6 +39,34 @@
                 <div class="mt-6">
                     <img src="path/to/image.jpg" alt="TPA Degayu" class="w-full h-64 object-cover rounded-lg">
                 </div>
+            </div>
+        </div>
+        <div class="p-16">
+            <div class="max-w-4xl mx-auto relative" x-data="{
+                activeSlidee: 1,
+                slides: [
+                { id: 1, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                { id: 2, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                { id: 3, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                { id: 4, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                { id: 5, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                ]
+            }">
+                <!--Data Loop-->
+                 <template x-for="slide in slides" :key="slide.id">
+                    <div x-show="activeSlide === slide.id" class="p-24 h-80 flex items-center bg-slate-500 text-white rounded-lg"></div>
+                    
+                 </template>
+
+                 <!--Back/Next-->
+                  <div>
+
+                  </div>
+
+                  <!--Button-->
+                  <div>
+                    <template></template>
+                  </div>
             </div>
         </div>
     </main>
