@@ -31,7 +31,7 @@
         <div class="bg-white shadow-md rounded-lg p-6">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-xl font-bold">Wali kota dan Wakil Wali kota Tinjau TPA Degayu</h1>
+                    <h1 class="text-xl font-bold">Wali kota dan Wakil Wali kota Pekalongan Tinjau TPA Degayu</h1>
                     <p class="text-gray-600">Rencanakan Fasilitas Pengolahan Sampah</p>
                 </div>
             </div>
