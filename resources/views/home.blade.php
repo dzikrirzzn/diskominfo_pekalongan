@@ -45,49 +45,57 @@
                 activeSlide: 1,
                 slides: [
                     { id: 1, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
-                    { id: 2, title: 'Hello 2', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
-                    { id: 3, title: 'Hello 3', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
-                    { id: 4, title: 'Hello 4', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
-                    { id: 5, title: 'Hello 5', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'}
+                    { id: 2, title: 'Hello 2', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, molestias.'},
+                    { id: 3, title: 'Hello 3', body: 'Lorem ipsum dolor Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, molestias.'},
+                    { id: 4, title: 'Hello 4', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, molestias.'},
+                    { id: 5, title: 'Hello 5', body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, molestias.'}
                 ],
-                goToSlide(index) {
-                    this.activeSlide = index;
-                },
-                nextSlide() {
-                    if(this.activeSlide === this.slides.length) {
-                        this.activeSlide = 1;
-                    } else {
-                        this.activeSlide++;
-                    }
-                },
-                prevSlide() {
-                    if(this.activeSlide === 1) {
-                        this.activeSlide = this.slides.length;
-                    } else {
-                        this.activeSlide--;
-                    }
-                }
-            }">
+                loop(){
+                setInterval{() => {this.activeSlide = this.activeSlide === 5 ? 1 : thisactiveSlide + 1}, 2000)
+            }"
+            x-init="loop"
+            >
                 <!-- Carousel -->
                 <template x-for="slide in slides" :key="slide.id">
                     <div x-show="activeSlide === slide.id" class="p-24 h-80 flex items-center bg-slate-500 text-white rounded-lg">
                         <div>
                             <h2 class="font-bold text-2xl" x-text="slide.title"></h2>
-                            <p x-text="slide.body" class="text-base"></p>
+                            <p x-text="slide.body" class="text-base">
+                            </p>
                         </div>
                     </div>
                 </template>
                 <!-- Back/Next Buttons -->
-                <div class="absolute">
+                <div class="absolute inset-0 flex">
+                    <div class="flex items-center justify-end w-1/2">
+                        <button 
+                        x-on:click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1"
+                        class="bg-slate-100 text-slate-500 hover:bg-blue-500 hover:text-white font-bold rounded-full w-12 h-12 shadow flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+</svg>
+</button>
+                        
+                    </div>
+                    <div class="absolute inset-0 flex">
                     <div class="flex items-center justify-start w-1/2">
-                        <button class="bg-slate-100 text-slate-500 font-bold rounded-full w-12 h-12">Back</button>
-                        <button class="bg-slate-100 text-slate-500 font-bold rounded-full w-12 h-12">Next</button>
+                        <button 
+                        x-on:click="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1"
+                        class="bg-slate-100 text-slate-500 hover:bg-blue-500 hover:text-white font-bold rounded-full w-12 h-12 shadow flex justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+</svg>
+</button>
+                        
                     </div>
                 </div>
                 <!-- Pagination Buttons -->
-                <div class="absolute bottom-0 left-0 right-0 flex justify-center space-x-2 p-4">
+                <div class="absolute 2-full flex items-center justify-center px-4">
                     <template x-for="slide in slides" :key="slide.id">
-                        <button @click="goToSlide(slide.id)" :class="{'bg-gray-800': activeSlide === slide.id, 'bg-gray-400': activeSlide !== slide.id}" class="w-4 h-4 rounded-full"></button>
+                        <button class="flex w-4 h-2 mt-4 mx-2 mb-2 rounded-full overflow-hidden transition colors duration-200 ease-out hover:bg-slate-600 hover:shadow-lg"
+                        : class="{
+                        'bg-blue-600' : activeSlide === slide.id,
+                        'bg-slate-300' : activeSlide !== slide.id,
+                        }"
+                        x-on:click="activeSlide = slide.id"></button>
                     </template>
                 </div>
             </div>
