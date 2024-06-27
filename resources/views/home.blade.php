@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pemerintah Kota Pekalongan</title>
     @vite('resources/css/app.css')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 </head>
-
 <body class="flex flex-col min-h-screen bg-gray-100">
     <nav class="bg-yellow-600 p-4">
         <div class="container mx-auto flex justify-between items-center">
@@ -45,12 +44,29 @@
             <div class="max-w-4xl mx-auto relative" x-data="{
                 activeSlide: 1,
                 slides: [
-                { id: 1, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
-                { id: 2, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
-                { id: 3, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
-                { id: 4, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
-                { id: 5, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
-                ]
+                    { id: 1, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                    { id: 2, title: 'Hello 2', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                    { id: 3, title: 'Hello 3', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                    { id: 4, title: 'Hello 4', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                    { id: 5, title: 'Hello 5', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'}
+                ],
+                goToSlide(index) {
+                    this.activeSlide = index;
+                },
+                nextSlide() {
+                    if(this.activeSlide === this.slides.length) {
+                        this.activeSlide = 1;
+                    } else {
+                        this.activeSlide++;
+                    }
+                },
+                prevSlide() {
+                    if(this.activeSlide === 1) {
+                        this.activeSlide = this.slides.length;
+                    } else {
+                        this.activeSlide--;
+                    }
+                }
             }">
                 <!-- Carousel -->
                 <template x-for="slide in slides" :key="slide.id">
@@ -74,6 +90,8 @@
                 </div>
             </div>
         </div>
+        <!-- Add the map div here -->
+        <div id="map" style="height: 400px;"></div>
     </main>
     <footer class="bg-yellow-600 text-gray-800 py-10">
         <div class="container mx-auto px-4">
@@ -89,31 +107,44 @@
                     </div>
                 </div>
                 <div class="text-center md:text-left">
-                    <h2 class="text-white font-semibold mb-4">Link Terkait</h2>
+                    <h2 class="text-white font-semibold mb-4">Navigasi</h2>
                     <ul class="space-y-2">
-                        <li><a href="https://www.menpan.go.id/site/" class="text-white hover:text-gray-200">KEMENPAN</a></li>
-                        <li><a href="https://www.kemendagri.go.id/" class="text-white hover:text-gray-200">KEMENDAGRI</a></li>
-                        <li><a href="https://jatengprov.go.id/" class="text-white hover:text-gray-200">PEMPROV JATENG</a></li>
-                        <li><a href="http://kipjateng.jatengprov.go.id/" class="text-white hover:text-gray-200">KIP JATENG</a></li>
-                        <li><a href="https://data.go.id/" class="text-white hover:text-gray-200">PORTAL SATU DATA</a></li>
-                        <li><a href="https://pekalongankota.go.id/halaman/kebijakan-privasi.html" class="text-white hover:text-gray-200">KEBIJAKAN PRIVASI</a></li>
+                        <li><a href="#" class="text-white hover:text-gray-300">Beranda</a></li>
+                        <li><a href="#" class="text-white hover:text-gray-300">Sekilas</a></li>
+                        <li><a href="#" class="text-white hover:text-gray-300">Instansi</a></li>
+                        <li><a href="#" class="text-white hover:text-gray-300">Berita</a></li>
+                        <li><a href="#" class="text-white hover:text-gray-300">Galeri</a></li>
+                        <li><a href="#" class="text-white hover:text-gray-300">Informasi</a></li>
+                        <li><a href="#" class="text-white hover:text-gray-300">Link</a></li>
+                        <li><a href="#" class="text-white hover:text-gray-300">Kip / PPID</a></li>
                     </ul>
                 </div>
                 <div class="text-center md:text-left">
-                    <h2 class="text-white font-semibold mb-4">Alamat</h2>
-                    <p class="text-white">Jl. Mataram No.1, Podosugih, Kec. Pekalongan Bar., Kota Pekalongan, Jawa Tengah 51111</p>
-                    <p class="text-white mt-2"><a href="mailto:setda@pekalongankota.go.id" class="hover:text-gray-200">setda@pekalongankota.go.id</a></p>
-                    <p class="text-white mt-2"><a href="tel:+62285421093" class="hover:text-gray-200">(0285) 421093</a></p>
+                    <h2 class="text-white font-semibold mb-4">Kontak Kami</h2>
+                    <ul class="space-y-2">
+                        <li class="text-white">Alamat: Jl. Nusantara No. 1, Pekalongan</li>
+                        <li class="text-white">Telepon: (0285) 123456</li>
+                        <li class="text-white">Email: info@pekalongan.go.id</li>
+                    </ul>
                 </div>
-            </div>
-            <div class="text-center mt-8 text-white">
-                &copy; {{ date('Y') }} Dinas Komunikasi dan Informatika Kota Pekalongan. All rights reserved.
             </div>
         </div>
     </footer>
-
     @vite('resources/js/app.js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.2.3/cdn.min.js"></script>
-</body>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([-6.888, 109.675], 13); // Coordinates for Pekalongan
 
+        // Add the OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add a marker for Pekalongan
+        L.marker([-6.888, 109.675]).addTo(map)
+            .bindPopup('Pekalongan')
+            .openPopup();
+    </script>
+</body>
 </html>
