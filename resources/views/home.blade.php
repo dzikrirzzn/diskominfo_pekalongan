@@ -121,7 +121,7 @@
                 <div class="text-center md:text-left">
                     <h2 class="text-black font-semibold mb-4">Navigasi</h2>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-black hover:text-gray-300">Beranda</a></li>
+                        <li><a href="#" class="text-black hover:text-gray-300">rumah</a></li>
                         <li><a href="#" class="text-black hover:text-gray-300">Sekilas</a></li>
                         <li><a href="#" class="text-black hover:text-gray-300">Instansi</a></li>
                         <li><a href="#" class="text-black hover:text-gray-300">Berita</a></li>
