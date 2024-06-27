@@ -96,24 +96,24 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="flex flex-col items-center md:items-start">
-                    <img src="{{ asset('img/logopkl.png') }}" alt="Logo" class="h-16 mb-2">
+                    <img src="{{ asset('img/pklbunga.png') }}" alt="Logo" class="h-16 mb-2">
                     <p class="text-white">Pemerintah Kota Pekalongan</p>
                     <div class="flex space-x-4 mt-4">
-                        <a href="#"><img src="{{ asset('img/facebook.png') }}" alt="Facebook" class="h-6"></a>
-                        <a href="#"><img src="{{ asset('img/twitter.png') }}" alt="Twitter" class="h-6"></a>
-                        <a href="#"><img src="{{ asset('img/instagram.png') }}" alt="Instagram" class="h-6"></a>
-                        <a href="#"><img src="{{ asset('img/youtube.png') }}" alt="YouTube" class="h-6"></a>
+                        <a href="#"><img src="{{ asset('img/fb.png') }}" alt="" class="h-6"></a>
+                        <a href="#"><img src="{{ asset('img/twt.png') }}" alt="" class="h-6"></a>
+                        <a href="#"><img src="{{ asset('img/ig.png') }}" alt="" class="h-6"></a>
+                        <a href="#"><img src="{{ asset('img/yt.png') }}" alt="" class="h-6"></a>
                     </div>
                 </div>
                 <div class="text-center md:text-left">
                     <h2 class="text-white font-semibold mb-4">Link Terkait</h2>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-white hover:text-gray-200">KEMENPAN</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-200">KEMENDAGRI</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-200">PEMPROV JATENG</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-200">KIP JATENG</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-200">PORTAL SATU DATA</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-200">KEBIJAKAN PRIVASI</a></li>
+                        <li><a href="https://www.menpan.go.id/site/" class="text-white hover:text-gray-200">KEMENPAN</a></li>
+                        <li><a href="https://www.kemendagri.go.id/" class="text-white hover:text-gray-200">KEMENDAGRI</a></li>
+                        <li><a href="https://jatengprov.go.id/" class="text-white hover:text-gray-200">PEMPROV JATENG</a></li>
+                        <li><a href="http://kipjateng.jatengprov.go.id/" class="text-white hover:text-gray-200">KIP JATENG</a></li>
+                        <li><a href="https://data.go.id/" class="text-white hover:text-gray-200">PORTAL SATU DATA</a></li>
+                        <li><a href="https://pekalongankota.go.id/halaman/kebijakan-privasi.html" class="text-white hover:text-gray-200">KEBIJAKAN PRIVASI</a></li>
                     </ul>
                 </div>
                 <div class="text-center md:text-left">
