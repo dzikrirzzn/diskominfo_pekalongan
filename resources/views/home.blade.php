@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 </head>
+
 <body class="flex flex-col min-h-screen bg-gray-100">
     <nav class="bg-yellow-600 p-4">
         <div class="container mx-auto flex justify-between items-center">
@@ -70,7 +72,8 @@
             }">
                 <!-- Carousel -->
                 <template x-for="slide in slides" :key="slide.id">
-                    <div x-show="activeSlide === slide.id" class="p-24 h-80 flex items-center bg-slate-500 text-white rounded-lg">
+                    <div x-show="activeSlide === slide.id"
+                        class="p-24 h-80 flex items-center bg-slate-500 text-white rounded-lg">
                         <div>
                             <h2 class="font-bold text-2xl" x-text="slide.title"></h2>
                             <p x-text="slide.body" class="text-base"></p>
@@ -87,7 +90,9 @@
                 <!-- Pagination Buttons -->
                 <div class="absolute bottom-0 left-0 right-0 flex justify-center space-x-2 p-4">
                     <template x-for="slide in slides" :key="slide.id">
-                        <button @click="goToSlide(slide.id)" :class="{'bg-gray-800': activeSlide === slide.id, 'bg-gray-400': activeSlide !== slide.id}" class="w-4 h-4 rounded-full"></button>
+                        <button @click="goToSlide(slide.id)"
+                            :class="{'bg-gray-800': activeSlide === slide.id, 'bg-gray-400': activeSlide !== slide.id}"
+                            class="w-4 h-4 rounded-full"></button>
                     </template>
                 </div>
             </div>
@@ -95,7 +100,7 @@
         <!-- Add the map div here -->
         <div id="map" style="height: 400px;"></div>
     </main>
-    <footer class="bg-yellow-600 text-gray-800 py-10">
+    <footer class="bg-blue-600 text-gray-800 py-10">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="flex flex-col items-center md:items-start">
@@ -124,9 +129,12 @@
                 <div class="text-center md:text-left">
                     <h2 class="text-black font-semibold mb-4">Kontak Kami</h2>
                     <ul class="space-y-2">
-                        <li class="text-black"><img src="{{ asset('img/alamat.png') }}" alt="" class="h-6">Alamat: Jl. Nusantara No. 1, Pekalongan</li>
-                        <li class="text-black"><img src="{{ asset('img/telp.png') }}" alt="" class="h-6">Telepon: (0285) 123456</li>
-                        <li class="text-black"><img src="{{ asset('img/pesan.png') }}" alt="" class="h-6">Email: info@pekalongan.go.id</li>
+                        <li class="text-black"><img src="{{ asset('img/alamat.png') }}" alt="" class="h-6">Alamat: Jl.
+                            Nusantara No. 1, Pekalongan</li>
+                        <li class="text-black"><img src="{{ asset('img/telp.png') }}" alt="" class="h-6">Telepon: (0285)
+                            123456</li>
+                        <li class="text-black"><img src="{{ asset('img/pesan.png') }}" alt="" class="h-6">Email:
+                            info@pekalongan.go.id</li>
                     </ul>
                 </div>
             </div>
@@ -135,18 +143,19 @@
     @vite('resources/js/app.js')
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
-        // Initialize the map
-        var map = L.map('map').setView([-6.888, 109.675], 13); // Coordinates for Pekalongan
+    // Initialize the map
+    var map = L.map('map').setView([-6.888, 109.675], 13); // Coordinates for Pekalongan
 
-        // Add the OpenStreetMap tiles
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+    // Add the OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
 
-        // Add a marker for Pekalongan
-        L.marker([-6.888, 109.675]).addTo(map)
-            .bindPopup('Pekalongan')
-            .openPopup();
+    // Add a marker for Pekalongan
+    L.marker([-6.888, 109.675]).addTo(map)
+        .bindPopup('Pekalongan')
+        .openPopup();
     </script>
 </body>
+
 </html>
