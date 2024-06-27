@@ -72,15 +72,17 @@
                 <template x-for="slide in slides" :key="slide.id">
                     <div x-show="activeSlide === slide.id" class="p-24 h-80 flex items-center bg-slate-500 text-white rounded-lg">
                         <div>
-                            <h2 class="text-2xl" x-text="slide.title"></h2>
-                            <p x-text="slide.body"></p>
+                            <h2 class="font-bold text-2xl" x-text="slide.title"></h2>
+                            <p x-text="slide.body" class="text-base"></p>
                         </div>
                     </div>
                 </template>
                 <!-- Back/Next Buttons -->
-                <div class="absolute inset-0 flex items-center justify-between">
-                    <button @click="prevSlide" class="bg-gray-800 text-white p-2 rounded-full">&lt;</button>
-                    <button @click="nextSlide" class="bg-gray-800 text-white p-2 rounded-full">&gt;</button>
+                <div class="absolute">
+                    <div class="flex items-center justify-start w-1/2">
+                        <button class="bg-slate-100 text-slate-500 font-bold rounded-full w-12 h-12">Back</button>
+                        <button class="bg-slate-100 text-slate-500 font-bold rounded-full w-12 h-12">Next</button>
+                    </div>
                 </div>
                 <!-- Pagination Buttons -->
                 <div class="absolute bottom-0 left-0 right-0 flex justify-center space-x-2 p-4">
