@@ -84,7 +84,7 @@
         <!-- Pagination Buttons -->
             <div class="absolute inset-y-0 flex items-center justify-between px-4 w-full">
             <template x-for="slide in slides" :key="slide.id">
-                <button class="flex w-4 h-2 mx-2 rounded-full overflow-hidden transition colors duration-200 ease-out hover:bg-slate-600 hover:shadow-lg" :class="{
+                <button class="flex w-4 h-2 mx-2 mb-2 rounded-full overflow-hidden transition colors duration-200 ease-out hover:bg-slate-600 hover:shadow-lg" :class="{
                 'bg-blue-600' : activeSlide === slide.id,
                 'bg-slate-300' : activeSlide !== slide.id,
                 }" x-on:click="activeSlide = slide.id"></button>
