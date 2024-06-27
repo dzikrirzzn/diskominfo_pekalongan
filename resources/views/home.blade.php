@@ -5,6 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pemerintah Kota Pekalongan</title>
+    <style>
+        .transparent-button {
+            background-color: transparent; /* Makes the background transparent */
+            border: 4px solid #ccc; /* Example border style */
+            color: #333; /* Text color */
+            padding: 45px 0px; /* Adjust padding as needed */
+        }
+    .carousel-slide {
+        width: 100vw; /* Full width of viewport */
+        height: 100%; /* Full height of parent container */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    </style>
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 </head>
@@ -44,7 +59,7 @@
         </div>
         <!-- Carousel -->
         <div class="p-16">
-    <div class="max-w-4xl mx-auto relative" x-data="{
+    <div class="max-w-full mx-auto relative overflow-hidden" style="height: 80vh;" x-data="{
         activeSlide: 1,
         slides: [
             { id: 1, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
@@ -61,37 +76,39 @@
     }" x-init="loop">
         <!-- Data Loop -->
         <template x-for="slide in slides" :key="slide.id">
-            <div x-show="activeSlide === slide.id" class="p-24 h-80 flex items-center bg-slate-500 text-white rounded-lg">
-                <div>
-                    <h2 class="font-bold text-2xl" x-text="slide.title"></h2>
-                    <p x-text="slide.body" class="text-base"></p>
+            <div x-show="activeSlide === slide.id" class="w-full h-full flex items-center bg-slate-500 text-white rounded-lg absolute inset-0">
+                <div class="mx-auto p-8">
+                    <h2 class="font-bold text-3xl mb-4" x-text="slide.title"></h2>
+                    <p x-text="slide.body" class="text-lg"></p>
                 </div>
             </div>
         </template>
         <!-- Back/Next Buttons -->
         <div class="absolute inset-y-0 flex items-center justify-between w-full px-4">
-            <button x-on:click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1" class="bg-slate-100 text-slate-500 hover:bg-blue-500 hover:text-white font-bold rounded-full w-12 h-12 shadow flex justify-center items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            <button x-on:click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1" class="bg-slate-100 transparent-button hover:bg-blue-500 hover:text-white font-bold rounded-full w-12 h-12 shadow flex justify-center items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10 opacity-25">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l5-5m0 10l-5-5" />
                 </svg>
             </button>
-            <button x-on:click="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1" class="bg-slate-100 text-slate-500 hover:bg-blue-500 hover:text-white font-bold rounded-full w-12 h-12 shadow flex justify-center items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            <button x-on:click="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1" class="bg-slate-100 transparent-button hover:bg-blue-500 hover:text-white font-bold rounded-full w-12 h-12 shadow flex justify-center items-center transform rotate-180">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10 opacity-25">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l5-5m0 10l-5-5" />
                 </svg>
             </button>
         </div>
+
         <!-- Pagination Buttons -->
-        <div class="absolute w-full flex items-center justify-center px-4">
-                    <template x-for="slide in slides" :key="slide.id">
-                        <button class="flex w-4 h-2 mt-4 mx-2 mb-2 rounded-full overflow-hidden transition colors duration-200 ease-out hover:bg-slate-600 hover:shadow-lg" :class="{
-                        'bg-blue-600' : activeSlide === slide.id,
-                        'bg-slate-300' : activeSlide !== slide.id,
-                        }" x-on:click="activeSlide = slide.id"></button>
-                    </template>
-                </div>
-            </div>
+        <div class="absolute w-full flex items-center justify-center px-4 bottom-0">
+            <template x-for="slide in slides" :key="slide.id">
+                <button class="flex w-4 h-2 mt-4 mx-2 mb-2 rounded-full overflow-hidden transition colors duration-200 ease-out hover:bg-slate-600 hover:shadow-lg" :class="{
+                    'bg-blue-600' : activeSlide === slide.id,
+                    'bg-slate-300' : activeSlide !== slide.id,
+                }" x-on:click="activeSlide = slide.id"></button>
+            </template>
         </div>
+    </div>
+</div>
+
         <!-- Add the map div here -->
         <div id="map" style="height: 400px; margin-top: 2rem;"></div>
     </main>
