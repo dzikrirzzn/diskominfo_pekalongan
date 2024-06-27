@@ -105,7 +105,7 @@
         <!-- Add the map div here -->
         <div id="map" style="height: 400px; margin-top: 2rem;"></div>
     </main>
-    <footer class="bg-blue-600 text-gray-800 py-10">
+    <footer class="bg-yellow-600 text-gray-800 py-10">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="flex flex-col items-center md:items-start">
