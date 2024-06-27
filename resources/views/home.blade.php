@@ -98,7 +98,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="flex flex-col items-center md:items-start">
                     <img src="{{ asset('img/pklbunga.png') }}" alt="Logo" class="h-16 mb-2">
-                    <p class="text-white">Pemerintah Kota Pekalongan</p>
+                    <p class="text-bllack">Pemerintah Kota Pekalongan</p>
                     <div class="flex space-x-4 mt-4">
                         <a href="#"><img src="{{ asset('img/fb.png') }}" alt="" class="h-6"></a>
                         <a href="#"><img src="{{ asset('img/twt.png') }}" alt="" class="h-6"></a>
