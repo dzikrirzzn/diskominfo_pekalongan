@@ -43,29 +43,52 @@
         </div>
         <div class="p-16">
             <div class="max-w-4xl mx-auto relative" x-data="{
-                activeSlidee: 1,
+                activeSlide: 1,
                 slides: [
-                { id: 1, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
-                { id: 2, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
-                { id: 3, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
-                { id: 4, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
-                { id: 5, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
-                ]
+                    { id: 1, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                    { id: 2, title: 'Hello 2', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                    { id: 3, title: 'Hello 3', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                    { id: 4, title: 'Hello 4', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                    { id: 5, title: 'Hello 5', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'}
+                ],
+                goToSlide(index) {
+                    this.activeSlide = index;
+                },
+                nextSlide() {
+                    if(this.activeSlide === this.slides.length) {
+                        this.activeSlide = 1;
+                    } else {
+                        this.activeSlide++;
+                    }
+                },
+                prevSlide() {
+                    if(this.activeSlide === 1) {
+                        this.activeSlide = this.slides.length;
+                    } else {
+                        this.activeSlide--;
+                    }
+                }
             }">
-                <!--Data Loop-->
-                 <template x-for="slide in slides" :key="slide.id">
-                    <div x-show="activeSlide === slide.id" class="p-24 h-80 flex items-center bg-slate-500 text-white rounded-lg"></div>
-                 </template>
-
-                 <!--Back/Next-->
-                  <div>
-
-                  </div>
-
-                  <!--Button-->
-                  <div>
-                    <template></template>
-                  </div>
+                <!-- Carousel -->
+                <template x-for="slide in slides" :key="slide.id">
+                    <div x-show="activeSlide === slide.id" class="p-24 h-80 flex items-center bg-slate-500 text-white rounded-lg">
+                        <div>
+                            <h2 class="text-2xl" x-text="slide.title"></h2>
+                            <p x-text="slide.body"></p>
+                        </div>
+                    </div>
+                </template>
+                <!-- Back/Next Buttons -->
+                <div class="absolute inset-0 flex items-center justify-between">
+                    <button @click="prevSlide" class="bg-gray-800 text-white p-2 rounded-full">&lt;</button>
+                    <button @click="nextSlide" class="bg-gray-800 text-white p-2 rounded-full">&gt;</button>
+                </div>
+                <!-- Pagination Buttons -->
+                <div class="absolute bottom-0 left-0 right-0 flex justify-center space-x-2 p-4">
+                    <template x-for="slide in slides" :key="slide.id">
+                        <button @click="goToSlide(slide.id)" :class="{'bg-gray-800': activeSlide === slide.id, 'bg-gray-400': activeSlide !== slide.id}" class="w-4 h-4 rounded-full"></button>
+                    </template>
+                </div>
             </div>
         </div>
     </main>
@@ -107,6 +130,7 @@
     </footer>
 
     @vite('resources/js/app.js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.2.3/cdn.min.js"></script>
 </body>
 
 </html>
