@@ -107,24 +107,24 @@
                     </div>
                 </div>
                 <div class="text-center md:text-left">
-                    <h2 class="text-white font-semibold mb-4">Navigasi</h2>
+                    <h2 class="text-black font-semibold mb-4">Navigasi</h2>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-white hover:text-gray-300">Beranda</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-300">Sekilas</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-300">Instansi</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-300">Berita</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-300">Galeri</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-300">Informasi</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-300">Link</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-300">Kip / PPID</a></li>
+                        <li><a href="#" class="text-black hover:text-gray-300">Beranda</a></li>
+                        <li><a href="#" class="text-black hover:text-gray-300">Sekilas</a></li>
+                        <li><a href="#" class="text-black hover:text-gray-300">Instansi</a></li>
+                        <li><a href="#" class="text-black hover:text-gray-300">Berita</a></li>
+                        <li><a href="#" class="text-black hover:text-gray-300">Galeri</a></li>
+                        <li><a href="#" class="text-black hover:text-gray-300">Informasi</a></li>
+                        <li><a href="#" class="text-black hover:text-gray-300">Link</a></li>
+                        <li><a href="#" class="text-black hover:text-gray-300">Kip / PPID</a></li>
                     </ul>
                 </div>
                 <div class="text-center md:text-left">
-                    <h2 class="text-white font-semibold mb-4">Kontak Kami</h2>
+                    <h2 class="text-black font-semibold mb-4">Kontak Kami</h2>
                     <ul class="space-y-2">
-                        <li class="text-white">Alamat: Jl. Nusantara No. 1, Pekalongan</li>
-                        <li class="text-white">Telepon: (0285) 123456</li>
-                        <li class="text-white">Email: info@pekalongan.go.id</li>
+                        <li class="text-black"><img src="{{ asset('img/alamat.png') }}" alt="" class="h-6">Alamat: Jl. Nusantara No. 1, Pekalongan</li>
+                        <li class="text-black"><img src="{{ asset('img/telp.png') }}" alt="" class="h-6">Telepon: (0285) 123456</li>
+                        <li class="text-black"><img src="{{ asset('img/pesan.png') }}" alt="" class="h-6">Email: info@pekalongan.go.id</li>
                     </ul>
                 </div>
             </div>
