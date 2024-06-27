@@ -43,29 +43,35 @@
         </div>
         <div class="p-16">
             <div class="max-w-4xl mx-auto relative" x-data="{
-                activeSlidee: 1,
+                activeSlide: 1,
                 slides: [
-                { id: 1, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus'},
-                { id: 2, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus'},
-                { id: 3, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus'},
-                { id: 4, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus'},
-                { id: 5, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus'},
+                { id: 1, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                { id: 2, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                { id: 3, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                { id: 4, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
+                { id: 5, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
                 ]
             }">
-                <!--Data Loop-->
-                 <template x-for="slide in slides" :key="slide.id">
-                    <div x-show="activeSlide === slide.id" class="p-24 h-80 flex items-center bg-slate-500 text-white rounded-lg"></div>
-                 </template>
-
-                 <!--Back/Next-->
-                  <div>
-
-                  </div>
-
-                  <!--Button-->
-                  <div>
-                    <template></template>
-                  </div>
+                <!-- Carousel -->
+                <template x-for="slide in slides" :key="slide.id">
+                    <div x-show="activeSlide === slide.id" class="p-24 h-80 flex items-center bg-slate-500 text-white rounded-lg">
+                        <div>
+                            <h2 class="text-2xl" x-text="slide.title"></h2>
+                            <p x-text="slide.body"></p>
+                        </div>
+                    </div>
+                </template>
+                <!-- Back/Next Buttons -->
+                <div class="absolute inset-0 flex items-center justify-between">
+                    <button @click="prevSlide" class="bg-gray-800 text-white p-2 rounded-full">&lt;</button>
+                    <button @click="nextSlide" class="bg-gray-800 text-white p-2 rounded-full">&gt;</button>
+                </div>
+                <!-- Pagination Buttons -->
+                <div class="absolute bottom-0 left-0 right-0 flex justify-center space-x-2 p-4">
+                    <template x-for="slide in slides" :key="slide.id">
+                        <button @click="goToSlide(slide.id)" :class="{'bg-gray-800': activeSlide === slide.id, 'bg-gray-400': activeSlide !== slide.id}" class="w-4 h-4 rounded-full"></button>
+                    </template>
+                </div>
             </div>
         </div>
     </main>
@@ -73,24 +79,24 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="flex flex-col items-center md:items-start">
-                    <img src="{{ asset('img/logopkl.png') }}" alt="Logo" class="h-16 mb-2">
+                    <img src="{{ asset('img/pklbunga.png') }}" alt="Logo" class="h-16 mb-2">
                     <p class="text-white">Pemerintah Kota Pekalongan</p>
                     <div class="flex space-x-4 mt-4">
-                        <a href="#"><img src="{{ asset('img/facebook.png') }}" alt="Facebook" class="h-6"></a>
-                        <a href="#"><img src="{{ asset('img/twitter.png') }}" alt="Twitter" class="h-6"></a>
-                        <a href="#"><img src="{{ asset('img/instagram.png') }}" alt="Instagram" class="h-6"></a>
-                        <a href="#"><img src="{{ asset('img/youtube.png') }}" alt="YouTube" class="h-6"></a>
+                        <a href="#"><img src="{{ asset('img/fb.png') }}" alt="" class="h-6"></a>
+                        <a href="#"><img src="{{ asset('img/twt.png') }}" alt="" class="h-6"></a>
+                        <a href="#"><img src="{{ asset('img/ig.png') }}" alt="" class="h-6"></a>
+                        <a href="#"><img src="{{ asset('img/yt.png') }}" alt="" class="h-6"></a>
                     </div>
                 </div>
                 <div class="text-center md:text-left">
                     <h2 class="text-white font-semibold mb-4">Link Terkait</h2>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-white hover:text-gray-200">KEMENPAN</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-200">KEMENDAGRI</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-200">PEMPROV JATENG</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-200">KIP JATENG</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-200">PORTAL SATU DATA</a></li>
-                        <li><a href="#" class="text-white hover:text-gray-200">KEBIJAKAN PRIVASI</a></li>
+                        <li><a href="https://www.menpan.go.id/site/" class="text-white hover:text-gray-200">KEMENPAN</a></li>
+                        <li><a href="https://www.kemendagri.go.id/" class="text-white hover:text-gray-200">KEMENDAGRI</a></li>
+                        <li><a href="https://jatengprov.go.id/" class="text-white hover:text-gray-200">PEMPROV JATENG</a></li>
+                        <li><a href="http://kipjateng.jatengprov.go.id/" class="text-white hover:text-gray-200">KIP JATENG</a></li>
+                        <li><a href="https://data.go.id/" class="text-white hover:text-gray-200">PORTAL SATU DATA</a></li>
+                        <li><a href="https://pekalongankota.go.id/halaman/kebijakan-privasi.html" class="text-white hover:text-gray-200">KEBIJAKAN PRIVASI</a></li>
                     </ul>
                 </div>
                 <div class="text-center md:text-left">
@@ -107,6 +113,7 @@
     </footer>
 
     @vite('resources/js/app.js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.2.3/cdn.min.js"></script>
 </body>
 
 </html>
