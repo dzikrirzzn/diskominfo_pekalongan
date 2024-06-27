@@ -50,23 +50,7 @@
                     { id: 4, title: 'Hello 4', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'},
                     { id: 5, title: 'Hello 5', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, magni a veniam minus nemo expedita eos veritatis vitae voluptate porro. Quo velit eius ea ipsam? Temporibus placeat dolore quisquam quod.'}
                 ],
-                goToSlide(index) {
-                    this.activeSlide = index;
-                },
-                nextSlide() {
-                    if(this.activeSlide === this.slides.length) {
-                        this.activeSlide = 1;
-                    } else {
-                        this.activeSlide++;
-                    }
-                },
-                prevSlide() {
-                    if(this.activeSlide === 1) {
-                        this.activeSlide = this.slides.length;
-                    } else {
-                        this.activeSlide--;
-                    }
-                }
+                
             }">
                 <!-- Carousel -->
                 <template x-for="slide in slides" :key="slide.id">
