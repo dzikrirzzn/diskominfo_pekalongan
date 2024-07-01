@@ -144,6 +144,73 @@
             </div>
         </div>
 
+        <!-- Add the News and Announcement sections here -->
+        <div class="container mx-auto py-8 px-4">
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <div class="flex flex-col md:flex-row">
+                    <div class="flex-1">
+                        <div class="p-4">
+                            <h2 class="text-xl font-semibold mb-4">Berita</h2>
+                            <div class="bg-gray-100 rounded-lg p-4 mb-4">
+                                <img src="your_image_url_here" alt="Pekalongan Balloon Festival"
+                                    class="w-full h-40 object-cover rounded-lg mb-4">
+                                <h3 class="text-lg font-bold">Pekalongan Balloon Festival</h3>
+                            </div>
+                            <div class="bg-gray-100 rounded-lg p-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="font-semibold">Terbaru</span>
+                                    <span class="font-semibold">Populer</span>
+                                </div>
+                                <ul class="space-y-2">
+                                    <li class="flex justify-between">
+                                        <span>35 Ton Sampah Telah Dibersihkan Di Kawasan Monas</span>
+                                        <span class="text-gray-500">Lintas Kota | 23 06 2024 10:35</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>15 Ribu Pelari Meriahkan JAKIM 2024</span>
+                                        <span class="text-gray-500">Jakarta Hari Ini | 23 06 2024 09:57</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>Jakarta Cerah Sepanjang Hari Ini</span>
+                                        <span class="text-gray-500">Jakarta Hari Ini | 23 06 2024 07:09</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>Malam Jaya Raya Sukses Pukau Pengunjung Monas</span>
+                                        <span class="text-gray-500">Wisata | 23 06 2024 01:05</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-1 mt-4 md:mt-0 md:ml-4">
+                        <div class="p-4">
+                            <h2 class="text-xl font-semibold mb-4">Pengumuman</h2>
+                            <div class="bg-gray-100 rounded-lg p-4">
+                                <ul class="space-y-2">
+                                    <li class="flex justify-between">
+                                        <span>35 Ton Sampah Telah Dibersihkan Di Kawasan Monas</span>
+                                        <span class="text-gray-500">Lintas Kota | 23 06 2024 10:35</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>15 Ribu Pelari Meriahkan JAKIM 2024</span>
+                                        <span class="text-gray-500">Jakarta Hari Ini | 23 06 2024 09:57</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>Jakarta Cerah Sepanjang Hari Ini</span>
+                                        <span class="text-gray-500">Jakarta Hari Ini | 23 06 2024 07:09</span>
+                                    </li>
+                                    <li class="flex justify-between">
+                                        <span>Malam Jaya Raya Sukses Pukau Pengunjung Monas</span>
+                                        <span class="text-gray-500">Wisata | 23 06 2024 01:05</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container mx-auto py-8 px-4">
             <div class="bg-white shadow-md rounded-lg p-6">
                 <div class="flex flex-col md:flex-row">
