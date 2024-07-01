@@ -9,6 +9,68 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        .news-box {
+            display: flex;
+            border: 1px solid #000;
+            width: 400px;
+            height: 300px;
+        }
+
+        .news-image {
+            width: 150px;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .news-scroll {
+            overflow-y: auto;
+            padding: 10px;
+            width: 250px;
+        }
+
+        .news-scroll h2 {
+            margin-top: 0;
+        }
+
+        .news-content p {
+            margin: 10px 0;
+        }
+
+        .vertical-rectangle {
+            border: 1px solid #000;
+            width: 200px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .vertical-rectangle h2 {
+            margin: 0;
+        }
+
+        .announcement-scroll {
+            overflow-y: auto;
+            width: 100%;
+            height: 100%;
+        }
+
+        .announcement-content p {
+            margin: 10px 0;
+        }
+    </style>
 </head>
 
 <body class="flex flex-col min-h-screen bg-gray-100">
@@ -48,7 +110,7 @@
         <div class="relative overflow-hidden h-[88vh]" x-data="{
             activeSlide: 1,
             slides: [
-                { id: 1, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
+                { id: 1, title: 'Hello 1', body: ' ipsum dolor sit amet, consectetur adipisicing elit.' },
                 { id: 2, title: 'Hello 2', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
                 { id: 3, title: 'Hello 3', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
                 { id: 4, title: 'Hello 4', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
@@ -85,6 +147,47 @@
                     </svg>
                 </button>
             </div>
+
+<!-- berita & pengumuman  -->
+<div class="container">
+        <div class="news-box">
+            <img src="path_to_image.jpg" alt="Image" class="news-image">
+            <div class="news-scroll">
+                <h2>News</h2>
+                <div class="news-content">
+                    <?php
+                    $news = [
+                        "News item 1: Lorem ipsum dolor sit amet.",
+                        "News item 2: Consectetur adipiscing elit.",
+                        "News item 3: Integer nec odio. Praesent libero.",
+                        "News item 4: Sed cursus ante dapibus diam."
+                    ];
+                    foreach ($news as $item) {
+                        echo "<p>$item</p>";
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="vertical-rectangle">
+            <h2>Pengumuman</h2>
+            <div class="announcement-scroll">
+                <div class="announcement-content">
+                    <?php
+                    $announcements = [
+                        "Announcement 1: Vestibulum ante ipsum primis.",
+                        "Announcement 2: In faucibus orci luctus et.",
+                        "Announcement 3: Aliquam erat volutpat.",
+                        "Announcement 4: Nullam quis risus eget urna."
+                    ];
+                    foreach ($announcements as $item) {
+                        echo "<p>$item</p>";
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
             <div class="absolute w-full flex items-center justify-center px-4 bottom-0">
                 <template x-for="slide in slides" :key="slide.id">
                     <button
