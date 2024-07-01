@@ -85,13 +85,13 @@
             </div>
             <button @click="isOpen = !isOpen" class="lg:hidden text-black focus:outline-none">
                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path :class="{'hidden': isOpen, 'inline-flex': !isOpen }" stroke-linecap="round"
+                    <path :class="{ 'hidden': isOpen, 'inline-flex': !isOpen }" stroke-linecap="round"
                         stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    <path :class="{'hidden': !isOpen, 'inline-flex': isOpen }" stroke-linecap="round"
+                    <path :class="{ 'hidden': !isOpen, 'inline-flex': isOpen }" stroke-linecap="round"
                         stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
-            <div :class="{'hidden': !isOpen}" class="w-full lg:flex lg:items-center lg:w-auto">
+            <div :class="{ 'hidden': !isOpen }" class="w-full lg:flex lg:items-center lg:w-auto">
                 <ul class="lg:flex space-y-2 lg:space-y-0 lg:space-x-10">
                     <li><a href="#" class="block text-black hover:text-gray-200">Beranda</a></li>
                     <li><a href="#" class="block text-black hover:text-gray-200">Sekilas</a></li>
@@ -148,46 +148,47 @@
                 </button>
             </div>
 
-<!-- berita & pengumuman  -->
-<div class="container">
-        <div class="news-box">
-            <img src="path_to_image.jpg" alt="Image" class="news-image">
-            <div class="news-scroll">
-                <h2>News</h2>
-                <div class="news-content">
-                    <?php
-                    $news = [
-                        "News item 1: Lorem ipsum dolor sit amet.",
-                        "News item 2: Consectetur adipiscing elit.",
-                        "News item 3: Integer nec odio. Praesent libero.",
-                        "News item 4: Sed cursus ante dapibus diam."
-                    ];
-                    foreach ($news as $item) {
-                        echo "<p>$item</p>";
-                    }
-                    ?>
+            <!-- berita & pengumuman  -->
+            <div class="container">
+                <div class="news-box">
+                    <img src="path_to_image.jpg" alt="Image" class="news-image">
+                    <div class="news-scroll">
+                        <h2>News</h2>
+                        <div class="news-content">
+                            <?php
+                            $news = [
+                                "News item 1: Lorem ipsum dolor sit amet.",
+                                "News item 2: Consectetur adipiscing elit.",
+                                "News item 3: Integer nec odio. Praesent libero.",
+                                "News item 4: Sed cursus ante dapibus diam."
+                            ];
+                            foreach ($news as $item) {
+                                echo "<p>$item</p>";
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="vertical-rectangle">
+                    <h2>Pengumuman</h2>
+                    <div class="announcement-scroll">
+                        <div class="announcement-content">
+                            <?php
+                            $announcements = [
+                                "Announcement 1: Vestibulum ante ipsum primis.",
+                                "Announcement 2: In faucibus orci luctus et.",
+                                "Announcement 3: Aliquam erat volutpat.",
+                                "Announcement 4: Nullam quis risus eget urna."
+                            ];
+                            foreach ($announcements as $item) {
+                                echo "<p>$item</p>";
+                            }
+                            ?>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="vertical-rectangle">
-            <h2>Pengumuman</h2>
-            <div class="announcement-scroll">
-                <div class="announcement-content">
-                    <?php
-                    $announcements = [
-                        "Announcement 1: Vestibulum ante ipsum primis.",
-                        "Announcement 2: In faucibus orci luctus et.",
-                        "Announcement 3: Aliquam erat volutpat.",
-                        "Announcement 4: Nullam quis risus eget urna."
-                    ];
-                    foreach ($announcements as $item) {
-                        echo "<p>$item</p>";
-                    }
-                    ?>
-                </div>
-            </div>
-        </div>
-    </div>
+
             <div class="absolute w-full flex items-center justify-center px-4 bottom-0">
                 <template x-for="slide in slides" :key="slide.id">
                     <button
