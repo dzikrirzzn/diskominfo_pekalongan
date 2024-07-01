@@ -95,117 +95,65 @@
             </div>
         </div>
 
-        <div class="relative bg-batik-pattern bg-repeat py-4 md:py-8">
-            <div class="relative w-full max-w-6xl mx-auto my-4 md:my-8" x-data="{
-        activeSlide: 1,
-        slides: [
-            { id: 1, image: '{{ asset('img/balon_pekalongan.png') }}', logo: '{{ asset('img/pklbunga.png') }}', title: 'Pekalongan Balloon Festival', description: 'You can make summer plans for unforgettable experiences in the nation\'s capital. Check out the dozens of free things to do, including Smithsonian museums, the National Mall and an array of outdoor activities. Explore wondrous neighborhoods, a dining scene filled with Michelin-approved restaurants, rooftop bars and beer gardens. Get ready for an exciting summer in.' },
-            { id:2, image: '{{ asset('img/balon_pekalongan.png') }}', logo: '{{ asset('img/pklbunga.png') }}', title: 'Pekalongan Balloon Festival', description: 'You can make summer plans for unforgettable experiences in the nation\'s capital. Check out the dozens of free things to do, including Smithsonian museums, the National Mall and an array of outdoor activities. Explore wondrous neighborhoods, a dining scene filled with Michelin-approved restaurants, rooftop bars and beer gardens. Get ready for an exciting summer in.' },
-        ]
-    }">
-                <div class="overflow-hidden rounded-lg shadow-lg">
-                    <div class="flex transition-transform duration-300 ease-in-out"
-                        :style="{ transform: translateX(-${(activeSlide - 1) * 100}%) }">
-                        <template x-for="slide in slides" :key="slide.id">
-                            <div class="flex-none w-full">
-                                <div class="flex flex-col md:flex-row">
-                                    <!-- Left side - Image -->
-                                    <div class="w-full md:w-1/2 h-64 md:h-auto">
-                                        <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover">
-                                    </div>
-                                    <!-- Right side - Content -->
-                                    <div class="w-full md:w-1/2 bg-white p-4 md:p-6">
-                                        <img :src="slide.logo" :alt="slide.title + ' Logo'"
-                                            class="h-12 w-auto mb-4 mx-auto md:mx-0">
-                                        <h2 class="text-xl md:text-2xl font-bold mb-2 md:mb-4" x-text="slide.title">
-                                        </h2>
-                                        <p class="text-sm md:text-base text-gray-700" x-text="slide.description"></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-                <!-- Navigation buttons -->
-                <button @click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1"
-                    class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        class="h-4 w-4 md:h-6 md:w-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-                <button @click="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1"
-                    class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        class="h-4 w-4 md:h-6 md:w-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-
         <!-- Add the News and Announcement sections here -->
         <div class="container mx-auto py-8 px-4">
-            <div class="bg-white shadow-md rounded-lg p-6">
-                <div class="flex flex-col md:flex-row">
-                    <div class="flex-1">
+            <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                <!-- Berita Section -->
+                <div class="flex-1 bg-yellow-300 rounded-lg p-4">
+                    <h2 class="text-xl font-semibold mb-4">Berita</h2>
+                    <div class="bg-white rounded-lg shadow-md mb-4 overflow-hidden">
+                        <img src="/mnt/data/image.png" alt="Pekalongan Balloon Festival" class="w-full h-40 object-cover">
                         <div class="p-4">
-                            <h2 class="text-xl font-semibold mb-4">Berita</h2>
-                            <div class="bg-gray-100 rounded-lg p-4 mb-4">
-                                <img src="your_image_url_here" alt="Pekalongan Balloon Festival"
-                                    class="w-full h-40 object-cover rounded-lg mb-4">
-                                <h3 class="text-lg font-bold">Pekalongan Balloon Festival</h3>
-                            </div>
-                            <div class="bg-gray-100 rounded-lg p-4">
-                                <div class="flex justify-between mb-2">
-                                    <span class="font-semibold">Terbaru</span>
-                                    <span class="font-semibold">Populer</span>
-                                </div>
-                                <ul class="space-y-2">
-                                    <li class="flex justify-between">
-                                        <span>35 Ton Sampah Telah Dibersihkan Di Kawasan Monas</span>
-                                        <span class="text-gray-500">Lintas Kota | 23 06 2024 10:35</span>
-                                    </li>
-                                    <li class="flex justify-between">
-                                        <span>15 Ribu Pelari Meriahkan JAKIM 2024</span>
-                                        <span class="text-gray-500">Jakarta Hari Ini | 23 06 2024 09:57</span>
-                                    </li>
-                                    <li class="flex justify-between">
-                                        <span>Jakarta Cerah Sepanjang Hari Ini</span>
-                                        <span class="text-gray-500">Jakarta Hari Ini | 23 06 2024 07:09</span>
-                                    </li>
-                                    <li class="flex justify-between">
-                                        <span>Malam Jaya Raya Sukses Pukau Pengunjung Monas</span>
-                                        <span class="text-gray-500">Wisata | 23 06 2024 01:05</span>
-                                    </li>
-                                </ul>
-                            </div>
+                            <h3 class="text-lg font-bold">Pekalongan Balloon Festival</h3>
                         </div>
                     </div>
-                    <div class="flex-1 mt-4 md:mt-0 md:ml-4">
-                        <div class="p-4">
-                            <h2 class="text-xl font-semibold mb-4">Pengumuman</h2>
-                            <div class="bg-gray-100 rounded-lg p-4">
-                                <ul class="space-y-2">
-                                    <li class="flex justify-between">
-                                        <span>35 Ton Sampah Telah Dibersihkan Di Kawasan Monas</span>
-                                        <span class="text-gray-500">Lintas Kota | 23 06 2024 10:35</span>
-                                    </li>
-                                    <li class="flex justify-between">
-                                        <span>15 Ribu Pelari Meriahkan JAKIM 2024</span>
-                                        <span class="text-gray-500">Jakarta Hari Ini | 23 06 2024 09:57</span>
-                                    </li>
-                                    <li class="flex justify-between">
-                                        <span>Jakarta Cerah Sepanjang Hari Ini</span>
-                                        <span class="text-gray-500">Jakarta Hari Ini | 23 06 2024 07:09</span>
-                                    </li>
-                                    <li class="flex justify-between">
-                                        <span>Malam Jaya Raya Sukses Pukau Pengunjung Monas</span>
-                                        <span class="text-gray-500">Wisata | 23 06 2024 01:05</span>
-                                    </li>
-                                </ul>
-                            </div>
+                    <div class="bg-white rounded-lg shadow-md p-4">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold">Terbaru</span>
+                            <span class="font-semibold">Populer</span>
                         </div>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between text-sm">
+                                <span>35 Ton Sampah Telah Dibersihkan Di Kawasan Monas</span>
+                                <span class="text-gray-500">Lintas Kota | 23 06 2024 10:35</span>
+                            </li>
+                            <li class="flex justify-between text-sm">
+                                <span>15 Ribu Pelari Meriahkan JAKIM 2024</span>
+                                <span class="text-gray-500">Jakarta Hari Ini | 23 06 2024 09:57</span>
+                            </li>
+                            <li class="flex justify-between text-sm">
+                                <span>Jakarta Cerah Sepanjang Hari Ini</span>
+                                <span class="text-gray-500">Jakarta Hari Ini | 23 06 2024 07:09</span>
+                            </li>
+                            <li class="flex justify-between text-sm">
+                                <span>Malam Jaya Raya Sukses Pukau Pengunjung Monas</span>
+                                <span class="text-gray-500">Wisata | 23 06 2024 01:05</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Pengumuman Section -->
+                <div class="flex-1 bg-yellow-300 rounded-lg p-4">
+                    <h2 class="text-xl font-semibold mb-4">Pengumuman</h2>
+                    <div class="bg-white rounded-lg shadow-md p-4">
+                        <ul class="space-y-2">
+                            <li class="flex justify-between text-sm">
+                                <span>35 Ton Sampah Telah Dibersihkan Di Kawasan Monas</span>
+                                <span class="text-gray-500">Lintas Kota | 23 06 2024 10:35</span>
+                            </li>
+                            <li class="flex justify-between text-sm">
+                                <span>15 Ribu Pelari Meriahkan JAKIM 2024</span>
+                                <span class="text-gray-500">Jakarta Hari Ini | 23 06 2024 09:57</span>
+                            </li>
+                            <li class="flex justify-between text-sm">
+                                <span>Jakarta Cerah Sepanjang Hari Ini</span>
+                                <span class="text-gray-500">Jakarta Hari Ini | 23 06 2024 07:09</span>
+                            </li>
+                            <li class="flex justify-between text-sm">
+                                <span>Malam Jaya Raya Sukses Pukau Pengunjung Monas</span>
+                                <span class="text-gray-500">Wisata | 23 06 2024 01:05</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
