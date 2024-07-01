@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pemerintah Kota Pekalongan</title>
-    @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
@@ -119,6 +118,58 @@
                     </div>
                 </div>
             </div>
+
+            <div class="mt-8">
+                <div class="bg-gray-200 py-6 px-4 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Layanan Kami</h2>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <li class="bg-white rounded-lg p-4 shadow-md">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Pelayanan Administrasi</h3>
+                            <p class="text-gray-600">Kami menyediakan berbagai layanan administrasi seperti pembuatan
+                                KTP, surat izin, dan lainnya.</p>
+                        </li>
+                        <li class="bg-white rounded-lg p-4 shadow-md">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Layanan Kesehatan</h3>
+                            <p class="text-gray-600">Fasilitas kesehatan kami mencakup rumah sakit dan puskesmas yang
+                                siap melayani warga.</p>
+                        </li>
+                        <li class="bg-white rounded-lg p-4 shadow-md">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Pendidikan</h3>
+                            <p class="text-gray-600">Kami berkomitmen untuk meningkatkan kualitas pendidikan di Kota
+                                Pekalongan dengan program-program edukasi.</p>
+                        </li>
+                        <li class="bg-white rounded-lg p-4 shadow-md">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Lingkungan</h3>
+                            <p class="text-gray-600">Kami aktif dalam menjaga kelestarian lingkungan dengan program
+                                penghijauan dan pengelolaan sampah.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <div class="bg-gray-200 py-6 px-4 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Berita Terbaru</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white rounded-lg shadow-md p-4">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Pembangunan Infrastruktur Baru</h3>
+                            <p class="text-gray-600">Kami memulai proyek pembangunan jalan baru untuk mempermudah
+                                akses warga.</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md p-4">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Program Vaksinasi Massal</h3>
+                            <p class="text-gray-600">Gelar vaksinasi massal akan segera dilaksanakan di seluruh
+                                kecamatan.</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md p-4">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Pameran Seni Budaya Lokal</h3>
+                            <p class="text-gray-600">Dukung seniman lokal dengan mengunjungi pameran seni di balai
+                                kota.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
 
