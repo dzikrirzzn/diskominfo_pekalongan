@@ -71,14 +71,14 @@
             </template>
             <div class="absolute inset-y-0 flex items-center justify-between w-full px-4">
                 <button @click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1"
-                    class="bg-slate-100 hover:bg-blue-500 hover:text-white font-bold rounded-full w-12 h-12 shadow flex justify-center items-center">
+                    class="bg-slate-100 hover:text-yellow-500 hover:text-white font-bold rounded-full w-12 h-12 shadow flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                         stroke="currentColor" class="w-10 h-10 opacity-25">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
                 <button @click="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1"
-                    class="bg-slate-100 hover:bg-blue-500 hover:text-white font-bold rounded-full w-12 h-12 shadow flex justify-center items-center">
+                    class="bg-slate-100 hover:text-yellow-500 hover:text-white font-bold rounded-full w-12 h-12 shadow flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                         stroke="currentColor" class="w-10 h-10 opacity-25">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
@@ -95,69 +95,144 @@
             </div>
         </div>
 
-        <!-- Add the News and Announcement sections here -->
-        <div class="container mx-auto py-8 px-4">
-            <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-                <!-- Berita Section -->
-                <div class="flex-1 bg-yellow-300 rounded-lg p-4">
-                    <h2 class="text-xl font-semibold mb-4">Berita</h2>
-                    <div class="bg-white rounded-lg shadow-md mb-4 overflow-hidden">
-                        <img src="/mnt/data/image.png" alt="Pekalongan Balloon Festival" class="w-full h-40 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-lg font-bold">Pekalongan Balloon Festival</h3>
+        <!-- Berita & Pengumuman -->
+        <div class="container mx-auto py-8 px-4 h-screen">
+    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 h-full">
+        <!-- Berita Section -->
+        <div class="flex-[3] bg-yellow-500 rounded-lg p-4 h-full flex flex-col">
+            <h2 class="text-xl font-semibold mb-4">Berita</h2>
+            <div class="flex space-x-4 mb-4">
+                <!-- Image Box -->
+                <div class="flex gap-2">
+                    <div class="flex-1 bg-white rounded-lg shadow overflow-hidden relative">
+                        <img class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300" src="https://awsimages.detik.net.id/community/media/visual/2024/04/16/puluhan-balon-tambat-yang-akan-dipamerkan-saat-festival-balon-tambat-2024-di-pekalongan-2_169.jpeg?w=1200" alt="Pekalongan Balloon Festival">
+                        <div class="absolute bottom-0 w-full p-2 bg-black bg-opacity-50 text-white text-center">
+                            <h3 class="text-lg font-bold hover:text-yellow-500 transition-colors duration-300">Pekalongan Balloon Festival</h3>
                         </div>
                     </div>
-                    <div class="bg-white rounded-lg shadow-md p-4">
-                        <div class="flex justify-between mb-2">
-                            <span class="font-semibold">Terbaru</span>
-                            <span class="font-semibold">Populer</span>
+                    <div class="flex-1 bg-white rounded-lg shadow overflow-hidden relative">
+                        <img class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300" src="https://cdn.antaranews.com/cache/1200x800/2017/10/20171009antarafoto-pawai-pekan-batik-pekalongan-071017-hpp-5.jpg" alt="Another Festival Image">
+                        <div class="absolute bottom-0 w-full p-2 bg-black bg-opacity-50 text-white text-center">
+                            <h3 class="text-lg font-bold hover:text-yellow-500 transition-colors duration-300">Festival Batik Pekalongan</h3>
                         </div>
-                        <ul class="space-y-2">
-                            <li class="flex justify-between text-sm">
-                                <span>35 Ton Sampah Telah Dibersihkan Di Kawasan Monas</span>
-                                <span class="text-gray-500">Lintas Kota | 23 06 2024 10:35</span>
-                            </li>
-                            <li class="flex justify-between text-sm">
-                                <span>15 Ribu Pelari Meriahkan JAKIM 2024</span>
-                                <span class="text-gray-500">Jakarta Hari Ini | 23 06 2024 09:57</span>
-                            </li>
-                            <li class="flex justify-between text-sm">
-                                <span>Jakarta Cerah Sepanjang Hari Ini</span>
-                                <span class="text-gray-500">Jakarta Hari Ini | 23 06 2024 07:09</span>
-                            </li>
-                            <li class="flex justify-between text-sm">
-                                <span>Malam Jaya Raya Sukses Pukau Pengunjung Monas</span>
-                                <span class="text-gray-500">Wisata | 23 06 2024 01:05</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Pengumuman Section -->
-                <div class="flex-1 bg-yellow-300 rounded-lg p-4">
-                    <h2 class="text-xl font-semibold mb-4">Pengumuman</h2>
-                    <div class="bg-white rounded-lg shadow-md p-4">
-                        <ul class="space-y-2">
-                            <li class="flex justify-between text-sm">
-                                <span>35 Ton Sampah Telah Dibersihkan Di Kawasan Monas</span>
-                                <span class="text-gray-500">Lintas Kota | 23 06 2024 10:35</span>
-                            </li>
-                            <li class="flex justify-between text-sm">
-                                <span>15 Ribu Pelari Meriahkan JAKIM 2024</span>
-                                <span class="text-gray-500">Jakarta Hari Ini | 23 06 2024 09:57</span>
-                            </li>
-                            <li class="flex justify-between text-sm">
-                                <span>Jakarta Cerah Sepanjang Hari Ini</span>
-                                <span class="text-gray-500">Jakarta Hari Ini | 23 06 2024 07:09</span>
-                            </li>
-                            <li class="flex justify-between text-sm">
-                                <span>Malam Jaya Raya Sukses Pukau Pengunjung Monas</span>
-                                <span class="text-gray-500">Wisata | 23 06 2024 01:05</span>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
+            <div class="bg-white rounded-lg shadow-md p-4 overflow-y-scroll flex-1 mb-1">
+                <div class="flex justify-between mb-2">
+                    <span class="font-semibold">Terbaru</span>
+                    <span class="font-semibold">Populer</span>
+                </div>
+                <ul class="space-y-2">
+                    <li class="flex justify-between text-sm">
+                        <span class="hover:text-yellow-500">35 Ton Sampah Telah Dibersihkan Di Kawasan Kota</span>
+                        <span class="text-gray-500">Lintas Kota | 23/06/2024 10:35</span>
+                    </li>
+                    <li class="flex justify-between text-sm">
+                        <span class="hover:text-yellow-500">15 Ribu Pelari Meriahkan 2024</span>
+                        <span class="text-gray-500">Pekalongan Hari Ini | 23/06/2024 09:57</span>
+                    </li>
+                    <li class="flex justify-between text-sm">
+                        <span class="hover:text-yellow-500">Pekalongan Cerah Sepanjang Hari Ini</span>
+                        <span class="text-gray-500">Pekalongan Hari Ini | 23/06/2024 07:09</span>
+                    </li>
+                    <li class="flex justify-between text-sm">
+                        <span class="hover:text-yellow-500">Malam Jaya Raya Sukses Pukau Pengunjung Pekalongan</span>
+                        <span class="text-gray-500">Wisata | 23/06/2024 01:05</span>
+                    </li>
+                    <li class="flex justify-between text-sm">
+                        <span class="hover:text-yellow-500">Festival Musik di Pantai Mendapat Sambutan Meriah</span>
+                        <span class="text-gray-500">Hiburan | 22/06/2024 18:45</span>
+                    </li>
+                    <li class="flex justify-between text-sm">
+                        <span class="hover:text-yellow-500">Kampanye Hijau di Bagian Selatan</span>
+                        <span class="text-gray-500">Lingkungan | 22/06/2024 14:30</span>
+                    </li>
+                    <li class="flex justify-between text-sm">
+                        <span class="hover:text-yellow-500">Peluncuran Buku Baru di Perpustakaan Kota</span>
+                        <span class="text-gray-500">Literatur | 22/06/2024 11:20</span>
+                    </li>
+                    <li class="flex justify-between text-sm">
+                        <span class="hover:text-yellow-500">Pameran Seni Rupa di Galeri Batik</span>
+                        <span class="text-gray-500">Seni | 22/06/2024/09:00</span>
+                    </li>
+                    <li class="flex justify-between text-sm">
+                        <span class="hover:text-yellow-500">Pawai Budaya di Pusat Kota</span>
+                        <span class="text-gray-500">Budaya | 22/06/2024/07:00</span>
+                    </li>
+                    <li class="flex justify-between text-sm">
+                        <span class="hover:text-yellow-500">Lomba Masak di Taman Kota</span>
+                        <span class="text-gray-500">Kuliner | 21/06/2024 16:45</span>
+                    </li>
+                </ul>
+            </div>
         </div>
+        <!-- Pengumuman Section -->
+        <div class="flex-[1] bg-yellow-500 rounded-lg p-4 h-full flex flex-col">
+    <h2 class="text-xl font-semibold mb-4">Pengumuman</h2>
+    <div class="bg-white rounded-lg shadow-md p-4 overflow-y-scroll flex-1">
+        <ul class="space-y-2">
+            <li class="flex justify-between text-sm">
+                <span class="hover:text-yellow-500">35 Ton Sampah Telah Dibersihkan Di Kawasan Alun-Alun</span>
+                <span class="text-gray-500 text-right">Lintas Kota | 23/06/2024 10:35</span>
+            </li>
+            <li class="flex justify-between text-sm">
+                <span class="hover:text-yellow-500">15 Ribu Pelari Meriahkan 2024</span>
+                <span class="text-gray-500 text-right">Pekalongan Hari Ini | 23/06/2024 09:57</span>
+            </li>
+            <li class="flex justify-between text-sm">
+                <span class="hover:text-yellow-500">Pekalongan Cerah Sepanjang Hari Ini</span>
+                <span class="text-gray-500 text-right">Berita Hari Ini | 23/06/2024 07:09</span>
+            </li>
+            <li class="flex justify-between text-sm">
+                <span class="hover:text-yellow-500">Malam Jaya Raya Sukses Pukau Pengunjung Pekalongan</span>
+                <span class="text-gray-500 text-right">Wisata | 23/06/2024 01:05</span>
+            </li>
+            <li class="flex justify-between text-sm">
+                <span class="hover:text-yellow-500">Pemadaman Listrik Terjadwal di Wilayah Degayu</span>
+                <span class="text-gray-500 text-right">Pengumuman | 23/06/2024 12:00</span>
+            </li>
+            <li class="flex justify-between text-sm">
+                <span class="hover:text-yellow-500">Perubahan Jadwal KRL Pekalongan</span>
+                <span class="text-gray-500 text-right">Pengumuman | 23/06/2024 11:00</span>
+            </li>
+            <li class="flex justify-between text-sm">
+                <span class="hover:text-yellow-500">Pengalihan Arus Lalu Lintas di Area Alun-Alun</span>
+                <span class="text-gray-500 text-right">Pengumuman | 23/06/2024 10:00</span>
+            </li>
+            <li class="flex justify-between text-sm">
+                <span class="hover:text-yellow-500">Peringatan Hari Kemerdekaan di Alun-Alun Pekalongan</span>
+                <span class="text-gray-500 text-right">Pengumuman | 23/06/2024 09:00</span>
+            </li>
+            <li class="flex justify-between text-sm">
+                <span class="hover:text-yellow-500">Pameran Buku Pekalongan di Toko Buku Salemba</span>
+                <span class="text-gray-500 text-right">Pengumuman | 23/06/2024 08:00</span>
+            </li>
+            <li class="flex justify-between text-sm">
+                <span class="hover:text-yellow-500">Perbaikan Jalan di Tol Pekalongan-Batang</span>
+                <span class="text-gray-500 text-right">Pengumuman | 23/06/2024 07:00</span>
+            </li>
+            <li class="flex justify-between text-sm">
+                <span class="hover:text-yellow-500">Penutupan Sementara Beberapa Jalan di Pusat Kota</span>
+                <span class="text-gray-500 text-right">Pengumuman | 22/06/2024 18:30</span>
+            </li>
+            <li class="flex justify-between text-sm">
+                <span class="hover:text-yellow-500">Pengumuman Pelatihan Kerja di Balai Latihan Kerja</span>
+                <span class="text-gray-500 text-right">Pengumuman | 22/06/2024 17:00</span>
+            </li>
+            <li class="flex justify-between text-sm">
+                <span class="hover:text-yellow-500">Kegiatan Donor Darah di PMI</span>
+                <span class="text-gray-500 text-right">Pengumuman | 22/06/2024 15:45</span>
+            </li>
+            <li class="flex justify-between text-sm">
+                <span class="hover:text-yellow-500">Lomba Kebersihan Antar RW</span>
+                <span class="text-gray-500 text-right">Pengumuman | 22/06/2024 14:00</span>
+            </li>
+        </ul>
+    </div>
+</div>
+    </div>
+</div>
 
         <div class="container mx-auto py-8 px-4">
             <div class="bg-white shadow-md rounded-lg p-6">
