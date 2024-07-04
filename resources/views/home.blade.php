@@ -18,7 +18,7 @@
     <nav class="bg-yellow-600 p-2 relative z-50" x-data="{ isOpen: false, dropdownOpen: false }">
         <div class="container mx-auto flex justify-between items-center flex-wrap">
             <a href="{{ route('home') }}">
-                <div class="text-black font-bold flex items-center">
+                <div class="text-white font-bold flex items-center">
                     <img src="{{ asset('img/logopkl.png') }}" alt="Logo" class="h-12 mr-3">
                     <div class="flex flex-col">
                         <div class="text-sm">Pemerintah</div>
@@ -37,7 +37,7 @@
             <div :class="{'hidden': !isOpen, 'block': isOpen}" class="w-full lg:flex lg:items-center lg:w-auto">
                 <ul class="lg:flex space-y-2 lg:space-y-0 lg:space-x-10">
                     <li class="relative group" x-data="{ open: false }">
-                        <a href="#" class="block text-black hover:text-gray-200" @mouseenter="open = true"
+                        <a href="#" class="block text-white hover:text-gray-200" @mouseenter="open = true"
                             @mouseleave="open = false">Sekilas</a>
                         <div x-show="open" @mouseenter="open = true" @mouseleave="open = false"
                             class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50"
@@ -58,10 +58,10 @@
                         </div>
                     </li>
 
-                    <li><a href="#" class="block text-black hover:text-gray-200">Instansi</a></li>
-                    <li><a href="#" class="block text-black hover:text-gray-200">Berita</a></li>
-                    <li><a href="#" class="block text-black hover:text-gray-200">Informasi</a></li>
-                    <li><a href="#" class="block text-black hover:text-gray-200">Kip / PPID</a></li>
+                    <li><a href="#" class="block text-white hover:text-gray-200">Instansi</a></li>
+                    <li><a href="#" class="block text-white hover:text-gray-200">Berita</a></li>
+                    <li><a href="#" class="block text-white hover:text-gray-200">Informasi</a></li>
+                    <li><a href="#" class="block text-white hover:text-gray-200">Kip / PPID</a></li>
                 </ul>
             </div>
         </div>
@@ -576,20 +576,20 @@
                     </div>
                 </div>
                 <div class="text-left">
-                    <h2 class="text-black font-semibold mb-4">Link Terkait</h2>
+                    <h2 class="text-white font-semibold mb-4">Link Terkait</h2>
                     <ul class="space-y-2">
-                        <li><a href="https://www.menpan.go.id/site/" class="text-black hover:text-gray-300">KEMENPAN</a>
+                        <li><a href="https://www.menpan.go.id/site/" class="text-white hover:text-gray-300">KEMENPAN</a>
                         </li>
                         <li><a href="https://www.kemendagri.go.id/"
-                                class="text-black hover:text-gray-300">KEMENDAGRI</a></li>
-                        <li><a href="https://jatengprov.go.id/" class="text-black hover:text-gray-300">PEMPROV
+                                class="text-white hover:text-gray-300">KEMENDAGRI</a></li>
+                        <li><a href="https://jatengprov.go.id/" class="text-white hover:text-gray-300">PEMPROV
                                 JATENG</a></li>
-                        <li><a href="http://kipjateng.jatengprov.go.id/" class="text-black hover:text-gray-300">KIP
+                        <li><a href="http://kipjateng.jatengprov.go.id/" class="text-white hover:text-gray-300">KIP
                                 JATENG</a></li>
-                        <li><a href="https://data.go.id/" class="text-black hover:text-gray-300">PORTAL SATU DATA</a>
+                        <li><a href="https://data.go.id/" class="text-white hover:text-gray-300">PORTAL SATU DATA</a>
                         </li>
                         <li><a href="https://pekalongankota.go.id/halaman/kebijakan-privasi.html"
-                                class="text-black hover:text-gray-300">KEBIJAKAN PRIVASI</a></li>
+                                class="text-white hover:text-gray-300">KEBIJAKAN PRIVASI</a></li>
                     </ul>
                 </div>
                 <div class="text-left">
