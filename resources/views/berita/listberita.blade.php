@@ -50,14 +50,16 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             @foreach ($allBerita as $berita)
             @if ($berita instanceof \App\Models\HeadlineBerita)
-            <div class="flex bg-white p-6 rounded-lg shadow-md">
-                <img class="w-24 h-24 object-cover" src="https://via.placeholder.com/100" alt="News Image 1">
-                <div class="ml-4">
-                    <h3 class="text-xl font-semibold mb-2">{{ $berita->title }}</h3>
-                    <p class="text-gray-600 mb-4">{{ $berita->subtitle }}</p>
-                    <p class="text-gray-500 text-sm">{{ $berita->date }}</p>
+            <a href="{{ route('berita.show', ['id' => $berita->id]) }}" class="block no-underline text-black">
+                <div class="flex bg-white p-6 rounded-lg shadow-md">
+                    <img class="w-24 h-24 object-cover" src="https://via.placeholder.com/100" alt="News Image 1">
+                    <div class="ml-4">
+                        <h3 class="text-xl font-semibold mb-2">{{ $berita->title }}</h3>
+                        <p class="text-gray-600 mb-4">{{ $berita->subtitle }}</p>
+                        <p class="text-gray-500 text-sm">{{ $berita->date }}</p>
+                    </div>
                 </div>
-            </div>
+            </a>
             @endif
             @endforeach
 

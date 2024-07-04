@@ -37,11 +37,11 @@ Route::get('/dashboard', function () {
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.listberita');
 
 
+Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
 
 // Route untuk menyimpan berita baru
 Route::post('/berita', [BeritaController::class, 'store'])->name('berita.store');
 
-Route::post('/berita', [BeritaController::class, 'store'])->name('berita.store');
 
 
 Route::middleware('auth')->group(function () {

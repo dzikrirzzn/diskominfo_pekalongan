@@ -47,8 +47,6 @@
             <!-- Main Content -->
             <div class="flex-1">
                 <div class="bg-white p-6 rounded-lg shadow-md mb-6">
-                    @foreach ($allBerita as $berita)
-                    @if ($berita instanceof \App\Models\HeadlineBerita)
                     <h1 class="text-3xl font-bold mb-2">{{ $berita->title }}
                     </h1>
                     <div class="text-gray-600 text-sm mb-4">
@@ -59,8 +57,6 @@
                         alt="Warga Terdampak Banjir di Pengungsian">
                     <p class="leading-7 mb-4">{{ $berita->subtitle }}</p>
                     <p class="leading-7 mb-4">{{ $berita->content }}</p>
-                    @endif
-                    @endforeach
                 </div>
             </div>
             <!-- Sidebar -->

@@ -17,9 +17,23 @@ class BeritaController extends Controller
         $allBerita = $headlineBerita->merge($otherBerita);
 
         // Mengembalikan tampilan dengan data berita
-        // return view('berita.berita_content', ['allBerita' => $allBerita]);
         return view('berita.listberita', ['allBerita' => $allBerita]);
     }
+
+    public function show($id)
+    {
+        // Attempt to find the news item in both CityNews and OtherNews
+        $berita = HeadlineBerita::find($id) ?? OtherBerita::find($id);
+
+        // Check if the news item was found
+        if (!$berita) {
+            return redirect()->route('listberita')->with('error', 'Berita tidak ditemukan.');
+        }
+
+        // Pass the news item to the view
+        return view('berita.berita_content', compact('berita'));
+    }
+    
 
     
 
