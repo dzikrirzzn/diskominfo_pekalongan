@@ -67,27 +67,22 @@
         </div>
     </nav>
     <main class="flex-1 relative z-0">
+        <!-- Blade Template -->
         <div class="relative overflow-hidden h-[92vh]" x-data="{
-            activeSlide: 1,
-            slides: [
-                { id: 1, title: 'Hello 1', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
-                { id: 2, title: 'Hello 2', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
-                { id: 3, title: 'Hello 3', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
-                { id: 4, title: 'Hello 4', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' },
-                { id: 5, title: 'Hello 5', body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.' }
-            ],
-            loop() {
-                setInterval(() => {
-                    this.activeSlide = this.activeSlide === 5 ? 1 : this.activeSlide + 1
-                }, 5000)
-            }
-        }" x-init="loop">
+        activeSlide: 1,
+        slides: @json($headlineBerita),
+        loop() {
+            setInterval(() => {
+                this.activeSlide = this.activeSlide === this.slides.length ? 1 : this.activeSlide + 1
+            }, 5000)
+        }
+    }" x-init="loop()">
             <template x-for="slide in slides" :key="slide.id">
                 <div x-show="activeSlide === slide.id"
                     class="w-full h-full flex items-center bg-slate-500 text-white absolute inset-0">
                     <div class="mx-auto p-8">
                         <h2 class="font-bold text-3xl mb-4" x-text="slide.title"></h2>
-                        <p x-text="slide.body" class="text-lg"></p>
+                        <p x-text="slide.subtitle" class="text-lg"></p>
                     </div>
                 </div>
             </template>
@@ -181,7 +176,7 @@
                         <div class="flex space-x-4 mb-4">
                             <!-- Image Box -->
                             <div class="flex gap-2">
-                                @foreach ($headlineBerita->take(2)->get() as $berita)
+                                @foreach ($headlineBerita->take(2) as $berita)
                                 <a href="{{ route('berita.show', ['id' => $berita->id]) }}"
                                     class="block no-underline text-black w-1/2">
                                     <div class="flex-1 bg-white rounded-lg shadow overflow-hidden relative"
@@ -204,14 +199,16 @@
                         </div>
                         <div class="bg-white rounded-lg shadow-md p-4 overflow-y-scroll flex-1 mb-1">
                             <div class="flex justify-between mb-2">
-                                <span class="font-semibold">Terbaru</span>
-                                <span class="font-semibold">Populer</span>
+                                <span class="font-semibold">Berita Terbaru</span>
                             </div>
                             <ul class="space-y-2">
-                                @foreach ($headlineBerita as $berita)
+                                @foreach ($otherBerita as $berita)
                                 <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">{{ $berita->title }}</span>
-                                    <span class="text-gray-500">{{ $berita->subtitle }} | {{ $berita->date }}</span>
+                                    <a href="{{ route('berita.show', ['id' => $berita->id]) }}"
+                                        class="flex justify-between w-full no-underline text-black">
+                                        <span class="hover:text-yellow-500">{{ $berita->title }}</span>
+                                        <span class="text-gray-500">| {{ $berita->date }}</span>
+                                    </a>
                                 </li>
                                 @endforeach
                             </ul>
