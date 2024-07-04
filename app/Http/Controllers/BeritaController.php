@@ -20,6 +20,18 @@ class BeritaController extends Controller
         return view('berita.listberita', ['allBerita' => $allBerita]);
     }
 
+    public function home()
+    {
+        // Retrieve all news items
+        $headlineBerita = HeadlineBerita::latest();
+        $otherBerita = OtherBerita::latest();
+    
+        return view('home', [
+            'headlineBerita' => $headlineBerita,
+            'otherBerita' => $otherBerita,
+        ]);
+    }
+
     public function show($id)
     {
         // Attempt to find the news item in both CityNews and OtherNews

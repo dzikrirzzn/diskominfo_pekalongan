@@ -181,29 +181,26 @@
                         <div class="flex space-x-4 mb-4">
                             <!-- Image Box -->
                             <div class="flex gap-2">
-                                <div class="flex-1 bg-white rounded-lg shadow overflow-hidden relative">
-                                    <img class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
-                                        src="https://awsimages.detik.net.id/community/media/visual/2024/04/16/puluhan-balon-tambat-yang-akan-dipamerkan-saat-festival-balon-tambat-2024-di-pekalongan-2_169.jpeg?w=1200"
-                                        alt="Pekalongan Balloon Festival">
-                                    <div
-                                        class="absolute bottom-0 w-full p-2 bg-black bg-opacity-50 text-white text-center">
-                                        <h3
-                                            class="text-lg font-bold hover:text-yellow-500 transition-colors duration-300">
-                                            Pekalongan Balloon Festival</h3>
+                                @foreach ($headlineBerita->take(2)->get() as $berita)
+                                <a href="{{ route('berita.show', ['id' => $berita->id]) }}"
+                                    class="block no-underline text-black w-1/2">
+                                    <div class="flex-1 bg-white rounded-lg shadow overflow-hidden relative"
+                                        style="height: 300px;">
+                                        <img class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
+                                            src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}"
+                                            style="object-fit: cover;">
+                                        <div
+                                            class="absolute bottom-0 w-full p-2 bg-black bg-opacity-50 text-white text-center">
+                                            <h3
+                                                class="text-lg font-bold hover:text-yellow-500 transition-colors duration-300">
+                                                {{ $berita->title }}
+                                            </h3>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="flex-1 bg-white rounded-lg shadow overflow-hidden relative">
-                                    <img class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
-                                        src="https://cdn.antaranews.com/cache/1200x800/2017/10/20171009antarafoto-pawai-pekan-batik-pekalongan-071017-hpp-5.jpg"
-                                        alt="Another Festival Image">
-                                    <div
-                                        class="absolute bottom-0 w-full p-2 bg-black bg-opacity-50 text-white text-center">
-                                        <h3
-                                            class="text-lg font-bold hover:text-yellow-500 transition-colors duration-300">
-                                            Festival Batik Pekalongan</h3>
-                                    </div>
-                                </div>
+                                </a>
+                                @endforeach
                             </div>
+
                         </div>
                         <div class="bg-white rounded-lg shadow-md p-4 overflow-y-scroll flex-1 mb-1">
                             <div class="flex justify-between mb-2">
@@ -211,51 +208,15 @@
                                 <span class="font-semibold">Populer</span>
                             </div>
                             <ul class="space-y-2">
+                                @foreach ($headlineBerita as $berita)
                                 <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">35 Ton Sampah Telah Dibersihkan Di Kawasan
-                                        Kota</span>
-                                    <span class="text-gray-500">Lintas Kota | 23/06/2024 10:35</span>
+                                    <span class="hover:text-yellow-500">{{ $berita->title }}</span>
+                                    <span class="text-gray-500">{{ $berita->subtitle }} | {{ $berita->date }}</span>
                                 </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">15 Ribu Pelari Meriahkan 2024</span>
-                                    <span class="text-gray-500">Pekalongan Hari Ini | 23/06/2024 09:57</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Pekalongan Cerah Sepanjang Hari Ini</span>
-                                    <span class="text-gray-500">Pekalongan Hari Ini | 23/06/2024 07:09</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Malam Jaya Raya Sukses Pukau Pengunjung
-                                        Pekalongan</span>
-                                    <span class="text-gray-500">Wisata | 23/06/2024 01:05</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Festival Musik di Pantai Mendapat Sambutan
-                                        Meriah</span>
-                                    <span class="text-gray-500">Hiburan | 22/06/2024 18:45</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Kampanye Hijau di Bagian Selatan</span>
-                                    <span class="text-gray-500">Lingkungan | 22/06/2024 14:30</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Peluncuran Buku Baru di Perpustakaan Kota</span>
-                                    <span class="text-gray-500">Literatur | 22/06/2024 11:20</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Pameran Seni Rupa di Galeri Batik</span>
-                                    <span class="text-gray-500">Seni | 22/06/2024/09:00</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Pawai Budaya di Pusat Kota</span>
-                                    <span class="text-gray-500">Budaya | 22/06/2024/07:00</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Lomba Masak di Taman Kota</span>
-                                    <span class="text-gray-500">Kuliner | 21/06/2024 16:45</span>
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
+
                     </div>
                     <!-- Pengumuman Section -->
                     <div class="flex-[1] bg-yellow-500 rounded-lg p-4 h-full flex flex-col">

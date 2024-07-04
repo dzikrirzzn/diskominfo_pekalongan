@@ -35,7 +35,7 @@ Route::get('/dashboard', function () {
 
 // Route untuk menampilkan halaman index berita
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.listberita');
-
+Route::get('/', [BeritaController::class, 'home'])->name('home');
 
 Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
 

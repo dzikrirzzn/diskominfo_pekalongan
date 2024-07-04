@@ -63,8 +63,6 @@
             </a>
             @endif
             @endforeach
-
-            <!-- Add more news items as needed -->
         </div>
     </div>
     <footer class="bg-gradient-to-b from-white to-yellow-600 text-gray-800 py-10 mt-auto">
