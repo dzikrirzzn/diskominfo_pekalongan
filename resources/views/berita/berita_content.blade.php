@@ -53,8 +53,8 @@
                         <span>Ditulis oleh {{ $berita->author }}</span> | <span> {{ $berita->date }}</span> |
                         <span>2449 views</span>
                     </div>
-                    <img class="w-full h-auto rounded-lg mb-4" src="https://via.placeholder.com/800x400"
-                        alt="Warga Terdampak Banjir di Pengungsian">
+                    <img class="w-full h-auto rounded-lg mb-4" src="{{ asset('storage/' . $berita->image) }}"
+                        alt="{{ $berita->title }}">
                     <p class="leading-7 mb-4">{{ $berita->subtitle }}</p>
                     <p class="leading-7 mb-4">{{ $berita->content }}</p>
                 </div>

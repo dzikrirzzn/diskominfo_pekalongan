@@ -52,7 +52,8 @@
             @if ($berita instanceof \App\Models\HeadlineBerita)
             <a href="{{ route('berita.show', ['id' => $berita->id]) }}" class="block no-underline text-black">
                 <div class="flex bg-white p-6 rounded-lg shadow-md">
-                    <img class="w-24 h-24 object-cover" src="https://via.placeholder.com/100" alt="News Image 1">
+                    <img class="w-24 h-24 object-cover" src="{{ asset('storage/' . $berita->image) }}"
+                        alt="{{ $berita->title }}">
                     <div class="ml-4">
                         <h3 class="text-xl font-semibold mb-2">{{ $berita->title }}</h3>
                         <p class="text-gray-600 mb-4">{{ $berita->subtitle }}</p>

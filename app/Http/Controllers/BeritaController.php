@@ -39,44 +39,51 @@ class BeritaController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi data
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'subtitle' => 'required|string|max:255',
-            'content' => 'required|string',
-            'author' => 'required|string|max:255',
-            'date' => 'required|date',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'type' => 'required|string|in:kota,lainnya',
-        ]);
-
-        // Upload gambar
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public');
-        }
-
-        // Simpan data berita ke tabel yang sesuai
-        if ($request->type == 'kota') {
-            HeadlineBerita::create([
-                'title' => $request->title,
-                'subtitle' => $request->subtitle,
-                'content' => $request->content,
-                'author' => $request->author,
-                'date' => $request->date,
-                'image' => $imagePath,
+        try {
+            // Validasi data
+            $request->validate([
+                'title' => 'required|string|max:255',
+                'subtitle' => 'required|string|max:255',
+                'content' => 'required|string',
+                'author' => 'required|string|max:255',
+                'date' => 'required|date',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'type' => 'required|string|in:kota,lainnya',
             ]);
-        } else {
-            OtherBerita::create([
-                'title' => $request->title,
-                'subtitle' => $request->subtitle,
-                'content' => $request->content,
-                'author' => $request->author,
-                'date' => $request->date,
-                'image' => $imagePath,
-            ]);
+    
+            // Upload gambar
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('images', 'public');
+            }
+    
+            // Simpan data berita ke tabel yang sesuai
+            if ($request->type == 'kota') {
+                HeadlineBerita::create([
+                    'title' => $request->title,
+                    'subtitle' => $request->subtitle,
+                    'content' => $request->content,
+                    'author' => $request->author,
+                    'date' => $request->date,
+                    'image' => $imagePath,
+                ]);
+            } else {
+                OtherBerita::create([
+                    'title' => $request->title,
+                    'subtitle' => $request->subtitle,
+                    'content' => $request->content,
+                    'author' => $request->author,
+                    'date' => $request->date,
+                    'image' => $imagePath,
+                ]);
+            }
+    
+            // Redirect back to form with success message
+            return redirect()->back()->with('success', 'Berita berhasil diupload!');
+    
+        } catch (\Exception $e) {
+            // Redirect back to form with error message
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupload berita: ' . $e->getMessage());
         }
-
-        // Redirect ke halaman index berita dengan pesan sukses
-        return redirect()->route('berita.listberita')->with('success', 'Berita berhasil diupload!');
     }
+    
 }
