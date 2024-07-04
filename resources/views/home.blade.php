@@ -602,7 +602,7 @@
             </div>
     </main>
 
-    <footer class="bg-gradient-to-b from-white to-yellow-600 text-gray-800 py-10 mt-auto">
+    <footer class="bg-yellow-600 p-2 relative z-50">
         <div class="container mx-auto px-4 max-w-screen-lg">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="flex flex-col items-start">
