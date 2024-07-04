@@ -593,16 +593,16 @@
                     </ul>
                 </div>
                 <div class="text-left">
-                    <h2 class="text-black font-semibold mb-4">Alamat</h2>
+                    <h2 class="text-white font-semibold mb-4">Alamat</h2>
                     <ul class="space-y-2">
-                        <li class="text-black flex items-center">
+                        <li class="text-white flex items-center">
                             <img src="{{ asset('img/alamat.png') }}" alt="Alamat" class="h-4 mr-2">
                             Jl. Mataram No.1, Podosugih, Kec. Pekalongan Bar., Kota Pekalongan, Jawa Tengah 51111
                         </li>
-                        <li class="text-black flex items-center">
+                        <li class="text-white flex items-center">
                             <img src="{{ asset('img/telp.png') }}" alt="Telepon" class="h-4 mr-2"> (0285) 421093
                         </li>
-                        <li class="text-black flex items-center">
+                        <li class="text-white flex items-center">
                             <img src="{{ asset('img/pesan.png') }}" alt="Email" class="h-4 mr-2">
                             <a href="mailto:setda@pekalongankota.go.id"
                                 class="hover:text-gray-300">setda@pekalongankota.go.id</a>
