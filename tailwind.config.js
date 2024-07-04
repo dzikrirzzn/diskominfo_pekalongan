@@ -11,11 +11,31 @@ export default {
 
     theme: {
         extend: {
+            variants: {
+                scrollbar: ['rounded'],
+              },
+              plugins: [
+                function ({ addUtilities }) {
+                  addUtilities({
+                    '.scrollbar-hide': {
+                      '::-webkit-scrollbar': {
+                        display: 'none',
+                      },
+                      '-ms-overflow-style': 'none',
+                      'scrollbar-width': 'none',
+                    },
+                  });
+                },
+              ],
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            backgroundImage: {
+                'batik-pattern': "url('/public/img/batik_pkl.png')",
+              },
         },
     },
-
-    plugins: [forms],
+    plugins: [
+        require('daisyui'),
+        forms],
 };
