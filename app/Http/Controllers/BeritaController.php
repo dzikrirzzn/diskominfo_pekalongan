@@ -23,8 +23,8 @@ class BeritaController extends Controller
     public function home()
     {
         // Retrieve all news items
-        $headlineBerita = HeadlineBerita::latest();
-        $otherBerita = OtherBerita::latest();
+        $headlineBerita = HeadlineBerita::latest()->get();
+        $otherBerita = OtherBerita::latest()->get();
     
         return view('home', [
             'headlineBerita' => $headlineBerita,
