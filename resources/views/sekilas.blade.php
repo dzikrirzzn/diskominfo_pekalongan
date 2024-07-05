@@ -141,11 +141,11 @@
             </div>
         </div>
     </div>
-    <footer class="bg-gradient-to-b from-white to-yellow-600 text-gray-800 py-10 mt-auto">
+    <footer class="bg-yellow-600 p-2 relative z-50">
         <div class="container mx-auto px-4 max-w-screen-lg">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="flex flex-col items-start">
-                    <img src="{{ asset('img/pklbunga.png') }}" alt="Logo" class="h-32 mb-4">
+                    <img src="{{ asset('img/pklbatikputih.png') }}" alt="Logo" class="h-32 mb-4">
                     <div class="flex space-x-4 mt-4">
                         <a href="#"><img src="{{ asset('img/fb.png') }}" alt="Facebook" class="h-8"></a>
                         <a href="#"><img src="{{ asset('img/twt.png') }}" alt="Twitter" class="h-8"></a>
@@ -154,33 +154,33 @@
                     </div>
                 </div>
                 <div class="text-left">
-                    <h2 class="text-black font-semibold mb-4">Link Terkait</h2>
+                    <h2 class="text-white font-semibold mb-4">Link Terkait</h2>
                     <ul class="space-y-2">
-                        <li><a href="https://www.menpan.go.id/site/" class="text-black hover:text-gray-300">KEMENPAN</a>
+                        <li><a href="https://www.menpan.go.id/site/" class="text-white hover:text-gray-300">KEMENPAN</a>
                         </li>
                         <li><a href="https://www.kemendagri.go.id/"
-                                class="text-black hover:text-gray-300">KEMENDAGRI</a></li>
-                        <li><a href="https://jatengprov.go.id/" class="text-black hover:text-gray-300">PEMPROV
+                                class="text-white hover:text-gray-300">KEMENDAGRI</a></li>
+                        <li><a href="https://jatengprov.go.id/" class="text-white hover:text-gray-300">PEMPROV
                                 JATENG</a></li>
-                        <li><a href="http://kipjateng.jatengprov.go.id/" class="text-black hover:text-gray-300">KIP
+                        <li><a href="http://kipjateng.jatengprov.go.id/" class="text-white hover:text-gray-300">KIP
                                 JATENG</a></li>
-                        <li><a href="https://data.go.id/" class="text-black hover:text-gray-300">PORTAL SATU DATA</a>
+                        <li><a href="https://data.go.id/" class="text-white hover:text-gray-300">PORTAL SATU DATA</a>
                         </li>
                         <li><a href="https://pekalongankota.go.id/halaman/kebijakan-privasi.html"
-                                class="text-black hover:text-gray-300">KEBIJAKAN PRIVASI</a></li>
+                                class="text-white hover:text-gray-300">KEBIJAKAN PRIVASI</a></li>
                     </ul>
                 </div>
                 <div class="text-left">
-                    <h2 class="text-black font-semibold mb-4">Alamat</h2>
+                    <h2 class="text-white font-semibold mb-4">Alamat</h2>
                     <ul class="space-y-2">
-                        <li class="text-black flex items-center">
+                        <li class="text-white flex items-center">
                             <img src="{{ asset('img/alamat.png') }}" alt="Alamat" class="h-4 mr-2">
                             Jl. Mataram No.1, Podosugih, Kec. Pekalongan Bar., Kota Pekalongan, Jawa Tengah 51111
                         </li>
-                        <li class="text-black flex items-center">
+                        <li class="text-white flex items-center">
                             <img src="{{ asset('img/telp.png') }}" alt="Telepon" class="h-4 mr-2"> (0285) 421093
                         </li>
-                        <li class="text-black flex items-center">
+                        <li class="text-white flex items-center">
                             <img src="{{ asset('img/pesan.png') }}" alt="Email" class="h-4 mr-2">
                             <a href="mailto:setda@pekalongankota.go.id"
                                 class="hover:text-gray-300">setda@pekalongankota.go.id</a>
