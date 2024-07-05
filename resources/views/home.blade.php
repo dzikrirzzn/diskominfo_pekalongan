@@ -537,7 +537,7 @@
         <div class="container mx-auto px-4 max-w-screen-lg">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="flex flex-col items-start">
-                    <img src="{{ asset('img/pklbunga.png') }}" alt="Logo" class="h-32 mb-4">
+                    <img src="{{ asset('img/pklbatikputih.png') }}" alt="Logo" class="h-32 mb-4">
                     <div class="flex space-x-4 mt-4">
                         <a href="#"><img src="{{ asset('img/fb.png') }}" alt="Facebook" class="h-8"></a>
                         <a href="#"><img src="{{ asset('img/twt.png') }}" alt="Twitter" class="h-8"></a>
