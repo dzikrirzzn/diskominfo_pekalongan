@@ -9,19 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('pengumuman', function (Blueprint $table) {
             $table->id();
+            $table->string('judul');
+            $table->date('tanggal');
+            $table->string('penulis');
+            $table->text('isi_pengumuman');
+            $table->string('gambar_pengumuman')->nullable();
+            $table->string('link_pdf_pengumuman')->nullable();
             $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    
+    public function down()
     {
         Schema::dropIfExists('pengumuman');
     }
-};
+    };

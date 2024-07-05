@@ -3,6 +3,7 @@
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PengumumanController;
 
 Route::get('/', function () {
     return view('home');
@@ -15,6 +16,10 @@ Route::get('/admin', function () {
 Route::get('/admin_berita', function () {
     return view('admin_berita');
 })->name('admin_berita');
+
+Route::get('/admin_pengumuman', function () {
+    return view('admin_pengumuman');
+})->name('admin_pengumuman');
 
 // Route::get('/berita/listberita', function () {
 //     return view('berita/listberita');
@@ -42,7 +47,11 @@ Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show
 // Route untuk menyimpan berita baru
 Route::post('/berita', [BeritaController::class, 'store'])->name('berita.store');
 
-
+// Route untuk pengumuman
+Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman.index');
+Route::get('/pengumuman/create', [PengumumanController::class, 'create'])->name('pengumuman.create');
+Route::post('/pengumuman', [PengumumanController::class, 'store'])->name('pengumuman.store');
+Route::get('/pengumuman/{id}', [PengumumanController::class, 'show'])->name('pengumuman.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
