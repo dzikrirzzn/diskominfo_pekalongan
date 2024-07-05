@@ -36,15 +36,19 @@ class BeritaController extends Controller
     {
         // Attempt to find the news item in both CityNews and OtherNews
         $berita = HeadlineBerita::find($id) ?? OtherBerita::find($id);
-
+    
         // Check if the news item was found
         if (!$berita) {
             return redirect()->route('listberita')->with('error', 'Berita tidak ditemukan.');
         }
-
-        // Pass the news item to the view
-        return view('berita.berita_content', compact('berita'));
+    
+        // Retrieve other news items for the sidebar
+        $otherBerita = OtherBerita::latest()->take(5)->get();
+    
+        // Pass the news item and other news items to the view
+        return view('berita.berita_content', compact('berita', 'otherBerita'));
     }
+    
     
 
     

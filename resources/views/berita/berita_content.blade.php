@@ -55,8 +55,8 @@
                     </div>
                     <img class="w-full h-auto rounded-lg mb-4" src="{{ asset('storage/' . $berita->image) }}"
                         alt="{{ $berita->title }}">
-                    <p class="leading-7 mb-4">{{ $berita->subtitle }}</p>
-                    <p class="leading-7 mb-4">{{ $berita->content }}</p>
+                    <p class="leading-7 mb-4 text-justify">{{ $berita->subtitle }}</p>
+                    <p class="leading-7 mb-4 text-justify">{!! nl2br(e($berita->content)) !!}</p>
                 </div>
             </div>
             <!-- Sidebar -->
@@ -64,50 +64,19 @@
                 <div class="bg-white p-6 rounded-lg shadow-md">
                     <h2 class="text-2xl font-bold mb-4">Berita Populer</h2>
                     <ul class="space-y-4">
+                        @foreach ($otherBerita as $berita)
                         <li class="flex items-center">
-                            <img class="w-16 h-16 object-cover rounded-lg mr-4" src="https://via.placeholder.com/60"
-                                alt="Popular News 1">
-                            <div>
-                                <h3 class="text-lg font-semibold">Kerja Bakti Bersama, Gotong Royong Peduli Lingkungan
-                                    Terus Digalakkan</h3>
-                                <p class="text-gray-600 text-sm">16 Maret 2020</p>
-                            </div>
+                            <a href="{{ route('berita.show', ['id' => $berita->id]) }}"
+                                class="flex justify-between w-full no-underline text-black">
+                                <img class="w-16 h-16 object-cover rounded-lg mr-4"
+                                    src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}">
+                                <div>
+                                    <h3 class="text-lg font-semibold">{{ $berita->title }}</h3>
+                                    <p class="text-gray-600 text-sm"> {{ $berita->date }}</p>
+                                </div>
+                            </a>
                         </li>
-                        <li class="flex items-center">
-                            <img class="w-16 h-16 object-cover rounded-lg mr-4" src="https://via.placeholder.com/60"
-                                alt="Popular News 2">
-                            <div>
-                                <h3 class="text-lg font-semibold">Guru Kreatif, Pembelajaran Daring Dibuat Menyenangkan
-                                </h3>
-                                <p class="text-gray-600 text-sm">1 April 2020</p>
-                            </div>
-                        </li>
-                        <li class="flex items-center">
-                            <img class="w-16 h-16 object-cover rounded-lg mr-4" src="https://via.placeholder.com/60"
-                                alt="Popular News 3">
-                            <div>
-                                <h3 class="text-lg font-semibold">Tangkis Virus Corona Dengan Terapkan Germas</h3>
-                                <p class="text-gray-600 text-sm">5 Maret 2020</p>
-                            </div>
-                        </li>
-                        <li class="flex items-center">
-                            <img class="w-16 h-16 object-cover rounded-lg mr-4" src="https://via.placeholder.com/60"
-                                alt="Popular News 4">
-                            <div>
-                                <h3 class="text-lg font-semibold">Cegah Manipulasi Suara, KPU Manfaatkan Aplikasi
-                                    Sirekap</h3>
-                                <p class="text-gray-600 text-sm">18 Desember 2023</p>
-                            </div>
-                        </li>
-                        <li class="flex items-center">
-                            <img class="w-16 h-16 object-cover rounded-lg mr-4" src="https://via.placeholder.com/60"
-                                alt="Popular News 5">
-                            <div>
-                                <h3 class="text-lg font-semibold">Inovasi Guru Mengajar Yang Kreatif dan Menyenangkan
-                                    Diperlukan Siswa Selama Belajar Dari Rumah</h3>
-                                <p class="text-gray-600 text-sm">13 Agustus 2020</p>
-                            </div>
-                        </li>
+                        @endforeach
                         <!-- Add more popular news items as needed -->
                     </ul>
                 </div>
