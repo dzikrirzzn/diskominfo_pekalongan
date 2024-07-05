@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\HeadlineBerita;
 use App\Models\OtherBerita;
+use App\Models\Pengumuman;
 
 class BeritaController extends Controller
 {
@@ -12,6 +13,7 @@ class BeritaController extends Controller
         // Mengambil semua berita dari kedua tabel
         $headlineBerita = HeadlineBerita::all();
         $otherBerita = OtherBerita::all();
+    
 
         // Menggabungkan kedua koleksi berita
         $allBerita = $headlineBerita->merge($otherBerita);
@@ -25,10 +27,14 @@ class BeritaController extends Controller
         // Retrieve all news items
         $headlineBerita = HeadlineBerita::latest()->get();
         $otherBerita = OtherBerita::latest()->get();
+        $pengumuman = Pengumuman::all();
+
+
     
         return view('home', [
             'headlineBerita' => $headlineBerita,
             'otherBerita' => $otherBerita,
+            'pengumuman' => $pengumuman
         ]);
     }
 

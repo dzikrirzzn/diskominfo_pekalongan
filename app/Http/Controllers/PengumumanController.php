@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OtherBerita;
 use Illuminate\Http\Request;
 use App\Models\Pengumuman;
 
@@ -10,7 +11,7 @@ class PengumumanController extends Controller
     public function index()
     {
         $pengumuman = Pengumuman::all();
-        return view('pengumuman.index', compact('pengumuman'));
+        return view('home', compact('pengumuman'));
     }
 
     public function create()
@@ -47,17 +48,14 @@ class PengumumanController extends Controller
 
         $pengumuman->save();
 
-        return redirect()->route('pengumuman.index')->with('success', 'Pengumuman berhasil dibuat');
+        return redirect()->route('home')->with('success', 'Pengumuman berhasil dibuat');
     }
 
     public function show($id)
     {
         $pengumuman = Pengumuman::findOrFail($id);
-        return view('pengumuman.show', compact('pengumuman'));
+        $otherBerita = OtherBerita::all(); // Example of fetching other berita
+
+        return view('pengumuman.show', compact('pengumuman', 'otherBerita'));
     }
 }
-
-
-
-
-

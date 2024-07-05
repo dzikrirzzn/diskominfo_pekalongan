@@ -14,6 +14,25 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
 </head>
 
+<style>
+#map {
+    height: 400px;
+}
+
+#focusButton {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 1000;
+    background-color: #fbbf24;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+</style>
+
 <body class="flex flex-col min-h-screen bg-gray-100">
     <nav class="bg-yellow-600 p-2 relative z-50" x-data="{ isOpen: false, dropdownOpen: false }">
         <div class="container mx-auto flex justify-between items-center flex-wrap">
@@ -68,50 +87,42 @@
     </nav>
     <main class="flex-1 relative z-0">
         <!-- Blade Template -->
-        <div class="relative overflow-hidden h-[92vh]" x-data="{
-        activeSlide: 1,
-        slides: @json($headlineBerita),
-        loop() {
-            setInterval(() => {
-                this.activeSlide = this.activeSlide === this.slides.length ? 1 : this.activeSlide + 1
-            }, 5000)
-        }
-    }" x-init="loop()">
-            <template x-for="slide in slides" :key="slide.id">
-                <div x-show="activeSlide === slide.id"
-                    class="w-full h-full flex items-center bg-slate-500 text-white absolute inset-0">
-                    <div class="mx-auto p-8">
-                        <h2 class="font-bold text-3xl mb-4" x-text="slide.title"></h2>
-                        <p x-text="slide.subtitle" class="text-lg"></p>
+        <!-- Padding to offset the fixed navbar -->
+        <div class="relative overflow-x-scroll h-screen snap-x snap-mandatory">
+            <div class="flex h-full" id="carousel">
+                @foreach($headlineBerita as $berita)
+                <div class="flex-shrink-0 w-full h-full snap-center relative">
+                    <img src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}"
+                        class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
+                        <h2 class="text-xl text-center">{{ $berita->title }}</h2>
                     </div>
                 </div>
-            </template>
-            <div class="absolute inset-y-0 flex items-center justify-between w-full px-4">
-                <button @click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1"
-                    class="bg-slate-100 hover:bg-yellow-500 hover:text-white font-bold rounded-full w-12 h-12 shadow flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                        stroke="currentColor" class="w-10 h-10 opacity-25">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-                <button @click="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1"
-                    class="bg-slate-100 hover:bg-yellow-500 hover:text-white font-bold rounded-full w-12 h-12 shadow flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                        stroke="currentColor" class="w-10 h-10 opacity-25">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-            </div>
-            <div class="absolute w-full flex items-center justify-center px-4 bottom-0">
-                <template x-for="slide in slides" :key="slide.id">
-                    <button
-                        class="flex w-4 h-2 mt-4 mx-2 mb-2 rounded-full overflow-hidden transition-colors duration-200 ease-out hover:bg-slate-600 hover:shadow-lg"
-                        :class="{ 'bg-yellow-600': activeSlide === slide.id, 'bg-slate-300': activeSlide !== slide.id }"
-                        @click="activeSlide = slide.id"></button>
-                </template>
+                @endforeach
             </div>
         </div>
 
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.getElementById('carousel');
+            const items = carousel.children;
+            let index = 0;
+
+            function showNextItem() {
+                const itemWidth = items[0].getBoundingClientRect().width;
+                index = (index + 1) % items.length;
+                carousel.scrollTo({
+                    left: index * itemWidth,
+                    behavior: 'smooth'
+                });
+            }
+
+            let autoScroll = setInterval(showNextItem, 3000);
+
+            carousel.addEventListener('mouseenter', () => clearInterval(autoScroll));
+            carousel.addEventListener('mouseleave', () => autoScroll = setInterval(showNextItem, 3000));
+        });
+        </script>
         <div class="relative bg-batik-pattern py-4 md:py-8 ml-20 bg-no-repeat bg-left-top">
             <div class="relative w-full max-w-6xl mx-auto my-4 md:my-8" x-data="{
         activeSlide: 1,
@@ -136,7 +147,8 @@
                                             class="h-24 w-auto mb-4 mx-auto md:mx-0">
                                         <h2 class="text-xl md:text-2xl font-bold mb-2 md:mb-4" x-text="slide.title">
                                         </h2>
-                                        <p class="text-sm md:text-base text-gray-700" x-text="slide.description"></p>
+                                        <p class="text-sm md:text-base text-gray-700" x-text="slide.description">
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -220,70 +232,15 @@
                         <h2 class="text-xl font-semibold mb-4">Pengumuman</h2>
                         <div class="bg-white rounded-lg shadow-md p-4 overflow-y-scroll flex-1">
                             <ul class="space-y-2">
+                                @foreach($pengumuman as $item)
                                 <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">35 Ton Sampah Telah Dibersihkan Di Kawasan
-                                        Alun-Alun</span>
-                                    <span class="text-gray-500 text-right">Lintas Kota | 23/06/2024 10:35</span>
+                                    <a href="{{ route('pengumuman.show', ['id' => $item->id]) }}"
+                                        class="flex justify-between w-full no-underline text-black">
+                                        <span class="hover:text-yellow-500">{{ $item->judul }}</span>
+                                        <span class="text-gray-500 text-right">{{ $item->tanggal }}</span>
+                                    </a>
                                 </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">15 Ribu Pelari Meriahkan 2024</span>
-                                    <span class="text-gray-500 text-right">Pekalongan Hari Ini | 23/06/2024 09:57</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Pekalongan Cerah Sepanjang Hari Ini</span>
-                                    <span class="text-gray-500 text-right">Berita Hari Ini | 23/06/2024 07:09</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Malam Jaya Raya Sukses Pukau Pengunjung
-                                        Pekalongan</span>
-                                    <span class="text-gray-500 text-right">Wisata | 23/06/2024 01:05</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Pemadaman Listrik Terjadwal di Wilayah
-                                        Degayu</span>
-                                    <span class="text-gray-500 text-right">Pengumuman | 23/06/2024 12:00</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Perubahan Jadwal KRL Pekalongan</span>
-                                    <span class="text-gray-500 text-right">Pengumuman | 23/06/2024 11:00</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Pengalihan Arus Lalu Lintas di Area
-                                        Alun-Alun</span>
-                                    <span class="text-gray-500 text-right">Pengumuman | 23/06/2024 10:00</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Peringatan Hari Kemerdekaan di Alun-Alun
-                                        Pekalongan</span>
-                                    <span class="text-gray-500 text-right">Pengumuman | 23/06/2024 09:00</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Pameran Buku Pekalongan di Toko Buku
-                                        Salemba</span>
-                                    <span class="text-gray-500 text-right">Pengumuman | 23/06/2024 08:00</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Perbaikan Jalan di Tol Pekalongan-Batang</span>
-                                    <span class="text-gray-500 text-right">Pengumuman | 23/06/2024 07:00</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Penutupan Sementara Beberapa Jalan di Pusat
-                                        Kota</span>
-                                    <span class="text-gray-500 text-right">Pengumuman | 22/06/2024 18:30</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Pengumuman Pelatihan Kerja di Balai Latihan
-                                        Kerja</span>
-                                    <span class="text-gray-500 text-right">Pengumuman | 22/06/2024 17:00</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Kegiatan Donor Darah di PMI</span>
-                                    <span class="text-gray-500 text-right">Pengumuman | 22/06/2024 15:45</span>
-                                </li>
-                                <li class="flex justify-between text-sm">
-                                    <span class="hover:text-yellow-500">Lomba Kebersihan Antar RW</span>
-                                    <span class="text-gray-500 text-right">Pengumuman | 22/06/2024 14:00</span>
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -389,14 +346,16 @@
             <!-- Twitter feed for @pemkotpkl -->
             <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-80">
                 <div class="font-bold mb-4">Postingan dari @pemkotpkl</div>
-                <a class="twitter-timeline" href="https://twitter.com/pemkotpkl" data-tweet-limit="1">Tweets by Pemkot
+                <a class="twitter-timeline" href="https://twitter.com/pemkotpkl" data-tweet-limit="1">Tweets by
+                    Pemkot
                     Pekalongan</a>
                 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
             <!-- Twitter feed for @officialbatiktv -->
             <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-80">
                 <div class="font-bold mb-4">Postingan dari @officialbatiktv</div>
-                <a class="twitter-timeline" href="https://twitter.com/officialbatiktv" data-tweet-limit="1">Tweets by
+                <a class="twitter-timeline" href="https://twitter.com/officialbatiktv" data-tweet-limit="1">Tweets
+                    by
                     BATIK TV</a>
                 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
@@ -419,7 +378,8 @@
                                     <div>
                                         <div class="font-bold text-xl mb-2">Berita Pekalongan</div>
                                         <p class="text-gray-700 text-base">
-                                            Portal berita resmi Pemerintah Kota Pekalongan. Temukan informasi aktual dan
+                                            Portal berita resmi Pemerintah Kota Pekalongan. Temukan informasi aktual
+                                            dan
                                             akurat tentang Kota Pekalongan.
                                         </p>
                                     </div>
@@ -523,34 +483,26 @@
         </script>
 
         <!-- Swiper CSS -->
-        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-
         <div class="container mx-auto py-8 px-4">
             <div class="bg-white shadow-md rounded-lg p-6">
                 <div class="flex flex-col md:flex-row">
                     <div id="map" class="h-96 md:h-[500px] w-full md:w-1/2 relative z-0">
-                        <button id="focusButton"
-                            class="absolute bottom-4 left-4 z-10 bg-yellow-500 text-white px-4 py-2 rounded">Fokus
-                            ke
-                            Pekalongan</button>
+                        <button id="focusButton">Fokus ke Pekalongan</button>
                     </div>
                     <div class="mt-4 md:mt-0 md:ml-4 flex flex-col items-center md:w-1/2">
-                        <img src="{{ asset('img/logopkl.png') }}" alt="Image beside the map" class="w-24 mb-4">
+                        <img src="img/logopkl.png" alt="Image beside the map" class="w-24 mb-4">
                         <h2 class="text-xl font-semibold mb-2">Kota Pekalongan</h2>
                         <p class="text-gray-600 text-justify">Kota Pekalongan adalah salah satu kota di pesisir
                             pantai
-                            utara
-                            Provinsi Jawa Tengah. Kota ini berbatasan dengan laut Jawa di utara, Kabupaten
+                            utara Provinsi Jawa Tengah. Kota ini berbatasan dengan laut Jawa di utara, Kabupaten
                             Pekalongan di
                             sebelah selatan dan barat dan Kabupaten Batang di timur. Kota Pekalongan terdiri
-                            atas 4
-                            kecamatan, yakni Pekalongan Utara, Pekalongan Barat, Pekalongan Selatan dan
+                            atas 4 kecamatan, yakni Pekalongan Utara, Pekalongan Barat, Pekalongan Selatan dan
                             Pekalongan
                             Timur. Kota Pekalongan terletak di antara 6°50’42” - 6°55’44” LS dan 109°37’55” -
-                            109°42’19”
-                            BT. Jarak Kota Pekalongan ke ibukota Provinsi Jawa Tengah sekitar 100 km sebelah
-                            barat
-                            Semarang. Kota Pekalongan mendapat julukan kota batik. Hal ini tidak terlepas dari
+                            109°42’19” BT. Jarak Kota Pekalongan ke ibukota Provinsi Jawa Tengah sekitar 100 km
+                            sebelah
+                            barat Semarang. Kota Pekalongan mendapat julukan kota batik. Hal ini tidak terlepas dari
                             sejarah
                             bahwa sejak puluhan dan ratusan tahun lampau hingga sekarang, sebagian besar proses
                             produksi
@@ -558,6 +510,28 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script>
+        const map = L.map('map').setView([-6.8883, 109.6753], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Menambahkan marker pada peta
+        L.marker([-6.8883, 109.6753]).addTo(map)
+            .bindPopup('Kota Pekalongan')
+            .openPopup();
+
+        document.getElementById('focusButton').addEventListener('click', () => {
+            map.setView([-6.8883, 109.6753], 13);
+        });
+        </script>
+
     </main>
 
     <footer class="bg-yellow-600 p-2 relative z-50">
@@ -613,46 +587,6 @@
         </div>
     </footer>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var map = L.map('map').setView([-6.8915, 109.6753], 13);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        var pointsOfInterest = [{
-            coords: [-6.887, 109.675],
-            name: 'Kota Pekalongan'
-        }];
-
-        pointsOfInterest.forEach(function(point) {
-            L.marker(point.coords).addTo(map)
-                .bindPopup(point.name);
-        });
-
-        var boundaryCoords = [
-            [-6.888, 109.665],
-            [-6.878, 109.665],
-            [-6.878, 109.685],
-            [-6.888, 109.685],
-            [-6.888, 109.665]
-        ];
-        var boundaryLine = L.polyline(boundaryCoords, {
-            color: 'no color',
-            weight: 2,
-            opacity: 0.5,
-            dashArray: '5, 5'
-        }).addTo(map);
-
-        var bounds = L.latLngBounds(boundaryCoords);
-        map.fitBounds(bounds);
-
-        document.getElementById('focusButton').addEventListener('click', function() {
-            map.setView([-6.888, 109.675], 13);
-        });
-    });
-    </script>
 </body>
 
 </html>
