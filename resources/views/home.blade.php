@@ -343,13 +343,13 @@
         </div>
     </div>
     <!-- Twitter feed for @pemkotpkl -->
-    <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-80 h-64 overflow-hidden">
+    <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-80 h-96 overflow-hidden">
         <div class="font-bold mb-4">Postingan dari @pemkotpkl</div>
         <a class="twitter-timeline" href="https://twitter.com/pemkotpkl" data-tweet-limit="1">Tweets by Pemkot Pekalongan</a>
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
     <!-- Twitter feed for @officialbatiktv -->
-    <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-80 h-64 overflow-hidden">
+    <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-80 h-96 overflow-hidden">
         <div class="font-bold mb-4">Postingan dari @officialbatiktv</div>
         <a class="twitter-timeline" href="https://twitter.com/officialbatiktv" data-tweet-limit="1">Tweets by BATIK TV</a>
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
