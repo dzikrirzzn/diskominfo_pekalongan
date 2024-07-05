@@ -31,7 +31,7 @@ export default {
                 },
             ],
             fontFamily: {
-                sans: ["Figtree", ...defaultTheme.fontFamily.sans],
+                sans: ['Poppins', "Figtree", ...defaultTheme.fontFamily.sans],
             },
             backgroundImage: {
                 "batik-pattern": "url('/public/img/batik_pkl.png')",

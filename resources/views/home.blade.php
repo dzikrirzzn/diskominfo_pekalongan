@@ -12,6 +12,9 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('img/logopkl.png') }}" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <style>
@@ -30,6 +33,14 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.cursor-grabbing {
+    cursor: grabbing;
+}
+
+.cursor-grab {
+    cursor: grab;
 }
 </style>
 
@@ -55,28 +66,7 @@
             </button>
             <div :class="{'hidden': !isOpen, 'block': isOpen}" class="w-full lg:flex lg:items-center lg:w-auto">
                 <ul class="lg:flex space-y-2 lg:space-y-0 lg:space-x-10">
-                    <li class="relative group" x-data="{ open: false }">
-                        <a href="#" class="block text-white hover:text-gray-200" @mouseenter="open = true"
-                            @mouseleave="open = false">Sekilas</a>
-                        <div x-show="open" @mouseenter="open = true" @mouseleave="open = false"
-                            class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50"
-                            x-transition:enter="transition ease-out duration-100"
-                            x-transition:enter-start="transform opacity-0 scale-95"
-                            x-transition:enter-end="transform opacity-100 scale-100"
-                            x-transition:leave="transition ease-in duration-75"
-                            x-transition:leave-start="transform opacity-100 scale-100"
-                            x-transition:leave-end="transform opacity-0 scale-95">
-                            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    role="menuitem">Submenu 1</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    role="menuitem">Submenu 2</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                    role="menuitem">Submenu 3</a>
-                            </div>
-                        </div>
-                    </li>
-
+                    <li><a href="#" class="block text-white hover:text-gray-200">Sekilas</a></li>
                     <li><a href="#" class="block text-white hover:text-gray-200">Instansi</a></li>
                     <li><a href="#" class="block text-white hover:text-gray-200">Berita</a></li>
                     <li><a href="#" class="block text-white hover:text-gray-200">Informasi</a></li>
@@ -85,25 +75,29 @@
             </div>
         </div>
     </nav>
+
     <main class="flex-1 relative z-0">
-        <!-- Blade Template -->
-        <!-- Padding to offset the fixed navbar -->
-        <div class="relative overflow-x-scroll h-screen snap-x snap-mandatory">
-            <div class="flex h-full" id="carousel">
-                @foreach($headlineBerita as $berita)
-                <div class="flex-shrink-0 w-full h-full snap-center relative">
-                    <img src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}"
-                        class="w-full h-full object-cover">
-                    <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
-                        <h2 class="text-xl text-center">{{ $berita->title }}</h2>
-                    </div>
+        <div class="h-full">
+            <div class="relative overflow-x-auto h-full snap-x snap-mandatory cursor-grab" id="carousel-container">
+                <div class="flex h-full" id="carousel">
+                    @foreach($headlineBerita as $berita)
+                    <a href="{{ route('berita.show', ['id' => $berita->id]) }}"
+                        class="flex-shrink-0 w-full h-full snap-center relative">
+                        <img src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}"
+                            class="w-full h-full object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
+                            <h2 class="text-xl text-center">{{ $berita->title }}</h2>
+                            <p class="text-center text-yellow-300">{{ $berita->author }}</p>
+                        </div>
+                    </a>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
         </div>
 
         <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const carouselContainer = document.getElementById('carousel-container');
             const carousel = document.getElementById('carousel');
             const items = carousel.children;
             let index = 0;
@@ -111,18 +105,50 @@
             function showNextItem() {
                 const itemWidth = items[0].getBoundingClientRect().width;
                 index = (index + 1) % items.length;
-                carousel.scrollTo({
+                carouselContainer.scrollTo({
                     left: index * itemWidth,
                     behavior: 'smooth'
                 });
             }
 
-            let autoScroll = setInterval(showNextItem, 3000);
+            let autoScroll = setInterval(showNextItem, 5000);
 
-            carousel.addEventListener('mouseenter', () => clearInterval(autoScroll));
-            carousel.addEventListener('mouseleave', () => autoScroll = setInterval(showNextItem, 3000));
+            carouselContainer.addEventListener('mouseenter', () => clearInterval(autoScroll));
+            carouselContainer.addEventListener('mouseleave', () => autoScroll = setInterval(showNextItem,
+                5000));
+
+            // Enable horizontal dragging
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            carouselContainer.addEventListener('mousedown', (e) => {
+                isDown = true;
+                carouselContainer.classList.add('cursor-grabbing');
+                startX = e.pageX - carouselContainer.offsetLeft;
+                scrollLeft = carouselContainer.scrollLeft;
+            });
+
+            carouselContainer.addEventListener('mouseleave', () => {
+                isDown = false;
+                carouselContainer.classList.remove('cursor-grabbing');
+            });
+
+            carouselContainer.addEventListener('mouseup', () => {
+                isDown = false;
+                carouselContainer.classList.remove('cursor-grabbing');
+            });
+
+            carouselContainer.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - carouselContainer.offsetLeft;
+                const walk = (x - startX) * 3; // Adjust scroll speed
+                carouselContainer.scrollLeft = scrollLeft - walk;
+            });
         });
         </script>
+
         <div class="relative bg-batik-pattern py-4 md:py-8 ml-20 bg-no-repeat bg-left-top">
             <div class="relative w-full max-w-6xl mx-auto my-4 md:my-8" x-data="{
         activeSlide: 1,
@@ -184,7 +210,7 @@
                 <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 h-full">
                     <!-- Berita Section -->
                     <div class="flex-[3] bg-yellow-500 rounded-lg p-4 h-full flex flex-col">
-                        <h2 class="text-xl font-semibold mb-4">Berita</h2>
+                        <h2 class="text-xl font-semibold mb-4 text-black">Berita</h2>
                         <div class="flex space-x-4 mb-4">
                             <!-- Image Box -->
                             <div class="flex gap-2">
@@ -211,13 +237,13 @@
                         </div>
                         <div class="bg-white rounded-lg shadow-md p-4 overflow-y-scroll flex-1 mb-1">
                             <div class="flex justify-between mb-2">
-                                <span class="font-semibold">Berita Terbaru</span>
+                                <span class="font-semibold text-black">Berita Terbaru</span>
                             </div>
                             <ul class="space-y-2">
                                 @foreach ($otherBerita as $berita)
                                 <li class="flex justify-between text-sm">
                                     <a href="{{ route('berita.show', ['id' => $berita->id]) }}"
-                                        class="flex justify-between w-full no-underline text-black">
+                                        class="flex justify-between w-full no-underline">
                                         <span class="hover:text-yellow-500">{{ $berita->title }}</span>
                                         <span class="text-gray-500">| {{ $berita->date }}</span>
                                     </a>
@@ -229,13 +255,13 @@
                     </div>
                     <!-- Pengumuman Section -->
                     <div class="flex-[1] bg-yellow-500 rounded-lg p-4 h-full flex flex-col">
-                        <h2 class="text-xl font-semibold mb-4">Pengumuman</h2>
+                        <h2 class="text-xl font-semibold mb-4 text-black">Pengumuman</h2>
                         <div class="bg-white rounded-lg shadow-md p-4 overflow-y-scroll flex-1">
                             <ul class="space-y-2">
                                 @foreach($pengumuman as $item)
                                 <li class="flex justify-between text-sm">
                                     <a href="{{ route('pengumuman.show', ['id' => $item->id]) }}"
-                                        class="flex justify-between w-full no-underline text-black">
+                                        class="flex justify-between w-full no-underline">
                                         <span class="hover:text-yellow-500">{{ $item->judul }}</span>
                                         <span class="text-gray-500 text-right">{{ $item->tanggal }}</span>
                                     </a>
@@ -249,7 +275,7 @@
         </div>
 
         <div class="container mx-auto py-8 px-4">
-            <h1 class="text-2xl font-bold mb-6">Galeri Kota Pekalongan</h1>
+            <h1 class="text-2xl font-bold mb-6 text-black">Galeri Kota Pekalongan</h1>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <div class="relative group rounded-lg overflow-hidden shadow-md">
                     <img src="https://via.placeholder.com/150" alt="Pemerintah Kota Bandung"
@@ -363,7 +389,7 @@
 
 
         <div class="container mx-auto py-8 px-4 overflow-hidden">
-            <h1 class="text-2xl font-bold mb-6">Layanan Kota Pekalongan</h1>
+            <h1 class="text-2xl font-bold mb-6 text-black">Layanan Kota Pekalongan</h1>
             <div class="swiper-container">
                 <div class="swiper-wrapper ">
                     <!-- Slide 1 -->
@@ -490,7 +516,7 @@
                     </div>
                     <div class="mt-4 md:mt-0 md:ml-4 flex flex-col items-center md:w-1/2">
                         <img src="img/logopkl.png" alt="Image beside the map" class="w-24 mb-4">
-                        <h2 class="text-xl font-semibold mb-2">Kota Pekalongan</h2>
+                        <h2 class="text-xl font-semibold mb-2 text-black">Kota Pekalongan</h2>
                         <p class="text-gray-600 text-justify">Kota Pekalongan adalah salah satu kota di pesisir
                             pantai
                             utara Provinsi Jawa Tengah. Kota ini berbatasan dengan laut Jawa di utara, Kabupaten
