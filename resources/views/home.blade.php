@@ -151,34 +151,30 @@
 
         <div class="relative bg-batik-pattern py-4 md:py-8 ml-20 bg-no-repeat bg-left-top">
             <div class="relative w-full max-w-6xl mx-auto my-4 md:my-8" x-data="{
-                activeSlide: 1,
-                slides: @json($travelRecommendations),
-                loop() {
-                    setInterval(() => {
-                        this.activeSlide = this.activeSlide === this.slides.length ? 1 : this.activeSlide + 1;
-                    }, 5000);
-                }
-            }" x-init="loop()">
+        activeSlide: 1,
+        slides: [
+            { id: 1, image: '{{ asset('img/balon_pekalongan.png') }}', logo: '{{ asset('img/pklbunga.png') }}', title: 'Pekalongan Balloon Festival', description: 'You can make summer plans for unforgettable experiences in the nation\'s capital. Check out the dozens of free things to do, including Smithsonian museums, the National Mall and an array of outdoor activities. Explore wondrous neighborhoods, a dining scene filled with Michelin-approved restaurants, rooftop bars and beer gardens. Get ready for an exciting summer in.' },
+            { id:2, image: '{{ asset('img/balon_pekalongan.png') }}', logo: '{{ asset('img/pklbunga.png') }}', title: 'Pekalongan Balloon Festival', description: 'You can make summer plans for unforgettable experiences in the nation\'s capital. Check out the dozens of free things to do, including Smithsonian museums, the National Mall and an array of outdoor activities. Explore wondrous neighborhoods, a dining scene filled with Michelin-approved restaurants, rooftop bars and beer gardens. Get ready for an exciting summer in.' },
+        ]
+    }">
                 <div class="overflow-hidden rounded-lg shadow-lg">
                     <div class="flex transition-transform duration-300 ease-in-out"
-                        :style="{ transform: translateX(-${(activeSlide - 1) * 100}%) }">
+                        :style="{ transform: `translateX(-${(activeSlide - 1) * 100}%)` }">
                         <template x-for="slide in slides" :key="slide.id">
                             <div class="flex-none w-full">
                                 <div class="flex flex-col md:flex-row">
                                     <!-- Left side - Image -->
                                     <div class="w-full md:w-1/2 h-64 md:h-auto">
-                                        <img :src="slide.image" :alt="slide.judul" class="w-full h-full object-cover">
+                                        <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover">
                                     </div>
                                     <!-- Right side - Content -->
                                     <div class="w-full md:w-1/2 bg-white p-4 md:p-6">
-                                        <img :src="slide.logo" :alt="slide.judul + ' Logo'"
+                                        <img :src="slide.logo" :alt="slide.title + ' Logo'"
                                             class="h-24 w-auto mb-4 mx-auto md:mx-0">
-                                        <h2 class="text-xl md:text-2xl font-bold mb-2 md:mb-4" x-text="slide.judul">
+                                        <h2 class="text-xl md:text-2xl font-bold mb-2 md:mb-4" x-text="slide.title">
                                         </h2>
-                                        <p class="text-sm md:text-base text-gray-700" x-text="slide.sub_judul">
+                                        <p class="text-sm md:text-base text-gray-700" x-text="slide.description">
                                         </p>
-                                        <a :href="/travel_recommendations/${slide.id}"
-                                            class="text-blue-500 hover:underline">Read more</a>
                                     </div>
                                 </div>
                             </div>
@@ -202,7 +198,6 @@
                 </button>
             </div>
         </div>
-
         <!-- Berita & Pengumuman -->
         <div class="relative h-screen">
             <!-- Background Image Overlay -->
@@ -360,39 +355,36 @@
             </div>
         </div>
 
+        <div class="container mx-auto p-4 flex flex-col lg:flex-row lg:justify-between space-y-4 lg:space-y-0 lg:space-x-4">
+    <div class="flex flex-col space-y-4">
+        <!-- Top placeholder image -->
         <div
-            class="container mx-auto p-4 flex flex-col lg:flex-row lg:justify-between space-y-4 lg:space-y-0 lg:space-x-4">
-            <div class="flex flex-col space-y-4">
-                <!-- Top placeholder image -->
-                <div
-                    class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-80 h-48 flex items-center justify-center">
-                    <span class="text-gray-500">Top Placeholder Image</span>
-                </div>
-                <!-- Bottom placeholder image -->
-                <div
-                    class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-80 h-48 flex items-center justify-center">
-                    <span class="text-gray-500">Bottom Placeholder Image</span>
-                </div>
-            </div>
-            <!-- Twitter feed for @pemkotpkl -->
-            <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-80 h-96 overflow-hidden">
-                <div class="font-bold mb-4">Postingan dari @pemkotpkl</div>
-                <div class="h-full overflow-y-scroll">
-                    <a class="twitter-timeline" href="https://twitter.com/pemkotpkl" data-tweet-limit="5">Tweets by
-                        Pemkot Pekalongan</a>
-                </div>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
-            <!-- Twitter feed for @officialbatiktv -->
-            <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-80 h-96 overflow-hidden">
-                <div class="font-bold mb-4">Postingan dari @officialbatiktv</div>
-                <div class="h-full overflow-y-scroll">
-                    <a class="twitter-timeline" href="https://twitter.com/officialbatiktv" data-tweet-limit="5">Tweets
-                        by BATIK TV</a>
-                </div>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
+            class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-80 h-48 flex items-center justify-center">
+            <span class="text-gray-500">Top Placeholder Image</span>
         </div>
+        <!-- Bottom placeholder image -->
+        <div
+            class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-80 h-48 flex items-center justify-center">
+            <span class="text-gray-500">Bottom Placeholder Image</span>
+        </div>
+    </div>
+    <!-- Twitter feed for @pemkotpkl -->
+    <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-80 h-96 overflow-hidden">
+        <div class="font-bold mb-4">Postingan dari @pemkotpkl</div>
+        <div class="h-full overflow-y-scroll">
+            <a class="twitter-timeline" href="https://twitter.com/pemkotpkl" data-tweet-limit="5">Tweets by Pemkot Pekalongan</a>
+        </div>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+    <!-- Twitter feed for @officialbatiktv -->
+    <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-80 h-96 overflow-hidden">
+        <div class="font-bold mb-4">Postingan dari @officialbatiktv</div>
+        <div class="h-full overflow-y-scroll">
+            <a class="twitter-timeline" href="https://twitter.com/officialbatiktv" data-tweet-limit="5">Tweets by BATIK TV</a>
+        </div>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+</div>
 
 
 
