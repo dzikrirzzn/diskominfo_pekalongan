@@ -42,10 +42,15 @@
                                     required>
                             </div>
                             <div class="mb-4">
-                                <label for="subtitle" class="block text-gray-700 text-sm font-bold mb-2">Subtitle:</label>
-                                <input type="text" id="subtitle" name="subtitle"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    required>
+                                <<<<<<< HEAD <label for="subtitle" class="block text-gray-700 text-sm font-bold mb-2">
+                                    Subtitle:</label>
+                                    =======
+                                    <label for="subtitle"
+                                        class="block text-gray-700 text-sm font-bold mb-2">Subtitle:</label>
+                                    >>>>>>> 40ca28d (kkdajdjaw)
+                                    <input type="text" id="subtitle" name="subtitle"
+                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        required>
                             </div>
                             <div class="mb-4">
                                 <label for="content" class="block text-gray-700 text-sm font-bold mb-2">Content:</label>
@@ -73,9 +78,10 @@
                             <div class="mb-4">
                                 <label for="type" class="block text-gray-700 text-sm font-bold mb-2">Type:</label>
                                 <select id="type" name="type"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                                    <option value="kota">Kota</option>
-                                    <option value="lainnya">Lainnya</option>
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    required>
+                                    <option value="kota">Berita Kota</option>
+                                    <option value="lainnya">Berita Lainnya</option>
                                 </select>
                             </div>
                             <div class="mb-4">

@@ -5,64 +5,51 @@ use Illuminate\Http\Request;
 use App\Models\HeadlineBerita;
 use App\Models\OtherBerita;
 use App\Models\Pengumuman;
+use App\Models\TravelRecommendation;
 
 class BeritaController extends Controller
 {
     public function index()
     {
-        // Mengambil semua berita dari kedua tabel
         $headlineBerita = HeadlineBerita::all();
         $otherBerita = OtherBerita::all();
-    
 
-        // Menggabungkan kedua koleksi berita
         $allBerita = $headlineBerita->merge($otherBerita);
 
-        // Mengembalikan tampilan dengan data berita
         return view('berita.listberita', ['allBerita' => $allBerita]);
     }
 
     public function home()
     {
-        // Retrieve all news items
         $headlineBerita = HeadlineBerita::latest()->get();
         $otherBerita = OtherBerita::latest()->get();
         $pengumuman = Pengumuman::all();
-
-
-    
+        $travelRecommendations = TravelRecommendation::all();
+        
         return view('home', [
             'headlineBerita' => $headlineBerita,
             'otherBerita' => $otherBerita,
-            'pengumuman' => $pengumuman
+            'pengumuman' => $pengumuman,
+            'travelRecommendations' => $travelRecommendations
         ]);
     }
 
     public function show($id)
     {
-        // Attempt to find the news item in both CityNews and OtherNews
         $berita = HeadlineBerita::find($id) ?? OtherBerita::find($id);
     
-        // Check if the news item was found
         if (!$berita) {
             return redirect()->route('listberita')->with('error', 'Berita tidak ditemukan.');
         }
     
-        // Retrieve other news items for the sidebar
         $otherBerita = OtherBerita::latest()->take(5)->get();
     
-        // Pass the news item and other news items to the view
         return view('berita.berita_content', compact('berita', 'otherBerita'));
     }
     
-    
-
-    
-
     public function store(Request $request)
     {
         try {
-            // Validasi data
             $request->validate([
                 'title' => 'required|string|max:255',
                 'subtitle' => 'required|string|max:255',
@@ -72,13 +59,11 @@ class BeritaController extends Controller
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'type' => 'required|string|in:kota,lainnya',
             ]);
-    
-            // Upload gambar
+
             if ($request->hasFile('image')) {
                 $imagePath = $request->file('image')->store('images', 'public');
             }
-    
-            // Simpan data berita ke tabel yang sesuai
+
             if ($request->type == 'kota') {
                 HeadlineBerita::create([
                     'title' => $request->title,
@@ -98,14 +83,11 @@ class BeritaController extends Controller
                     'image' => $imagePath,
                 ]);
             }
-    
-            // Redirect back to form with success message
+
             return redirect()->back()->with('success', 'Berita berhasil diupload!');
     
         } catch (\Exception $e) {
-            // Redirect back to form with error message
             return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupload berita: ' . $e->getMessage());
         }
     }
-    
 }
