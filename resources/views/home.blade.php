@@ -44,11 +44,11 @@
 }
 </style>
 
-<body class="flex flex-col min-h-screen bg-gray-100">
-    <nav class="bg-white-600 p-2 relative z-50" x-data="{ isOpen: false, dropdownOpen: false }">
+<body class="flex flex-col min-h-screen bg-white">
+    <nav class="bg-white p-2 relative z-50" x-data="{ isOpen: false, dropdownOpen: false }">
         <div class="container mx-auto flex justify-between items-center flex-wrap">
             <a href="{{ route('home') }}">
-                <div class="text-white font-bold flex items-center">
+                <div class="text-black font-bold flex items-center">
                     <img src="{{ asset('img/logopkl.png') }}" alt="Logo" class="h-12 mr-3">
                     <div class="flex flex-col">
                         <div class="text-sm">Pemerintah</div>
