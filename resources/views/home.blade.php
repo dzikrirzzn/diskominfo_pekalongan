@@ -45,7 +45,7 @@
 </style>
 
 <body class="flex flex-col min-h-screen bg-gray-100">
-    <nav class="bg-yellow-600 p-2 relative z-50" x-data="{ isOpen: false, dropdownOpen: false }">
+    <nav class="bg-white-600 p-2 relative z-50" x-data="{ isOpen: false, dropdownOpen: false }">
         <div class="container mx-auto flex justify-between items-center flex-wrap">
             <a href="{{ route('home') }}">
                 <div class="text-white font-bold flex items-center">
