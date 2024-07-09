@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Include CKEditor CDN in your form view -->
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
 
 <body>
@@ -42,15 +44,11 @@
                                     required>
                             </div>
                             <div class="mb-4">
-                                <<<<<<< HEAD <label for="subtitle" class="block text-gray-700 text-sm font-bold mb-2">
-                                    Subtitle:</label>
-                                    =======
-                                    <label for="subtitle"
-                                        class="block text-gray-700 text-sm font-bold mb-2">Subtitle:</label>
-                                    >>>>>>> 40ca28d (kkdajdjaw)
-                                    <input type="text" id="subtitle" name="subtitle"
-                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        required>
+                                <label for="subtitle"
+                                    class="block text-gray-700 text-sm font-bold mb-2">Subtitle:</label>
+                                <input type="text" id="subtitle" name="subtitle"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    required>
                             </div>
                             <div class="mb-4">
                                 <label for="content" class="block text-gray-700 text-sm font-bold mb-2">Content:</label>
@@ -102,6 +100,7 @@
                 dateFormat: 'yy-mm-dd'
             });
         });
+        CKEDITOR.replace('content');
         </script>
     </x-app-layout>
 </body>
