@@ -137,8 +137,8 @@
     });
     </script>
 
-    <div class="relative py-4 md:py-8 bg-no-repeat bg-left-top">
-        <div class="relative w-full max-w-6xl mx-auto my-4 md:my-8" x-data="{
+<div class="relative py-4 md:py-8 bg-no-repeat bg-left-top">
+    <div class="relative w-full max-w-6xl mx-auto my-4 md:my-8" x-data="{
         activeSlide: 1,
         slides: [
             @foreach ($travelRecommendations as $recommendation)
@@ -146,47 +146,47 @@
             @endforeach
         ]
     }">
-            <div class="overflow-hidden rounded-lg shadow-lg">
-                <div class="flex transition-transform duration-300 ease-in-out"
-                    :style="{ transform: `translateX(-${(activeSlide - 1) * 100}%)` }">
-                    <template x-for="slide in slides" :key="slide.id">
-                        <div class="flex-none w-full">
-                            <div class="flex flex-col md:flex-row h-full">
-                                <!-- Left side - Image -->
-                                <div class="w-full md:w-1/2 h-64 md:h-96 relative">
-                                    <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover">
-                                </div>
-                                <!-- Right side - Content -->
-                                <div class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative">
-                                    <img :src="slide.logo" :alt="slide.title + ' Logo'"
-                                        class="h-24 w-auto mb-2 absolute top-4 left-4 object-contain">
-                                    <h2 class="text-xl md:text-2xl font-bold mb-2 text-black mt-10 md:mt-20"
-                                        x-text="slide.title"></h2>
-                                    <p class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis"
-                                        x-text="slide.description"></p>
-                                </div>
+        <div class="overflow-hidden rounded-lg shadow-lg">
+            <div class="flex transition-transform duration-300 ease-in-out"
+                :style="{ transform: `translateX(-${(activeSlide - 1) * 100}%)` }">
+                <template x-for="slide in slides" :key="slide.id">
+                    <div class="flex-none w-full">
+                        <div class="flex flex-col md:flex-row h-full">
+                            <!-- Left side - Image -->
+                            <div class="w-full md:w-1/2 h-64 md:h-96 relative">
+                                <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover">
+                            </div>
+                            <!-- Right side - Content -->
+                            <div class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative">
+                                <img :src="slide.logo" :alt="slide.title + ' Logo'"
+                                    class="h-24 w-auto mb-2 absolute top-4 left-4 object-contain">
+                                <h2 class="text-xl md:text-2xl font-bold mb-2 text-black mt-16 md:mt-28"
+                                    x-text="slide.title"></h2>
+                                <p class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis"
+                                    x-text="slide.description"></p>
                             </div>
                         </div>
-                    </template>
-                </div>
+                    </div>
+                </template>
             </div>
-            <!-- Navigation buttons -->
-            <button @click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1"
-                class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    class="h-4 w-4 md:h-6 md:w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-            </button>
-            <button @click="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1"
-                class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    class="h-4 w-4 md:h-6 md:w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </button>
         </div>
+        <!-- Navigation buttons -->
+        <button @click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1"
+            class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                class="h-4 w-4 md:h-6 md:w-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+        <button @click="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1"
+            class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                class="h-4 w-4 md:h-6 md:w-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
     </div>
+</div>
 
     <!-- Berita & Pengumuman -->
     <div class="relative h-screen">
