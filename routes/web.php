@@ -4,6 +4,7 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\TravelRecommendationController;
+use App\Http\Controllers\LayananController; // Add this line
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BeritaController::class, 'home'])->name('home');
@@ -23,6 +24,10 @@ Route::get('/admin_pengumuman', function () {
 Route::get('/admin_travel', function () {
     return view('admin_travel');
 })->name('admin_travel');
+
+Route::get('/admin_layanan', function () {
+    return view('admin_layanan');
+})->name('admin_layanan');
 
 Route::get('/sekilas', function () {
     return view('sekilas');
@@ -52,8 +57,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
-<<<<<<< HEAD
->>>>>>> 7a31baec729d45a791255e44091e3148bd067928
-=======
->>>>>>> 59f6284668ab53bd11eb214fe72fd67461949d7b
+require __DIR__.'/auth.php';
