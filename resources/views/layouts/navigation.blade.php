@@ -19,9 +19,11 @@
                         {{ __('Berita') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin_pengumuman')" :active="request()->routeIs('admin_pengumuman')">
-                       {{ __('Pengumuman') }}
+                        {{ __('Pengumuman') }}
                     </x-nav-link>
-
+                    <x-nav-link :href="route('admin_travel')" :active="request()->routeIs('admin_travel')">
+                        {{ __('Travel') }}
+                    </x-nav-link>
                 </div>
             </div>
 

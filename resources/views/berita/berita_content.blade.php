@@ -56,7 +56,7 @@
                     <img class="w-full h-auto rounded-lg mb-4" src="{{ asset('storage/' . $berita->image) }}"
                         alt="{{ $berita->title }}">
                     <p class="leading-7 mb-4 text-justify">{{ $berita->subtitle }}</p>
-                    <p class="leading-7 mb-4 text-justify">{!! nl2br(e($berita->content)) !!}</p>
+                    <p class="leading-7 mb-4 text-justify">{!! $berita->content !!}</p>
                 </div>
             </div>
             <!-- Sidebar -->
