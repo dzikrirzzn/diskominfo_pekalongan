@@ -10,18 +10,18 @@ class TravelRecommendationController extends Controller
     public function index()
     {
         $travelRecommendations = TravelRecommendation::all();
-        return view('admin.travel_recommendations.index', compact('travelRecommendations'));
+        return view('home', compact('travelRecommendations'));
     }
 
     public function create()
     {
-        return view('admin.travel_recommendations.create');
+        return view('travel_recommendations.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'judul' => 'required',
             'sub_judul' => 'required',
             'isi' => 'required',
@@ -30,9 +30,23 @@ class TravelRecommendationController extends Controller
             'date' => 'required|date',
         ]);
 
-        TravelRecommendation::create($request->all());
+        $travelRecommendation = new TravelRecommendation();
 
-        return redirect()->route('admin_travel')->with('success', 'Travel Recommendation created successfully.');
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $travelRecommendation->image = $imagePath;
+        }
+
+        $travelRecommendation->judul = $request->judul;
+        $travelRecommendation->sub_judul = $request->sub_judul;
+        $travelRecommendation->isi = $request->isi;
+        $travelRecommendation->map = $request->map;
+        $travelRecommendation->author = $request->author;
+        $travelRecommendation->date = $request->date;
+
+        $travelRecommendation->save();
+
+        return redirect()->route('home')->with('success', 'Travel Recommendation created successfully.');
     }
 
     public function show($id)
@@ -47,23 +61,36 @@ class TravelRecommendationController extends Controller
         return view('admin.travel_recommendations.edit', compact('travelRecommendation'));
     }
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'image' => 'required',
-            'judul' => 'required',
-            'sub_judul' => 'required',
-            'isi' => 'required',
-            'map' => 'required',
-            'author' => 'required',
-            'date' => 'required|date',
-        ]);
+    // public function update(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    //         'judul' => 'required',
+    //         'sub_judul' => 'required',
+    //         'isi' => 'required',
+    //         'map' => 'required',
+    //         'author' => 'required',
+    //         'date' => 'required|date',
+    //     ]);
 
-        $travelRecommendation = TravelRecommendation::findOrFail($id);
-        $travelRecommendation->update($request->all());
+    //     $travelRecommendation = TravelRecommendation::findOrFail($id);
 
-        return redirect()->route('admin_travel')->with('success', 'Travel Recommendation updated successfully.');
-    }
+    //     if ($request->hasFile('image')) {
+    //         $imagePath = $request->file('image')->store('images', 'public');
+    //         $travelRecommendation->image = $imagePath;
+    //     }
+
+    //     $travelRecommendation->judul = $request->judul;
+    //     $travelRecommendation->sub_judul = $request->sub_judul;
+    //     $travelRecommendation->isi = $request->isi;
+    //     $travelRecommendation->map = $request->map;
+    //     $travelRecommendation->author = $request->author;
+    //     $travelRecommendation->date = $request->date;
+
+    //     $travelRecommendation->save();
+
+    //     return redirect()->route('admin_travel')->with('success', 'Travel Recommendation updated successfully.');
+    // }
 
     public function destroy($id)
     {

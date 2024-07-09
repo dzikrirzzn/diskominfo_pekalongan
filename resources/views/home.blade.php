@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Include CKEditor CDN in your form view -->
     <!-- Tailwind CSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -42,6 +43,10 @@
 .cursor-grab {
     cursor: grab;
 }
+
+.half-circle {
+    clip-path: ellipse(100% 80% at 0% 50%);
+}
 </style>
 
 <body class="flex flex-col min-h-screen bg-white">
@@ -66,119 +71,69 @@
             </button>
             <div :class="{'hidden': !isOpen, 'block': isOpen}" class="w-full lg:flex lg:items-center lg:w-auto">
                 <ul class="lg:flex space-y-2 lg:space-y-0 lg:space-x-10">
-                    <li><a href="#" class="block text-white hover:text-gray-200">Sekilas</a></li>
-                    <li><a href="#" class="block text-white hover:text-gray-200">Instansi</a></li>
-                    <li><a href="#" class="block text-white hover:text-gray-200">Berita</a></li>
-                    <li><a href="#" class="block text-white hover:text-gray-200">Informasi</a></li>
-                    <li><a href="#" class="block text-white hover:text-gray-200">Kip / PPID</a></li>
+                    <li><a href="#" class="block text-black hover:text-gray-200">Sekilas</a></li>
+                    <li><a href="#" class="block text-black hover:text-gray-200">Instansi</a></li>
+                    <li><a href="#" class="block text-black hover:text-gray-200">Berita</a></li>
+                    <li><a href="#" class="block text-black hover:text-gray-200">Informasi</a></li>
+                    <li><a href="#" class="block text-black hover:text-gray-200">Kip / PPID</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <main class="flex-1 relative z-0">
-        <div class="h-full">
-            <div class="relative overflow-x-auto h-full snap-x snap-mandatory cursor-grab" id="carousel-container">
-                <div class="flex h-full" id="carousel">
-                    @foreach($headlineBerita as $berita)
-                    <a href="{{ route('berita.show', ['id' => $berita->id]) }}"
-                        class="flex-shrink-0 w-full h-full snap-center relative">
-                        <img src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}"
-                            class="w-full h-64 md:h-96 lg:h-full object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4">
-                            <h2 class="text-xl text-center">{{ $berita->title }}</h2>
-                            <p class="text-center text-yellow-300">{{ $berita->author }}</p>
-                        </div>
-                    </a>
-                    @endforeach
+        <!-- Main content -->
+        <div class="flex h-screen">
+            <!-- Left side (yellow section) -->
+            <div class="w-full lg:w-1/2 bg-yellow-500 text-white p-12 lg:p-24 flex flex-col justify-center half-circle">
+                <h1 class="text-5xl lg:text-7xl font-bold mb-8">Welcome to<br>City of<br>Pekalongan</h1>
+                <p class="mb-8 text-xl lg:text-2xl">World City of Batik</p>
+                <div class="relative">
+                    <input type="text" placeholder="How can we help?"
+                        class="w-full p-4 pr-12 rounded-full text-black text-xl">
+                    <button class="absolute right-4 top-1/2 transform -translate-y-1/2">
+                        <svg class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
+            <!-- Right side (image) -->
+            <div class="w-full lg:w-1/2 relative">
+                <img src="{{ asset('img/pemkot.png') }}" alt="foto wali dan walikota pekalongan"
+                    class="w-full h-full object-cover">
+            </div>
         </div>
-
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const carouselContainer = document.getElementById('carousel-container');
-            const carousel = document.getElementById('carousel');
-            const items = carousel.children;
-            let index = 0;
-
-            function showNextItem() {
-                const itemWidth = items[0].getBoundingClientRect().width;
-                index = (index + 1) % items.length;
-                carouselContainer.scrollTo({
-                    left: index * itemWidth,
-                    behavior: 'smooth'
-                });
-            }
-
-            let autoScroll = setInterval(showNextItem, 5000);
-
-            carouselContainer.addEventListener('mouseenter', () => clearInterval(autoScroll));
-            carouselContainer.addEventListener('mouseleave', () => autoScroll = setInterval(showNextItem,
-            5000));
-
-            // Enable horizontal dragging
-            let isDown = false;
-            let startX;
-            let scrollLeft;
-
-            carouselContainer.addEventListener('mousedown', (e) => {
-                isDown = true;
-                carouselContainer.classList.add('cursor-grabbing');
-                startX = e.pageX - carouselContainer.offsetLeft;
-                scrollLeft = carouselContainer.scrollLeft;
-            });
-
-            carouselContainer.addEventListener('mouseleave', () => {
-                isDown = false;
-                carouselContainer.classList.remove('cursor-grabbing');
-            });
-
-            carouselContainer.addEventListener('mouseup', () => {
-                isDown = false;
-                carouselContainer.classList.remove('cursor-grabbing');
-            });
-
-            carouselContainer.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - carouselContainer.offsetLeft;
-                const walk = (x - startX) * 3; // Adjust scroll speed
-                carouselContainer.scrollLeft = scrollLeft - walk;
-            });
-        });
-        </script>
-
-        <div class="relative bg-batik-pattern py-4 md:py-8 ml-20 bg-no-repeat bg-left-top">
+        <div class="relative py-4 md:py-8 bg-no-repeat bg-left-top">
             <div class="relative w-full max-w-6xl mx-auto my-4 md:my-8" x-data="{
-                activeSlide: 1,
-                slides: @json($travelRecommendations),
-                loop() {
-                    setInterval(() => {
-                        this.activeSlide = this.activeSlide === this.slides.length ? 1 : this.activeSlide + 1;
-                    }, 5000);
-                }
-            }" x-init="loop()">
+        activeSlide: 1,
+        slides: [
+            @foreach ($travelRecommendations as $recommendation)
+                { id: {{ $recommendation->id }}, image: '{{ asset('storage/' . $recommendation->image) }}', logo: '{{ asset('img/pklbunga.png') }}', title: '{{ $recommendation->judul }}', description: '{{ $recommendation->isi }}' },
+            @endforeach
+        ]
+    }">
                 <div class="overflow-hidden rounded-lg shadow-lg">
                     <div class="flex transition-transform duration-300 ease-in-out"
                         :style="{ transform: `translateX(-${(activeSlide - 1) * 100}%)` }">
                         <template x-for="slide in slides" :key="slide.id">
                             <div class="flex-none w-full">
-                                <div class="flex flex-col md:flex-row">
+                                <div class="flex flex-col md:flex-row h-full">
                                     <!-- Left side - Image -->
-                                    <div class="w-full md:w-1/2 h-64 md:h-auto">
-                                        <img :src="slide.image" :alt="slide.judul" class="w-full h-full object-cover">
+                                    <div class="w-full md:w-1/2 h-64 md:h-96 relative">
+                                        <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover">
                                     </div>
                                     <!-- Right side - Content -->
-                                    <div class="w-full md:w-1/2 bg-white p-4 md:p-6">
-                                        <img :src="slide.logo" :alt="slide.judul + ' Logo'"
-                                            class="h-24 w-auto mb-4 mx-auto md:mx-0">
-                                        <h2 class="text-xl md:text-2xl font-bold mb-2 md:mb-4" x-text="slide.judul">
-                                        </h2>
-                                        <p class="text-sm md:text-base text-gray-700" x-text="slide.sub_judul">
-                                        </p>
-                                        <a :href="`/travel_recommendations/${slide.id}`"
-                                            class="text-blue-500 hover:underline">Read more</a>
+                                    <div
+                                        class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative">
+                                        <img :src="slide.logo" :alt="slide.title + ' Logo'"
+                                            class="h-24 w-auto mb-2 absolute top-4 left-4 object-contain">
+                                        <h2 class="text-xl md:text-2xl font-bold mb-2 text-black mt-10 md:mt-20"
+                                            x-text="slide.title"></h2>
+                                        <p class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis"
+                                            x-text="slide.description"></p>
                                     </div>
                                 </div>
                             </div>
@@ -393,8 +348,6 @@
                 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
         </div>
-
-
 
         <div class="container mx-auto py-8 px-4 overflow-hidden">
             <h1 class="text-2xl font-bold mb-6 text-black">Layanan Kota Pekalongan</h1>

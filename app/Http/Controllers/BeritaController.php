@@ -25,6 +25,8 @@ class BeritaController extends Controller
         $otherBerita = OtherBerita::latest()->get();
         $pengumuman = Pengumuman::all();
         $travelRecommendations = TravelRecommendation::all();
+
+        
         
         return view('home', [
             'headlineBerita' => $headlineBerita,

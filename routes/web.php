@@ -7,6 +7,7 @@ use App\Http\Controllers\TravelRecommendationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BeritaController::class, 'home'])->name('home');
+
 Route::get('/admin', function () {
     // Admin dashboard
 })->middleware('role:admin');
@@ -19,7 +20,9 @@ Route::get('/admin_pengumuman', function () {
     return view('admin_pengumuman');
 })->name('admin_pengumuman');
 
-Route::get('/admin_travel', [TravelRecommendationController::class, 'index'])->name('admin_travel');
+Route::get('/admin_travel', function () {
+    return view('admin_travel');
+})->name('admin_travel');
 
 Route::get('/sekilas', function () {
     return view('sekilas');
@@ -40,6 +43,8 @@ Route::get('/pengumuman/{id}', [PengumumanController::class, 'show'])->name('pen
 Route::get('/travel_recommendations/create', [TravelRecommendationController::class, 'create'])->name('travel_recommendations.create');
 Route::post('/travel_recommendations', [TravelRecommendationController::class, 'store'])->name('travel_recommendations.store');
 Route::get('travel_recommendations/{id}', [TravelRecommendationController::class, 'show'])->name('travel_recommendations.show');
+Route::post('/admin/travel_recommendations', [TravelRecommendationController::class, 'store'])->name('admin.travel_recommendations.store');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
