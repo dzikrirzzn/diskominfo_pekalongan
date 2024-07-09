@@ -53,3 +53,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+<<<<<<< HEAD
+>>>>>>> 7a31baec729d45a791255e44091e3148bd067928
+=======
+>>>>>>> 59f6284668ab53bd11eb214fe72fd67461949d7b
