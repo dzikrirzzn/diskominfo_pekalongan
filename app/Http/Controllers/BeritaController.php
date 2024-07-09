@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\HeadlineBerita;
+use App\Models\Layanan;
 use App\Models\OtherBerita;
 use App\Models\Pengumuman;
 use App\Models\TravelRecommendation;
@@ -19,36 +21,41 @@ class BeritaController extends Controller
         return view('berita.listberita', ['allBerita' => $allBerita]);
     }
 
+    // Example of the home() method in your controller
     public function home()
     {
         $headlineBerita = HeadlineBerita::latest()->get();
         $otherBerita = OtherBerita::latest()->get();
         $pengumuman = Pengumuman::all();
         $travelRecommendations = TravelRecommendation::all();
+        $layanans = Layanan::all(); // Fetch all layanan entries
 
-        
-        
-        return view('home', [
-            'headlineBerita' => $headlineBerita,
-            'otherBerita' => $otherBerita,
-            'pengumuman' => $pengumuman,
-            'travelRecommendations' => $travelRecommendations
-        ]);
+        return view('home', compact('headlineBerita', 'otherBerita', 'pengumuman', 'travelRecommendations', 'layanans'));
+
+
+
+        // return view('home', [
+        //     'headlineBerita' => $headlineBerita,
+        //     'otherBerita' => $otherBerita,
+        //     'pengumuman' => $pengumuman,
+        //     'travelRecommendations' => $travelRecommendations
+        //     'layanans' => $layanans
+        // ]);
     }
 
     public function show($id)
     {
         $berita = HeadlineBerita::find($id) ?? OtherBerita::find($id);
-    
+
         if (!$berita) {
             return redirect()->route('listberita')->with('error', 'Berita tidak ditemukan.');
         }
-    
+
         $otherBerita = OtherBerita::latest()->take(5)->get();
-    
+
         return view('berita.berita_content', compact('berita', 'otherBerita'));
     }
-    
+
     public function store(Request $request)
     {
         try {
@@ -87,7 +94,6 @@ class BeritaController extends Controller
             }
 
             return redirect()->back()->with('success', 'Berita berhasil diupload!');
-    
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupload berita: ' . $e->getMessage());
         }
