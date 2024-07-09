@@ -50,6 +50,11 @@ Route::post('/travel_recommendations', [TravelRecommendationController::class, '
 Route::get('travel_recommendations/{id}', [TravelRecommendationController::class, 'show'])->name('travel_recommendations.show');
 Route::post('/admin/travel_recommendations', [TravelRecommendationController::class, 'store'])->name('admin.travel_recommendations.store');
 
+// Add Layanan routes
+Route::get('/layanans', [LayananController::class, 'index'])->name('layanans.index');
+Route::get('/layanans/create', [LayananController::class, 'create'])->name('layanans.create');
+Route::post('/layanans', [LayananController::class, 'store'])->name('layanans.store');
+Route::get('/layanans/{id}', [LayananController::class, 'show'])->name('layanans.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
