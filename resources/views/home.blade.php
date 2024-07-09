@@ -13,8 +13,7 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Include CKEditor CDN in your form view -->
-    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
@@ -50,7 +49,8 @@
 </style>
 
 <body class="flex flex-col min-h-screen bg-white">
-    <nav x-data="{ isOpen: false, scrolled: false, showNav: true, lastScrollY: 0 }" x-init="window.addEventListener('scroll', () => {
+    <nav x-data="{ isOpen: false, scrolled: false, showNav: true, lastScrollY: 0, timeout: null }" x-init="window.addEventListener('scroll', () => {
+             clearTimeout(timeout);
              if (window.scrollY > lastScrollY) {
                  showNav = false;
              } else {
@@ -58,20 +58,24 @@
              }
              lastScrollY = window.scrollY;
              scrolled = window.scrollY > 0;
-         })" :class="{'bg-yellow-500': scrolled, 'bg-transparent': !scrolled, 'hidden': !showNav, 'block': showNav}"
-        class="fixed w-full z-50 p-4 transition-all duration-300">
+             timeout = setTimeout(() => {
+                 showNav = true;
+             }, 300); // Adjust the timeout duration as needed
+         })"
+        :class="{'bg-yellow-500': scrolled, 'bg-transparent': !scrolled, 'transform -translate-y-full': !showNav, 'transform translate-y-0': showNav}"
+        class="fixed w-full z-50 py-2 transition-transform duration-500 ease-in-out">
         <div class="container mx-auto flex justify-between items-center flex-wrap">
             <a href="{{ route('home') }}">
                 <div class="text-black font-bold flex items-center">
-                    <img src="{{ asset('img/logopkl.png') }}" alt="Logo" class="h-12 mr-3">
+                    <img src="{{ asset('img/logopkl.png') }}" alt="Logo" class="h-10 mr-2">
                     <div class="flex flex-col">
-                        <div class="text-sm">Pemerintah</div>
-                        <div class="text-sm">Kota Pekalongan</div>
+                        <div class="text-xs">Pemerintah</div>
+                        <div class="text-xs">Kota Pekalongan</div>
                     </div>
                 </div>
             </a>
             <button @click="isOpen = !isOpen" class="block lg:hidden">
-                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path :class="{'hidden': isOpen, 'inline-flex': !isOpen }" stroke-linecap="round"
                         stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     <path :class="{'hidden': !isOpen, 'inline-flex': isOpen }" stroke-linecap="round"
@@ -79,20 +83,17 @@
                 </svg>
             </button>
             <div :class="{'hidden': !isOpen, 'block': isOpen}" class="w-full lg:flex lg:items-center lg:w-auto">
-                <ul class="lg:flex space-y-2 lg:space-y-0 lg:space-x-10">
-                    <li><a href="#" class="block text-black hover:text-gray-200">Sekilas</a></li>
-                    <li><a href="#" class="block text-black hover:text-gray-200">Instansi</a></li>
-                    <li><a href="#" class="block text-black hover:text-gray-200">Berita</a></li>
-                    <li><a href="#" class="block text-black hover:text-gray-200">Informasi</a></li>
-                    <li><a href="#" class="block text-black hover:text-gray-200">Kip / PPID</a></li>
+                <ul class="lg:flex space-y-2 lg:space-y-0 lg:space-x-4">
+                    <li><a href="#" class="block text-black hover:text-gray-200 text-sm">Sekilas</a></li>
+                    <li><a href="#" class="block text-black hover:text-gray-200 text-sm">Instansi</a></li>
+                    <li><a href="#" class="block text-black hover:text-gray-200 text-sm">Berita</a></li>
+                    <li><a href="#" class="block text-black hover:text-gray-200 text-sm">Informasi</a></li>
+                    <li><a href="#" class="block text-black hover:text-gray-200 text-sm">Kip / PPID</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <!-- Rest of your page content -->
-
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
-
 
     <main class="flex-1 relative z-0 pt-16">
         <!-- Main content -->
