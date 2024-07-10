@@ -96,11 +96,10 @@
     <!-- Rest of your page content -->
 
     <main class="flex-1 relative z-0 pt-16">
-        <!-- Main content -->
-        <div class="flex h-screen">
+        <div class="flex flex-col lg:flex-row h-[92vh]">
             <!-- Left side (yellow section) -->
             <div class="w-full lg:w-1/2 bg-yellow-500 text-white p-12 lg:p-24 flex flex-col justify-center half-circle">
-                <h1 class="text-5xl lg:text-7xl font-bold mb-8">Welcome to<br>City of<br>Pekalongan</h1>
+                <h1 class="text-5xl lg:text-6xl font-bold mb-8">Welcome to<br>City of<br>Pekalongan</h1>
                 <p class="mb-8 text-xl lg:text-2xl">World City of Batik</p>
                 <div class="relative">
                     <input type="text" placeholder="How can we help?"
@@ -120,6 +119,7 @@
                     class="w-full h-full object-cover">
             </div>
         </div>
+
 
         <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
         <script>
@@ -145,49 +145,49 @@
             @endforeach
         ]
     }">
-            <div class="overflow-hidden rounded-lg shadow-lg">
-                <div class="flex transition-transform duration-300 ease-in-out"
-                    :style="{ transform: `translateX(-${(activeSlide - 1) * 100}%)` }">
-                    <template x-for="slide in slides" :key="slide.id">
-                        <div class="flex-none w-full">
-                            <div class="flex flex-col md:flex-row h-full">
-                                <!-- Left side - Image -->
-                                <div class="w-full md:w-1/2 h-64 md:h-96 relative">
-                                    <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover">
-                                </div>
-                                <!-- Right side - Content -->
-                                <div class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative">
-                                    <img :src="slide.logo" :alt="slide.title + ' Logo'"
-                                        class="h-24 w-auto mb-2 absolute top-4 left-4 object-contain">
-                                    <h2 class="text-xl md:text-2xl font-bold mb-2 text-black mt-10 md:mt-20"
-                                        x-text="slide.title"></h2>
-                                    <p class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis"
-                                        x-text="slide.description"></p>
+                <div class="overflow-hidden rounded-lg shadow-lg">
+                    <div class="flex transition-transform duration-300 ease-in-out"
+                        :style="{ transform: `translateX(-${(activeSlide - 1) * 100}%)` }">
+                        <template x-for="slide in slides" :key="slide.id">
+                            <div class="flex-none w-full">
+                                <div class="flex flex-col md:flex-row h-full">
+                                    <!-- Left side - Image -->
+                                    <div class="w-full md:w-1/2 h-64 md:h-96 relative">
+                                        <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover">
+                                    </div>
+                                    <!-- Right side - Content -->
+                                    <div
+                                        class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative">
+                                        <img :src="slide.logo" :alt="slide.title + ' Logo'"
+                                            class="h-24 w-auto mb-2 absolute top-4 left-4 object-contain">
+                                        <h2 class="text-xl md:text-2xl font-bold mb-2 text-black mt-16 md:mt-28"
+                                            x-text="slide.title"></h2>
+                                        <p class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis"
+                                            x-text="slide.description"></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </template>
+                        </template>
+                    </div>
                 </div>
+                <!-- Navigation buttons -->
+                <button @click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1"
+                    class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        class="h-4 w-4 md:h-6 md:w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button @click="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1"
+                    class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        class="h-4 w-4 md:h-6 md:w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
             </div>
-            <!-- Navigation buttons -->
-            <button @click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1"
-                class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    class="h-4 w-4 md:h-6 md:w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-            </button>
-            <button @click="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1"
-                class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                    class="h-4 w-4 md:h-6 md:w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </button>
         </div>
-    </div>
 
-        <!-- Berita & Pengumuman -->
         <!-- Berita & Pengumuman -->
         <div class="relative h-screen">
             <!-- Background Image Overlay -->
