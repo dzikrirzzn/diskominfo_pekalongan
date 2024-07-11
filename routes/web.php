@@ -9,12 +9,15 @@ use App\Http\Controllers\LayananController; // Add this line
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NavItemController;
 use App\Models\NavItem;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', [BeritaController::class, 'home'])->name('home');
 
 Route::get('/admin', function () {
     // Admin dashboard
 })->middleware('role:admin');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 Route::get('/admin_berita', function () {
     return view('admin_berita');

@@ -295,10 +295,11 @@
                     class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex items-center justify-center h-48">
                     <span class="text-gray-500">Top Placeholder Image</span>
                 </div>
-                <!-- Bottom placeholder image -->
+                <!-- Bottom Kominfo widget -->
                 <div
                     class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex items-center justify-center h-48">
-                    <span class="text-gray-500">Bottom Placeholder Image</span>
+                    <div id="gpr-kominfo-widget-container"></div>
+                    <script src="https://widget.kominfo.go.id/gpr-widget-kominfo.min.js" async></script>
                 </div>
             </div>
             <!-- Twitter feed for @pemkotpkl -->
@@ -316,12 +317,12 @@
                 <div class="font-bold mb-4">Postingan dari @officialbatiktv</div>
                 <div class="h-full overflow-y-scroll">
                     <a class="twitter-timeline" href="https://twitter.com/officialbatiktv" data-tweet-limit="5">Tweets
-                        by
-                        BATIK TV</a>
+                        by BATIK TV</a>
                 </div>
                 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
         </div>
+
 
         <div class="container mx-auto p-2 lg:p-4 bg-yellow-500">
             <div class="flex flex-col lg:flex-row lg:space-x-4">
