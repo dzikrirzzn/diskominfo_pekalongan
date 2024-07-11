@@ -35,8 +35,7 @@ class LayananController extends Controller
             'image' => $imagePath,
             'link' => $request->link,
         ]);
-
-        return redirect()->route('layanans.index')->with('success', 'Layanan berhasil dibuat');
+        return redirect()->back()->with('success', 'Layanan berhasil diupload!');
     }
 
     public function show($id)

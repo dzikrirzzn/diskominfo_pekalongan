@@ -48,7 +48,7 @@ class PengumumanController extends Controller
 
         $pengumuman->save();
 
-        return redirect()->route('home')->with('success', 'Pengumuman berhasil dibuat');
+        return redirect()->back()->with('success', 'Pengumuman berhasil diupload!');
     }
 
     public function show($id)
