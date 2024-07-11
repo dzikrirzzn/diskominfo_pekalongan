@@ -18,34 +18,34 @@
 </head>
 
 <style>
-#map {
-    height: 400px;
-}
+    #map {
+        height: 400px;
+    }
 
-#focusButton {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    z-index: 1000;
-    background-color: #fbbf24;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+    #focusButton {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        z-index: 1000;
+        background-color: #fbbf24;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-.cursor-grabbing {
-    cursor: grabbing;
-}
+    .cursor-grabbing {
+        cursor: grabbing;
+    }
 
-.cursor-grab {
-    cursor: grab;
-}
+    .cursor-grab {
+        cursor: grab;
+    }
 
-.half-circle {
-    clip-path: ellipse(100% 80% at 0% 50%);
-}
+    .half-circle {
+        clip-path: ellipse(100% 80% at 0% 50%);
+    }
 </style>
 
 <body class="flex flex-col min-h-screen bg-white">
@@ -59,21 +59,17 @@
                 <h1 class="text-5xl lg:text-6xl font-bold mb-8">Welcome to<br>City of<br>Pekalongan</h1>
                 <p class="mb-8 text-xl lg:text-2xl">World City of Batik</p>
                 <div class="relative">
-                    <input type="text" placeholder="How can we help?"
-                        class="w-full p-4 pr-12 rounded-full text-black text-xl">
+                    <input type="text" placeholder="How can we help?" class="w-full p-4 pr-12 rounded-full text-black text-xl">
                     <button class="absolute right-4 top-1/2 transform -translate-y-1/2">
-                        <svg class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        <svg class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </button>
                 </div>
             </div>
             <!-- Right side (image) -->
             <div class="w-full lg:w-1/2 relative">
-                <img src="{{ asset('img/pemkot.png') }}" alt="foto wali dan walikota pekalongan"
-                    class="w-full h-full object-cover">
+                <img src="{{ asset('img/pemkot.png') }}" alt="foto wali dan walikota pekalongan" class="w-full h-full object-cover">
             </div>
         </div>
         <div class="relative py-4 md:py-8 bg-no-repeat bg-left-top">
@@ -89,25 +85,19 @@
                 <div class="container mx-auto p-4">
                     <div class="overflow-hidden rounded-lg shadow-2xl shadow-lg my-8 mx-auto max-w-screen-lg relative">
                         <div class="absolute top-0 left-0 right-0 h-4 bg-white shadow-2xl"></div>
-                        <div class="flex transition-transform duration-300 ease-in-out"
-                            :style="{ transform: `translateX(-${(activeSlide - 1) * 100}%)` }">
+                        <div class="flex transition-transform duration-300 ease-in-out" :style="{ transform: `translateX(-${(activeSlide - 1) * 100}%)` }">
                             <template x-for="slide in slides" :key="slide.id">
                                 <div class="flex-none w-full">
                                     <div class="flex flex-col md:flex-row h-full">
                                         <!-- Left side - Image -->
                                         <div class="w-full md:w-1/2 h-64 md:h-96 relative">
-                                            <img :src="slide.image" :alt="slide.title"
-                                                class="w-full h-full object-cover">
+                                            <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover">
                                         </div>
                                         <!-- Right side - Content -->
-                                        <div
-                                            class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative shadow-lg">
-                                            <img :src="slide.logo" :alt="slide.title + ' Logo'"
-                                                class="h-16 md:h-24 w-auto mb-2 absolute top-2 md:top-4 left-2 md:left-4 object-contain shadow-xl">
-                                            <h2 class="text-lg md:text-2xl font-bold mb-2 text-black mt-10 md:mt-20"
-                                                x-text="slide.title"></h2>
-                                            <p class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis"
-                                                x-text="slide.description"></p>
+                                        <div class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative shadow-lg">
+                                            <img :src="slide.logo" :alt="slide.title + ' Logo'" class="h-16 md:h-24 w-auto mb-2 absolute top-2 md:top-4 left-2 md:left-4 object-contain shadow-xl">
+                                            <h2 class="text-lg md:text-2xl font-bold mb-2 text-black mt-10 md:mt-20" x-text="slide.title"></h2>
+                                            <p class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis" x-text="slide.description"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -117,17 +107,13 @@
                 </div>
 
                 <!-- Navigation buttons -->
-                <button @click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1"
-                    class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        class="h-4 w-4 md:h-6 md:w-6">
+                <button @click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 md:h-6 md:w-6">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
-                <button @click="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1"
-                    class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        class="h-4 w-4 md:h-6 md:w-6">
+                <button @click="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 md:h-6 md:w-6">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                 </button>
@@ -135,25 +121,24 @@
         </div>
 
         <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('navbar', () => ({
-                isOpen: false,
-                scrolled: false,
-                init() {
-                    window.addEventListener('scroll', () => {
-                        this.scrolled = window.scrollY > 50;
-                    });
-                },
-            }));
-        });
+            document.addEventListener('alpine:init', () => {
+                Alpine.data('navbar', () => ({
+                    isOpen: false,
+                    scrolled: false,
+                    init() {
+                        window.addEventListener('scroll', () => {
+                            this.scrolled = window.scrollY > 50;
+                        });
+                    },
+                }));
+            });
         </script>
 
 
         <!-- Berita & Pengumuman -->
         <div class="relative h-screen">
             <!-- Background Image Overlay -->
-            <div class="absolute inset-0 bg-cover bg-center"
-                style="background-image: url('https://asset.kompas.com/crops/AsZwJgbHv7GOQqeOdxo1cCZ64Ak=/167x95:965x627/750x500/data/photo/2022/10/01/633807f7d7d67.png');">
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://asset.kompas.com/crops/AsZwJgbHv7GOQqeOdxo1cCZ64Ak=/167x95:965x627/750x500/data/photo/2022/10/01/633807f7d7d67.png');">
                 <div class="absolute inset-0 bg-gray-500 opacity-60"></div>
             </div>
             <!-- Content Container -->
@@ -165,20 +150,14 @@
                             Kota</h2>
                         <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-4">
                             <!-- Image Box -->
-                            <div
-                                class="flex flex-col md:flex-row flex-wrap md:flex-nowrap space-y-4 md:space-y-0 md:space-x-4 mb-4">
+                            <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap space-y-4 md:space-y-0 md:space-x-4 mb-4">
                                 @foreach ($headlineBerita->take(2) as $berita)
                                 <!-- Each image box taking up half the space -->
-                                <a href="{{ route('berita.show', ['id' => $berita->id]) }}"
-                                    class="block no-underline text-black w-full md:w-1/2">
-                                    <div
-                                        class="w-full h-full rounded-lg shadow overflow-hidden relative transform hover:scale-90 hover:brightness-75 transition-transform duration-700">
-                                        <img class=" w-screen h-64 object-cover"
-                                            src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}">
-                                        <div
-                                            class="absolute bottom-0 w-full p-2 bg-black bg-opacity-50 text-white text-center">
-                                            <h3
-                                                class="text-lg font-bold hover:text-gray-400 transition-colors duration-300">
+                                <a href="{{ route('berita.show', ['id' => $berita->id]) }}" class="block no-underline text-black w-full md:w-1/2">
+                                    <div class="w-full h-full rounded-lg shadow overflow-hidden relative transform hover:scale-90 hover:brightness-75 transition-transform duration-700">
+                                        <img class=" w-screen h-64 object-cover" src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}">
+                                        <div class="absolute bottom-0 w-full p-2 bg-black bg-opacity-50 text-white text-center">
+                                            <h3 class="text-lg font-bold hover:text-gray-400 transition-colors duration-300">
                                                 {{ $berita->title }}
                                             </h3>
                                         </div>
@@ -196,8 +175,7 @@
                                 <ul class="space-y-2">
                                     @foreach ($otherBerita as $berita)
                                     <li class="flex justify-between text-sm border-b border-gray-300 pb-2">
-                                        <a href="{{ route('berita.show', ['id' => $berita->id]) }}"
-                                            class="flex justify-between w-full no-underline">
+                                        <a href="{{ route('berita.show', ['id' => $berita->id]) }}" class="flex justify-between w-full no-underline">
                                             <span class="hover:text-yellow-500">{{ $berita->title }}</span>
                                             <span class="text-gray-500">| {{ $berita->date }}</span>
                                         </a>
@@ -209,15 +187,13 @@
                     </div>
                     <!-- Pengumuman Section -->
                     <div class="flex-1 md:flex-[1] bg-transparent rounded-lg p-4 h-full flex flex-col">
-                        <h2
-                            class="text-2xl md:text-3xl font-semibold mb-4 text-left text-white border-b-2 border-gray-300">
+                        <h2 class="text-2xl md:text-3xl font-semibold mb-4 text-left text-white border-b-2 border-gray-300">
                             Pengumuman</h2>
                         <div class="bg-white rounded-lg shadow-md p-4 overflow-y-scroll flex-1">
                             <ul class="space-y-2">
                                 @foreach ($pengumuman as $item)
                                 <li class="flex justify-between text-sm border-b border-gray-300 pb-2">
-                                    <a href="{{ route('pengumuman.show', ['id' => $item->id]) }}"
-                                        class="flex justify-between w-full no-underline">
+                                    <a href="{{ route('pengumuman.show', ['id' => $item->id]) }}" class="flex justify-between w-full no-underline">
                                         <span class="hover:text-yellow-500">{{ $item->judul }}</span>
                                         <span class="text-gray-500 text-right"> | {{ $item->tanggal }}</span>
                                     </a>
@@ -236,13 +212,10 @@
                     @foreach($galleries as $gallery)
                     <div class="swiper-slide">
                         <div class="relative group rounded-lg overflow-hidden shadow-md">
-                            <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}"
-                                class="w-full h-32 object-cover">
-                            <div
-                                class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
+                            <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}" class="w-full h-32 object-cover">
+                            <div class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
                             </div>
-                            <div
-                                class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
+                            <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
                                 {{ $gallery->title }}
                             </div>
                         </div>
@@ -259,45 +232,42 @@
 
         <!-- Initialize Swiper -->
         <script>
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 2,
-            spaceBetween: 10,
-            slidesPerGroup: 2,
-            loop: true,
-            loopFillGroupWithBlank: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            breakpoints: {
-                // when window width is >= 640px
-                640: {
-                    slidesPerView: 3,
-                    slidesPerGroup: 3,
-                    spaceBetween: 20
+            var swiper = new Swiper('.swiper-container', {
+                slidesPerView: 2,
+                spaceBetween: 10,
+                slidesPerGroup: 2,
+                loop: true,
+                loopFillGroupWithBlank: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
                 },
-                // when window width is >= 768px
-                768: {
-                    slidesPerView: 4,
-                    slidesPerGroup: 4,
-                    spaceBetween: 30
+                breakpoints: {
+                    // when window width is >= 640px
+                    640: {
+                        slidesPerView: 3,
+                        slidesPerGroup: 3,
+                        spaceBetween: 20
+                    },
+                    // when window width is >= 768px
+                    768: {
+                        slidesPerView: 4,
+                        slidesPerGroup: 4,
+                        spaceBetween: 30
+                    }
                 }
-            }
-        });
+            });
         </script>
 
 
-        <div
-            class="container mx-auto p-4 flex flex-col lg:flex-row lg:justify-between space-y-4 lg:space-y-0 lg:space-x-4">
+        <div class="container mx-auto p-4 flex flex-col lg:flex-row lg:justify-between space-y-4 lg:space-y-0 lg:space-x-4">
             <div class="flex flex-col space-y-4 w-full lg:w-1/3">
                 <!-- Top placeholder image -->
-                <div
-                    class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex items-center justify-center h-48">
+                <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex items-center justify-center h-48">
                     <span class="text-gray-500">Top Placeholder Image</span>
                 </div>
                 <!-- Bottom Kominfo widget -->
-                <div
-                    class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex items-center justify-center h-48">
+                <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex items-center justify-center h-48">
                     <div id="gpr-kominfo-widget-container"></div>
                     <script src="https://widget.kominfo.go.id/gpr-widget-kominfo.min.js" async></script>
                 </div>
@@ -335,18 +305,14 @@
                     <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4">
                         <div class="flex items-center justify-between mb-2">
                             <button class="focus:outline-none">
-                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 19l-7-7 7-7"></path>
+                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                                 </svg>
                             </button>
                             <h2 class="text-lg font-bold text-gray-700">April 2024</h2>
                             <button class="focus:outline-none">
-                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5l7 7-7 7"></path>
+                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                 </svg>
                             </button>
                         </div>
@@ -398,8 +364,7 @@
                         <ul class="space-y-2">
                             <li class="flex items-start space-x-2">
                                 <div class="flex-shrink-0">
-                                    <div
-                                        class="bg-black text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
+                                    <div class="bg-black text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
                                         <span class="text-lg font-bold">24</span>
                                         <span class="text-xs">SEP</span>
                                     </div>
@@ -411,8 +376,7 @@
                             </li>
                             <li class="flex items-start space-x-2">
                                 <div class="flex-shrink-0">
-                                    <div
-                                        class="bg-black text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
+                                    <div class="bg-black text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
                                         <span class="text-lg font-bold">25</span>
                                         <span class="text-xs">SEP</span>
                                     </div>
@@ -425,8 +389,7 @@
                             </li>
                             <li class="flex items-start space-x-2">
                                 <div class="flex-shrink-0">
-                                    <div
-                                        class="bg-black text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
+                                    <div class="bg-black text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
                                         <span class="text-lg font-bold">26</span>
                                         <span class="text-xs">SEP</span>
                                     </div>
@@ -444,8 +407,7 @@
                 <!-- Right Column -->
                 <div class="lg:w-1/2 mt-8 lg:mt-0 lg:flex lg:flex-col">
                     <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex-grow">
-                        <img src="https://via.placeholder.com/150" alt="Event Image"
-                            class="w-full h-64 object-cover rounded-md mb-4">
+                        <img src="https://via.placeholder.com/150" alt="Event Image" class="w-full h-64 object-cover rounded-md mb-4">
                         <h2 class="text-xl font-bold mb-2">PERIKLINDO ELECTRIC VEHICLE SHOW (PEVS) 2024</h2>
                         <p class="text-gray-700 text-sm mb-2">
                             Jakarta International Expo Kemayoran, 30 April - 5 Mei 2024
@@ -471,17 +433,14 @@
                     @foreach($layanans as $layanan)
                     <a href="{{ $layanan->link }}">
                         <div class="swiper-slide bg-white">
-                            <div
-                                class="w-full max-w-md rounded overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 border-2 border-transparent hover:border-yellow-500 h-64 flex flex-col">
-                                <img class="w-16 h-16 mt-4 ml-4 object-contain"
-                                    src="{{ asset('storage/' . $layanan->image) }}" alt="{{ $layanan->title }}">
+                            <div class="w-full max-w-md rounded overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 border-2 border-transparent hover:border-yellow-500 h-64 flex flex-col">
+                                <img class="w-16 h-16 mt-4 ml-4 object-contain" src="{{ asset('storage/' . $layanan->image) }}" alt="{{ $layanan->title }}">
                                 <div class="px-6 py-4 flex flex-col justify-between flex-grow">
                                     <div>
                                         <div class="font-bold text-xl mb-2">{{ $layanan->title }}</div>
                                         <p class="text-gray-700 text-base">{!! $layanan->description !!}</p>
                                     </div>
-                                    <a href="{{ $layanan->link }}"
-                                        class="text-blue-500 hover:underline mt-2 inline-block">Selengkapnya..
+                                    <a href="{{ $layanan->link }}" class="text-blue-500 hover:underline mt-2 inline-block">Selengkapnya..
                                     </a>
                                 </div>
                             </div>
@@ -495,31 +454,31 @@
         <!-- Swiper JS -->
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var swiper = new Swiper('.swiper-container', {
-                slidesPerView: 1,
-                spaceBetween: 10,
-                loop: true,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                breakpoints: {
-                    640: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
+            document.addEventListener('DOMContentLoaded', function() {
+                var swiper = new Swiper('.swiper-container', {
+                    slidesPerView: 1,
+                    spaceBetween: 10,
+                    loop: true,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
                     },
-                    768: {
-                        slidesPerView: 2,
-                        spaceBetween: 30,
+                    breakpoints: {
+                        640: {
+                            slidesPerView: 1,
+                            spaceBetween: 20,
+                        },
+                        768: {
+                            slidesPerView: 2,
+                            spaceBetween: 30,
+                        },
+                        1024: {
+                            slidesPerView: 3,
+                            spaceBetween: 40,
+                        },
                     },
-                    1024: {
-                        slidesPerView: 3,
-                        spaceBetween: 40,
-                    },
-                },
+                });
             });
-        });
         </script>
 
 
@@ -556,21 +515,21 @@
         <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <script>
-        const map = L.map('map').setView([-6.8883, 109.6753], 13);
+            const map = L.map('map').setView([-6.8883, 109.6753], 13);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
 
-        // Menambahkan marker pada peta
-        L.marker([-6.8883, 109.6753]).addTo(map)
-            .bindPopup('Kota Pekalongan')
-            .openPopup();
+            // Menambahkan marker pada peta
+            L.marker([-6.8883, 109.6753]).addTo(map)
+                .bindPopup('Kota Pekalongan')
+                .openPopup();
 
-        document.getElementById('focusButton').addEventListener('click', () => {
-            map.setView([-6.8883, 109.6753], 13);
-        });
+            document.getElementById('focusButton').addEventListener('click', () => {
+                map.setView([-6.8883, 109.6753], 13);
+            });
         </script>
 
     </main>
@@ -593,16 +552,14 @@
                     <ul class="space-y-2">
                         <li><a href="https://www.menpan.go.id/site/" class="text-black hover:text-gray-300">KEMENPAN</a>
                         </li>
-                        <li><a href="https://www.kemendagri.go.id/"
-                                class="text-black hover:text-gray-300">KEMENDAGRI</a></li>
+                        <li><a href="https://www.kemendagri.go.id/" class="text-black hover:text-gray-300">KEMENDAGRI</a></li>
                         <li><a href="https://jatengprov.go.id/" class="text-black hover:text-gray-300">PEMPROV
                                 JATENG</a></li>
                         <li><a href="http://kipjateng.jatengprov.go.id/" class="text-black hover:text-gray-300">KIP
                                 JATENG</a></li>
                         <li><a href="https://data.go.id/" class="text-black hover:text-gray-300">PORTAL SATU DATA</a>
                         </li>
-                        <li><a href="https://pekalongankota.go.id/halaman/kebijakan-privasi.html"
-                                class="text-black hover:text-gray-300">KEBIJAKAN PRIVASI</a></li>
+                        <li><a href="https://pekalongankota.go.id/halaman/kebijakan-privasi.html" class="text-black hover:text-gray-300">KEBIJAKAN PRIVASI</a></li>
                     </ul>
                 </div>
                 <!-- Alamat Column -->
@@ -618,8 +575,7 @@
                         </li>
                         <li class="text-black flex items-center">
                             <img src="{{ asset('img/pesan.png') }}" alt="Email" class="h-3 mr-1">
-                            <a href="mailto:setda@pekalongankota.go.id"
-                                class="hover:text-gray-300">setda@pekalongankota.go.id</a>
+                            <a href="mailto:setda@pekalongankota.go.id" class="hover:text-gray-300">setda@pekalongankota.go.id</a>
                         </li>
                     </ul>
                 </div>
