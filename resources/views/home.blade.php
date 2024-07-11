@@ -324,15 +324,17 @@
         </div>
 
 
-        <div class="container mx-auto p-2 lg:p-4 bg-yellow-500">
+        <div class="container mx-auto p-2 lg:p-4 relative">
             <div class="flex flex-col lg:flex-row lg:space-x-4">
+                <!-- Background Half -->
+                <div class="absolute top-0 left-0 w-full h-2/3 bg-yellow-500 bg-opacity-75 rounded-lg z-0"></div>
+
                 <!-- Left Column -->
-                <div class="flex flex-col lg:w-1/2 space-y-4">
+                <div class="flex flex-col lg:w-1/2 space-y-4 relative z-10">
                     <!-- Kalender Text -->
                     <div class="text-2xl font-bold text-gray-700">Kalender Acara</div>
-
                     <!-- Calendar Section -->
-                    <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4">
+                    <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 mt-2">
                         <div class="flex items-center justify-between mb-2">
                             <button class="focus:outline-none">
                                 <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor"
@@ -394,7 +396,7 @@
                     </div>
 
                     <!-- Events Section -->
-                    <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4">
+                    <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 mt-2">
                         <ul class="space-y-2">
                             <li class="flex items-start space-x-2">
                                 <div class="flex-shrink-0">
@@ -442,7 +444,7 @@
                 </div>
 
                 <!-- Right Column -->
-                <div class="lg:w-1/2 mt-8 lg:mt-0 lg:flex lg:flex-col">
+                <div class="lg:w-1/2 mt-8 lg:mt-0 lg:flex lg:flex-col relative z-10">
                     <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex-grow">
                         <img src="https://via.placeholder.com/150" alt="Event Image"
                             class="w-full h-64 object-cover rounded-md mb-4">
@@ -463,7 +465,6 @@
                 </div>
             </div>
         </div>
-
         <div class="container mx-auto py-8 px-4 overflow-hidden">
             <h1 class="text-2xl font-bold mb-6 text-black">Layanan Kota Pekalongan</h1>
             <div class="swiper-container">
