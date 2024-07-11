@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\TravelRecommendationController;
 use App\Http\Controllers\LayananController; // Add this line
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NavItemController;
+use App\Models\NavItem;
 
 Route::get('/', [BeritaController::class, 'home'])->name('home');
 
@@ -28,6 +31,16 @@ Route::get('/admin_travel', function () {
 Route::get('/admin_layanan', function () {
     return view('admin_layanan');
 })->name('admin_layanan');
+
+Route::get('/admin_gallery', function () {
+    return view('admin_gallery');
+})->name('admin_gallery');
+
+Route::get('/admin_navbar', function () {
+    $navItems = NavItem::all(); // or NavItem::whereNull('parent_id')->get() if you only want top-level items
+    return view('admin_navbar');
+})->name('admin_navbar');
+
 
 Route::get('/sekilas', function () {
     return view('sekilas');
@@ -55,6 +68,20 @@ Route::get('/layanans', [LayananController::class, 'index'])->name('layanans.ind
 Route::get('/layanans/create', [LayananController::class, 'create'])->name('layanans.create');
 Route::post('/layanans', [LayananController::class, 'store'])->name('layanans.store');
 Route::get('/layanans/{id}', [LayananController::class, 'show'])->name('layanans.show');
+
+Route::get('/galleries', [GalleryController::class, 'index'])->name('galleries.index');
+Route::get('/galleries/create', [GalleryController::class, 'create'])->name('galleries.create');
+Route::get('/galleries/{id}', [GalleryController::class, 'show'])->name('galleries.show');
+Route::post('/admin/galleries', [GalleryController::class, 'store'])->name('galleries.store');
+
+// routes/web.php
+Route::get('/navItems/create', [NavItemController::class, 'create'])->name('navItems.create');
+Route::post('/navItems', [NavItemController::class, 'store'])->name('navItems.store');
+Route::get('/navItems', [NavItemController::class, 'index'])->name('navItems.index');
+Route::resource('/layouts/navbarhome', NavItemController::class);
+Route::get('/admin_navbar', [NavItemController::class, 'index'])->name('admin_navbar');
+Route::resource('navItems', NavItemController::class);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

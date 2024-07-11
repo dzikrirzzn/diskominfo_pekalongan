@@ -46,7 +46,8 @@ class TravelRecommendationController extends Controller
 
         $travelRecommendation->save();
 
-        return redirect()->route('home')->with('success', 'Travel Recommendation created successfully.');
+        return redirect()->back()->with('success', 'Travel berhasil diupload!');
+
     }
 
     public function show($id)

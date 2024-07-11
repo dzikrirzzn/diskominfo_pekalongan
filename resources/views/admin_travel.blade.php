@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Pengumuman</title>
+    <title>Upload Galeri</title>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 </head>
 
 <body>
@@ -17,44 +18,88 @@
                 {{ __('Upload Travel') }}
             </h2>
         </x-slot>
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900">
+                        @if (session('success'))
+                        <div class="bg-green-500 text-white p-4 rounded mb-4">
+                            {{ session('success') }}
+                        </div>
+                        @endif
 
-        <div class="container">
-            <h1>Add Travel Recommendation</h1>
-            <form action="{{ route('admin.travel_recommendations.store') }}" method="POST"
-                enctype="multipart/form-data">
-                @csrf
-                <div class="form-group">
-                    <label for="image">Image:</label>
-                    <input type="file" name="image" id="image" class="form-control" required>
+                        @if (session('error'))
+                        <div class="bg-red-500 text-white p-4 rounded mb-4">
+                            {{ session('error') }}
+                        </div>
+                        @endif
+                        <form method="POST" action="{{ route('admin.travel_recommendations.store') }}"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-4">
+                                <label for="judul" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
+                                <input type="text" id="judul" name="judul"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="sub_judul"
+                                    class="block text-gray-700 text-sm font-bold mb-2">Subtitle:</label>
+                                <input type="text" id="sub_judul" name="sub_judul"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="isi" class="block text-gray-700 text-sm font-bold mb-2">Content:</label>
+                                <textarea id="isi" name="isi" rows="5"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    required></textarea>
+                            </div>
+                            <div class="mb-4">
+                                <label for="author" class="block text-gray-700 text-sm font-bold mb-2">Author:</label>
+                                <input type="text" id="author" name="author"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="date" class="block text-gray-700 text-sm font-bold mb-2">Date:</label>
+                                <input type="date" id="date" name="date"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline datepicker"
+                                    required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image:</label>
+                                <input type="file" id="image" name="image"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            </div>
+                            <div class="mb-4">
+                                <label for="map" class="block text-gray-700 text-sm font-bold mb-2">Map:</label>
+                                <input type="text" id="map" name="map"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    required>
+                            </div>
+                            <div class="mb-4">
+                                <button type="submit"
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                    Upload
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="judul">Title:</label>
-                    <input type="text" name="judul" id="judul" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="sub_judul">Subtitle:</label>
-                    <input type="text" name="sub_judul" id="sub_judul" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="isi">Content:</label>
-                    <textarea name="isi" id="isi" class="form-control" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="map">Map:</label>
-                    <input type="text" name="map" id="map" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="author">Author:</label>
-                    <input type="text" name="author" id="author" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="date">Date:</label>
-                    <input type="date" name="date" id="date" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Add</button>
-            </form>
+            </div>
         </div>
+
+        <script>
+        $(document).ready(function() {
+            $('.datepicker').datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
+        });
+        CKEDITOR.replace('isi');
+        </script>
     </x-app-layout>
+
 </body>
 
 </html>

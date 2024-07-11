@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gallery;
 use Illuminate\Http\Request;
 use App\Models\HeadlineBerita;
 use App\Models\Layanan;
+use App\Models\NavItem;
 use App\Models\OtherBerita;
 use App\Models\Pengumuman;
 use App\Models\TravelRecommendation;
@@ -29,8 +31,9 @@ class BeritaController extends Controller
         $pengumuman = Pengumuman::all();
         $travelRecommendations = TravelRecommendation::all();
         $layanans = Layanan::all(); // Fetch all layanan entries
+        $galleries = Gallery::all();
 
-        return view('home', compact('headlineBerita', 'otherBerita', 'pengumuman', 'travelRecommendations', 'layanans'));
+        return view('home', compact('headlineBerita', 'otherBerita', 'pengumuman', 'travelRecommendations', 'layanans', 'galleries'));
 
 
 

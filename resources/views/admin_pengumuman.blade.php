@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 </head>
 
 <body>
@@ -43,7 +44,7 @@
                             </div>
                             <div class="mb-4">
                                 <label for="tanggal" class="block text-gray-700 text-sm font-bold mb-2">Tanggal:</label>
-                                <input type="text" id="tanggal" name="tanggal"
+                                <input type="date" id="tanggal" name="tanggal"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline datepicker"
                                     required>
                             </div>
@@ -90,6 +91,7 @@
                 dateFormat: 'yy-mm-dd'
             });
         });
+        CKEDITOR.replace('isi_pengumuman');
         </script>
     </x-app-layout>
 </body>

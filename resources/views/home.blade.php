@@ -49,50 +49,7 @@
 </style>
 
 <body class="flex flex-col min-h-screen bg-white">
-    <nav x-data="{ isOpen: false, scrolled: false, showNav: true, lastScrollY: 0, timeout: null }" x-init="window.addEventListener('scroll', () => {
-             clearTimeout(timeout);
-             if (window.scrollY > lastScrollY) {
-                 showNav = false;
-             } else {
-                 showNav = true;
-             }
-             lastScrollY = window.scrollY;
-             scrolled = window.scrollY > 0;
-             timeout = setTimeout(() => {
-                 showNav = true;
-             }, 300); // Adjust the timeout duration as needed
-         })"
-        :class="{'bg-yellow-500': scrolled, 'bg-transparent': !scrolled, 'transform -translate-y-full': !showNav, 'transform translate-y-0': showNav}"
-        class="fixed w-full z-50 py-2 transition-transform duration-500 ease-in-out">
-        <div class="container mx-auto flex justify-between items-center flex-wrap">
-            <a href="{{ route('home') }}">
-                <div class="text-black font-bold flex items-center">
-                    <img src="{{ asset('img/logopkl.png') }}" alt="Logo" class="h-10 mr-2">
-                    <div class="flex flex-col">
-                        <div class="text-xs">Pemerintah</div>
-                        <div class="text-xs">Kota Pekalongan</div>
-                    </div>
-                </div>
-            </a>
-            <button @click="isOpen = !isOpen" class="block lg:hidden">
-                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path :class="{'hidden': isOpen, 'inline-flex': !isOpen }" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    <path :class="{'hidden': !isOpen, 'inline-flex': isOpen }" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-            <div :class="{'hidden': !isOpen, 'block': isOpen}" class="w-full lg:flex lg:items-center lg:w-auto">
-                <ul class="lg:flex space-y-2 lg:space-y-0 lg:space-x-4">
-                    <li><a href="#" class="block text-black hover:text-gray-200 text-sm">Sekilas</a></li>
-                    <li><a href="#" class="block text-black hover:text-gray-200 text-sm">Instansi</a></li>
-                    <li><a href="#" class="block text-black hover:text-gray-200 text-sm">Berita</a></li>
-                    <li><a href="#" class="block text-black hover:text-gray-200 text-sm">Informasi</a></li>
-                    <li><a href="#" class="block text-black hover:text-gray-200 text-sm">Kip / PPID</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    @include('layouts.navbarhome')
     <!-- Rest of your page content -->
 
     <main class="flex-1 relative z-0 pt-16">
@@ -119,23 +76,6 @@
                     class="w-full h-full object-cover">
             </div>
         </div>
-
-
-        <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
-        <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('navbar', () => ({
-                isOpen: false,
-                scrolled: false,
-                init() {
-                    window.addEventListener('scroll', () => {
-                        this.scrolled = window.scrollY > 50;
-                    });
-                },
-            }));
-        });
-        </script>
-
         <div class="relative py-4 md:py-8 bg-no-repeat bg-left-top">
             <div class="relative w-full max-w-6xl mx-auto my-4 md:my-8" x-data="{
         activeSlide: 1,
@@ -145,31 +85,37 @@
             @endforeach
         ]
     }">
-                <div class="overflow-hidden rounded-lg shadow-lg">
-                    <div class="flex transition-transform duration-300 ease-in-out"
-                        :style="{ transform: `translateX(-${(activeSlide - 1) * 100}%)` }">
-                        <template x-for="slide in slides" :key="slide.id">
-                            <div class="flex-none w-full">
-                                <div class="flex flex-col md:flex-row h-full">
-                                    <!-- Left side - Image -->
-                                    <div class="w-full md:w-1/2 h-64 md:h-96 relative">
-                                        <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover">
-                                    </div>
-                                    <!-- Right side - Content -->
-                                    <div
-                                        class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative">
-                                        <img :src="slide.logo" :alt="slide.title + ' Logo'"
-                                            class="h-24 w-auto mb-2 absolute top-4 left-4 object-contain">
-                                        <h2 class="text-xl md:text-2xl font-bold mb-2 text-black mt-16 md:mt-28"
-                                            x-text="slide.title"></h2>
-                                        <p class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis"
-                                            x-text="slide.description"></p>
+
+                <div class="container mx-auto p-4">
+                    <div class="overflow-hidden rounded-lg shadow-2xl shadow-lg my-8 mx-auto max-w-screen-lg relative">
+                        <div class="absolute top-0 left-0 right-0 h-4 bg-white shadow-2xl"></div>
+                        <div class="flex transition-transform duration-300 ease-in-out"
+                            :style="{ transform: `translateX(-${(activeSlide - 1) * 100}%)` }">
+                            <template x-for="slide in slides" :key="slide.id">
+                                <div class="flex-none w-full">
+                                    <div class="flex flex-col md:flex-row h-full">
+                                        <!-- Left side - Image -->
+                                        <div class="w-full md:w-1/2 h-64 md:h-96 relative">
+                                            <img :src="slide.image" :alt="slide.title"
+                                                class="w-full h-full object-cover">
+                                        </div>
+                                        <!-- Right side - Content -->
+                                        <div
+                                            class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative shadow-lg">
+                                            <img :src="slide.logo" :alt="slide.title + ' Logo'"
+                                                class="h-16 md:h-24 w-auto mb-2 absolute top-2 md:top-4 left-2 md:left-4 object-contain shadow-xl">
+                                            <h2 class="text-lg md:text-2xl font-bold mb-2 text-black mt-10 md:mt-20"
+                                                x-text="slide.title"></h2>
+                                            <p class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis"
+                                                x-text="slide.description"></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </template>
+                            </template>
+                        </div>
                     </div>
                 </div>
+
                 <!-- Navigation buttons -->
                 <button @click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1"
                     class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md">
@@ -187,6 +133,21 @@
                 </button>
             </div>
         </div>
+
+        <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('navbar', () => ({
+                isOpen: false,
+                scrolled: false,
+                init() {
+                    window.addEventListener('scroll', () => {
+                        this.scrolled = window.scrollY > 50;
+                    });
+                },
+            }));
+        });
+        </script>
+
 
         <!-- Berita & Pengumuman -->
         <div class="relative h-screen">
@@ -218,7 +179,8 @@
                                             class="absolute bottom-0 w-full p-2 bg-black bg-opacity-50 text-white text-center">
                                             <h3
                                                 class="text-lg font-bold hover:text-gray-400 transition-colors duration-300">
-                                                {{ $berita->title }}</h3>
+                                                {{ $berita->title }}
+                                            </h3>
                                         </div>
                                     </div>
                                 </a>
@@ -267,87 +229,64 @@
                 </div>
             </div>
         </div>
-
         <div class="container mx-auto py-8 px-4">
             <h1 class="text-2xl font-bold mb-6 text-black">Galeri Kota Pekalongan</h1>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <div class="relative group rounded-lg overflow-hidden shadow-md">
-                    <img src="https://via.placeholder.com/150" alt="Pemerintah Kota Bandung"
-                        class="w-full h-32 object-cover">
-                    <div
-                        class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach($galleries as $gallery)
+                    <div class="swiper-slide">
+                        <div class="relative group rounded-lg overflow-hidden shadow-md">
+                            <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}"
+                                class="w-full h-32 object-cover">
+                            <div
+                                class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
+                            </div>
+                            <div
+                                class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
+                                {{ $gallery->title }}
+                            </div>
+                        </div>
                     </div>
-                    <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
-                        Pemerintah Kota Pekalongan
-                    </div>
+                    @endforeach
                 </div>
-                <div class="relative group rounded-lg overflow-hidden shadow-md">
-                    <img src="https://via.placeholder.com/150" alt="Pendidikan Dan Kebudayaan"
-                        class="w-full h-32 object-cover">
-                    <div
-                        class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
-                    </div>
-                    <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
-                        Pendidikan Dan Kebudayaan
-                    </div>
-                </div>
-                <div class="relative group rounded-lg overflow-hidden shadow-md">
-                    <img src="https://via.placeholder.com/150" alt="Kesehatan" class="w-full h-32 object-cover">
-                    <div
-                        class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
-                    </div>
-                    <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
-                        Kesehatan
-                    </div>
-                </div>
-                <div class="relative group rounded-lg overflow-hidden shadow-md">
-                    <img src="https://via.placeholder.com/150" alt="Transportasi" class="w-full h-32 object-cover">
-                    <div
-                        class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
-                    </div>
-                    <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
-                        Transportasi
-                    </div>
-                </div>
-                <div class="relative group rounded-lg overflow-hidden shadow-md">
-                    <img src="https://via.placeholder.com/150" alt="Perumahan Dan Pemukiman"
-                        class="w-full h-32 object-cover">
-                    <div
-                        class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
-                    </div>
-                    <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
-                        Perumahan Dan Pemukiman
-                    </div>
-                </div>
-                <div class="relative group rounded-lg overflow-hidden shadow-md">
-                    <img src="https://via.placeholder.com/150" alt="Pariwisata" class="w-full h-32 object-cover">
-                    <div
-                        class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
-                    </div>
-                    <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
-                        Pariwisata
-                    </div>
-                </div>
-                <div class="relative group rounded-lg overflow-hidden shadow-md">
-                    <img src="https://via.placeholder.com/150" alt="Pertanian" class="w-full h-32 object-cover">
-                    <div
-                        class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
-                    </div>
-                    <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
-                        Pertanian
-                    </div>
-                </div>
-                <div class="relative group rounded-lg overflow-hidden shadow-md">
-                    <img src="https://via.placeholder.com/150" alt="Olahraga" class="w-full h-32 object-cover">
-                    <div
-                        class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
-                    </div>
-                    <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
-                        Olahraga
-                    </div>
-                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
             </div>
         </div>
+
+        <!-- Include Swiper JS -->
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+        <!-- Initialize Swiper -->
+        <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 2,
+            spaceBetween: 10,
+            slidesPerGroup: 2,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                // when window width is >= 640px
+                640: {
+                    slidesPerView: 3,
+                    slidesPerGroup: 3,
+                    spaceBetween: 20
+                },
+                // when window width is >= 768px
+                768: {
+                    slidesPerView: 4,
+                    slidesPerGroup: 4,
+                    spaceBetween: 30
+                }
+            }
+        });
+        </script>
+
+
         <div
             class="container mx-auto p-4 flex flex-col lg:flex-row lg:justify-between space-y-4 lg:space-y-0 lg:space-x-4">
             <div class="flex flex-col space-y-4 w-full lg:w-1/3">
@@ -383,10 +322,14 @@
                 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
         </div>
-        <div class="container mx-auto p-2 lg:p-4">
+
+        <div class="container mx-auto p-2 lg:p-4 bg-yellow-500">
             <div class="flex flex-col lg:flex-row lg:space-x-4">
                 <!-- Left Column -->
                 <div class="flex flex-col lg:w-1/2 space-y-4">
+                    <!-- Kalender Text -->
+                    <div class="text-2xl font-bold text-gray-700">Kalender Acara</div>
+
                     <!-- Calendar Section -->
                     <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4">
                         <div class="flex items-center justify-between mb-2">
@@ -394,8 +337,7 @@
                                 <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 19l-7-7 7-7">
-                                    </path>
+                                        d="M15 19l-7-7 7-7"></path>
                                 </svg>
                             </button>
                             <h2 class="text-lg font-bold text-gray-700">April 2024</h2>
@@ -403,8 +345,7 @@
                                 <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5l7 7-7 7">
-                                    </path>
+                                        d="M9 5l7 7-7 7"></path>
                                 </svg>
                             </button>
                         </div>
@@ -478,8 +419,7 @@
                                 <div>
                                     <h3 class="text-md font-semibold">SEMINAR</h3>
                                     <p class="text-gray-600 text-sm">HPC-AI Summer Seminar Series - "AI for Social Good"
-                                        -
-                                        Leveraging AI to Solve Problems for Human Kind</p>
+                                        - Leveraging AI to Solve Problems for Human Kind</p>
                                 </div>
                             </li>
                             <li class="flex items-start space-x-2">
@@ -511,12 +451,11 @@
                         </p>
                         <p class="text-gray-700 text-sm mb-2">
                             Perkumpulan Industri Kendaraan Listrik Indonesia (PERIKLINDO) bersama Dyandra Promosindo
-                            akan
-                            kembali menyelenggarakan pameran mobil listrik dan otomotif turunannya PERIKLINDO Electric
-                            Vehicle Show (PEVS) 2024. PEVS hadir sebagai wadah untuk menggencarkan kendaraan listrik di
-                            Indonesia. Acara ini diharapkan dapat memberikan peluang bagi pengunjung untuk mendapatkan
-                            wawasan mendalam tentang tren terbaru dalam kendaraan listrik, solusi pengisian daya, dan
-                            berbagai aspek terkait lainnya.
+                            akan kembali menyelenggarakan pameran mobil listrik dan otomotif turunannya PERIKLINDO
+                            Electric Vehicle Show (PEVS) 2024. PEVS hadir sebagai wadah untuk menggencarkan kendaraan
+                            listrik di Indonesia. Acara ini diharapkan dapat memberikan peluang bagi pengunjung untuk
+                            mendapatkan wawasan mendalam tentang tren terbaru dalam kendaraan listrik, solusi pengisian
+                            daya, dan berbagai aspek terkait lainnya.
                         </p>
                         <a href="#" class="text-blue-500 text-sm hover:underline">Selengkapnya...</a>
                     </div>
@@ -538,10 +477,11 @@
                                 <div class="px-6 py-4 flex flex-col justify-between flex-grow">
                                     <div>
                                         <div class="font-bold text-xl mb-2">{{ $layanan->title }}</div>
-                                        <p class="text-gray-700 text-base">{{ $layanan->description }}</p>
+                                        <p class="text-gray-700 text-base">{!! $layanan->description !!}</p>
                                     </div>
                                     <a href="{{ $layanan->link }}"
-                                        class="text-blue-500 hover:underline mt-2 inline-block">Selengkapnya..</a>
+                                        class="text-blue-500 hover:underline mt-2 inline-block">Selengkapnya..
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -633,11 +573,11 @@
         </script>
 
     </main>
-
     <footer class="bg-customYellow py-12 relative z-50 rounded-t-lg">
         <div class="container mx-auto px-4 max-w-screen-lg">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="flex flex-col items-start">
+            <div class="flex flex-col md:grid md:grid-cols-3 gap-8">
+                <!-- Logo Column -->
+                <div class="flex flex-col items-start md:justify-self-start">
                     <img src="{{ asset('img/pklbunga.png') }}" alt="Logo" class="h-32 mb-6">
                     <div class="flex space-x-4 mt-4">
                         <a href="#"><img src="{{ asset('img/fb.png') }}" alt="Facebook" class="h-8"></a>
@@ -646,14 +586,14 @@
                         <a href="#"><img src="{{ asset('img/yt.png') }}" alt="YouTube" class="h-8"></a>
                     </div>
                 </div>
-                <div class="text-left">
-                    <h2 class="text-black font-semibold mb-6">Link Terkait</h2>
+                <!-- Link Terkait Column -->
+                <div class="order-3 md:order-none md:text-left">
+                    <h2 class="text-black font-semibold mb-6 text-xl">Link Terkait</h2>
                     <ul class="space-y-2">
                         <li><a href="https://www.menpan.go.id/site/" class="text-black hover:text-gray-300">KEMENPAN</a>
                         </li>
                         <li><a href="https://www.kemendagri.go.id/"
-                                class="text-black hover:text-gray-300">KEMENDAGRI</a>
-                        </li>
+                                class="text-black hover:text-gray-300">KEMENDAGRI</a></li>
                         <li><a href="https://jatengprov.go.id/" class="text-black hover:text-gray-300">PEMPROV
                                 JATENG</a></li>
                         <li><a href="http://kipjateng.jatengprov.go.id/" class="text-black hover:text-gray-300">KIP
@@ -664,31 +604,30 @@
                                 class="text-black hover:text-gray-300">KEBIJAKAN PRIVASI</a></li>
                     </ul>
                 </div>
-                <div class="text-left">
-                    <h2 class="text-black font-semibold mb-6">Alamat</h2>
-                    <ul class="space-y-2">
+                <!-- Alamat Column -->
+                <div class="order-2 md:order-none text-left md:text-sm md:justify-self-end">
+                    <h2 class="text-black font-semibold mb-4 text-xl">Alamat</h2>
+                    <ul class="space-y-1">
                         <li class="text-black flex items-center">
-                            <img src="{{ asset('img/alamat.png') }}" alt="Alamat" class="h-4 mr-2">
+                            <img src="{{ asset('img/alamat.png') }}" alt="Alamat" class="h-3 mr-1">
                             Jl. Mataram No.1, Podosugih, Kec. Pekalongan Bar., Kota Pekalongan, Jawa Tengah 51111
                         </li>
                         <li class="text-black flex items-center">
-                            <img src="{{ asset('img/telp.png') }}" alt="Telepon" class="h-4 mr-2"> (0285) 421093
+                            <img src="{{ asset('img/telp.png') }}" alt="Telepon" class="h-3 mr-1"> (0285) 421093
                         </li>
                         <li class="text-black flex items-center">
-                            <img src="{{ asset('img/pesan.png') }}" alt="Email" class="h-4 mr-2">
+                            <img src="{{ asset('img/pesan.png') }}" alt="Email" class="h-3 mr-1">
                             <a href="mailto:setda@pekalongankota.go.id"
                                 class="hover:text-gray-300">setda@pekalongankota.go.id</a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="text-center mt-8 text-black">
+            <div class="text-center mt-4 md:mt-8 text-black text-lg mb-4">
                 &copy; {{ date('Y') }} Dinas Komunikasi dan Informatika Kota Pekalongan. All Rights Reserved.
             </div>
         </div>
     </footer>
-
-
 </body>
 
 </html>
