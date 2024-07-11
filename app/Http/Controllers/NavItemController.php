@@ -21,17 +21,24 @@ class NavItemController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'url' => 'required|max:255',
-            'is_dropdown' => 'boolean',
-            'parent_id' => 'nullable|exists:nav_items,id',
-        ]);
+        $navItem = new NavItem;
+        $navItem->title = $request->input('title');
+        $navItem->url = $request->input('url');
+        $navItem->is_dropdown = $request->input('is_dropdown') ? true : false;
+        $navItem->parent_id = $request->input('parent_id') ? $request->input('parent_id') : null;
+        $navItem->save();
 
-        NavItem::create($validatedData);
+        if ($navItem->is_dropdown && $request->input('child_title')) {
+            $childItem = new NavItem;
+            $childItem->title = $request->input('child_title');
+            $childItem->url = $request->input('child_url');
+            $childItem->parent_id = $navItem->id;
+            $childItem->save();
+        }
 
-        return redirect()->route('navItems.index')->with('success', 'Navigation item created successfully.');
+        return redirect()->route('navItems.index');
     }
+
 
     public function show(NavItem $navItem)
     {

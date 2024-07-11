@@ -23,19 +23,17 @@
                     <div class="p-6 bg-white border-b border-gray-200">
                         <h2 class="text-2xl font-bold mb-4">Add/Edit Navigation Item</h2>
 
-                        <form action="{{ route('navItems.store') }}" method="POST" x-data="{ isDropdown: false }">
+                        <form action="{{ route('navItems.store') }}" method="POST" x-data="{ isDropdown: false, parentDropdown: false }">
                             @csrf
 
                             <div class="mb-4">
                                 <label for="title" class="block text-gray-700">Title</label>
-                                <input type="text" name="title" id="title"
-                                    class="w-full p-2 border border-gray-300 rounded" required>
+                                <input type="text" name="title" id="title" class="w-full p-2 border border-gray-300 rounded" required>
                             </div>
 
                             <div class="mb-4">
                                 <label for="url" class="block text-gray-700">URL or File Path</label>
-                                <input type="text" name="url" id="url" class="w-full p-2 border border-gray-300 rounded"
-                                    required>
+                                <input type="text" name="url" id="url" class="w-full p-2 border border-gray-300 rounded" required>
                             </div>
 
                             <div class="mb-4">
@@ -47,20 +45,23 @@
 
                             <div x-show="!isDropdown" class="mb-4">
                                 <label for="parent_id" class="block text-gray-700">Parent Item (optional)</label>
-                                <select name="parent_id" id="parent_id"
-                                    class="w-full p-2 border border-gray-300 rounded">
+                                <select name="parent_id" id="parent_id" class="w-full p-2 border border-gray-300 rounded" x-on:change="parentDropdown = $event.target.value ? true : false">
                                     <option value="">-- Select Parent Item --</option>
                                     @foreach($navItems as $navItem)
-                                    @if($navItem->is_dropdown)
                                     <option value="{{ $navItem->id }}">{{ $navItem->title }}</option>
-                                    @endif
                                     @endforeach
                                 </select>
                             </div>
 
+                            <div x-show="isDropdown && parentDropdown" class="mb-4">
+                                <label for="child_title" class="block text-gray-700">Dropdown Item Title</label>
+                                <input type="text" name="child_title" id="child_title" class="w-full p-2 border border-gray-300 rounded">
+                                <label for="child_url" class="block text-gray-700">Dropdown Item URL</label>
+                                <input type="text" name="child_url" id="child_url" class="w-full p-2 border border-gray-300 rounded">
+                            </div>
+
                             <div class="mb-4">
-                                <button type="submit"
-                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                     Add/Update Item
                                 </button>
                             </div>
@@ -86,10 +87,8 @@
                                     @foreach($item->children as $child)
                                     <li>
                                         {{ $child->title }} ({{ $child->url }})
-                                        <a href="{{ route('navItems.edit', $child->id) }}"
-                                            class="text-blue-500 ml-2">Edit</a>
-                                        <form action="{{ route('navItems.destroy', $child->id) }}" method="POST"
-                                            class="inline">
+                                        <a href="{{ route('navItems.edit', $child->id) }}" class="text-blue-500 ml-2">Edit</a>
+                                        <form action="{{ route('navItems.destroy', $child->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-500 ml-2">Delete</button>
