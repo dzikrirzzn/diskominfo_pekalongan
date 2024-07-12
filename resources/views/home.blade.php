@@ -43,9 +43,6 @@
     cursor: grab;
 }
 
-.half-circle {
-    clip-path: ellipse(100% 80% at 0% 50%);
-}
 </style>
 
 <body class="flex flex-col min-h-screen bg-white">
@@ -151,87 +148,72 @@
         </script>
 
 
-        <!-- Berita & Pengumuman -->
-        <div class="relative h-screen">
-            <!-- Background Image Overlay -->
-            <div class="absolute inset-0 bg-cover bg-center z-20"
-                style="background-image: url('https://asset.kompas.com/crops/AsZwJgbHv7GOQqeOdxo1cCZ64Ak=/167x95:965x627/750x500/data/photo/2022/10/01/633807f7d7d67.png');">
-                <div class="absolute inset-0 bg-gray-500 opacity-60"></div>
-            </div>
-            <!-- Content Container -->
-            <div class="container mx-auto py-8 px-4 h-full relative z-20">
-                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 h-full px-4 md:px-20 z-20">
-                    <!-- Berita Section -->
-                    <div class="flex-1 md:flex-[3] bg-transparent rounded-lg p-4 h-full flex flex-col z-20">
-                        <h2 class="text-2xl md:text-3xl font-semibold mb-4 text-white border-b-2 border-gray-300 z-20">
-                            Berita Kota</h2>
-                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-4 z-20">
-                            <!-- Image Box -->
-                            <div
-                                class="flex flex-col md:flex-row flex-wrap md:flex-nowrap space-y-4 md:space-y-0 md:space-x-4 mb-4 z-20">
-                                @foreach ($headlineBerita->take(2) as $berita)
-                                <!-- Each image box taking up half the space -->
-                                <a href="{{ route('berita.show', ['id' => $berita->id]) }}"
-                                    class="block no-underline text-black w-full md:w-1/2">
-                                    <div
-                                        class="w-full h-full rounded-lg shadow overflow-hidden relative transform hover:scale-90 hover:brightness-75 transition-transform duration-700">
-                                        <img class=" w-screen h-64 object-cover"
-                                            src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}">
-                                        <div
-                                            class="absolute bottom-0 w-full p-2 bg-black bg-opacity-50 text-white text-center">
-                                            <h3
-                                                class="text-lg font-bold hover:text-gray-400 transition-colors duration-300">
-                                                {{ $berita->title }}
-                                            </h3>
-                                        </div>
-                                    </div>
-                                </a>
-                                @endforeach
+<!-- Berita & Pengumuman -->
+<div class="relative h-screen">
+    <!-- Background Image Overlay -->
+    <div class="absolute inset-0 bg-cover bg-center z-20" style="background-image: url('https://asset.kompas.com/crops/AsZwJgbHv7GOQqeOdxo1cCZ64Ak=/167x95:965x627/750x500/data/photo/2022/10/01/633807f7d7d67.png');">
+        <div class="absolute inset-0 bg-gray-500 opacity-60"></div>
+    </div>
+    <!-- Content Container -->
+    <div class="container mx-auto py-8 px-2 h-full relative z-20">
+        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 h-full px-4 md:px-20 z-20">
+            <!-- Berita Section -->
+            <div class="flex-1 md:flex-[3] bg-transparent rounded-lg p-4 h-full flex flex-col z-20">
+                <h2 class="text-2xl md:text-3xl font-semibold mb-4 text-white border-b-2 border-gray-300 z-20">Berita Kota</h2>
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-4 z-20">
+                    <!-- Image Box -->
+                    <div class="flex flex-col md:flex-row flex-wrap md:flex-nowrap space-y-4 md:space-y-0 md:space-x-4 mb-4 z-20">
+                        @foreach ($headlineBerita->take(2) as $berita)
+                        <!-- Each image box taking up half the space -->
+                        <a href="{{ route('berita.show', ['id' => $berita->id]) }}" class="block no-underline text-black w-full md:w-1/2">
+                            <div class="w-full h-full rounded-lg shadow overflow-hidden relative transform hover:scale-90 hover:brightness-75 transition-transform duration-700">
+                                <img class=" w-screen h-64 object-cover" src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}">
+                                <div class="absolute bottom-0 w-full p-2 bg-black bg-opacity-50 text-white text-center">
+                                    <h3 class="text-lg font-bold hover:text-gray-400 transition-colors duration-300">{{ $berita->title }}</h3>
+                                </div>
                             </div>
-                        </div>
-                        <div class="bg-white h-48 rounded-lg shadow-md p-4 flex-1 mb-1">
-                            <div class="flex justify-between mb-2">
-                                <span class="font-semibold text-black">Berita Lainnya</span>
-                                <span class="font-semibold"></span>
-                            </div>
-                            <div class="overflow-y-auto h-48">
-                                <ul class="space-y-2">
-                                    @foreach ($otherBerita as $berita)
-                                    <li class="flex justify-between text-sm border-b border-gray-300 pb-2">
-                                        <a href="{{ route('berita.show', ['id' => $berita->id]) }}"
-                                            class="flex justify-between w-full no-underline">
-                                            <span class="hover:text-yellow-500">{{ $berita->title }}</span>
-                                            <span class="text-gray-500">| {{ $berita->date }}</span>
-                                        </a>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
+                        </a>
+                        @endforeach
                     </div>
-                    <!-- Pengumuman Section -->
-                    <div class="flex-1 md:flex-[1] bg-transparent rounded-lg p-4 h-full flex flex-col z-10">
-                        <h2
-                            class="text-2xl md:text-3xl font-semibold mb-4 text-left text-white border-b-2 border-gray-300">
-                            Pengumuman</h2>
-                        <div class="bg-white rounded-lg shadow-md p-4 overflow-y-scroll flex-1">
-                            <ul class="space-y-2">
-                                @foreach ($pengumuman as $item)
-                                <li class="flex justify-between text-sm border-b border-gray-300 pb-2">
-                                    <a href="{{ route('pengumuman.show', ['id' => $item->id]) }}"
-                                        class="flex justify-between w-full no-underline">
-                                        <span class="hover:text-yellow-500">{{ $item->judul }}</span>
-                                        <span class="text-gray-500 text-right"> | {{ $item->tanggal }}</span>
-                                    </a>
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
+                </div>
+                <div class="bg-white h-48 rounded-lg shadow-md p-4 flex-1 mb-1">
+                    <div class="flex justify-between mb-2">
+                        <span class="font-semibold text-black">Berita Lainnya</span>
+                        <span class="font-semibold"></span>
+                    </div>
+                    <div class="overflow-y-auto h-48">
+                        <ul class="space-y-2">
+                            @foreach ($otherBerita as $berita)
+                            <li class="flex justify-between text-sm border-b border-gray-300 pb-2">
+                                <a href="{{ route('berita.show', ['id' => $berita->id]) }}" class="flex justify-between w-full no-underline">
+                                    <span class="hover:text-yellow-500">{{ $berita->title }}</span>
+                                    <span class="text-gray-500">| {{ $berita->date }}</span>
+                                </a>
+                            </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>
+            <!-- Pengumuman Section -->
+            <div class="flex-1 md:flex-[1] bg-transparent rounded-lg p-4 h-full flex flex-col z-10">
+                <h2 class="text-2xl md:text-3xl font-semibold mb-4 text-left text-white border-b-2 border-gray-300">Pengumuman</h2>
+                <div class="bg-white rounded-lg shadow-md p-4 overflow-y-scroll flex-1">
+                    <ul class="space-y-2">
+                        @foreach ($pengumuman as $item)
+                        <li class="flex justify-between text-sm border-b border-gray-300 pb-2">
+                            <a href="{{ route('pengumuman.show', ['id' => $item->id]) }}" class="flex justify-between w-full no-underline">
+                                <span class="hover:text-yellow-500">{{ $item->judul }}</span>
+                                <span class="text-gray-500 text-right"> | {{ $item->tanggal }}</span>
+                            </a>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
         </div>
-
+    </div>
+</div>
         <div class="container mx-auto py-8 px-4">
             <h1 class="text-2xl font-bold mb-6 text-black">Galeri Kota Pekalongan</h1>
             <div class="swiper-container">
@@ -501,6 +483,7 @@
             </div>
         </div>
 
+        
         <!-- Swiper JS -->
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         <script>
@@ -584,60 +567,53 @@
 
     </main>
     <footer class="bg-customYellow py-12 relative z-50 rounded-t-lg">
-        <div class="container mx-auto px-4 max-w-screen-lg">
-            <div class="flex flex-col md:grid md:grid-cols-3 gap-8">
-                <!-- Logo Column -->
-                <div class="flex flex-col items-start md:justify-self-start">
-                    <img src="{{ asset('img/pklbunga.png') }}" alt="Logo" class="h-32 mb-6">
-                    <div class="flex space-x-4 mt-4">
-                        <a href="#"><img src="{{ asset('img/fb.png') }}" alt="Facebook" class="h-8"></a>
-                        <a href="#"><img src="{{ asset('img/twt.png') }}" alt="Twitter" class="h-8"></a>
-                        <a href="#"><img src="{{ asset('img/ig.png') }}" alt="Instagram" class="h-8"></a>
-                        <a href="#"><img src="{{ asset('img/yt.png') }}" alt="YouTube" class="h-8"></a>
-                    </div>
-                </div>
-                <!-- Link Terkait Column -->
-                <div class="order-3 md:order-none md:text-left">
-                    <h2 class="text-black font-semibold mb-6 text-xl">Link Terkait</h2>
-                    <ul class="space-y-2">
-                        <li><a href="https://www.menpan.go.id/site/" class="text-black hover:text-gray-300">KEMENPAN</a>
-                        </li>
-                        <li><a href="https://www.kemendagri.go.id/"
-                                class="text-black hover:text-gray-300">KEMENDAGRI</a></li>
-                        <li><a href="https://jatengprov.go.id/" class="text-black hover:text-gray-300">PEMPROV
-                                JATENG</a></li>
-                        <li><a href="http://kipjateng.jatengprov.go.id/" class="text-black hover:text-gray-300">KIP
-                                JATENG</a></li>
-                        <li><a href="https://data.go.id/" class="text-black hover:text-gray-300">PORTAL SATU DATA</a>
-                        </li>
-                        <li><a href="https://pekalongankota.go.id/halaman/kebijakan-privasi.html"
-                                class="text-black hover:text-gray-300">KEBIJAKAN PRIVASI</a></li>
-                    </ul>
-                </div>
-                <!-- Alamat Column -->
-                <div class="order-2 md:order-none text-left md:text-sm md:justify-self-end">
-                    <h2 class="text-black font-semibold mb-4 text-xl">Alamat</h2>
-                    <ul class="space-y-1">
-                        <li class="text-black flex items-center">
-                            <img src="{{ asset('img/alamat.png') }}" alt="Alamat" class="h-3 mr-1">
-                            Jl. Mataram No.1, Podosugih, Kec. Pekalongan Bar., Kota Pekalongan, Jawa Tengah 51111
-                        </li>
-                        <li class="text-black flex items-center">
-                            <img src="{{ asset('img/telp.png') }}" alt="Telepon" class="h-3 mr-1"> (0285) 421093
-                        </li>
-                        <li class="text-black flex items-center">
-                            <img src="{{ asset('img/pesan.png') }}" alt="Email" class="h-3 mr-1">
-                            <a href="mailto:setda@pekalongankota.go.id"
-                                class="hover:text-gray-300">setda@pekalongankota.go.id</a>
-                        </li>
-                    </ul>
+    <div class="container mx-auto px-4 max-w-screen-lg">
+        <div class="flex flex-col md:grid md:grid-cols-3 gap-8">
+            <!-- Logo Column -->
+            <div class="flex flex-col items-start md:justify-self-start">
+                <img src="{{ asset('img/pklbunga.png') }}" alt="Logo" class="h-32 mb-6">
+                <div class="flex space-x-4 mt-4">
+                    <a href="#"><img src="{{ asset('img/fb.png') }}" alt="Facebook" class="h-8"></a>
+                    <a href="#"><img src="{{ asset('img/twt.png') }}" alt="Twitter" class="h-8"></a>
+                    <a href="#"><img src="{{ asset('img/ig.png') }}" alt="Instagram" class="h-8"></a>
+                    <a href="#"><img src="{{ asset('img/yt.png') }}" alt="YouTube" class="h-8"></a>
                 </div>
             </div>
-            <div class="text-center mt-4 md:mt-8 text-black text-lg mb-4">
-                &copy; {{ date('Y') }} Dinas Komunikasi dan Informatika Kota Pekalongan. All Rights Reserved.
+            <!-- Link Terkait Column -->
+            <div class="order-3 md:order-none md:text-left">
+                <h2 class="text-black font-semibold mb-6 text-xl">Link Terkait</h2>
+                <ul class="space-y-2">
+                    <li><a href="https://www.menpan.go.id/site/" class="text-black hover:text-gray-300">KEMENPAN</a></li>
+                    <li><a href="https://www.kemendagri.go.id/" class="text-black hover:text-gray-300">KEMENDAGRI</a></li>
+                    <li><a href="https://jatengprov.go.id/" class="text-black hover:text-gray-300">PEMPROV JATENG</a></li>
+                    <li><a href="http://kipjateng.jatengprov.go.id/" class="text-black hover:text-gray-300">KIP JATENG</a></li>
+                    <li><a href="https://data.go.id/" class="text-black hover:text-gray-300">PORTAL SATU DATA</a></li>
+                    <li><a href="https://pekalongankota.go.id/halaman/kebijakan-privasi.html" class="text-black hover:text-gray-300">KEBIJAKAN PRIVASI</a></li>
+                </ul>
+            </div>
+            <!-- Alamat Column -->
+            <div class="order-2 md:order-none text-left md:text-sm md:justify-self-end">
+                <h2 class="text-black font-semibold mb-4 text-xl">Alamat</h2>
+                <ul class="space-y-1">
+                    <li class="text-black flex items-center">
+                        <img src="{{ asset('img/alamat.png') }}" alt="Alamat" class="h-3 mr-1">
+                        Jl. Mataram No.1, Podosugih, Kec. Pekalongan Bar., Kota Pekalongan, Jawa Tengah 51111
+                    </li>
+                    <li class="text-black flex items-center">
+                        <img src="{{ asset('img/telp.png') }}" alt="Telepon" class="h-3 mr-1"> (0285) 421093
+                    </li>
+                    <li class="text-black flex items-center">
+                        <img src="{{ asset('img/pesan.png') }}" alt="Email" class="h-3 mr-1">
+                        <a href="mailto:setda@pekalongankota.go.id" class="hover:text-gray-300">setda@pekalongankota.go.id</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </footer>
+        <div class="text-center mt-4 md:mt-8 text-black text-lg mb-4">
+            &copy; {{ date('Y') }} Dinas Komunikasi dan Informatika Kota Pekalongan. All Rights Reserved.
+        </div>
+    </div>
+</footer>
 </body>
 
 </html>

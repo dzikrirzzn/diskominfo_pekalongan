@@ -15,7 +15,7 @@ export default {
     theme: {
         extend: {
             colors: {
-                customYellow: "#998560",
+                customYellow: "#A4721E",
             },
             variants: {
                 scrollbar: ["rounded"],
