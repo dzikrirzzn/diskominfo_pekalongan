@@ -52,18 +52,20 @@
     @include('layouts.navbarhome')
     <!-- Rest of your page content -->
 
-    <main class="flex-1 relative z-0 pt-16">
-        <div class="flex flex-col lg:flex-row h-[92vh]">
+    <main class="flex-1 relative z-0 pt-4 md:pt-8 lg:pt-16">
+        <div class="flex flex-col lg:flex-row h-auto lg:h-[92vh]">
             <!-- Left side (yellow section) -->
-            <div class="w-full lg:w-1/2 bg-yellow-500 text-white p-12 lg:p-24 flex flex-col justify-center half-circle">
-                <h1 class="text-5xl lg:text-6xl font-bold mb-8">Welcome to<br>City of<br>Pekalongan</h1>
-                <p class="mb-8 text-xl lg:text-2xl">World City of Batik</p>
+            <div class="transform scale-100 md:scale-110 lg:scale-125 relative lg:w-6/12 bg-yellow-500 text-white p-6 md:p-12 lg:p-24 flex flex-col justify-start z-10"
+                style="clip-path: ellipse(100% 85% at 0% 50%);">
+                <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-8">Welcome to<br>City of<br>Pekalongan
+                </h1>
+                <p class="mb-4 md:mb-8 text-lg md:text-xl lg:text-2xl">World City of Batik</p>
                 <div class="relative">
                     <input type="text" placeholder="How can we help?"
-                        class="w-full p-4 pr-12 rounded-full text-black text-xl">
-                    <button class="absolute right-4 top-1/2 transform -translate-y-1/2">
-                        <svg class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
+                        class="w-full p-3 md:p-4 pr-12 rounded-full text-black text-lg md:text-xl">
+                    <button class="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2">
+                        <svg class="w-6 md:w-8 h-6 md:h-8 text-gray-500" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
@@ -71,9 +73,9 @@
                 </div>
             </div>
             <!-- Right side (image) -->
-            <div class="w-full lg:w-1/2 relative">
+            <div class="relative w-full lg:w-6/12 flex items-center justify-end lg:h-auto z-0">
                 <img src="{{ asset('img/pemkot.png') }}" alt="foto wali dan walikota pekalongan"
-                    class="w-full h-full object-cover">
+                    class="absolute w-full h-full object-cover">
             </div>
         </div>
         <div class="relative py-4 md:py-8 bg-no-repeat bg-left-top">
@@ -87,7 +89,7 @@
     }">
 
                 <div class="container mx-auto p-4">
-                    <div class="overflow-hidden rounded-lg shadow-2xl shadow-lg my-8 mx-auto max-w-screen-lg relative">
+                    <div class="overflow-hidden rounded-lg shadow-2xl my-8 mx-auto max-w-screen-lg relative">
                         <div class="absolute top-0 left-0 right-0 h-4 bg-white shadow-2xl"></div>
                         <div class="flex transition-transform duration-300 ease-in-out"
                             :style="{ transform: `translateX(-${(activeSlide - 1) * 100}%)` }">
@@ -152,21 +154,21 @@
         <!-- Berita & Pengumuman -->
         <div class="relative h-screen">
             <!-- Background Image Overlay -->
-            <div class="absolute inset-0 bg-cover bg-center"
+            <div class="absolute inset-0 bg-cover bg-center z-20"
                 style="background-image: url('https://asset.kompas.com/crops/AsZwJgbHv7GOQqeOdxo1cCZ64Ak=/167x95:965x627/750x500/data/photo/2022/10/01/633807f7d7d67.png');">
                 <div class="absolute inset-0 bg-gray-500 opacity-60"></div>
             </div>
             <!-- Content Container -->
-            <div class="container mx-auto py-8 px-4 h-full relative z-10">
-                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 h-full px-4 md:px-20">
+            <div class="container mx-auto py-8 px-4 h-full relative z-20">
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 h-full px-4 md:px-20 z-20">
                     <!-- Berita Section -->
-                    <div class="flex-1 md:flex-[3] bg-transparent rounded-lg p-4 h-full flex flex-col">
-                        <h2 class="text-2xl md:text-3xl font-semibold mb-4 text-white border-b-2 border-gray-300">Berita
-                            Kota</h2>
-                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-4">
+                    <div class="flex-1 md:flex-[3] bg-transparent rounded-lg p-4 h-full flex flex-col z-20">
+                        <h2 class="text-2xl md:text-3xl font-semibold mb-4 text-white border-b-2 border-gray-300 z-20">
+                            Berita Kota</h2>
+                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-4 z-20">
                             <!-- Image Box -->
                             <div
-                                class="flex flex-col md:flex-row flex-wrap md:flex-nowrap space-y-4 md:space-y-0 md:space-x-4 mb-4">
+                                class="flex flex-col md:flex-row flex-wrap md:flex-nowrap space-y-4 md:space-y-0 md:space-x-4 mb-4 z-20">
                                 @foreach ($headlineBerita->take(2) as $berita)
                                 <!-- Each image box taking up half the space -->
                                 <a href="{{ route('berita.show', ['id' => $berita->id]) }}"
@@ -187,12 +189,12 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="bg-white rounded-lg shadow-md p-4 flex-1 mb-1">
+                        <div class="bg-white h-48 rounded-lg shadow-md p-4 flex-1 mb-1">
                             <div class="flex justify-between mb-2">
                                 <span class="font-semibold text-black">Berita Lainnya</span>
                                 <span class="font-semibold"></span>
                             </div>
-                            <div class="overflow-y-auto h-64">
+                            <div class="overflow-y-auto h-48">
                                 <ul class="space-y-2">
                                     @foreach ($otherBerita as $berita)
                                     <li class="flex justify-between text-sm border-b border-gray-300 pb-2">
@@ -208,7 +210,7 @@
                         </div>
                     </div>
                     <!-- Pengumuman Section -->
-                    <div class="flex-1 md:flex-[1] bg-transparent rounded-lg p-4 h-full flex flex-col">
+                    <div class="flex-1 md:flex-[1] bg-transparent rounded-lg p-4 h-full flex flex-col z-10">
                         <h2
                             class="text-2xl md:text-3xl font-semibold mb-4 text-left text-white border-b-2 border-gray-300">
                             Pengumuman</h2>
@@ -229,6 +231,7 @@
                 </div>
             </div>
         </div>
+
         <div class="container mx-auto py-8 px-4">
             <h1 class="text-2xl font-bold mb-6 text-black">Galeri Kota Pekalongan</h1>
             <div class="swiper-container">
@@ -250,7 +253,6 @@
                     @endforeach
                 </div>
                 <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
             </div>
         </div>
 
@@ -289,41 +291,47 @@
 
         <div
             class="container mx-auto p-4 flex flex-col lg:flex-row lg:justify-between space-y-4 lg:space-y-0 lg:space-x-4">
+            <!-- Kominfo widget on the left -->
             <div class="flex flex-col space-y-4 w-full lg:w-1/3">
-                <!-- Top placeholder image -->
                 <div
-                    class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex items-center justify-center h-48">
-                    <span class="text-gray-500">Top Placeholder Image</span>
-                </div>
-                <!-- Bottom Kominfo widget -->
-                <div
-                    class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex items-center justify-center h-48">
+                    class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex items-center justify-center h-full">
                     <div id="gpr-kominfo-widget-container"></div>
                     <script src="https://widget.kominfo.go.id/gpr-widget-kominfo.min.js" async></script>
                 </div>
             </div>
-            <!-- Twitter feed for @pemkotpkl -->
-            <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-1/3 h-96 overflow-hidden">
-                <div class="font-bold mb-4">Postingan dari @pemkotpkl</div>
-                <div class="h-full overflow-y-scroll">
-                    <a class="twitter-timeline" href="https://twitter.com/pemkotpkl" data-tweet-limit="5">Tweets by
-                        Pemkot
-                        Pekalongan</a>
+
+            <!-- Logo Berakhlak on top of Twitter feed for @pemkotpkl in the middle -->
+            <div class="flex flex-col space-y-4 w-full lg:w-1/3">
+                <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex items-center justify-center">
+                    <img src="https://pekalongankota.go.id/template/frontend/img/widget/logo-berakhlak.png"
+                        alt="Logo Berakhlak" class="max-w-full max-h-full">
                 </div>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 h-96 overflow-hidden">
+                    <div class="font-bold mb-4">Postingan dari @pemkotpkl</div>
+                    <div class="h-full overflow-y-scroll">
+                        <a class="twitter-timeline" href="https://twitter.com/pemkotpkl" data-tweet-limit="5">Tweets by
+                            Pemkot Pekalongan</a>
+                    </div>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
             </div>
-            <!-- Twitter feed for @officialbatiktv -->
-            <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-1/3 h-96 overflow-hidden">
-                <div class="font-bold mb-4">Postingan dari @officialbatiktv</div>
-                <div class="h-full overflow-y-scroll">
-                    <a class="twitter-timeline" href="https://twitter.com/officialbatiktv" data-tweet-limit="5">Tweets
-                        by BATIK TV</a>
+
+            <!-- Logo EVP on top of Twitter feed for @officialbatiktv on the right -->
+            <div class="flex flex-col space-y-4 w-full lg:w-1/3">
+                <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex items-center justify-center">
+                    <img src="https://pekalongankota.go.id/template/frontend/img/widget/logo-evp.png" alt="Logo EVP"
+                        class="max-w-full max-h-full">
                 </div>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 h-96 overflow-hidden">
+                    <div class="font-bold mb-4">Postingan dari @officialbatiktv</div>
+                    <div class="h-full overflow-y-scroll">
+                        <a class="twitter-timeline" href="https://twitter.com/officialbatiktv"
+                            data-tweet-limit="5">Tweets by BATIK TV</a>
+                    </div>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
             </div>
         </div>
-
-
         <div class="container mx-auto p-2 lg:p-4 relative">
             <div class="flex flex-col lg:flex-row lg:space-x-4">
                 <!-- Background Half -->
