@@ -11,11 +11,12 @@ class CreateNavItemsTable extends Migration
         Schema::create('nav_items', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('url');
-            $table->boolean('is_dropdown')->default(false);
+            $table->string('url')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
-            $table->foreign('parent_id')->references('id')->on('nav_items')->onDelete('cascade');
+            $table->boolean('is_dropdown')->nullable();
             $table->timestamps();
+
+            $table->foreign('parent_id')->references('id')->on('nav_items')->onDelete('cascade');
         });
     }
 

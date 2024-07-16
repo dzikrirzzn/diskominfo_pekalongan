@@ -4,71 +4,84 @@ namespace App\Http\Controllers;
 
 use App\Models\NavItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class NavItemController extends Controller
 {
     public function index()
     {
         $navItems = NavItem::whereNull('parent_id')->with('children')->get();
-        return view('admin_navbar', compact('navItems'));
+        $parentItems = NavItem::whereNull('parent_id')->get();
+        return view('admin_navbar', compact('navItems', 'parentItems'));
     }
 
     public function create()
     {
-        $navItems = NavItem::whereNull('parent_id')->with('children')->get();
-        return view('admin_navbar', compact('navItems'));
+        $parentItems = NavItem::whereNull('parent_id')->get();
+        return view('admin_navbar_create', compact('parentItems'));
     }
 
     public function store(Request $request)
     {
-        $navItem = new NavItem;
-        $navItem->title = $request->input('title');
-        $navItem->url = $request->input('url');
-        $navItem->is_dropdown = $request->input('is_dropdown') ? true : false;
-        $navItem->parent_id = $request->input('parent_id') ? $request->input('parent_id') : null;
-        $navItem->save();
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'url' => 'nullable|string|max:255',
+            'parent_id' => 'nullable|exists:nav_items,id',
+            'is_dropdown' => 'nullable|boolean',
+        ]);
 
-        if ($navItem->is_dropdown && $request->input('child_title')) {
-            $childItem = new NavItem;
-            $childItem->title = $request->input('child_title');
-            $childItem->url = $request->input('child_url');
-            $childItem->parent_id = $navItem->id;
-            $childItem->save();
+        $navItem = NavItem::create($validatedData);
+
+        Log::info('NavItem created', ['navItem' => $navItem]);
+
+        if ($request->filled('child_items')) {
+            foreach ($request->input('child_items') as $childItem) {
+                $childItem['parent_id'] = $navItem->id;
+                Log::info('Child item data', ['childItem' => $childItem]);
+                NavItem::create($childItem);
+            }
         }
 
-        return redirect()->route('navItems.index');
-    }
-
-
-    public function show(NavItem $navItem)
-    {
-        return view('admin_navbar_show', compact('navItem'));
+        return redirect()->route('navItems.index')->with('success', 'Navigation item added successfully');
     }
 
     public function edit(NavItem $navItem)
     {
-        $navItems = NavItem::whereNull('parent_id')->with('children')->get();
-        return view('admin_navbar_edit', compact('navItem', 'navItems'));
+        $parentItems = NavItem::whereNull('parent_id')->where('id', '!=', $navItem->id)->get();
+        return view('admin_navbar_create', compact('navItem', 'parentItems'));
     }
 
     public function update(Request $request, NavItem $navItem)
     {
         $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'url' => 'required|max:255',
-            'is_dropdown' => 'boolean',
+            'title' => 'required|string|max:255',
+            'url' => 'nullable|string|max:255',
             'parent_id' => 'nullable|exists:nav_items,id',
+            'is_dropdown' => 'nullable|boolean',
         ]);
 
         $navItem->update($validatedData);
 
-        return redirect()->route('navItems.index')->with('success', 'Navigation item updated successfully.');
+        // Delete existing children if they exist
+        $navItem->children()->delete();
+
+        Log::info('NavItem updated', ['navItem' => $navItem]);
+
+        // Add new children if they exist
+        if ($request->filled('child_items')) {
+            foreach ($request->input('child_items') as $childItem) {
+                $childItem['parent_id'] = $navItem->id;
+                Log::info('Child item data', ['childItem' => $childItem]);
+                NavItem::create($childItem);
+            }
+        }
+
+        return redirect()->route('navItems.index')->with('success', 'Navigation item updated successfully');
     }
 
     public function destroy(NavItem $navItem)
     {
         $navItem->delete();
-
-        return redirect()->route('navItems.index')->with('success', 'Navigation item deleted successfully.');
+        return redirect()->route('navItems.index')->with('success', 'Navigation item deleted successfully');
     }
 }

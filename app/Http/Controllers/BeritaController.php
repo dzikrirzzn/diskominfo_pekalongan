@@ -14,10 +14,7 @@ class BeritaController extends Controller
 {
     public function index()
     {
-        $headlineBerita = HeadlineBerita::all();
-        $otherBerita = OtherBerita::all();
-        $allBerita = $headlineBerita->merge($otherBerita);
-
+        $allBerita = $this->getAllBerita();
         return view('berita.listberita', ['allBerita' => $allBerita]);
     }
 
@@ -35,10 +32,10 @@ class BeritaController extends Controller
 
     public function show($id)
     {
-        $berita = HeadlineBerita::find($id) ?? OtherBerita::find($id);
+        $berita = $this->findBeritaById($id);
 
         if (!$berita) {
-            return redirect()->route('listberita')->with('error', 'Berita tidak ditemukan.');
+            return redirect()->route('berita.listberita')->with('error', 'Berita tidak ditemukan.');
         }
 
         $otherBerita = OtherBerita::latest()->take(5)->get();
@@ -52,7 +49,6 @@ class BeritaController extends Controller
 
         try {
             $imagePath = $request->file('image')->store('images', 'public');
-
             $data = $request->only(['title', 'subtitle', 'content', 'author', 'date']);
             $data['image'] = $imagePath;
 
@@ -70,10 +66,7 @@ class BeritaController extends Controller
 
     public function adminIndex()
     {
-        $headlineBerita = HeadlineBerita::all();
-        $otherBerita = OtherBerita::all();
-        $allBerita = $headlineBerita->merge($otherBerita);
-
+        $allBerita = $this->getAllBerita();
         return view('admin.berita.index', compact('allBerita'));
     }
 
@@ -84,7 +77,7 @@ class BeritaController extends Controller
 
     public function edit($id)
     {
-        $berita = HeadlineBerita::find($id) ?? OtherBerita::find($id);
+        $berita = $this->findBeritaById($id);
 
         if (!$berita) {
             return redirect()->route('admin.berita.index')->with('error', 'Berita tidak ditemukan.');
@@ -98,7 +91,7 @@ class BeritaController extends Controller
         $this->validateRequest($request, false);
 
         try {
-            $berita = HeadlineBerita::find($id) ?? OtherBerita::find($id);
+            $berita = $this->findBeritaById($id);
 
             if (!$berita) {
                 return redirect()->route('admin.berita.index')->with('error', 'Berita tidak ditemukan.');
@@ -122,7 +115,7 @@ class BeritaController extends Controller
     public function destroy($id)
     {
         try {
-            $berita = HeadlineBerita::find($id) ?? OtherBerita::find($id);
+            $berita = $this->findBeritaById($id);
 
             if (!$berita) {
                 return redirect()->route('admin.berita.index')->with('error', 'Berita tidak ditemukan.');
@@ -154,5 +147,17 @@ class BeritaController extends Controller
         }
 
         $request->validate($rules);
+    }
+
+    private function findBeritaById($id)
+    {
+        return HeadlineBerita::find($id) ?? OtherBerita::find($id);
+    }
+
+    private function getAllBerita()
+    {
+        $headlineBerita = HeadlineBerita::all();
+        $otherBerita = OtherBerita::all();
+        return $headlineBerita->merge($otherBerita);
     }
 }

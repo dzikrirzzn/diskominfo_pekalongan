@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class AccessLog extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['page', 'accessed_at'];
 }

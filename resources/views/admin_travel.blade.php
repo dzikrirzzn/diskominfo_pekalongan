@@ -68,9 +68,15 @@
                                     required>
                             </div>
                             <div class="mb-4">
-                                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image:</label>
-                                <input type="file" id="image" name="image"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Gambar :</label>
+                                <div class="flex items-center">
+                                    <label for="image"
+                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer">
+                                        Pilih File
+                                    </label>
+                                    <span id="file-chosen" class="ml-2 text-gray-700">No file chosen</span>
+                                </div>
+                                <input type="file" id="image" name="image" class="hidden">
                             </div>
                             <div class="mb-4">
                                 <label for="map" class="block text-gray-700 text-sm font-bold mb-2">Map:</label>
@@ -96,7 +102,14 @@
                 dateFormat: 'yy-mm-dd'
             });
         });
-        // CKEDITOR.replace('isi');
+        CKEDITOR.replace('isi');
+
+        const imageInput = document.getElementById('image');
+        const fileChosen = document.getElementById('file-chosen');
+
+        imageInput.addEventListener('change', function() {
+            fileChosen.textContent = this.files[0].name;
+        });
         </script>
     </x-app-layout>
 

@@ -14,17 +14,14 @@ return new class extends Migration
     Schema::create('access_logs', function (Blueprint $table) {
         $table->id();
         $table->string('page');
-        $table->integer('access_count')->default(1);
+        $table->timestamp('accessed_at');
         $table->timestamps();
     });
 }
 
+public function down()
+{
+    Schema::dropIfExists('access_logs');
+}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('access_logs');
-    }
 };
