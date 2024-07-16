@@ -27,7 +27,7 @@
         class="fixed w-full z-50 py-2 transition-transform duration-500 ease-in-out">
         <div class="container mx-auto flex justify-between items-center flex-wrap">
             <a href="{{ route('home') }}">
-                <div class="text-black font-bold flex items-center">
+                <div class="text-black font-bold flex items-center mt-1 ms-12">
                     <img src="{{ asset('img/logopkl.png') }}" alt="Logo" class="h-10 mr-2">
                     <div class="flex flex-col">
                         <div class="text-xs">Pemerintah</div>

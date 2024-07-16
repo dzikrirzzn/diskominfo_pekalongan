@@ -96,7 +96,7 @@
                 dateFormat: 'yy-mm-dd'
             });
         });
-        CKEDITOR.replace('isi');
+        // CKEDITOR.replace('isi');
         </script>
     </x-app-layout>
 
