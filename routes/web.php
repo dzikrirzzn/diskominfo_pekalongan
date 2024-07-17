@@ -53,9 +53,16 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/berita', [BeritaController::class, 'index'])->name('berita.listberita');
+Route::get('/berita/listberita', [BeritaController::class, 'index'])->name('berita.listberita');
 Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
 Route::post('/berita', [BeritaController::class, 'store'])->name('berita.store');
+
+Route::get('/admin/berita', [BeritaController::class, 'adminIndex'])->name('admin.berita.index');
+Route::get('/admin/berita/create', [BeritaController::class, 'create'])->name('admin.berita.create');
+Route::post('/admin/berita/store', [BeritaController::class, 'store'])->name('admin.berita.store');
+Route::get('/admin/berita/{id}/edit', [BeritaController::class, 'edit'])->name('admin.berita.edit');
+Route::put('/admin/berita/{id}', [BeritaController::class, 'update'])->name('admin.berita.update');
+Route::delete('/admin/berita/{id}', [BeritaController::class, 'destroy'])->name('admin.berita.destroy');
 
 Route::get('/pengumuman/create', [PengumumanController::class, 'create'])->name('pengumuman.create');
 Route::post('/pengumuman', [PengumumanController::class, 'store'])->name('pengumuman.store');
@@ -92,4 +99,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

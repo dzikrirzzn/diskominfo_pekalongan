@@ -49,14 +49,12 @@
     @include('layouts.navbarhome')
     <!-- Rest of your page content -->
 
-    <main class="flex-1 relative z-0 pt-4 md:pt-8 lg:pt-16 mt-16">
-        <div class="flex flex-col lg:flex-row h-auto lg:h-[92vh]">
+    <main class="flex-1 relative z-0 pt-16">
+        <div class="flex flex-col lg:flex-row h-[92vh]">
             <!-- Left side (yellow section) -->
-            <div class="transform scale-100 md:scale-110 lg:scale-125 relative lg:w-6/12 bg-yellow-500 text-white p-6 md:p-12 lg:p-24 flex flex-col justify-start z-10"
-                style="clip-path: ellipse(100% 100% at 0% 50%);">
-                <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-8">Welcome to<br>City of<br>Pekalongan
-                </h1>
-                <p class="mb-4 md:mb-8 text-lg md:text-xl lg:text-2xl">World City of Batik</p>
+            <div class="w-full lg:w-1/2 bg-yellow-500 text-white p-12 lg:p-24 flex flex-col justify-center half-circle">
+                <h1 class="text-5xl lg:text-6xl font-bold mb-8">Welcome to<br>City of<br>Pekalongan</h1>
+                <p class="mb-8 text-xl lg:text-2xl">World City of Batik</p>
                 <div class="relative">
                     <input type="text" placeholder="How can we help?"
                         class="w-full p-3 md:p-4 pr-12 rounded-full text-black text-lg md:text-xl">
@@ -70,13 +68,11 @@
                 </div>
             </div>
             <!-- Right side (image) -->
-            <div class="relative w-full lg:w-6/12 flex items-center justify-end lg:h-auto z-0">
+            <div class="w-full lg:w-1/2 relative">
                 <img src="{{ asset('img/pemkot.png') }}" alt="foto wali dan walikota pekalongan"
                     class="absolute w-full h-full object-cover">
             </div>
         </div>
-        <!-- carousel travel -->
-<div class="mx-48 mt-20 mb-4">
         <div class="relative py-4 md:py-8 bg-no-repeat bg-left-top">
         <div class="relative w-full max-w-6xl mx-auto my-4 md:my-8" x-data="{
     activeSlide: 1,
@@ -240,22 +236,28 @@
 <div class=" mx-16  mt-10 mb-24">
         <div class="container mx-auto py-8 px-4">
             <h1 class="text-2xl font-bold mb-6 text-black">Galeri Kota Pekalongan</h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                @foreach($galleries as $gallery)
-                <div class="relative group rounded-lg overflow-hidden shadow-md">
-                    <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}"
-                        class="w-full h-32 object-cover">
-                    <div class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach($galleries as $gallery)
+                    <div class="swiper-slide">
+                        <div class="relative group rounded-lg overflow-hidden shadow-md">
+                            <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}"
+                                class="w-full h-32 object-cover">
+                            <div
+                                class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
+                            </div>
+                            <div
+                                class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
+                                {{ $gallery->title }}
+                            </div>
+                        </div>
                     </div>
-                    <div
-                        class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
-                        {{ $gallery->title }}
-                    </div>
+                    @endforeach
                 </div>
-                @endforeach
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
             </div>
         </div>
-    </div>
 
     <!-- Include Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -289,74 +291,112 @@
     });
     </script>
 
-       
-    <!-- Kalender Acara -->
-<div class="container mx-auto p-2 lg:p-4 relative mt-8 mb-6">
-    <div class="flex flex-col lg:flex-row lg:space-x-4">
-        <!-- Background Half -->
-        <div class="absolute top-0 left-0 w-full h-2/3 bg-yellow-500 bg-opacity-75 rounded-lg z-0"></div>
 
-        <!-- Left Column -->
-        <div class="flex flex-col lg:w-1/2 space-y-4 relative z-10">
-            <!-- Kalender Text -->
-            <div class="text-2xl font-bold text-gray-700">Kalender Acara</div>
-            <!-- Calendar Section -->
-            <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 mt-2">
-                <div class="flex items-center justify-between mb-2">
-                    <button class="focus:outline-none">
-                        <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                        </svg>
-                    </button>
-                    <h2 class="text-lg font-bold text-gray-700">April 2024</h2>
-                    <button class="focus:outline-none">
-                        <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </button>
+        <div
+            class="container mx-auto p-4 flex flex-col lg:flex-row lg:justify-between space-y-4 lg:space-y-0 lg:space-x-4">
+            <div class="flex flex-col space-y-4 w-full lg:w-1/3">
+                <!-- Top placeholder image -->
+                <div
+                    class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex items-center justify-center h-48">
+                    <span class="text-gray-500">Top Placeholder Image</span>
                 </div>
-                <div class="grid grid-cols-7 gap-2 text-center text-gray-700">
-                    <div>Mon</div>
-                    <div>Tue</div>
-                    <div>Wed</div>
-                    <div>Thu</div>
-                    <div>Fri</div>
-                    <div>Sat</div>
-                    <div>Sun</div>
-                    <!-- Repeat for days of the month -->
-                    <div class="col-span-7 border-t border-gray-300"></div>
-                    <div class="py-1">1</div>
-                    <div class="py-1">2</div>
-                    <div class="py-1">3</div>
-                    <div class="py-1">4</div>
-                    <div class="py-1">5</div>
-                    <div class="py-1">6</div>
-                    <div class="py-1">7</div>
-                    <div class="py-1">8</div>
-                    <div class="py-1">9</div>
-                    <div class="py-1">10</div>
-                    <div class="py-1 bg-yellow-300 rounded-full">11</div>
-                    <div class="py-1">12</div>
-                    <div class="py-1">13</div>
-                    <div class="py-1">14</div>
-                    <div class="py-1">15</div>
-                    <div class="py-1">16</div>
-                    <div class="py-1">17</div>
-                    <div class="py-1">18</div>
-                    <div class="py-1">19</div>
-                    <div class="py-1">20</div>
-                    <div class="py-1">21</div>
-                    <div class="py-1">22</div>
-                    <div class="py-1 bg-yellow-300 rounded-full">23</div>
-                    <div class="py-1 bg-yellow-300 rounded-full">24</div>
-                    <div class="py-1">25</div>
-                    <div class="py-1 bg-yellow-300 rounded-full">26</div>
-                    <div class="py-1">27</div>
-                    <div class="py-1">28</div>
-                    <div class="py-1">29</div>
-                    <div class="py-1 bg-yellow-300 rounded-full">30</div>
+                <!-- Bottom Kominfo widget -->
+                <div
+                    class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex items-center justify-center h-48">
+                    <div id="gpr-kominfo-widget-container"></div>
+                    <script src="https://widget.kominfo.go.id/gpr-widget-kominfo.min.js" async></script>
                 </div>
             </div>
+            <!-- Twitter feed for @pemkotpkl -->
+            <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-1/3 h-96 overflow-hidden">
+                <div class="font-bold mb-4">Postingan dari @pemkotpkl</div>
+                <div class="h-full overflow-y-scroll">
+                    <a class="twitter-timeline" href="https://twitter.com/pemkotpkl" data-tweet-limit="5">Tweets by
+                        Pemkot
+                        Pekalongan</a>
+                </div>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+            <!-- Twitter feed for @officialbatiktv -->
+            <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full lg:w-1/3 h-96 overflow-hidden">
+                <div class="font-bold mb-4">Postingan dari @officialbatiktv</div>
+                <div class="h-full overflow-y-scroll">
+                    <a class="twitter-timeline" href="https://twitter.com/officialbatiktv" data-tweet-limit="5">Tweets
+                        by BATIK TV</a>
+                </div>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+        </div>
+
+
+        <div class="container mx-auto p-2 lg:p-4 bg-yellow-500">
+            <div class="flex flex-col lg:flex-row lg:space-x-4">
+                <!-- Left Column -->
+                <div class="flex flex-col lg:w-1/2 space-y-4">
+                    <!-- Kalender Text -->
+                    <div class="text-2xl font-bold text-gray-700">Kalender Acara</div>
+
+                    <!-- Calendar Section -->
+                    <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <button class="focus:outline-none">
+                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                            </button>
+                            <h2 class="text-lg font-bold text-gray-700">April 2024</h2>
+                            <button class="focus:outline-none">
+                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-7 gap-2 text-center text-gray-700">
+                            <div>Mon</div>
+                            <div>Tue</div>
+                            <div>Wed</div>
+                            <div>Thu</div>
+                            <div>Fri</div>
+                            <div>Sat</div>
+                            <div>Sun</div>
+                            <!-- Repeat for days of the month -->
+                            <div class="col-span-7 border-t border-gray-300"></div>
+                            <div class="py-1">1</div>
+                            <div class="py-1">2</div>
+                            <div class="py-1">3</div>
+                            <div class="py-1">4</div>
+                            <div class="py-1">5</div>
+                            <div class="py-1">6</div>
+                            <div class="py-1">7</div>
+                            <div class="py-1">8</div>
+                            <div class="py-1">9</div>
+                            <div class="py-1">10</div>
+                            <div class="py-1 bg-yellow-300 rounded-full">11</div>
+                            <div class="py-1">12</div>
+                            <div class="py-1">13</div>
+                            <div class="py-1">14</div>
+                            <div class="py-1">15</div>
+                            <div class="py-1">16</div>
+                            <div class="py-1">17</div>
+                            <div class="py-1">18</div>
+                            <div class="py-1">19</div>
+                            <div class="py-1">20</div>
+                            <div class="py-1">21</div>
+                            <div class="py-1">22</div>
+                            <div class="py-1 bg-yellow-300 rounded-full">23</div>
+                            <div class="py-1 bg-yellow-300 rounded-full">24</div>
+                            <div class="py-1">25</div>
+                            <div class="py-1 bg-yellow-300 rounded-full">26</div>
+                            <div class="py-1">27</div>
+                            <div class="py-1">28</div>
+                            <div class="py-1">29</div>
+                            <div class="py-1 bg-yellow-300 rounded-full">30</div>
+                        </div>
+                    </div>
 
             <!-- Events Section -->
             <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 mt-2">

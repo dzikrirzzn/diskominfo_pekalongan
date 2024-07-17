@@ -1,23 +1,26 @@
+<!-- resources/views/admin/berita/create.blade.php -->
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Galeri</title>
+    <title>Upload Berita</title>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
 </head>
 
 <body>
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Upload Galeri') }}
+                {{ __('Upload Berita') }}
             </h2>
         </x-slot>
+
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -33,7 +36,7 @@
                             {{ session('error') }}
                         </div>
                         @endif
-                        <form method="POST" action="{{ route('galleries.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.berita.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-4">
                                 <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
@@ -78,10 +81,13 @@
                                 <input type="file" id="image" name="image" class="hidden">
                             </div>
                             <div class="mb-4">
-                                <label for="link" class="block text-gray-700 text-sm font-bold mb-2">Link:</label>
-                                <input type="url" id="link" name="link"
+                                <label for="type" class="block text-gray-700 text-sm font-bold mb-2">Type:</label>
+                                <select id="type" name="type"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     required>
+                                    <option value="kota">Berita Kota</option>
+                                    <option value="lainnya">Berita Lainnya</option>
+                                </select>
                             </div>
                             <div class="mb-4">
                                 <button type="submit"
@@ -111,7 +117,6 @@
         });
         </script>
     </x-app-layout>
-
 </body>
 
 </html>

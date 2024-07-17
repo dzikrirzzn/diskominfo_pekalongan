@@ -1,20 +1,20 @@
 <?php
 
+namespace App\Http\Middleware;
+
 use Closure;
 use Illuminate\Http\Request;
 use App\Models\AccessLog;
 
-class AccessLogMiddleware
+class LogAccess
 {
     public function handle(Request $request, Closure $next)
     {
-        $page = $request->path();
-        $accessLog = AccessLog::where('page', $page)->first();
-        
-        if ($accessLog) {
-            $accessLog->increment('access_count');
-        } else {
-            AccessLog::create(['page' => $page]);
+        if ($request->route()) {
+            AccessLog::create([
+                'page' => $request->route()->getName(),
+                'accessed_at' => now(),
+            ]);
         }
 
         return $next($request);

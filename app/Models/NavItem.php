@@ -9,14 +9,15 @@ class NavItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'url', 'is_dropdown', 'parent_id'];
+    protected $fillable = ['title', 'url', 'parent_id', 'is_dropdown'];
+
+    public function parent()
+    {
+        return $this->belongsTo(NavItem::class, 'parent_id');
+    }
 
     public function children()
     {
         return $this->hasMany(NavItem::class, 'parent_id');
-    }
-    public function parent()
-    {
-        return $this->belongsTo(NavItem::class, 'parent_id');
     }
 }

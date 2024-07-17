@@ -3,55 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gallery;
-use Illuminate\Http\Request;
 use App\Models\HeadlineBerita;
 use App\Models\Layanan;
-use App\Models\NavItem;
 use App\Models\OtherBerita;
 use App\Models\Pengumuman;
 use App\Models\TravelRecommendation;
+use Illuminate\Http\Request;
 
 class BeritaController extends Controller
 {
     public function index()
     {
-        $headlineBerita = HeadlineBerita::all();
-        $otherBerita = OtherBerita::all();
-
-        $allBerita = $headlineBerita->merge($otherBerita);
-
+        $allBerita = $this->getAllBerita();
         return view('berita.listberita', ['allBerita' => $allBerita]);
     }
 
-    // Example of the home() method in your controller
     public function home()
     {
         $headlineBerita = HeadlineBerita::latest()->get();
         $otherBerita = OtherBerita::latest()->get();
         $pengumuman = Pengumuman::all();
         $travelRecommendations = TravelRecommendation::all();
-        $layanans = Layanan::all(); // Fetch all layanan entries
+        $layanans = Layanan::all();
         $galleries = Gallery::all();
 
         return view('home', compact('headlineBerita', 'otherBerita', 'pengumuman', 'travelRecommendations', 'layanans', 'galleries'));
-
-
-
-        // return view('home', [
-        //     'headlineBerita' => $headlineBerita,
-        //     'otherBerita' => $otherBerita,
-        //     'pengumuman' => $pengumuman,
-        //     'travelRecommendations' => $travelRecommendations
-        //     'layanans' => $layanans
-        // ]);
     }
 
     public function show($id)
     {
-        $berita = HeadlineBerita::find($id) ?? OtherBerita::find($id);
+        $berita = $this->findBeritaById($id);
 
         if (!$berita) {
-            return redirect()->route('listberita')->with('error', 'Berita tidak ditemukan.');
+            return redirect()->route('berita.listberita')->with('error', 'Berita tidak ditemukan.');
         }
 
         $otherBerita = OtherBerita::latest()->take(5)->get();
@@ -61,44 +45,119 @@ class BeritaController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'title' => 'required|string|max:255',
-                'subtitle' => 'required|string|max:255',
-                'content' => 'required|string',
-                'author' => 'required|string|max:255',
-                'date' => 'required|date',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'type' => 'required|string|in:kota,lainnya',
-            ]);
+        $this->validateRequest($request);
 
-            if ($request->hasFile('image')) {
-                $imagePath = $request->file('image')->store('images', 'public');
-            }
+        try {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $data = $request->only(['title', 'subtitle', 'content', 'author', 'date']);
+            $data['image'] = $imagePath;
 
             if ($request->type == 'kota') {
-                HeadlineBerita::create([
-                    'title' => $request->title,
-                    'subtitle' => $request->subtitle,
-                    'content' => $request->content,
-                    'author' => $request->author,
-                    'date' => $request->date,
-                    'image' => $imagePath,
-                ]);
+                HeadlineBerita::create($data);
             } else {
-                OtherBerita::create([
-                    'title' => $request->title,
-                    'subtitle' => $request->subtitle,
-                    'content' => $request->content,
-                    'author' => $request->author,
-                    'date' => $request->date,
-                    'image' => $imagePath,
-                ]);
+                OtherBerita::create($data);
             }
 
             return redirect()->back()->with('success', 'Berita berhasil diupload!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupload berita: ' . $e->getMessage());
         }
+    }
+
+    public function adminIndex()
+    {
+        $allBerita = $this->getAllBerita();
+        return view('admin.berita.index', compact('allBerita'));
+    }
+
+    public function create()
+    {
+        return view('admin.berita.create');
+    }
+
+    public function edit($id)
+    {
+        $berita = $this->findBeritaById($id);
+
+        if (!$berita) {
+            return redirect()->route('admin.berita.index')->with('error', 'Berita tidak ditemukan.');
+        }
+
+        return view('admin.berita.edit', compact('berita'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validateRequest($request, false);
+
+        try {
+            $berita = $this->findBeritaById($id);
+
+            if (!$berita) {
+                return redirect()->route('admin.berita.index')->with('error', 'Berita tidak ditemukan.');
+            }
+
+            $data = $request->only(['title', 'subtitle', 'content', 'author', 'date']);
+
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('images', 'public');
+                $data['image'] = $imagePath;
+            }
+
+            $berita->update($data);
+
+            return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diperbarui!');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.berita.index')->with('error', 'Terjadi kesalahan saat memperbarui berita: ' . $e->getMessage());
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $berita = $this->findBeritaById($id);
+
+            if (!$berita) {
+                return redirect()->route('admin.berita.index')->with('error', 'Berita tidak ditemukan.');
+            }
+
+            $berita->delete();
+
+            return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus!');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.berita.index')->with('error', 'Terjadi kesalahan saat menghapus berita: ' . $e->getMessage());
+        }
+    }
+
+    private function validateRequest(Request $request, $isCreate = true)
+    {
+        $rules = [
+            'title' => 'required|string|max:255',
+            'subtitle' => 'required|string|max:255',
+            'content' => 'required|string',
+            'author' => 'required|string|max:255',
+            'date' => 'required|date',
+            'type' => 'required|string|in:kota,lainnya',
+        ];
+
+        if ($isCreate) {
+            $rules['image'] = 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+        } else {
+            $rules['image'] = 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+        }
+
+        $request->validate($rules);
+    }
+
+    private function findBeritaById($id)
+    {
+        return HeadlineBerita::find($id) ?? OtherBerita::find($id);
+    }
+
+    private function getAllBerita()
+    {
+        $headlineBerita = HeadlineBerita::all();
+        $otherBerita = OtherBerita::all();
+        return $headlineBerita->merge($otherBerita);
     }
 }

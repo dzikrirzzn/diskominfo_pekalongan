@@ -8,15 +8,17 @@
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
         "alpinejs": "^3.14.1",
-        "autoprefixer": "^10.4.2",
+        "autoprefixer": "^10.4.19",
         "axios": "^1.6.4",
         "daisyui": "^4.12.10",
+        "flowbite": "^2.4.1",
         "laravel-vite-plugin": "^1.0",
-        "postcss": "^8.4.31",
+        "postcss": "^8.4.39",
         "tailwindcss": "^3.4.4",
         "vite": "^5.3.3"
     },
     "dependencies": {
-        "swiper": "^11.1.4"
+        "swiper": "^11.1.4",
+        "vue": "^3.4.31"
     }
 }
