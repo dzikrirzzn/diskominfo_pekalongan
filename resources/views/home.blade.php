@@ -490,45 +490,31 @@
     </div>
 </div>
 
-<div class="container mx-auto p-4 flex flex-col lg:flex-row lg:justify-between space-y-8 lg:space-y-0 lg:space-x-8 mb-2"> <!-- Menambahkan margin-bottom dan space -->
+<div class="container mx-auto p-4 flex flex-col lg:flex-row lg:justify-between space-y-8 lg:space-y-0 lg:space-x-8 mb-2">
     <!-- Kominfo widget on the left -->
     <div class="flex flex-col space-y-4 w-full lg:w-1/3">
         <div class="flex items-center justify-center h-full">
-            <div id="gpr-kominfo-widget-container"></div>
+            <div id="gpr-kominfo-widget-container" class="w-full"></div>
             <script src="https://widget.kominfo.go.id/gpr-widget-kominfo.min.js" async></script>
         </div>
     </div>
     
-<!-- Container for Twitter widgets -->
-<div class="flex flex-wrap lg:flex-nowrap space-y-4 lg:space-y-0 lg:space-x-4">
-    <!-- Twitter feed for @pemkotpkl -->
-    <div class="flex flex-col space-y-4 w-full lg:w-1/2">
-        <div class="flex items-center justify-center">
-            <img src="https://pekalongankota.go.id/template/frontend/img/widget/logo-berakhlak.png" alt="Logo Berakhlak" class="max-w-full max-h-full">
-        </div>
-        <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 h-96 overflow-hidden">
-            <div class="font-bold mb-4">Postingan dari @pemkotpkl</div>
-            <div class="h-full overflow-y-scroll">
-                <a class="twitter-timeline" href="https://twitter.com/pemkotpkl" data-tweet-limit="5" data-height="400" data-width="100%">Tweets by Pemkot Pekalongan</a>
-            </div>
+    <!-- Container for Twitter widgets -->
+    <div class="flex flex-wrap lg:flex-nowrap space-y-4 lg:space-y-0 lg:space-x-4 w-full lg:w-2/3">
+        <!-- Twitter feed for @pemkotpkl -->
+        <div class="flex flex-col space-y-4 w-full lg:w-1/2">
+            <div class="font-bold mb-4 text-left">Postingan dari @pemkotpkl</div>
+            <a class="twitter-timeline" href="https://twitter.com/pemkotpkl" data-tweet-limit="5" data-height="550" data-width="100%">Tweets by Pemkot Pekalongan</a>
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
-    </div>
 
-    <!-- Twitter feed for @officialbatiktv -->
-    <div class="flex flex-col space-y-4 w-full lg:w-1/2">
-        <div class="flex items-center justify-center">
-            <img src="https://pekalongankota.go.id/template/frontend/img/widget/logo-evp.png" alt="Logo EVP" class="max-w-full max-h-full">
-        </div>
-        <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 h-96 overflow-hidden">
-            <div class="font-bold mb-4">Postingan dari @officialbatiktv</div>
-            <div class="h-full overflow-y-scroll">
-                <a class="twitter-timeline" href="https://twitter.com/officialbatiktv" data-tweet-limit="5" data-height="400" data-width="100%">Tweets by BATIK TV</a>
-            </div>
+        <!-- Twitter feed for @officialbatiktv -->
+        <div class="flex flex-col space-y-4 w-full lg:w-1/2">
+            <div class="font-bold mb-4 text-left">Postingan dari @officialbatiktv</div>
+            <a class="twitter-timeline" href="https://twitter.com/officialbatiktv" data-tweet-limit="5" data-height="550" data-width="100%">Tweets by BATIK TV</a>
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
     </div>
-</div>
 </div>
 
 <!-- Swiper JS -->
