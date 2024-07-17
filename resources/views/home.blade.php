@@ -43,6 +43,26 @@
     cursor: grab;
 }
 
+.swiper-slide {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+.gallery-item {
+    margin-bottom: 10px;
+    max-width: 100%;
+}
+
+.swiper-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 </style>
 
 <body class="flex flex-col min-h-screen bg-white">
@@ -240,40 +260,58 @@
 
 
 <!-- Galeri -->
-<div class=" mx-16  mt-10 mb-24">
+<div class="mx-4 md:mx-16 mt-10 mb-24">
         <div class="container mx-auto py-8 px-4">
             <h1 class="text-2xl font-bold mb-6 text-black">Galeri Kota Pekalongan</h1>
-            <div class="swiper-container">
+
+            <!-- First Carousel -->
+            <div class="swiper-container first-carousel">
                 <div class="swiper-wrapper">
                     @foreach($galleries as $gallery)
                     <div class="swiper-slide">
-                        <div class="relative group rounded-lg overflow-hidden shadow-md">
-                            <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}"
-                                class="w-full h-32 object-cover">
-                            <div
-                                class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
-                            </div>
-                            <div
-                                class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
+                        <div class="gallery-item relative group rounded-lg overflow-hidden shadow-md">
+                            <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}" class="w-full h-32 object-cover">
+                            <div class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300"></div>
+                            <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
                                 {{ $gallery->title }}
                             </div>
                         </div>
                     </div>
                     @endforeach
                 </div>
+                <div class="swiper-pagination"></div>
+            </div>
+
+            <!-- Second Carousel -->
+            <div class="swiper-container second-carousel mt-10">
+                <div class="swiper-wrapper">
+                    @foreach($galleries as $gallery)
+                    <div class="swiper-slide">
+                        <div class="gallery-item relative group rounded-lg overflow-hidden shadow-md">
+                            <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}" class="w-full h-32 object-cover">
+                            <div class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300"></div>
+                            <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
+                                {{ $gallery->title }}
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="swiper-pagination"></div>
             </div>
         </div>
-        </div>
+    </div>
 
-        <!-- Include Swiper JS -->
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- Include Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-        <!-- Initialize Swiper -->
-        <script>
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 2,
+    <!-- Initialize Swiper -->
+    <script>
+        var firstSwiper = new Swiper('.first-carousel', {
+            slidesPerView: 1,
+            slidesPerColumn: 2,
             spaceBetween: 10,
-            slidesPerGroup: 2,
+            slidesPerGroup: 1,
             loop: true,
             loopFillGroupWithBlank: true,
             pagination: {
@@ -281,23 +319,60 @@
                 clickable: true,
             },
             breakpoints: {
-                // when window width is >= 640px
                 640: {
-                    slidesPerView: 3,
-                    slidesPerGroup: 3,
+                    slidesPerView: 2,
+                    slidesPerColumn: 2,
+                    slidesPerGroup: 2,
                     spaceBetween: 20
                 },
-                // when window width is >= 768px
                 768: {
-                    slidesPerView: 4,
-                    slidesPerGroup: 4,
+                    slidesPerView: 3,
+                    slidesPerColumn: 2,
+                    slidesPerGroup: 3,
                     spaceBetween: 30
+                },
+                1024: {
+                    slidesPerView: 4,
+                    slidesPerColumn: 2,
+                    slidesPerGroup: 4,
+                    spaceBetween: 40
                 }
             }
         });
-        </script>
 
-
+        var secondSwiper = new Swiper('.second-carousel', {
+            slidesPerView: 1,
+            slidesPerColumn: 2,
+            spaceBetween: 10,
+            slidesPerGroup: 1,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    slidesPerColumn: 2,
+                    slidesPerGroup: 2,
+                    spaceBetween: 20
+                },
+                768: {
+                    slidesPerView: 3,
+                    slidesPerColumn: 2,
+                    slidesPerGroup: 3,
+                    spaceBetween: 30
+                },
+                1024: {
+                    slidesPerView: 4,
+                    slidesPerColumn: 2,
+                    slidesPerGroup: 4,
+                    spaceBetween: 40
+                }
+            }
+        });
+    </script>
        
     <!-- Kalender Acara -->
 <div class="container mx-auto p-2 lg:p-4 relative mt-8 mb-6">
