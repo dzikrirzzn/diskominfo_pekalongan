@@ -2,102 +2,112 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TravelRecommendation;
 use Illuminate\Http\Request;
+use App\Models\TravelRecommendation;
 
 class TravelRecommendationController extends Controller
 {
     public function index()
     {
         $travelRecommendations = TravelRecommendation::all();
-        return view('home', compact('travelRecommendations'));
+        return view('admin.travel.index', compact('travelRecommendations'));
+    }
+
+    public function adminIndex()
+    {
+        $allTravel = TravelRecommendation::all();
+        return view('admin.travel.index', compact('allTravel'));
     }
 
     public function create()
     {
-        return view('travel_recommendations.create');
+        return view('admin.travel.create');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'judul' => 'required',
-            'sub_judul' => 'required',
-            'isi' => 'required',
-            'map' => 'required',
-            'author' => 'required',
-            'date' => 'required|date',
-        ]);
+        $this->validateRequest($request);
 
-        $travelRecommendation = new TravelRecommendation();
+        try {
+            $travelRecommendation = new TravelRecommendation();
 
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public');
-            $travelRecommendation->image = $imagePath;
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('images', 'public');
+                $travelRecommendation->image = $imagePath;
+            }
+
+            $travelRecommendation->judul = $request->judul;
+            $travelRecommendation->sub_judul = $request->sub_judul;
+            $travelRecommendation->isi = $request->isi;
+            $travelRecommendation->map_location = $request->map_location;
+            $travelRecommendation->author = $request->author;
+            $travelRecommendation->date = $request->date;
+
+            $travelRecommendation->save();
+
+            return redirect()->route('admin.travel.index')->with('success', 'Travel Recommendation uploaded successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to upload travel recommendation: ' . $e->getMessage());
         }
-
-        $travelRecommendation->judul = $request->judul;
-        $travelRecommendation->sub_judul = $request->sub_judul;
-        $travelRecommendation->isi = $request->isi;
-        $travelRecommendation->map = $request->map;
-        $travelRecommendation->author = $request->author;
-        $travelRecommendation->date = $request->date;
-
-        $travelRecommendation->save();
-
-        return redirect()->back()->with('success', 'Travel berhasil diupload!');
-
-    }
-
-    public function show($id)
-    {
-        $travelRecommendation = TravelRecommendation::findOrFail($id);
-        return view('travel_recommendations.show', compact('travelRecommendation'));
     }
 
     public function edit($id)
     {
         $travelRecommendation = TravelRecommendation::findOrFail($id);
-        return view('admin.travel_recommendations.edit', compact('travelRecommendation'));
+        return view('admin.travel.edit', compact('travelRecommendation'));
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     $request->validate([
-    //         'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    //         'judul' => 'required',
-    //         'sub_judul' => 'required',
-    //         'isi' => 'required',
-    //         'map' => 'required',
-    //         'author' => 'required',
-    //         'date' => 'required|date',
-    //     ]);
+    public function update(Request $request, $id)
+    {
+        $this->validateRequest($request);
 
-    //     $travelRecommendation = TravelRecommendation::findOrFail($id);
+        try {
+            $travelRecommendation = TravelRecommendation::findOrFail($id);
 
-    //     if ($request->hasFile('image')) {
-    //         $imagePath = $request->file('image')->store('images', 'public');
-    //         $travelRecommendation->image = $imagePath;
-    //     }
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('images', 'public');
+                $travelRecommendation->image = $imagePath;
+            }
 
-    //     $travelRecommendation->judul = $request->judul;
-    //     $travelRecommendation->sub_judul = $request->sub_judul;
-    //     $travelRecommendation->isi = $request->isi;
-    //     $travelRecommendation->map = $request->map;
-    //     $travelRecommendation->author = $request->author;
-    //     $travelRecommendation->date = $request->date;
+            $travelRecommendation->judul = $request->judul;
+            $travelRecommendation->sub_judul = $request->sub_judul;
+            $travelRecommendation->isi = $request->isi;
+            $travelRecommendation->map_location = $request->map_location;
+            $travelRecommendation->author = $request->author;
+            $travelRecommendation->date = $request->date;
 
-    //     $travelRecommendation->save();
+            $travelRecommendation->save();
 
-    //     return redirect()->route('admin_travel')->with('success', 'Travel Recommendation updated successfully.');
-    // }
+            return redirect()->route('admin.travel.index')->with('success', 'Travel Recommendation updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to update travel recommendation: ' . $e->getMessage());
+        }
+    }
 
     public function destroy($id)
     {
-        $travelRecommendation = TravelRecommendation::findOrFail($id);
-        $travelRecommendation->delete();
+        try {
+            $travelRecommendation = TravelRecommendation::findOrFail($id);
+            $travelRecommendation->delete();
 
-        return redirect()->route('admin_travel')->with('success', 'Travel Recommendation deleted successfully.');
+            return redirect()->route('admin.travel.index')->with('success', 'Travel Recommendation deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to delete travel recommendation: ' . $e->getMessage());
+        }
+    }
+
+    private function validateRequest(Request $request)
+    {
+        $rules = [
+            'judul' => 'required|string|max:255',
+            'sub_judul' => 'required|string|max:255',
+            'isi' => 'required|string',
+            'map_location' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'date' => 'required|date',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ];
+
+        $request->validate($rules);
     }
 }
