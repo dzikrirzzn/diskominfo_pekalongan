@@ -8,31 +8,18 @@ export default {
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
     ],
-
+    
     theme: {
         extend: {
             colors: {
-                customYellow: '#998560',
+                customYellow: '#C68D2E',
+            },
+            fontSize: {
+                'xxs': '0.625rem', // Tambahkan ukuran font baru
             },
             variants: {
                 scrollbar: ["rounded"],
             },
-            plugins: [
-                function ({ addUtilities }) {
-                    addUtilities({
-                        ".scrollbar-hide": {
-                            "::-webkit-scrollbar": {
-                                display: "none",
-                            },
-                            "-ms-overflow-style": "none",
-                            "scrollbar-width": "none",
-                        },
-                        ".text-justify": {
-                            "text-align": "justify",
-                        },
-                    });
-                },
-            ],
             fontFamily: {
                 sans: ['Poppins', "Figtree", ...defaultTheme.fontFamily.sans],
             },
@@ -41,5 +28,27 @@ export default {
             },
         },
     },
-    plugins: [require("daisyui"), forms],
+    
+    plugins: [
+        require("daisyui"),
+        forms,
+        function ({ addUtilities }) {
+            addUtilities({
+                ".scrollbar-hide": {
+                    "::-webkit-scrollbar": {
+                        display: "none",
+                    },
+                    "-ms-overflow-style": "none",
+                    "scrollbar-width": "none",
+                },
+                ".text-justify": {
+                    "text-align": "justify",
+                },
+                ".placeholder-lg::placeholder": {
+                    "font-size": "1.25rem", // Atur ukuran placeholder
+                    "color": "#000", // Atur warna placeholder jika diperlukan
+                },
+            });
+        },
+    ],
 };
