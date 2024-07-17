@@ -309,154 +309,155 @@
         </div>
 
         <!-- Kalender Acara -->
-        <div class="container mx-auto p-2 lg:p-4 relative mt-8 mb-6">
-            <div class="flex flex-col lg:flex-row lg:space-x-4">
-                <!-- Background Half -->
-                <div class="absolute top-0 left-0 w-full h-2/3 bg-yellow-500 bg-opacity-75 rounded-lg z-0"></div>
+        <div class="container mx-auto p-2 lg:p-4 relative mt-8 mb-6 overflow-hidden">
+            <!-- Background kuning yang memenuhi lebar layar -->
+            <div
+                class="absolute top-0 left-1/2 transform -translate-x-1/2 w-screen h-2/3 bg-yellow-500 bg-opacity-75 z-0">
+            </div>
 
-                <!-- Left Column -->
-                <div class="flex flex-col lg:w-1/2 space-y-4 relative z-10">
-                    <!-- Kalender Text -->
-                    <div class="text-2xl font-bold text-gray-700">Kalender Acara</div>
-                    <!-- Calendar Section -->
-                    <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 mt-2">
-                        <div class="flex items-center justify-between mb-2">
-                            <button class="focus:outline-none">
-                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 19l-7-7 7-7"></path>
-                                </svg>
-                            </button>
-                            <h2 class="text-lg font-bold text-gray-700">April 2024</h2>
-                            <button class="focus:outline-none">
-                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5l7 7-7 7"></path>
-                                </svg>
-                            </button>
+            <!-- Wrapper untuk konten -->
+            <div class="relative z-10">
+                <div class="flex flex-col lg:flex-row lg:space-x-4">
+                    <!-- Left Column -->
+                    <div class="flex flex-col lg:w-1/2 space-y-4">
+                        <!-- Kalender Text -->
+                        <div class="text-2xl font-bold text-gray-700">Kalender Acara</div>
+                        <!-- Calendar Section -->
+                        <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 mt-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <button class="focus:outline-none">
+                                    <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 19l-7-7 7-7"></path>
+                                    </svg>
+                                </button>
+                                <h2 class="text-lg font-bold text-gray-700">April 2024</h2>
+                                <button class="focus:outline-none">
+                                    <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="grid grid-cols-7 gap-2 text-center text-gray-700">
+                                <div>Mon</div>
+                                <div>Tue</div>
+                                <div>Wed</div>
+                                <div>Thu</div>
+                                <div>Fri</div>
+                                <div>Sat</div>
+                                <div>Sun</div>
+                                <div class="col-span-7 border-t border-gray-300"></div>
+                                <div class="py-1">1</div>
+                                <div class="py-1">2</div>
+                                <div class="py-1">3</div>
+                                <div class="py-1">4</div>
+                                <div class="py-1">5</div>
+                                <div class="py-1">6</div>
+                                <div class="py-1">7</div>
+                                <div class="py-1">8</div>
+                                <div class="py-1">9</div>
+                                <div class="py-1">10</div>
+                                <div class="py-1 bg-yellow-300 rounded-full">11</div>
+                                <div class="py-1">12</div>
+                                <div class="py-1">13</div>
+                                <div class="py-1">14</div>
+                                <div class="py-1">15</div>
+                                <div class="py-1">16</div>
+                                <div class="py-1">17</div>
+                                <div class="py-1">18</div>
+                                <div class="py-1">19</div>
+                                <div class="py-1">20</div>
+                                <div class="py-1">21</div>
+                                <div class="py-1">22</div>
+                                <div class="py-1 bg-yellow-300 rounded-full">23</div>
+                                <div class="py-1 bg-yellow-300 rounded-full">24</div>
+                                <div class="py-1">25</div>
+                                <div class="py-1 bg-yellow-300 rounded-full">26</div>
+                                <div class="py-1">27</div>
+                                <div class="py-1">28</div>
+                                <div class="py-1">29</div>
+                                <div class="py-1 bg-yellow-300 rounded-full">30</div>
+                            </div>
                         </div>
-                        <div class="grid grid-cols-7 gap-2 text-center text-gray-700">
-                            <div>Mon</div>
-                            <div>Tue</div>
-                            <div>Wed</div>
-                            <div>Thu</div>
-                            <div>Fri</div>
-                            <div>Sat</div>
-                            <div>Sun</div>
-                            <!-- Repeat for days of the month -->
-                            <div class="col-span-7 border-t border-gray-300"></div>
-                            <div class="py-1">1</div>
-                            <div class="py-1">2</div>
-                            <div class="py-1">3</div>
-                            <div class="py-1">4</div>
-                            <div class="py-1">5</div>
-                            <div class="py-1">6</div>
-                            <div class="py-1">7</div>
-                            <div class="py-1">8</div>
-                            <div class="py-1">9</div>
-                            <div class="py-1">10</div>
-                            <div class="py-1 bg-yellow-300 rounded-full">11</div>
-                            <div class="py-1">12</div>
-                            <div class="py-1">13</div>
-                            <div class="py-1">14</div>
-                            <div class="py-1">15</div>
-                            <div class="py-1">16</div>
-                            <div class="py-1">17</div>
-                            <div class="py-1">18</div>
-                            <div class="py-1">19</div>
-                            <div class="py-1">20</div>
-                            <div class="py-1">21</div>
-                            <div class="py-1">22</div>
-                            <div class="py-1 bg-yellow-300 rounded-full">23</div>
-                            <div class="py-1 bg-yellow-300 rounded-full">24</div>
-                            <div class="py-1">25</div>
-                            <div class="py-1 bg-yellow-300 rounded-full">26</div>
-                            <div class="py-1">27</div>
-                            <div class="py-1">28</div>
-                            <div class="py-1">29</div>
-                            <div class="py-1 bg-yellow-300 rounded-full">30</div>
+
+                        <!-- Events Section -->
+                        <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 mt-2">
+                            <ul class="space-y-2">
+                                <li class="flex items-start space-x-2">
+                                    <div class="flex-shrink-0">
+                                        <div
+                                            class="bg-black text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
+                                            <span class="text-lg font-bold">24</span>
+                                            <span class="text-xs">SEP</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-md font-semibold">EXHIBITION</h3>
+                                        <p class="text-gray-600 text-sm">Here Today: Posters from 120 SPE, Los Angeles
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <div class="flex-shrink-0">
+                                        <div
+                                            class="bg-black text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
+                                            <span class="text-lg font-bold">25</span>
+                                            <span class="text-xs">SEP</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-md font-semibold">SEMINAR</h3>
+                                        <p class="text-gray-600 text-sm">HPC-AI Summer Seminar Series - "AI for Social
+                                            Good" - Leveraging AI to Solve Problems for Human Kind</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <div class="flex-shrink-0">
+                                        <div
+                                            class="bg-black text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
+                                            <span class="text-lg font-bold">26</span>
+                                            <span class="text-xs">SEP</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-md font-semibold">LECTURE</h3>
+                                        <p class="text-gray-600 text-sm">Webinar: Presenting and Managing Migraines
+                                            Without Chemical Treatment</p>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
 
-                    <!-- Events Section -->
-                    <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 mt-2">
-                        <ul class="space-y-2">
-                            <li class="flex items-start space-x-2">
-                                <div class="flex-shrink-0">
-                                    <div
-                                        class="bg-black text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
-                                        <span class="text-lg font-bold">24</span>
-                                        <span class="text-xs">SEP</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h3 class="text-md font-semibold">EXHIBITION</h3>
-                                    <p class="text-gray-600 text-sm">Here Today: Posters from 120 SPE, Los Angeles
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="flex items-start space-x-2">
-                                <div class="flex-shrink-0">
-                                    <div
-                                        class="bg-black text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
-                                        <span class="text-lg font-bold">25</span>
-                                        <span class="text-xs">SEP</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h3 class="text-md font-semibold">SEMINAR</h3>
-                                    <p class="text-gray-600 text-sm">HPC-AI Summer Seminar Series - "AI for Social
-                                        Good"
-                                        - Leveraging AI to Solve Problems for Human Kind</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start space-x-2">
-                                <div class="flex-shrink-0">
-                                    <div
-                                        class="bg-black text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
-                                        <span class="text-lg font-bold">26</span>
-                                        <span class="text-xs">SEP</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h3 class="text-md font-semibold">LECTURE</h3>
-                                    <p class="text-gray-600 text-sm">Webinar: Presenting and Managing Migraines
-                                        Without
-                                        Chemical Treatment</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Right Column -->
-                <div class="lg:w-1/2 mt-8 lg:mt-0 lg:flex lg:flex-col relative z-10">
-                    <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex-grow">
-                        <img src="https://via.placeholder.com/150" alt="Event Image"
-                            class="w-full h-64 object-cover rounded-md mb-4">
-                        <h2 class="text-xl font-bold mb-2">PERIKLINDO ELECTRIC VEHICLE SHOW (PEVS) 2024</h2>
-                        <p class="text-gray-700 text-sm mb-2">
-                            Jakarta International Expo Kemayoran, 30 April - 5 Mei 2024
-                        </p>
-                        <p class="text-gray-700 text-sm mb-2">
-                            Perkumpulan Industri Kendaraan Listrik Indonesia (PERIKLINDO) bersama Dyandra Promosindo
-                            akan kembali menyelenggarakan pameran mobil listrik dan otomotif turunannya PERIKLINDO
-                            Electric Vehicle Show (PEVS) 2024. PEVS hadir sebagai wadah untuk menggencarkan
-                            kendaraan
-                            listrik di Indonesia. Acara ini diharapkan dapat memberikan peluang bagi pengunjung
-                            untuk
-                            mendapatkan wawasan mendalam tentang tren terbaru dalam kendaraan listrik, solusi
-                            pengisian
-                            daya, dan berbagai aspek terkait lainnya.
-                        </p>
-                        <a href="#" class="text-blue-500 text-sm hover:underline">Selengkapnya...</a>
+                    <!-- Right Column -->
+                    <div class="lg:w-1/2 mt-8 lg:mt-0 lg:flex lg:flex-col">
+                        <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex-grow">
+                            <img src="https://via.placeholder.com/150" alt="Event Image"
+                                class="w-full h-64 object-cover rounded-md mb-4">
+                            <h2 class="text-xl font-bold mb-2">PERIKLINDO ELECTRIC VEHICLE SHOW (PEVS) 2024</h2>
+                            <p class="text-gray-700 text-sm mb-2">
+                                Jakarta International Expo Kemayoran, 30 April - 5 Mei 2024
+                            </p>
+                            <p class="text-gray-700 text-sm mb-2">
+                                Perkumpulan Industri Kendaraan Listrik Indonesia (PERIKLINDO) bersama Dyandra Promosindo
+                                akan kembali menyelenggarakan pameran mobil listrik dan otomotif turunannya PERIKLINDO
+                                Electric Vehicle Show (PEVS) 2024. PEVS hadir sebagai wadah untuk menggencarkan
+                                kendaraan
+                                listrik di Indonesia. Acara ini diharapkan dapat memberikan peluang bagi pengunjung
+                                untuk
+                                mendapatkan wawasan mendalam tentang tren terbaru dalam kendaraan listrik, solusi
+                                pengisian
+                                daya, dan berbagai aspek terkait lainnya.
+                            </p>
+                            <a href="#" class="text-blue-500 text-sm hover:underline">Selengkapnya...</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <!-- Layanan Kota Pekalongan -->
         <div class=" mx-10  mt-12 mb-20">
             <div class="container mx-auto py-8 px-4">
@@ -610,6 +611,7 @@
         L.marker([-6.8883, 109.6753]).addTo(map)
             .bindPopup('Kota Pekalongan')
             .openPopup();
+
 
         document.getElementById('focusButton').addEventListener('click', () => {
             map.setView([-6.8883, 109.6753], 13);
