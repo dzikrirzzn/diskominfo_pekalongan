@@ -11,5 +11,5 @@ class TravelRecommendation extends Model
 
     protected $table = 'travel_recommendations';
 
-    protected $fillable = ['image', 'judul', 'sub_judul', 'isi', 'map', 'author', 'date'];
+    protected $fillable = ['image', 'judul', 'sub_judul', 'isi', 'map_location', 'author', 'date'];
 }

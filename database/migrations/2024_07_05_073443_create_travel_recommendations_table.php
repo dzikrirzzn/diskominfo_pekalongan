@@ -14,7 +14,7 @@ class CreateTravelRecommendationsTable extends Migration
             $table->string('judul');
             $table->string('sub_judul');
             $table->text('isi');
-            $table->string('map');
+            $table->string('map_location');
             $table->string('author');
             $table->date('date');
             $table->timestamps();

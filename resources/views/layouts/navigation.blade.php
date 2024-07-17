@@ -18,10 +18,11 @@
                     <x-nav-link :href="route('admin.berita.index')" :active="request()->routeIs('admin.berita.index')">
                         {{ __('Berita') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin_pengumuman')" :active="request()->routeIs('admin_pengumuman')">
+                    <x-nav-link :href="route('admin.pengumuman.index')"
+                        :active="request()->routeIs('admin.pengumuman.index')">
                         {{ __('Pengumuman') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin_travel')" :active="request()->routeIs('admin_travel')">
+                    <x-nav-link :href="route('admin.travel.index')" :active="request()->routeIs('admin.travel.index')">
                         {{ __('Travel') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin_layanan')" :active="request()->routeIs('admin_layanan')">

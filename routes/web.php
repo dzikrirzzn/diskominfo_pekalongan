@@ -68,10 +68,25 @@ Route::get('/pengumuman/create', [PengumumanController::class, 'create'])->name(
 Route::post('/pengumuman', [PengumumanController::class, 'store'])->name('pengumuman.store');
 Route::get('/pengumuman/{id}', [PengumumanController::class, 'show'])->name('pengumuman.show');
 
+
+Route::get('/admin/pengumuman', [PengumumanController::class, 'adminIndex'])->name('admin.pengumuman.index');
+Route::get('/admin/pengumuman/create', [PengumumanController::class, 'create'])->name('admin.pengumuman.create');
+Route::post('/admin/pengumuman/store', [PengumumanController::class, 'store'])->name('admin.pengumuman.store');
+Route::get('/admin/pengumuman/{id}/edit', [PengumumanController::class, 'edit'])->name('admin.pengumuman.edit');
+Route::put('/admin/pengumuman/{id}', [PengumumanController::class, 'update'])->name('admin.pengumuman.update');
+Route::delete('/admin/pengumuman/{id}', [PengumumanController::class, 'destroy'])->name('admin.pengumuman.destroy');
+
 Route::get('/travel_recommendations/create', [TravelRecommendationController::class, 'create'])->name('travel_recommendations.create');
 Route::post('/travel_recommendations', [TravelRecommendationController::class, 'store'])->name('travel_recommendations.store');
 Route::get('travel_recommendations/{id}', [TravelRecommendationController::class, 'show'])->name('travel_recommendations.show');
 Route::post('/admin/travel_recommendations', [TravelRecommendationController::class, 'store'])->name('admin.travel_recommendations.store');
+
+Route::get('/admin/travel', [TravelRecommendationController::class, 'adminIndex'])->name('admin.travel.index');
+Route::get('/admin/travel/create', [TravelRecommendationController::class, 'create'])->name('admin.travel.create');
+Route::post('/admin/travel/store', [TravelRecommendationController::class, 'store'])->name('admin.travel.store');
+Route::get('/admin/travel/{id}/edit', [TravelRecommendationController::class, 'edit'])->name('admin.travel.edit');
+Route::put('/admin/travel/{id}', [TravelRecommendationController::class, 'update'])->name('admin.travel.update');
+Route::delete('/admin/travel/{id}', [TravelRecommendationController::class, 'destroy'])->name('admin.travel.destroy');
 
 // Add Layanan routes
 Route::get('/layanans', [LayananController::class, 'index'])->name('layanans.index');
