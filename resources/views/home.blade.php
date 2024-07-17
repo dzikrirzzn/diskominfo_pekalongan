@@ -1,67 +1,53 @@
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Website Resmi Pemerintah Kota Pekalongan</title>
-        @vite('resources/css/app.css')
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-        <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-        <link rel="icon" type="image/x-icon" href="{{ asset('img/logopkl.png') }}" />
-        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Resmi Pemerintah Kota Pekalongan</title>
+    @vite('resources/css/app.css')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/logopkl.png') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
 
-    <style>
-    #map {
-        height: 400px;
-    }
-
-    #focusButton {
-        position: absolute;
-        bottom: 10px;
-        left: 10px;
-        z-index: 1000;
-        background-color: #fbbf24;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .cursor-grabbing {
-        cursor: grabbing;
-    }
-
-    .cursor-grab {
-        cursor: grab;
-    }
-
-.swiper-slide {
-    display: flex;
-    flex-direction: column;
-    max-width: 100%;
+<style>
+#map {
+    height: 400px;
 }
 
-.gallery-item {
-    margin-bottom: 10px;
-    max-width: 100%;
+#focusButton {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 1000;
+    background-color: #fbbf24;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.swiper-container {
-    width: 100%;
+.cursor-grabbing {
+    cursor: grabbing;
 }
+
+.cursor-grab {
+    cursor: grab;
+}
+
 </style>
 
-    <body class="flex flex-col min-h-screen bg-white">
-        @include('layouts.navbarhome')
-        <!-- Rest of your page content -->
+<body class="flex flex-col min-h-screen bg-white">
+    @include('layouts.navbarhome')
+    <!-- Rest of your page content -->
 
     <main class="flex-1 relative z-0 pt-4 md:pt-8 lg:pt-16 mt-16">
 
@@ -156,19 +142,19 @@
             </div>
         </div>
 
-            <script>
-            document.addEventListener('alpine:init', () => {
-                Alpine.data('navbar', () => ({
-                    isOpen: false,
-                    scrolled: false,
-                    init() {
-                        window.addEventListener('scroll', () => {
-                            this.scrolled = window.scrollY > 50;
-                        });
-                    },
-                }));
-            });
-            </script>
+        <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('navbar', () => ({
+                isOpen: false,
+                scrolled: false,
+                init() {
+                    window.addEventListener('scroll', () => {
+                        this.scrolled = window.scrollY > 50;
+                    });
+                },
+            }));
+        });
+        </script>
 
 
 <!-- Berita & Pengumuman -->
@@ -279,37 +265,37 @@
         </div>
         </div>
 
-            <!-- Include Swiper JS -->
-            <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <!-- Include Swiper JS -->
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-            <!-- Initialize Swiper -->
-            <script>
-            var swiper = new Swiper('.swiper-container', {
-                slidesPerView: 2,
-                spaceBetween: 10,
-                slidesPerGroup: 2,
-                loop: true,
-                loopFillGroupWithBlank: true,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
+        <!-- Initialize Swiper -->
+        <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 2,
+            spaceBetween: 10,
+            slidesPerGroup: 2,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                // when window width is >= 640px
+                640: {
+                    slidesPerView: 3,
+                    slidesPerGroup: 3,
+                    spaceBetween: 20
                 },
-                breakpoints: {
-                    // when window width is >= 640px
-                    640: {
-                        slidesPerView: 3,
-                        slidesPerGroup: 3,
-                        spaceBetween: 20
-                    },
-                    // when window width is >= 768px
-                    768: {
-                        slidesPerView: 4,
-                        slidesPerGroup: 4,
-                        spaceBetween: 30
-                    }
+                // when window width is >= 768px
+                768: {
+                    slidesPerView: 4,
+                    slidesPerGroup: 4,
+                    spaceBetween: 30
                 }
-            });
-            </script>
+            }
+        });
+        </script>
 
 
        
@@ -589,57 +575,73 @@ document.getElementById('focusButton').addEventListener('click', () => {
 });
 </script>
 
-        </main>
+    </main>
 
 <!-- footer -->
-    <footer class="bg-customYellow py-12 relative z-50 rounded-t-lg">
-    <div class="container mx-auto px-4 max-w-screen-lg">
-        <div class="flex flex-col md:grid md:grid-cols-3 gap-8">
-            <!-- Logo Column -->
-            <div class="flex flex-col items-start md:justify-self-start">
-                <img src="{{ asset('img/pklbunga.png') }}" alt="Logo" class="h-32 mb-6">
-                <div class="flex space-x-4 mt-4">
-                    <a href="#"><img src="{{ asset('img/fb.png') }}" alt="Facebook" class="h-8"></a>
-                    <a href="#"><img src="{{ asset('img/twt.png') }}" alt="Twitter" class="h-8"></a>
-                    <a href="#"><img src="{{ asset('img/ig.png') }}" alt="Instagram" class="h-8"></a>
-                    <a href="#"><img src="{{ asset('img/yt.png') }}" alt="YouTube" class="h-8"></a>
-                </div>
+<footer class="bg-yellow-500 py-4 relative z-50">
+    <div class="container mx-auto px-2">
+        <!-- Upper Section with Logos -->
+        <div class="mb-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center justify-center md:justify-start mb-4 md:mb-0">
+                <img src="{{ asset('img/pklbunga.png') }}" alt="Logo" class="h-36 max-w-full">
             </div>
-            <!-- Link Terkait Column -->
-            <div class="order-3 md:order-none md:text-left">
-                <h2 class="text-black font-semibold mb-6 text-xl">Link Terkait</h2>
-                <ul class="space-y-2">
-                    <li><a href="https://www.menpan.go.id/site/" class="text-black hover:text-gray-300">KEMENPAN</a></li>
-                    <li><a href="https://www.kemendagri.go.id/" class="text-black hover:text-gray-300">KEMENDAGRI</a></li>
-                    <li><a href="https://jatengprov.go.id/" class="text-black hover:text-gray-300">PEMPROV JATENG</a></li>
-                    <li><a href="http://kipjateng.jatengprov.go.id/" class="text-black hover:text-gray-300">KIP JATENG</a></li>
-                    <li><a href="https://data.go.id/" class="text-black hover:text-gray-300">PORTAL SATU DATA</a></li>
-                    <li><a href="https://pekalongankota.go.id/halaman/kebijakan-privasi.html" class="text-black hover:text-gray-300">KEBIJAKAN PRIVASI</a></li>
-                </ul>
-            </div>
-            <!-- Alamat Column -->
-            <div class="order-2 md:order-none text-left md:text-sm md:justify-self-end">
-                <h2 class="text-black font-semibold mb-4 text-xl">Alamat</h2>
-                <ul class="space-y-1">
-                    <li class="text-black flex items-center">
-                        <img src="{{ asset('img/alamat.png') }}" alt="Alamat" class="h-3 mr-1">
-                        Jl. Mataram No.1, Podosugih, Kec. Pekalongan Bar., Kota Pekalongan, Jawa Tengah 51111
-                    </li>
-                    <li class="text-black flex items-center">
-                        <img src="{{ asset('img/telp.png') }}" alt="Telepon" class="h-3 mr-1"> (0285) 421093
-                    </li>
-                    <li class="text-black flex items-center">
-                        <img src="{{ asset('img/pesan.png') }}" alt="Email" class="h-3 mr-1">
-                        <a href="mailto:setda@pekalongankota.go.id" class="hover:text-gray-300">setda@pekalongankota.go.id</a>
-                    </li>
-                </ul>
+            <div class="flex items-center space-x-2 justify-center md:justify-end">
+                <img src="https://pekalongankota.go.id/template/frontend/img/widget/logo-evp.png" alt="Logo EVP" class="h-16 max-w-full">
+                <img src="https://pekalongankota.go.id/template/frontend/img/widget/logo-berakhlak.png" alt="Logo Berakhlak" class="h-16 max-w-full">
+                <img src="https://api-pse.layanan.go.id/storage/badge/badge_643.png" alt="Logo Kominfo" class="h-16 max-w-full">
             </div>
         </div>
-        <div class="text-center mt-4 md:mt-8 text-black text-lg mb-4">
-            &copy; {{ date('Y') }} Dinas Komunikasi dan Informatika Kota Pekalongan. All Rights Reserved.
+        <!-- Middle Section with Address and Contact Info -->
+        <div class="pt-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <!-- Address Section -->
+                <div class="text-center md:text-left mb-4 md:mb-0 order-2 md:order-none w-full md:w-1/2">
+                    <h2 class="text-lg font-semibold mb-2">DISKOMINFO Kota Pekalongan</h2>
+                    <ul class="space-y-1">
+                        <li class="text-black flex items-center justify-center md:justify-start">
+                            <img src="{{ asset('img/alamat.png') }}" alt="Alamat" class="h-3 mr-1">
+                            Jl. Mataram No.1, Podosugih, Kec. Pekalongan Bar., Kota Pekalongan, Jawa Tengah 51111
+                        </li>
+                        <li class="text-black flex items-center justify-center md:justify-start">
+                            <img src="{{ asset('img/telp.png') }}" alt="Telepon" class="h-3 mr-1"> (0285) 421093
+                        </li>
+                        <li class="text-black flex items-center justify-center md:justify-start">
+                            <img src="{{ asset('img/pesan.png') }}" alt="Email" class="h-3 mr-1">
+                            <a href="mailto:setda@pekalongankota.go.id" class="hover:text-gray-300">setda@pekalongankota.go.id</a>
+                        </li>
+                    </ul>
+                    <!-- Social Media Icons -->
+                    <div class="flex justify-center md:justify-start space-x-2 mt-2">
+                        <a href="#"><img src="{{ asset('img/fb.png') }}" alt="Facebook" class="h-8"></a>
+                        <a href="#"><img src="{{ asset('img/twt.png') }}" alt="Twitter" class="h-8"></a>
+                        <a href="#"><img src="{{ asset('img/yt.png') }}" alt="YouTube" class="h-8"></a>
+                        <a href="#"><img src="{{ asset('img/ig.png') }}" alt="Instagram" class="h-8"></a>
+                    </div>
+                </div>
+                <!-- Link Terkait Section -->
+                <div class="text-center md:text-right order-1 md:order-none w-full md:w-1/2">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-4">
+                        <h2 class="text-black font-semibold mb-4 text-xl col-span-1 sm:col-span-2">Link Terkait</h2>
+                        <ul class="space-y-1">
+                            <li><a href="https://www.menpan.go.id/site/" class="text-black hover:text-gray-300">KEMENPAN</a></li>
+                            <li><a href="https://www.kemendagri.go.id/" class="text-black hover:text-gray-300">KEMENDAGRI</a></li>
+                            <li><a href="https://jatengprov.go.id/" class="text-black hover:text-gray-300">PEMPROV JATENG</a></li>
+                        </ul>
+                        <ul class="space-y-1">
+                            <li><a href="http://kipjateng.jatengprov.go.id/" class="text-black hover:text-gray-300">KIP JATENG</a></li>
+                            <li><a href="https://data.go.id/" class="text-black hover:text-gray-300">PORTAL SATU DATA</a></li>
+                            <li><a href="https://pekalongankota.go.id/halaman/kebijakan-privasi.html" class="text-black hover:text-gray-300">KEBIJAKAN PRIVASI</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Diskominfo Section -->
+        <div class="mt-4 text-center">
+            <p>&copy; {{ date('Y') }} Dinas Komunikasi dan Informatika Kota Pekalongan. All Rights Reserved.</p>
         </div>
     </div>
 </footer>
 </body>
 
-    </html>
+</html>
