@@ -50,9 +50,10 @@
     <!-- Rest of your page content -->
 
     <main class="flex-1 relative z-0 pt-4 md:pt-8 lg:pt-16 mt-16">
+
         <div class="flex flex-col lg:flex-row h-auto lg:h-[92vh]">
             <!-- Left side (yellow section) -->
-            <div class="transform scale-100 md:scale-110 lg:scale-125 relative lg:w-6/12 bg-yellow-500 text-white p-6 md:p-12 lg:p-24 flex flex-col justify-start z-10"
+            <div class="transform scale-100 md:scale-110 lg:scale-125 relative lg:w-6/12 bg-yellow-500 text-white p-6 md:p-12 lg:p-24 flex flex-col justify-start z-10 h-screen"
                 style="clip-path: ellipse(100% 100% at 0% 50%);">
                 <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-8">Welcome to<br>City of<br>Pekalongan
                 </h1>
@@ -70,11 +71,13 @@
                 </div>
             </div>
             <!-- Right side (image) -->
+             
             <div class="relative w-full lg:w-6/12 flex items-center justify-end lg:h-auto z-0">
                 <img src="{{ asset('img/pemkot.png') }}" alt="foto wali dan walikota pekalongan"
                     class="absolute w-full h-full object-cover">
             </div>
         </div>
+        
         <!-- carousel travel -->
 <div class="mx-48 mt-20 mb-4">
         <div class="relative py-4 md:py-8 bg-no-repeat bg-left-top">
