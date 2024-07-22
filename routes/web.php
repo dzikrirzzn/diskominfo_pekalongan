@@ -78,7 +78,7 @@ Route::delete('/admin/pengumuman/{id}', [PengumumanController::class, 'destroy']
 
 Route::get('/travel_recommendations/create', [TravelRecommendationController::class, 'create'])->name('travel_recommendations.create');
 Route::post('/travel_recommendations', [TravelRecommendationController::class, 'store'])->name('travel_recommendations.store');
-Route::get('travel_recommendations/{id}', [TravelRecommendationController::class, 'show'])->name('travel_recommendations.show');
+Route::get('travel/{id}', [TravelRecommendationController::class, 'show'])->name('travel.show');
 Route::post('/admin/travel_recommendations', [TravelRecommendationController::class, 'store'])->name('admin.travel_recommendations.store');
 
 Route::get('/admin/travel', [TravelRecommendationController::class, 'adminIndex'])->name('admin.travel.index');
@@ -94,10 +94,27 @@ Route::get('/layanans/create', [LayananController::class, 'create'])->name('laya
 Route::post('/layanans', [LayananController::class, 'store'])->name('layanans.store');
 Route::get('/layanans/{id}', [LayananController::class, 'show'])->name('layanans.show');
 
+Route::get('/admin/layanan', [LayananController::class, 'adminIndex'])->name('admin.layanan.index');
+Route::get('/admin/layanan/create', [LayananController::class, 'create'])->name('admin.layanan.create');
+Route::post('/admin/layanan/store', [LayananController::class, 'store'])->name('admin.layanan.store');
+Route::get('/admin/layanan/{id}/edit', [LayananController::class, 'edit'])->name('admin.layanan.edit');
+Route::put('/admin/layanan/{id}', [LayananController::class, 'update'])->name('admin.layanan.update');
+Route::delete('/admin/layanan/{id}', [LayananController::class, 'destroy'])->name('admin.layanan.destroy');
+
 Route::get('/galleries', [GalleryController::class, 'index'])->name('galleries.index');
 Route::get('/galleries/create', [GalleryController::class, 'create'])->name('galleries.create');
 Route::get('/galleries/{id}', [GalleryController::class, 'show'])->name('galleries.show');
 Route::post('/admin/galleries', [GalleryController::class, 'store'])->name('galleries.store');
+
+Route::get('admin/galeri', [GalleryController::class, 'adminIndex'])->name('admin.galeri.index');
+Route::get('admin/galeri/create', [GalleryController::class, 'create'])->name('admin.galeri.create');
+Route::post('admin/galeri', [GalleryController::class, 'store'])->name('admin.galeri.store');
+Route::get('admin/galeri/{id}/edit', [GalleryController::class, 'edit'])->name('admin.galeri.edit');
+Route::put('admin/galeri/{id}', [GalleryController::class, 'update'])->name('admin.galeri.update');
+Route::delete('admin/galeri/{id}', [GalleryController::class, 'destroy'])->name('admin.galeri.destroy');
+Route::delete('admin/galeri', [GalleryController::class, 'destroyAll'])->name('admin.galeri.destroyAll');
+
+
 
 // routes/web.php
 Route::get('/navItems/create', [NavItemController::class, 'create'])->name('navItems.create');
@@ -106,6 +123,24 @@ Route::get('/navItems', [NavItemController::class, 'index'])->name('navItems.ind
 Route::resource('/layouts/navbarhome', NavItemController::class);
 Route::get('/admin_navbar', [NavItemController::class, 'index'])->name('admin_navbar');
 Route::resource('navItems', NavItemController::class);
+
+Route::resource('navItems', NavItemController::class);
+Route::get('navItems/createContent', [NavItemController::class, 'createContent'])->name('navItems.createContent');
+Route::post('navItems/storeContent', [NavItemController::class, 'storeContent'])->name('navItems.storeContent');
+Route::get('content/{content}', [NavItemController::class, 'showContent'])->name('content.show');
+
+Route::get('/admin_create_content', function () {
+    return view('admin_create_content');
+})->name('admin_create_content');
+
+use App\Http\Controllers\ContentController;
+
+Route::get('/berita', [ContentController::class, 'listBerita'])->name('berita.list');
+Route::get('/pengumuman', [ContentController::class, 'listPengumuman'])->name('pengumuman.list');
+Route::get('/travel', [ContentController::class, 'listTravel'])->name('travel.list');
+Route::get('/{type}/{id}', [ContentController::class, 'show'])->name('content.show');
+
+
 
 
 Route::middleware('auth')->group(function () {

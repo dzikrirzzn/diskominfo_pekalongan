@@ -106,75 +106,139 @@
         </div>
 
         <!-- carousel travel -->
-        <div class="relative mx-4 md:mx-16 mt-10 mb-24">
-    <div class="absolute top-0 right-0 p-4 text-right">
-        <h2 class="text-lg md:text-2xl font-bold text-black">Rekomendasi Travel</h2>
-    </div>
-    <div class="relative py-4 md:py-8 bg-no-repeat bg-left-top">
-        <div class="relative w-full max-w-6xl mx-auto my-4 md:my-8">
-            <div class="container mx-auto p-4">
-                <div class="overflow-hidden rounded-lg shadow-2xl my-8 mx-auto max-w-screen-lg relative">
-                    <div class="absolute top-0 left-0 right-0 h-4 bg-white shadow-2xl"></div>
-                    <div class="relative" id="slides">
-                        @foreach ($travelRecommendations as $index => $recommendation)
-                        <div class="slide {{ $loop->first ? 'active' : '' }} w-full" data-index="{{ $index }}">
-                            <div class="flex flex-col md:flex-row h-full">
-                                <!-- Left side - Image -->
-                                <div class="w-full md:w-1/2 h-64 md:h-96 relative border-l-2 border-t-2 border-b-2 border-gray-200">
-                                    <img src="{{ asset('storage/' . $recommendation->image) }}" alt="{{ $recommendation->judul }}" class="w-full h-full object-cover">
+        <div class="mx-4 md:mx-16 mt-10 mb-24">
+            <div class="relative py-4 md:py-8 bg-no-repeat bg-left-top">
+                <div class="relative w-full max-w-6xl mx-auto my-4 md:my-8">
+                    <div class="container mx-auto p-4">
+                        <div class="overflow-hidden rounded-lg shadow-2xl my-8 mx-auto max-w-screen-lg relative">
+                            <div class="absolute top-0 left-0 right-0 h-4 bg-white shadow-2xl"></div>
+                            <div class="relative" id="slides">
+                                @foreach ($travelRecommendations as $index => $recommendation)
+                                <div class="slide {{ $loop->first ? 'active' : '' }} w-full" data-index="{{ $index }}">
+                                    <div class="flex flex-col md:flex-row h-full">
+                                        <!-- Left side - Image -->
+                                        <div
+                                            class="w-full md:w-1/2 h-64 md:h-96 relative border-l-2 border-t-2 border-b-2 border-gray-200">
+                                            <img src="{{ asset('storage/' . $recommendation->image) }}"
+                                                alt="{{ $recommendation->judul }}" class="w-full h-full object-cover">
+                                        </div>
+                                        <!-- Right side - Content -->
+                                        <div
+                                            class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative shadow-lg border-t-2 border-r-2 border-b-2 border-gray-200">
+                                            <img src="{{ asset('img/pklbunga.png') }}"
+                                                alt="{{ $recommendation->judul }} Logo"
+                                                class="h-16 md:h-24 w-auto mb-2 absolute top-2 md:top-4 left-2 md:left-4 object-contain">
+                                            <h2 class="text-lg md:text-2xl font-bold mb-2 text-black mt-20 md:mt-28">
+                                                {{ $recommendation->judul }}</h2>
+                                            <p
+                                                class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis mt-6">
+                                                {{ $recommendation->isi }}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- Right side - Content -->
-                                <div class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative shadow-lg border-t-2 border-r-2 border-b-2 border-gray-200">
-                                    <img src="{{ asset('img/pklbunga.png') }}" alt="{{ $recommendation->judul }} Logo" class="h-16 md:h-24 w-auto mb-2 absolute top-2 md:top-4 left-2 md:left-4 object-contain">
-                                    <h2 class="text-lg md:text-2xl font-bold mb-2 text-black mt-20 md:mt-28">{{ $recommendation->judul }}</h2>
-                                    <p class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis mt-6">{{ $recommendation->isi }}</p>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
-                        @endforeach
                     </div>
                 </div>
+                <!-- Navigation buttons -->
+                <button onclick="prevSlide()"
+                    class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        class="h-4 w-4 md:h-6 md:w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button onclick="nextSlide()"
+                    class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        class="h-4 w-4 md:h-6 md:w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
             </div>
-            <!-- Navigation buttons -->
-            <button onclick="prevSlide()" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 md:h-6 md:w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-            </button>
-            <button onclick="nextSlide()" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 md:h-6 md:w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </button>
         </div>
-    </div>
-</div>
+        <div class="relative mx-4 md:mx-16 mt-10 mb-24">
+            <div class="absolute top-0 right-0 p-4 text-right">
+                <h2 class="text-lg md:text-2xl font-bold text-black">Rekomendasi Travel</h2>
+            </div>
+            <div class="relative py-4 md:py-8 bg-no-repeat bg-left-top">
+                <div class="relative w-full max-w-6xl mx-auto my-4 md:my-8">
+                    <div class="container mx-auto p-4">
+                        <div class="overflow-hidden rounded-lg shadow-2xl my-8 mx-auto max-w-screen-lg relative">
+                            <div class="absolute top-0 left-0 right-0 h-4 bg-white shadow-2xl"></div>
+                            <div class="relative" id="slides">
+                                @foreach ($travelRecommendations as $index => $recommendation)
+                                <div class="slide {{ $loop->first ? 'active' : '' }} w-full" data-index="{{ $index }}">
+                                    <div class="flex flex-col md:flex-row h-full">
+                                        <!-- Left side - Image -->
+                                        <div
+                                            class="w-full md:w-1/2 h-64 md:h-96 relative border-l-2 border-t-2 border-b-2 border-gray-200">
+                                            <img src="{{ asset('storage/' . $recommendation->image) }}"
+                                                alt="{{ $recommendation->judul }}" class="w-full h-full object-cover">
+                                        </div>
+                                        <!-- Right side - Content -->
+                                        <div
+                                            class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative shadow-lg border-t-2 border-r-2 border-b-2 border-gray-200">
+                                            <img src="{{ asset('img/pklbunga.png') }}"
+                                                alt="{{ $recommendation->judul }} Logo"
+                                                class="h-16 md:h-24 w-auto mb-2 absolute top-2 md:top-4 left-2 md:left-4 object-contain">
+                                            <h2 class="text-lg md:text-2xl font-bold mb-2 text-black mt-20 md:mt-28">
+                                                {{ $recommendation->judul }}</h2>
+                                            <p
+                                                class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis mt-6">
+                                                {{ $recommendation->isi }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Navigation buttons -->
+                    <button onclick="prevSlide()"
+                        class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            class="h-4 w-4 md:h-6 md:w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button onclick="nextSlide()"
+                        class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            class="h-4 w-4 md:h-6 md:w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-<script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
+        <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
 
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide > 0) ? currentSlide - 1 : slides.length - 1;
+            showSlide(currentSlide);
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
+            showSlide(currentSlide);
+        }
+
+        // Automatically show the first slide on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            showSlide(currentSlide);
         });
-    }
-
-    function prevSlide() {
-        currentSlide = (currentSlide > 0) ? currentSlide - 1 : slides.length - 1;
-        showSlide(currentSlide);
-    }
-
-    function nextSlide() {
-        currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
-        showSlide(currentSlide);
-    }
-
-    // Automatically show the first slide on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        showSlide(currentSlide);
-    });
-</script>
+        </script>
 
         <!-- Berita & Pengumuman -->
         <div class="relative h-screen">
@@ -239,6 +303,9 @@
                         <h2
                             class="text-2xl md:text-3xl font-semibold mb-4 text-left text-white border-b-2 border-gray-300">
                             Pengumuman</h2>
+                        <a href="{{ route('pengumuman.list') }}"
+                            class="text-sm text-yellow-500 hover:text-yellow-700">Lihat Semua</a>
+
                         <div class="bg-white rounded-lg shadow-md p-4 overflow-y-scroll flex-1">
                             <ul class="space-y-2">
                                 @foreach ($pengumuman as $item)
@@ -486,48 +553,32 @@
             </div>
         </div>
 
-        <div class=" mx-16 mb-8">
-            <div
-                class="container mx-auto p-4 flex flex-col lg:flex-row lg:justify-between space-y-8 lg:space-y-0 lg:space-x-8 mb-2">
-                <!-- Menambahkan margin-bottom dan space -->
-                <!-- Kominfo widget on the left -->
-                <div class="flex flex-col space-y-4 w-full lg:w-1/3">
-                    <div class="flex items-center justify-center h-full">
-                        <div id="gpr-kominfo-widget-container"></div>
-                        <script src="https://widget.kominfo.go.id/gpr-widget-kominfo.min.js" async></script>
-                    </div>
+        <div
+            class="container mx-auto p-4 flex flex-col lg:flex-row lg:justify-between space-y-8 lg:space-y-0 lg:space-x-8 mb-2">
+            <!-- Kominfo widget on the left -->
+            <div class="flex flex-col space-y-4 w-full lg:w-1/3">
+                <div class="flex items-center justify-center h-full">
+                    <div id="gpr-kominfo-widget-container" class="w-full"></div>
+                    <script src="https://widget.kominfo.go.id/gpr-widget-kominfo.min.js" async></script>
+                </div>
+            </div>
+
+            <!-- Container for Twitter widgets -->
+            <div class="flex flex-wrap lg:flex-nowrap space-y-4 lg:space-y-0 lg:space-x-4 w-full lg:w-2/3">
+                <!-- Twitter feed for @pemkotpkl -->
+                <div class="flex flex-col space-y-4 w-full lg:w-1/2">
+                    <div class="font-bold mb-4 text-left">Postingan dari @pemkotpkl</div>
+                    <a class="twitter-timeline" href="https://twitter.com/pemkotpkl" data-tweet-limit="5"
+                        data-height="550" data-width="100%">Tweets by Pemkot Pekalongan</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
 
-                <!-- Logo Berakhlak on top of Twitter feed for @pemkotpkl in the middle -->
-                <div class="flex flex-col space-y-4 w-full lg:w-1/3">
-                    <div class="flex items-center justify-center">
-                        <img src="https://pekalongankota.go.id/template/frontend/img/widget/logo-berakhlak.png"
-                            alt="Logo Berakhlak" class="max-w-full max-h-full">
-                    </div>
-                    <div class="h-96 overflow-hidden">
-                        <div class="font-bold mb-4">Postingan dari @pemkotpkl</div>
-                        <div class="h-full overflow-y-scroll">
-                            <a class="twitter-timeline" href="https://twitter.com/pemkotpkl" data-tweet-limit="5">Tweets
-                                by Pemkot Pekalongan</a>
-                        </div>
-                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                    </div>
-                </div>
-
-                <!-- Logo EVP on top of Twitter feed for @officialbatiktv on the right -->
-                <div class="flex flex-col space-y-4 w-full lg:w-1/3">
-                    <div class="flex items-center justify-center">
-                        <img src="https://pekalongankota.go.id/template/frontend/img/widget/logo-evp.png" alt="Logo EVP"
-                            class="max-w-full max-h-full">
-                    </div>
-                    <div class="h-96 overflow-hidden">
-                        <div class="font-bold mb-4">Postingan dari @officialbatiktv</div>
-                        <div class="h-full overflow-y-scroll">
-                            <a class="twitter-timeline" href="https://twitter.com/officialbatiktv"
-                                data-tweet-limit="5">Tweets by BATIK TV</a>
-                        </div>
-                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                    </div>
+                <!-- Twitter feed for @officialbatiktv -->
+                <div class="flex flex-col space-y-4 w-full lg:w-1/2">
+                    <div class="font-bold mb-4 text-left">Postingan dari @officialbatiktv</div>
+                    <a class="twitter-timeline" href="https://twitter.com/officialbatiktv" data-tweet-limit="5"
+                        data-height="550" data-width="100%">Tweets by BATIK TV</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
             </div>
         </div>

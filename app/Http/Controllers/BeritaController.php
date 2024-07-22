@@ -35,12 +35,14 @@ class BeritaController extends Controller
         $berita = $this->findBeritaById($id);
 
         if (!$berita) {
-            return redirect()->route('berita.listberita')->with('error', 'Berita tidak ditemukan.');
+            return redirect()->route('content.list_content')->with('error', 'Berita tidak ditemukan.');
         }
 
         $otherBerita = OtherBerita::latest()->take(5)->get();
+        $type = $berita instanceof HeadlineBerita ? 'kota' : 'lainnya';
 
-        return view('berita.berita_content', compact('berita', 'otherBerita'));
+
+        return view('content.detail_content', compact('berita', 'otherBerita'));
     }
 
     public function store(Request $request)

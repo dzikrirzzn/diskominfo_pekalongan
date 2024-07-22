@@ -25,14 +25,19 @@
                     <x-nav-link :href="route('admin.travel.index')" :active="request()->routeIs('admin.travel.index')">
                         {{ __('Travel') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin_layanan')" :active="request()->routeIs('admin_layanan')">
+                    <x-nav-link :href="route('admin.layanan.index')"
+                        :active="request()->routeIs('admin.layanan.index')">
                         {{ __('Layanan') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin_gallery')" :active="request()->routeIs('admin_gallery')">
+                    <x-nav-link :href="route('admin.galeri.index')" :active="request()->routeIs('admin.galeri.index')">
                         {{ __('Galeri') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin_navbar')" :active="request()->routeIs('admin_navbar')">
                         {{ __('Navbar') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin_create_content')"
+                        :active="request()->routeIs('admin_create_content')">
+                        {{ __('Content') }}
                     </x-nav-link>
                 </div>
             </div>

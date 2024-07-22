@@ -69,8 +69,10 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach($allBerita as $berita)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $berita->title }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $berita->subtitle }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap truncate max-w-xs"
+                                        title="{{ $berita->title }}">{{ $berita->title }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap truncate max-w-xs"
+                                        title="{{ $berita->subtitle }}">{{ $berita->subtitle }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $berita->author }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $berita->date }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">

@@ -20,4 +20,5 @@ class Gallery extends Model
         'content',
         'link'
     ];
+    
 }

@@ -1,3 +1,5 @@
+<!-- resources/views/templates/detail_berita.blade.php -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,15 +25,16 @@
             <div class="bg-white p-6 rounded-lg shadow-lg md:mb-0 w-full md:w-8/12 md:mr-4"
                 style="min-height: 500px; margin-top: -5rem;">
                 <div class="mx-2">
-                    <h1 class="text-4xl font-bold mb-2">{{ $berita->title }}</h1>
+                    <h1 class="text-4xl font-bold mb-2">{{ $content->title }}</h1>
                     <div class="text-gray-600 text-sm mb-4">
-                        <span>Ditulis oleh {{ $berita->author }}</span> | <span>{{ $berita->date }}</span> | <span>2449
+                        <span>Ditulis oleh {{ $content->author }}</span> | <span>{{ $content->date }}</span> |
+                        <span>2449
                             views</span>
                     </div>
                     <img class="max-h-80 max-w-96 rounded-lg mb-4 content-center"
-                        src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}">
-                    <p class="leading-7 mb-4 text-justify">{{ $berita->subtitle }}</p>
-                    <p class="leading-7 mb-4 text-justify">{!! $berita->content !!}</p>
+                        src="{{ asset('storage/' . $content->image_url) }}" alt="{{ $content->title }}">
+                    <p class="leading-7 mb-4 text-justify">{{ $content->subtitle }}</p>
+                    <p class="leading-7 mb-4 text-justify">{!! $content->text !!}</p>
                 </div>
             </div>
 
@@ -40,15 +43,15 @@
                 style="max-height: 500px; overflow-y: auto;">
                 <h2 class="text-2xl font-bold mb-6 border-gray-400 border-b-2 mr-1">Berita Lainnya</h2>
                 <ul class="space-y-4">
-                    @foreach ($otherBerita as $berita)
+                    @foreach ($otherContent as $other)
                     <li class="flex items-center">
-                        <a href="{{ route('berita.show', ['id' => $berita->id]) }}"
+                        <a href="{{ route('content.show', ['id' => $other->id]) }}"
                             class="flex justify-between w-full no-underline text-black">
                             <img class="w-16 h-16 object-cover rounded-lg mr-4"
-                                src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}">
+                                src="{{ asset('storage/' . $other->image_url) }}" alt="{{ $other->title }}">
                             <div class="flex-1">
-                                <h3 class="text-lg font-semibold">{{ $berita->title }}</h3>
-                                <p class="text-gray-600 text-sm">{{ $berita->date }}</p>
+                                <h3 class="text-lg font-semibold">{{ $other->title }}</h3>
+                                <p class="text-gray-600 text-sm">{{ $other->date }}</p>
                             </div>
                         </a>
                     </li>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Content;
 use App\Models\NavItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -83,5 +84,35 @@ class NavItemController extends Controller
     {
         $navItem->delete();
         return redirect()->route('navItems.index')->with('success', 'Navigation item deleted successfully');
+    }
+
+    public function createContent()
+    {
+        $navItems = NavItem::all();
+        return view('admin_create_content', compact('navItems'));
+    }
+
+    public function storeContent(Request $request)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'image_url' => 'required|string|max:255',
+            'text' => 'required|string',
+            'author' => 'required|string|max:255',
+            'date' => 'required|date',
+            'nav_item_id' => 'required|exists:nav_items,id',
+        ]);
+
+        $content = Content::create($validatedData);
+
+        Log::info('Content created', ['content' => $content]);
+
+        return redirect()->route('navItems.index')->with('success', 'Content added successfully');
+    }
+
+    public function showContent(Content $content)
+    {
+        $otherContent = Content::where('id', '!=', $content->id)->limit(5)->get();
+        return view('templates.content_navbar', compact('content', 'otherContent'));
     }
 }
