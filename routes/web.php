@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NavItemController;
 use App\Models\NavItem;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ContentController;
+use App\Http\Controllers\NavbarController;
 
 Route::get('/', [BeritaController::class, 'home'])->name('home');
 
@@ -19,42 +21,12 @@ Route::get('/admin', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
-Route::get('/admin_berita', function () {
-    return view('admin_berita');
-})->name('admin_berita');
-
-Route::get('/admin_pengumuman', function () {
-    return view('admin_pengumuman');
-})->name('admin_pengumuman');
-
-Route::get('/admin_travel', function () {
-    return view('admin_travel');
-})->name('admin_travel');
-
-Route::get('/admin_layanan', function () {
-    return view('admin_layanan');
-})->name('admin_layanan');
-
-Route::get('/admin_gallery', function () {
-    return view('admin_gallery');
-})->name('admin_gallery');
-
-Route::get('/admin_navbar', function () {
-    $navItems = NavItem::all(); // or NavItem::whereNull('parent_id')->get() if you only want top-level items
-    return view('admin_navbar');
-})->name('admin_navbar');
-
-
-Route::get('/sekilas', function () {
-    return view('sekilas');
-})->name('sekilas');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/berita/listberita', [BeritaController::class, 'index'])->name('berita.listberita');
-Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
 Route::post('/berita', [BeritaController::class, 'store'])->name('berita.store');
 
 Route::get('/admin/berita', [BeritaController::class, 'adminIndex'])->name('admin.berita.index');
@@ -66,7 +38,6 @@ Route::delete('/admin/berita/{id}', [BeritaController::class, 'destroy'])->name(
 
 Route::get('/pengumuman/create', [PengumumanController::class, 'create'])->name('pengumuman.create');
 Route::post('/pengumuman', [PengumumanController::class, 'store'])->name('pengumuman.store');
-Route::get('/pengumuman/{id}', [PengumumanController::class, 'show'])->name('pengumuman.show');
 
 
 Route::get('/admin/pengumuman', [PengumumanController::class, 'adminIndex'])->name('admin.pengumuman.index');
@@ -78,7 +49,6 @@ Route::delete('/admin/pengumuman/{id}', [PengumumanController::class, 'destroy']
 
 Route::get('/travel_recommendations/create', [TravelRecommendationController::class, 'create'])->name('travel_recommendations.create');
 Route::post('/travel_recommendations', [TravelRecommendationController::class, 'store'])->name('travel_recommendations.store');
-Route::get('travel/{id}', [TravelRecommendationController::class, 'show'])->name('travel.show');
 Route::post('/admin/travel_recommendations', [TravelRecommendationController::class, 'store'])->name('admin.travel_recommendations.store');
 
 Route::get('/admin/travel', [TravelRecommendationController::class, 'adminIndex'])->name('admin.travel.index');
@@ -114,9 +84,10 @@ Route::put('admin/galeri/{id}', [GalleryController::class, 'update'])->name('adm
 Route::delete('admin/galeri/{id}', [GalleryController::class, 'destroy'])->name('admin.galeri.destroy');
 Route::delete('admin/galeri', [GalleryController::class, 'destroyAll'])->name('admin.galeri.destroyAll');
 
+Route::get('/admin_create_content', function () {
+    return view('admin_create_content');
+})->name('admin_create_content');
 
-
-// routes/web.php
 Route::get('/navItems/create', [NavItemController::class, 'create'])->name('navItems.create');
 Route::post('/navItems', [NavItemController::class, 'store'])->name('navItems.store');
 Route::get('/navItems', [NavItemController::class, 'index'])->name('navItems.index');
@@ -124,24 +95,10 @@ Route::resource('/layouts/navbarhome', NavItemController::class);
 Route::get('/admin_navbar', [NavItemController::class, 'index'])->name('admin_navbar');
 Route::resource('navItems', NavItemController::class);
 
-Route::resource('navItems', NavItemController::class);
-Route::get('navItems/createContent', [NavItemController::class, 'createContent'])->name('navItems.createContent');
-Route::post('navItems/storeContent', [NavItemController::class, 'storeContent'])->name('navItems.storeContent');
-Route::get('content/{content}', [NavItemController::class, 'showContent'])->name('content.show');
-
-Route::get('/admin_create_content', function () {
-    return view('admin_create_content');
-})->name('admin_create_content');
-
-use App\Http\Controllers\ContentController;
-
 Route::get('/berita', [ContentController::class, 'listBerita'])->name('berita.list');
 Route::get('/pengumuman', [ContentController::class, 'listPengumuman'])->name('pengumuman.list');
 Route::get('/travel', [ContentController::class, 'listTravel'])->name('travel.list');
 Route::get('/{type}/{id}', [ContentController::class, 'show'])->name('content.show');
-
-
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

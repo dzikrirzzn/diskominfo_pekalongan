@@ -35,10 +35,6 @@
                     <x-nav-link :href="route('admin_navbar')" :active="request()->routeIs('admin_navbar')">
                         {{ __('Navbar') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin_create_content')"
-                        :active="request()->routeIs('admin_create_content')">
-                        {{ __('Content') }}
-                    </x-nav-link>
                 </div>
             </div>
 

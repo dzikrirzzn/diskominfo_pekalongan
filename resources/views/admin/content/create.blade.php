@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Navbar</title>
+    <title>Admin Content</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -14,33 +14,26 @@
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Admin Navbar') }}
+                {{ __('Admin Content') }}
             </h2>
         </x-slot>
+
         <div>
-            <h1>Add Navbar Item</h1>
-            <form action="{{ route('admin.navbar.store') }}" method="POST">
+            <h1>Add Content Page</h1>
+            <form action="{{ route('content.store') }}" method="POST">
                 @csrf
                 <div>
                     <label for="title">Title</label>
                     <input type="text" name="title" id="title" required>
                 </div>
                 <div>
-                    <label for="url">URL</label>
-                    <input type="url" name="url" id="url">
-                </div>
-                <div>
-                    <label for="parent_id">Parent</label>
-                    <select name="parent_id" id="parent_id">
-                        <option value="">None</option>
-                        @foreach ($navbarItems as $item)
-                        <option value="{{ $item->id }}">{{ $item->title }}</option>
-                        @endforeach
-                    </select>
+                    <label for="content">Content</label>
+                    <textarea name="content" id="content" required></textarea>
                 </div>
                 <button type="submit">Save</button>
             </form>
         </div>
+
     </x-app-layout>
 </body>
 

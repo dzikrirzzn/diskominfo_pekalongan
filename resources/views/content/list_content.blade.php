@@ -27,8 +27,8 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             @foreach ($data as $item)
-            <a href="{{ route($type . '.show', ['id' => $item->id]) }}" class="block no-underline text-black">
-                @if ($type == 'berita')
+            <a href="{{ route('content.show', ['type' => $type, 'id' => $item->id]) }}"
+                class="block no-underline text-black"> @if ($type == 'berita')
                 <div class="flex bg-white p-6 rounded-lg shadow-md">
                     <img class="w-24 h-24 object-cover" src="{{ asset('storage/' . $item->image) }}"
                         alt="{{ $item->title }}">

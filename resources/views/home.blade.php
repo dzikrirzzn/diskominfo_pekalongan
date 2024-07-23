@@ -107,82 +107,83 @@
 
         <!-- carousel travel -->
         <div class="mx-4 md:mx-16 mt-10 mb-24">
-    <div class="relative py-4 md:py-8 bg-no-repeat bg-left-top">
-        <div class="relative w-full max-w-6xl mx-auto my-4 md:my-8">
-            <div class="container mx-auto p-4">
-                <div class="overflow-hidden rounded-lg shadow-2xl my-8 mx-auto max-w-screen-lg relative">
-                    <div class="absolute top-0 left-0 right-0 h-4 bg-white shadow-2xl"></div>
-                    <div class="relative" id="slides">
-                        @foreach ($travelRecommendations as $index => $recommendation)
-                        <div class="slide {{ $loop->first ? 'active' : '' }} w-full" data-index="{{ $index }}">
-                            <div class="flex flex-col md:flex-row h-full">
-                                <!-- Left side - Image -->
-                                <div
-                                    class="w-full md:w-1/2 h-64 md:h-96 relative border-l-2 border-t-2 border-b-2 border-gray-200">
-                                    <img src="{{ asset('storage/' . $recommendation->image) }}"
-                                        alt="{{ $recommendation->judul }}" class="w-full h-full object-cover">
+            <div class="relative py-4 md:py-8 bg-no-repeat bg-left-top">
+                <div class="relative w-full max-w-6xl mx-auto my-4 md:my-8">
+                    <div class="container mx-auto p-4">
+                        <div class="overflow-hidden rounded-lg shadow-2xl my-8 mx-auto max-w-screen-lg relative">
+                            <div class="absolute top-0 left-0 right-0 h-4 bg-white shadow-2xl"></div>
+                            <div class="relative" id="slides">
+                                @foreach ($travelRecommendations as $index => $recommendation)
+                                <div class="slide {{ $loop->first ? 'active' : '' }} w-full" data-index="{{ $index }}">
+                                    <div class="flex flex-col md:flex-row h-full">
+                                        <!-- Left side - Image -->
+                                        <div
+                                            class="w-full md:w-1/2 h-64 md:h-96 relative border-l-2 border-t-2 border-b-2 border-gray-200">
+                                            <img src="{{ asset('storage/' . $recommendation->image) }}"
+                                                alt="{{ $recommendation->judul }}" class="w-full h-full object-cover">
+                                        </div>
+                                        <!-- Right side - Content -->
+                                        <div
+                                            class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative shadow-lg border-t-2 border-r-2 border-b-2 border-gray-200">
+                                            <img src="{{ asset('img/pklbunga.png') }}"
+                                                alt="{{ $recommendation->judul }} Logo"
+                                                class="h-16 md:h-24 w-auto mb-2 absolute top-2 md:top-4 left-2 md:left-4 object-contain">
+                                            <h2 class="text-lg md:text-2xl font-bold mb-2 text-black mt-20 md:mt-28">
+                                                {{ $recommendation->judul }}</h2>
+                                            <p
+                                                class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis mt-6">
+                                                {{ $recommendation->isi }}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- Right side - Content -->
-                                <div
-                                    class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative shadow-lg border-t-2 border-r-2 border-b-2 border-gray-200">
-                                    <img src="{{ asset('img/pklbunga.png') }}"
-                                        alt="{{ $recommendation->judul }} Logo"
-                                        class="h-16 md:h-24 w-auto mb-2 absolute top-2 md:top-4 left-2 md:left-4 object-contain">
-                                    <h2 class="text-lg md:text-2xl font-bold mb-2 text-black mt-20 md:mt-28">
-                                        {{ $recommendation->judul }}</h2>
-                                    <p class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis mt-6">
-                                        {{ $recommendation->isi }}</p>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
-                        @endforeach
                     </div>
                 </div>
+                <!-- Navigation buttons -->
+                <button onclick="prevSlide()"
+                    class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        class="h-4 w-4 md:h-6 md:w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button onclick="nextSlide()"
+                    class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        class="h-4 w-4 md:h-6 md:w-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
             </div>
         </div>
-        <!-- Navigation buttons -->
-        <button onclick="prevSlide()"
-            class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                class="h-4 w-4 md:h-6 md:w-6">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-        </button>
-        <button onclick="nextSlide()"
-            class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                class="h-4 w-4 md:h-6 md:w-6">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-        </button>
-    </div>
-</div>
 
-<script>
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
+        <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
 
-function showSlide(index) {
-    slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
-    });
-}
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
 
-function prevSlide() {
-    currentSlide = (currentSlide > 0) ? currentSlide - 1 : slides.length - 1;
-    showSlide(currentSlide);
-}
+        function prevSlide() {
+            currentSlide = (currentSlide > 0) ? currentSlide - 1 : slides.length - 1;
+            showSlide(currentSlide);
+        }
 
-function nextSlide() {
-    currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
-    showSlide(currentSlide);
-}
+        function nextSlide() {
+            currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
+            showSlide(currentSlide);
+        }
 
-// Automatically show the first slide on page load
-document.addEventListener('DOMContentLoaded', () => {
-    showSlide(currentSlide);
-});
-</script>
+        // Automatically show the first slide on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            showSlide(currentSlide);
+        });
+        </script>
 
 
         <!-- Berita & Pengumuman -->
@@ -205,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 class="flex flex-col md:flex-row flex-wrap md:flex-nowrap space-y-4 md:space-y-0 md:space-x-4 mb-4">
                                 @foreach ($headlineBerita->take(2) as $berita)
                                 <!-- Each image box taking up half the space -->
-                                <a href="{{ route('berita.show', ['id' => $berita->id]) }}"
+                                <a href="{{ route('content.show', ['type' => 'berita', 'id' => $berita->id]) }}"
                                     class="block no-underline text-black w-full md:w-1/2">
                                     <div
                                         class="w-full h-full rounded-lg shadow overflow-hidden relative transform hover:scale-90 hover:brightness-75 transition-transform duration-700">
@@ -215,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                             class="absolute bottom-0 w-full p-2 bg-black bg-opacity-50 text-white text-center">
                                             <h3
                                                 class="text-lg font-bold hover:text-gray-400 transition-colors duration-300">
-                                                {{ mb_substr($berita->title,0,50) }}... 
+                                                {{ mb_substr($berita->title,0,50) }}...
                                             </h3>
                                         </div>
                                     </div>
@@ -232,9 +233,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <ul class="space-y-2">
                                     @foreach ($otherBerita as $berita)
                                     <li class="flex justify-between text-sm border-b border-gray-300 pb-2 mr-2">
-                                        <a href="{{ route('berita.show', ['id' => $berita->id]) }}"
+                                        <a href="{{ route('content.show', ['type' => 'berita', 'id' => $berita->id]) }}"
                                             class="flex justify-between w-full no-underline">
-                                            <span class="hover:text-yellow-500">{{ $berita->title }}</span>
+                                            <span
+                                                class="hover:text-yellow-500 truncate max-w-xs">{{ $berita->title }}</span>
                                             <span class="text-gray-500">| {{ $berita->date }}</span>
                                         </a>
                                     </li>
@@ -255,9 +257,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             <ul class="space-y-2">
                                 @foreach ($pengumuman as $item)
                                 <li class="flex justify-between text-sm border-b border-gray-300 pb-2">
-                                    <a href="{{ route('pengumuman.show', ['id' => $item->id]) }}"
+                                    <a href="{{ route('content.show', ['type' => 'pengumuman', 'id' => $item->id]) }}"
                                         class="flex justify-between w-full no-underline">
-                                        <span class="hover:text-yellow-500">{{ $item->judul }}</span>
+                                        <span class="hover:text-yellow-500 truncate max-w-xs">{{ $item->judul }}</span>
                                         <span class="text-gray-500 text-right"> | {{ $item->tanggal }}</span>
                                     </a>
                                 </li>
