@@ -58,7 +58,7 @@
                                     </label>
                                     <span id="file-chosen" class="ml-2 text-gray-700">No file chosen</span>
                                 </div>
-                                <input type="file" id="image" name="image" class="hidden">
+                                <input type="file" id="image" accept="image/jpeg,image/png,image/jpg" name="image" class="hidden">
                             </div>
                             <div class="mb-4">
                                 <label for="link" class="block text-gray-700 text-sm font-bold mb-2">Link:</label>

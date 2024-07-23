@@ -60,9 +60,9 @@ class BeritaController extends Controller
                 OtherBerita::create($data);
             }
 
-            return redirect()->back()->with('success', 'Berita berhasil diupload!');
+            return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diupload!');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupload berita: ' . $e->getMessage());
+            return redirect()->route('admin.berita.index')->with('error', 'Terjadi kesalahan saat mengupload berita: ' . $e->getMessage());
         }
     }
 

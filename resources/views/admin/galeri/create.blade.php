@@ -56,7 +56,7 @@
                             </div>
                             <div class="mb-4">
                                 <label for="author" class="block text-gray-700 text-sm font-bold mb-2">Author:</label>
-                                <input type="text" id="author" name="author"
+                                <input type="text" id="author" name="author" value="{{Auth::user()->name}}" readonly
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     required>
                             </div>
@@ -75,7 +75,7 @@
                                     </label>
                                     <span id="file-chosen" class="ml-2 text-gray-700">No file chosen</span>
                                 </div>
-                                <input type="file" id="image" name="image" class="hidden">
+                                <input type="file" accept="image/jpeg,image/png,image/jpg" id="image" name="image" class="hidden">
                             </div>
                             <div class="mb-4">
                                 <label for="link" class="block text-gray-700 text-sm font-bold mb-2">Link:</label>
