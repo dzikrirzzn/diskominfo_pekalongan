@@ -27,19 +27,19 @@
 </head>
 
 <body>
-    <nav x-data="{ scrolled: false, showNav: true, lastScrollY: 0, timeout: null }" x-init="window.addEventListener('scroll', () => {
-         clearTimeout(timeout);
-         if (window.scrollY > lastScrollY) {
-             showNav = false;
-         } else {
-             showNav = true;
-         }
-         lastScrollY = window.scrollY;
-         scrolled = window.scrollY > 0;
-         timeout = setTimeout(() => {
-             showNav = true;
-         }, 300);
-     })" :class="{'transform -translate-y-full': !showNav, 'transform translate-y-0': showNav}"
+    <nav x-data="{ scrolled: false, showNav: true, lastScrollY: 0, timeout: null, isOpen: false }" x-init="window.addEventListener('scroll', () => {
+             clearTimeout(timeout);
+             if (window.scrollY > lastScrollY) {
+                 showNav = false;
+             } else {
+                 showNav = true;
+             }
+             lastScrollY = window.scrollY;
+             scrolled = window.scrollY > 0;
+             timeout = setTimeout(() => {
+                 showNav = true;
+             }, 300);
+         })" :class="{'transform -translate-y-full': !showNav, 'transform translate-y-0': showNav}"
         class="fixed w-full z-50 py-2 transition-transform duration-500 ease-in-out border-b-2 border-white h-24 bg-yellow-500">
         <div class="container mx-auto flex justify-between items-center flex-wrap">
             <a href="{{ route('home') }}">
@@ -64,18 +64,17 @@
                 <ul class="lg:flex space-y-2 lg:space-y-0 lg:space-x-4">
                     @foreach($navItems as $item)
                     @if($item->is_dropdown && $item->children->isNotEmpty())
-                    <li class="relative" x-data="{ isOpen: false }" @mouseenter="isOpen = true"
-                        @mouseleave="isOpen = false">
+                    <li class="relative" x-data="{ dropdownOpen: false }">
                         <a href="#" class="block text-black hover:text-gray-200 text-xl"
-                            @focus="isOpen = true">{{ $item->title }}</a>
-                        <div x-show="isOpen" x-transition:enter="transition ease-out duration-300"
+                            @click.prevent="dropdownOpen = !dropdownOpen">{{ $item->title }}</a>
+                        <div x-show="dropdownOpen" x-transition:enter="transition ease-out duration-300"
                             x-transition:enter-start="opacity-0 transform scale-90"
                             x-transition:enter-end="opacity-100 transform scale-100"
                             x-transition:leave="transition ease-in duration-300"
                             x-transition:leave-start="opacity-100 transform scale-100"
-                            x-transition:leave-end="opacity-0 transform scale-90" @mouseenter="isOpen = true"
-                            @mouseleave="isOpen = false" class="absolute left-0 mt-2 w-48 dropdown-animation">
-                            <ul class="bg-white border rounded-lg shadow-lg">
+                            x-transition:leave-end="opacity-0 transform scale-90"
+                            class="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg dropdown-animation">
+                            <ul>
                                 @foreach($item->children as $child)
                                 <li><a href="{{ $child->url }}"
                                         class="block px-4 py-2 text-black hover:bg-gray-200 rounded-lg transition-colors duration-300">{{ $child->title }}</a>

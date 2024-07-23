@@ -4,44 +4,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Navbar</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <title>Create Navigation Item</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Admin Navbar') }}
+                {{ __('Create Navigation Item') }}
             </h2>
         </x-slot>
-        <div>
-            <h1>Add Navbar Item</h1>
-            <form action="{{ route('admin.navbar.store') }}" method="POST">
-                @csrf
-                <div>
-                    <label for="title">Title</label>
-                    <input type="text" name="title" id="title" required>
+
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900">
+                        @if (session('success'))
+                        <div class="bg-green-500 text-white p-4 rounded mb-4">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+
+                        @if (session('error'))
+                        <div class="bg-red-500 text-white p-4 rounded mb-4">
+                            {{ session('error') }}
+                        </div>
+                        @endif
+
+                        <form method="POST" action="{{ route('admin.navbar.store') }}">
+                            @csrf
+
+                            <div class="mb-4">
+                                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
+                                <input type="text" id="title" name="title"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    required>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="url" class="block text-gray-700 text-sm font-bold mb-2">URL:</label>
+                                <input type="text" id="url" name="url"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="parent_id" class="block text-gray-700 text-sm font-bold mb-2">Parent
+                                    Item:</label>
+                                <select name="parent_id" id="parent_id"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                    <option value="">None</option>
+                                    @foreach($parentItems as $parent)
+                                    <option value="{{ $parent->id }}">{{ $parent->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="child_items" class="block text-gray-700 text-sm font-bold mb-2">Child
+                                    Items:</label>
+                                <div id="child_items_container"></div>
+                                <button type="button" onclick="addChildItem()"
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                    Add Child Item
+                                </button>
+                            </div>
+
+                            <div class="mb-4">
+                                <button type="submit"
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                    Create
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
                 </div>
-                <div>
-                    <label for="url">URL</label>
-                    <input type="url" name="url" id="url">
-                </div>
-                <div>
-                    <label for="parent_id">Parent</label>
-                    <select name="parent_id" id="parent_id">
-                        <option value="">None</option>
-                        @foreach ($navbarItems as $item)
-                        <option value="{{ $item->id }}">{{ $item->title }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <button type="submit">Save</button>
-            </form>
+            </div>
         </div>
     </x-app-layout>
+
+    <script>
+    function addChildItem() {
+        const container = document.getElementById('child_items_container');
+        const index = container.children.length;
+        const childItemHtml = `
+                <div class="child-item mb-2">
+                    <input type="text" name="child_items[${index}][title]" placeholder="Child Item Title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2">
+                    <input type="text" name="child_items[${index}][url]" placeholder="Child Item URL" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+            `;
+        container.insertAdjacentHTML('beforeend', childItemHtml);
+    }
+    </script>
 </body>
 
 </html>

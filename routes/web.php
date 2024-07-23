@@ -8,10 +8,8 @@ use App\Http\Controllers\TravelRecommendationController;
 use App\Http\Controllers\LayananController; // Add this line
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NavItemController;
-use App\Models\NavItem;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ContentController;
-use App\Http\Controllers\NavbarController;
 
 Route::get('/', [BeritaController::class, 'home'])->name('home');
 
@@ -84,21 +82,23 @@ Route::put('admin/galeri/{id}', [GalleryController::class, 'update'])->name('adm
 Route::delete('admin/galeri/{id}', [GalleryController::class, 'destroy'])->name('admin.galeri.destroy');
 Route::delete('admin/galeri', [GalleryController::class, 'destroyAll'])->name('admin.galeri.destroyAll');
 
+Route::get('/admin/navbar', [NavItemController::class, 'index'])->name('admin.navbar.index');
+Route::get('/admin/navbar/create', [NavItemController::class, 'create'])->name('admin.navbar.create');
+Route::post('/admin/navbar/store', [NavItemController::class, 'store'])->name('admin.navbar.store');
+Route::get('/admin/navbar/{id}/edit', [NavItemController::class, 'edit'])->name('admin.navbar.edit');
+Route::put('/admin/navbar/{id}', [NavItemController::class, 'update'])->name('admin.navbar.update');
+Route::delete('/admin/navbar/{id}', [NavItemController::class, 'destroy'])->name('admin.navbar.destroy');
+
 Route::get('/admin_create_content', function () {
     return view('admin_create_content');
 })->name('admin_create_content');
-
-Route::get('/navItems/create', [NavItemController::class, 'create'])->name('navItems.create');
-Route::post('/navItems', [NavItemController::class, 'store'])->name('navItems.store');
-Route::get('/navItems', [NavItemController::class, 'index'])->name('navItems.index');
-Route::resource('/layouts/navbarhome', NavItemController::class);
-Route::get('/admin_navbar', [NavItemController::class, 'index'])->name('admin_navbar');
-Route::resource('navItems', NavItemController::class);
 
 Route::get('/berita', [ContentController::class, 'listBerita'])->name('berita.list');
 Route::get('/pengumuman', [ContentController::class, 'listPengumuman'])->name('pengumuman.list');
 Route::get('/travel', [ContentController::class, 'listTravel'])->name('travel.list');
 Route::get('/{type}/{id}', [ContentController::class, 'show'])->name('content.show');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

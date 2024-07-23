@@ -10,15 +10,24 @@ class NavItemController extends Controller
 {
     public function index()
     {
-        $navItems = NavItem::whereNull('parent_id')->with('children')->get();
-        $parentItems = NavItem::whereNull('parent_id')->get();
-        return view('admin_navbar', compact('navItems', 'parentItems'));
+        $navItems = NavItem::all(); // Adjust based on your actual logic
+        return view('admin.navbar.index', compact('navItems'));
     }
+
+
+    // NavItemController.php
+    public function adminIndex()
+    {
+        $navItems = NavItem::all(); // Adjust based on your actual logic
+        return view('admin.navbar.index', compact('navItems'));
+    }
+
+
 
     public function create()
     {
         $parentItems = NavItem::whereNull('parent_id')->get();
-        return view('admin_navbar_create', compact('parentItems'));
+        return view('admin.navbar.create', compact('parentItems'));
     }
 
     public function store(Request $request)
@@ -27,7 +36,6 @@ class NavItemController extends Controller
             'title' => 'required|string|max:255',
             'url' => 'nullable|string|max:255',
             'parent_id' => 'nullable|exists:nav_items,id',
-            'is_dropdown' => 'nullable|boolean',
         ]);
 
         $navItem = NavItem::create($validatedData);
@@ -42,22 +50,26 @@ class NavItemController extends Controller
             }
         }
 
-        return redirect()->route('navItems.index')->with('success', 'Navigation item added successfully');
+        return redirect()->route('admin.navbar.index')->with('success', 'Navigation item added successfully');
     }
 
-    public function edit(NavItem $navItem)
-    {
-        $parentItems = NavItem::whereNull('parent_id')->where('id', '!=', $navItem->id)->get();
-        return view('admin_navbar_create', compact('navItem', 'parentItems'));
-    }
+    public function edit($id)
+{
+    $navItem = NavItem::findOrFail($id);
+    $parentItems = NavItem::whereNull('parent_id')->get();
 
-    public function update(Request $request, NavItem $navItem)
+    return view('admin.navbar.edit', compact('navItem', 'parentItems'));
+}
+
+
+    public function update(Request $request, NavItem $navItem, $id)
     {
+        $navItem = NavItem::findOrFail($id);
+        $navItem->update($request->all());
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'url' => 'nullable|string|max:255',
             'parent_id' => 'nullable|exists:nav_items,id',
-            'is_dropdown' => 'nullable|boolean',
         ]);
 
         $navItem->update($validatedData);
@@ -76,12 +88,25 @@ class NavItemController extends Controller
             }
         }
 
-        return redirect()->route('navItems.index')->with('success', 'Navigation item updated successfully');
+        return redirect()->route('admin.navbar.index')->with('success', 'Navigation item updated successfully');
     }
 
-    public function destroy(NavItem $navItem)
-    {
-        $navItem->delete();
-        return redirect()->route('navItems.index')->with('success', 'Navigation item deleted successfully');
+    public function destroy($id)
+{
+    $navItem = NavItem::findOrFail($id);
+    $navItem->delete();
+
+    return redirect()->route('admin.navbar.index')->with('success', 'Item deleted successfully.');
+}
+public function showNavbar()
+{
+    $navItems = NavItem::where('parent_id', null)->with('children')->get();
+
+    // Debug logging
+    foreach ($navItems as $item) {
+        Log::info('Nav Item: ', $item->toArray());
     }
+
+    return view('your_view_name', compact('navItems'));
+}
 }

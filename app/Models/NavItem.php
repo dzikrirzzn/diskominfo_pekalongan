@@ -11,6 +11,10 @@ class NavItem extends Model
 
     protected $fillable = ['title', 'url', 'parent_id', 'is_dropdown'];
 
+    protected $casts = [
+        'is_dropdown' => 'boolean',
+    ];
+
     public function parent()
     {
         return $this->belongsTo(NavItem::class, 'parent_id');
