@@ -35,20 +35,19 @@
                         <h2 class="text-lg font-semibold mb-2">DISKOMINFO Kota Pekalongan</h2>
                         <ul class="space-y-1">
                             <li class="text-black flex items-center justify-center md:justify-start">
-                                <img src="{{ asset('img/alamat.png') }}" alt="Alamat" class="h-3 mr-1">
+
                                 Jl. Mataram No.1, Podosugih, Kec. Pekalongan Bar., Kota Pekalongan, Jawa Tengah 51111
                             </li>
                             <li class="text-black flex items-center justify-center md:justify-start">
-                                <img src="{{ asset('img/telp.png') }}" alt="Telepon" class="h-3 mr-1"> (0285) 421093
+                                (0285) 421093
                             </li>
                             <li class="text-black flex items-center justify-center md:justify-start">
-                                <img src="{{ asset('img/pesan.png') }}" alt="Email" class="h-3 mr-1">
                                 <a href="mailto:setda@pekalongankota.go.id"
                                     class="hover:text-gray-300">setda@pekalongankota.go.id</a>
                             </li>
                         </ul>
                         <!-- Social Media Icons -->
-                        <div class="flex justify-center md:justify-start space-x-2 mt-2">
+                        <div class="flex justify-center md:justify-start space-x-2 mt-4">
                             <a href="#"><img src="{{ asset('img/fb.png') }}" alt="Facebook" class="h-8"></a>
                             <a href="#"><img src="{{ asset('img/twt.png') }}" alt="Twitter" class="h-8"></a>
                             <a href="#"><img src="{{ asset('img/yt.png') }}" alt="YouTube" class="h-8"></a>
@@ -58,7 +57,7 @@
                     <!-- Link Terkait Section -->
                     <div class="text-center md:text-right order-1 md:order-none w-full md:w-1/2">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-4">
-                            <h2 class="text-black font-semibold mb-4 text-xl col-span-1 sm:col-span-2">Link Terkait</h2>
+                            <h2 class="text-black font-semibold mb-2 text-xl col-span-1 sm:col-span-2">Link Terkait</h2>
                             <ul class="space-y-1">
                                 <li><a href="https://www.menpan.go.id/site/"
                                         class="text-black hover:text-gray-300">KEMENPAN</a></li>

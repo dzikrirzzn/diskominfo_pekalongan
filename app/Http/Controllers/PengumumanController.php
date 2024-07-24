@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Pengumuman;
 
@@ -64,6 +64,9 @@ class PengumumanController extends Controller
     public function adminIndex()
     {
         $allPengumuman = Pengumuman::all();
+        foreach ($allPengumuman as $pengumuman) {
+            $pengumuman->formatted_date = Carbon::parse($pengumuman->tanggal)->translatedFormat('d F Y');
+        }
         return view('admin.pengumuman.index', compact('allPengumuman'));
     }
 

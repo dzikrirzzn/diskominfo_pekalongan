@@ -75,7 +75,8 @@
                                     </label>
                                     <span id="file-chosen" class="ml-2 text-gray-700">No file chosen</span>
                                 </div>
-                                <input type="file" accept="image/jpeg,image/png,image/jpg" id="image" name="image" class="hidden">
+                                <input type="file" accept="image/jpeg,image/png,image/jpg" id="image" name="image"
+                                    class="hidden">
                             </div>
                             <div class="mb-4">
                                 <label for="map_location"
@@ -102,7 +103,6 @@
                 dateFormat: 'yy-mm-dd'
             });
         });
-        CKEDITOR.replace('isi');
 
         const imageInput = document.getElementById('image');
         const fileChosen = document.getElementById('file-chosen');

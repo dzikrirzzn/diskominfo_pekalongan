@@ -1,47 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+{{-- resources/views/layouts/navbar.blade.php --}}
+<style>
+.group:hover .group-hover\:opacity-100 {
+    pointer-events: auto;
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar with Correct Dropdown Structure</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
-    <style>
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
+.group .group-hover\:opacity-100 {
+    pointer-events: none;
+}
+</style>
 
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .dropdown-animation {
-        animation: fadeIn 0.3s ease-out;
-    }
-    </style>
-</head>
-
-<body>
-    <nav x-data="{ scrolled: false, showNav: true, lastScrollY: 0, timeout: null, isOpen: false }" x-init="window.addEventListener('scroll', () => {
-             clearTimeout(timeout);
-             if (window.scrollY > lastScrollY) {
-                 showNav = false;
-             } else {
-                 showNav = true;
-             }
-             lastScrollY = window.scrollY;
-             scrolled = window.scrollY > 0;
-             timeout = setTimeout(() => {
-                 showNav = true;
-             }, 300);
-         })" :class="{'transform -translate-y-full': !showNav, 'transform translate-y-0': showNav}"
-        class="fixed w-full z-50 py-2 transition-transform duration-500 ease-in-out border-b-2 border-white h-24 bg-yellow-500">
-        <div class="container mx-auto flex justify-between items-center flex-wrap">
+<nav id="navbar" x-data="{ open: false, activeDropdown: null }"
+    class="fixed w-full bg-white shadow-md transition-all duration-300 ease-in-out z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
             <a href="{{ route('home') }}">
                 <div class="text-black font-bold flex items-center mt-4 ms-7">
                     <img src="{{ asset('img/logopkl.png') }}" alt="Logo" class="h-12 mr-3">
@@ -51,47 +22,136 @@
                     </div>
                 </div>
             </a>
-            <button @click="isOpen = !isOpen" class="block lg:hidden">
-                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path :class="{'hidden': isOpen, 'inline-flex': !isOpen }" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    <path :class="{'hidden': !isOpen, 'inline-flex': isOpen }" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-            <div :class="{'hidden': !isOpen, 'block': isOpen}"
-                class="w-full lg:flex lg:items-center lg:w-auto mt-3 mr-5">
-                <ul class="lg:flex space-y-2 lg:space-y-0 lg:space-x-4">
-                    @foreach($navItems as $item)
-                    @if($item->is_dropdown && $item->children->isNotEmpty())
-                    <li class="relative" x-data="{ dropdownOpen: false }">
-                        <a href="#" class="block text-black hover:text-gray-200 text-xl"
-                            @click.prevent="dropdownOpen = !dropdownOpen">{{ $item->title }}</a>
-                        <div x-show="dropdownOpen" x-transition:enter="transition ease-out duration-300"
-                            x-transition:enter-start="opacity-0 transform scale-90"
-                            x-transition:enter-end="opacity-100 transform scale-100"
-                            x-transition:leave="transition ease-in duration-300"
-                            x-transition:leave-start="opacity-100 transform scale-100"
-                            x-transition:leave-end="opacity-0 transform scale-90"
-                            class="absolute left-0 mt-2 w-48 bg-white border rounded-lg shadow-lg dropdown-animation">
-                            <ul>
-                                @foreach($item->children as $child)
-                                <li><a href="{{ $child->url }}"
-                                        class="block px-4 py-2 text-black hover:bg-gray-200 rounded-lg transition-colors duration-300">{{ $child->title }}</a>
-                                </li>
-                                @endforeach
-                            </ul>
+
+            <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                @foreach($navItems as $item)
+                @if($item->parent_id === null)
+                @if($item->children->isEmpty())
+                <a href="{{ $item->url }}"
+                    class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">{{ $item->title }}</a>
+                @else
+                <div class="relative" @mouseenter="activeDropdown = {{ $item->id }}"
+                    @mouseleave="activeDropdown = null">
+                    <button
+                        class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 inline-flex items-center">
+                        {{ $item->title }}
+                        <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div x-show="activeDropdown === {{ $item->id }}"
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="transform opacity-0 scale-95"
+                        x-transition:enter-end="transform opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="transform opacity-100 scale-100"
+                        x-transition:leave-end="transform opacity-0 scale-95"
+                        class="absolute z-10 left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                        <div class="py-1" role="menu" aria-orientation="vertical">
+                            @foreach($item->children as $child)
+                            <a href="{{ $child->url }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                role="menuitem">{{ $child->title }}</a>
+                            @endforeach
                         </div>
-                    </li>
-                    @else
-                    <li><a href="{{ $item->url }}"
-                            class="block text-black hover:text-gray-200 text-base">{{ $item->title }}</a></li>
-                    @endif
-                    @endforeach
-                </ul>
+                    </div>
+                </div>
+                @endif
+                @endif
+                @endforeach
+            </div>
+            <div class="-mr-2 flex items-center sm:hidden">
+                <button @click="open = !open" type="button"
+                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                    aria-controls="mobile-menu" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="block h-6 w-6" :class="{'hidden': open, 'block': !open }"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg class="hidden h-6 w-6" :class="{'block': open, 'hidden': !open }"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                        aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
         </div>
-    </nav>
-</body>
+    </div>
 
-</html>
+    <div x-show="open" x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-150" x-transition:leave-start="transform opacity-100 scale-100"
+        x-transition:leave-end="transform opacity-0 scale-95" class="sm:hidden" id="mobile-menu">
+        <div class="pt-2 pb-3 space-y-1">
+            @foreach($navItems as $item)
+            @if($item->parent_id === null)
+            @if($item->children->isEmpty())
+            <a href="{{ $item->url }}"
+                class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">{{ $item->title }}</a>
+            @else
+            <div x-data="{ subOpen: false }" class="relative">
+                <button @click="subOpen = !subOpen"
+                    class="w-full px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 flex justify-between items-center">
+                    {{ $item->title }}
+                    <svg class="h-4 w-4 transform transition-transform duration-200" :class="{'rotate-180': subOpen}"
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <div x-show="subOpen" x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="transform opacity-0 scale-95"
+                    x-transition:enter-end="transform opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="transform opacity-100 scale-100"
+                    x-transition:leave-end="transform opacity-0 scale-95" class="mt-2 space-y-1">
+                    @foreach($item->children as $child)
+                    <a href="{{ $child->url }}"
+                        class="block pl-6 pr-3 py-2 text-base font-medium text-gray-500 hover:text-gray-900 hover:bg-gray-50">{{ $child->title }}</a>
+                    @endforeach
+                </div>
+            </div>
+            @endif
+            @endif
+            @endforeach
+        </div>
+    </div>
+</nav>
+
+<script>
+let prevScrollpos = window.pageYOffset;
+const navbar = document.getElementById("navbar");
+let scrollTimeout;
+
+function debounce(func, wait) {
+    return function() {
+        const context = this;
+        const args = arguments;
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => func.apply(context, args), wait);
+    };
+}
+
+function handleScroll() {
+    let currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+        navbar.style.top = "0";
+    } else {
+        navbar.style.top = "-64px"; // Sesuaikan nilai ini dengan tinggi navbar Anda
+    }
+    prevScrollpos = currentScrollPos;
+}
+
+function showNavbar() {
+    navbar.style.top = "0";
+}
+
+window.addEventListener('scroll', handleScroll);
+window.addEventListener('scroll', debounce(showNavbar, 500)); // Navbar akan muncul 0.5 detik setelah scrolling berhenti
+</script>

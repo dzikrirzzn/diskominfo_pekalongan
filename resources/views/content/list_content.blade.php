@@ -35,7 +35,7 @@
                     <div class="ml-4">
                         <h3 class="text-xl font-semibold mb-2">{{ $item->title }}</h3>
                         <p class="text-gray-600 mb-4">{{ $item->subtitle }}</p>
-                        <p class="text-gray-500 text-sm">{{ $item->date }}</p>
+                        <p class="text-gray-500 text-sm">{{ $item->formatted_date }}</p>
                     </div>
                 </div>
                 @elseif ($type == 'pengumuman')
@@ -44,8 +44,8 @@
                         alt="{{ $item->judul }}">
                     <div class="ml-4">
                         <h3 class="text-xl font-semibold mb-2">{{ $item->judul }}</h3>
-                        <p class="text-gray-600 mb-4">{{ $item->isi_pengumuman }}</p>
-                        <p class="text-gray-500 text-sm">{{ $item->tanggal }}</p>
+                        <p class="text-gray-600 mb-4">{!! $item->isi_pengumuman !!}</p>
+                        <p class="text-gray-500 text-sm">{{ $item->formatted_date }}</p>
                     </div>
                 </div>
                 @elseif ($type == 'travel')
@@ -55,7 +55,7 @@
                     <div class="ml-4">
                         <h3 class="text-xl font-semibold mb-2">{{ $item->judul }}</h3>
                         <p class="text-gray-600 mb-4">{{ $item->sub_judul }}</p>
-                        <p class="text-gray-500 text-sm">{{ $item->date }}</p>
+                        <p class="text-gray-500 text-sm">{{ $item->formatted_date }}</p>
                     </div>
                 </div>
                 @endif

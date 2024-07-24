@@ -26,7 +26,7 @@
                     @if($type === 'berita')
                     <h1 class="text-4xl font-bold mb-2">{{ $content->title }}</h1>
                     <div class="text-gray-600 text-sm mb-4">
-                        <span>Ditulis oleh {{ $content->author }}</span> | <span>{{ $content->date }}</span> |
+                        <span>Ditulis oleh {{ $content->author }}</span> | <span>{{ $content->formatted_date }}</span> |
                         <span>2449
                             views</span>
                     </div>
@@ -35,20 +35,22 @@
                     <p class="leading-7 mb-4 text-justify">{{ $content->subtitle }}</p>
                     <p class="leading-7 mb-4 text-justify">{!! $content->content !!}</p>
                     @elseif($type === 'pengumuman')
-                    <h1 class="text-4xl font-bold mb-2">{{ $content->title }}</h1>
+                    <h1 class="text-4xl font-bold mb-2">{{ $content->judul }}</h1>
                     <div class="text-gray-600 text-sm mb-4">
-                        <span>Ditulis oleh {{ $content->author }}</span> | <span>{{ $content->date }}</span>
+                        <span>Ditulis oleh {{ $content->penulis }}</span> | <span>{{ $content->formatted_date }}</span>
                     </div>
-                    <p class="leading-7 mb-4 text-justify">{{ $content->content }}</p>
+                    <img class="max-h-80 max-w-96 rounded-lg mb-4 content-center"
+                        src="{{ asset('storage/' . $content->gambar_pengumuman) }}" alt="{{ $content->judul }}">
+                    <p class="leading-7 mb-4 text-justify">{!! $content->isi_pengumuman !!}</p>
                     @elseif($type === 'travel')
-                    <h1 class="text-4xl font-bold mb-2">{{ $content->title }}</h1>
+                    <h1 class="text-4xl font-bold mb-2">{{ $content->judul }}</h1>
                     <div class="text-gray-600 text-sm mb-4">
-                        <span>Ditulis oleh {{ $content->author }}</span> | <span>{{ $content->date }}</span>
+                        <span>Ditulis oleh {{ $content->author }}</span> | <span>{{ $content->formatted_date }}</span>
                     </div>
                     <img class="max-h-80 max-w-96 rounded-lg mb-4 content-center"
                         src="{{ asset('storage/' . $content->image) }}" alt="{{ $content->title }}">
-                    <p class="leading-7 mb-4 text-justify">{{ $content->subtitle }}</p>
-                    <p class="leading-7 mb-4 text-justify">{!! $content->content !!}</p>
+                    <p class="leading-7 mb-4 text-justify">{{ $content->sub_judul }}</p>
+                    <p class="leading-7 mb-4 text-justify">{!! $content->isi !!}</p>
                     <div class="mt-4">
                         <a href="{{ $content->map }}" target="_blank"
                             class="text-blue-500 hover:text-blue-700 underline">Lihat Lokasi di Peta</a>
@@ -70,7 +72,7 @@
                                 src="{{ asset('storage/' . $content->image) }}" alt="{{ $content->title }}">
                             <div class="flex-1">
                                 <h3 class="text-lg font-semibold">{{ $content->title }}</h3>
-                                <p class="text-gray-600 text-sm">{{ $content->date }}</p>
+                                <p class="text-gray-600 text-sm">{{ $content->formatted_date }}</p>
                             </div>
                         </a>
                     </li>

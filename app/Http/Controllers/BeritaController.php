@@ -8,6 +8,7 @@ use App\Models\Layanan;
 use App\Models\OtherBerita;
 use App\Models\Pengumuman;
 use App\Models\TravelRecommendation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Event;
 
@@ -27,7 +28,19 @@ class BeritaController extends Controller
         $travelRecommendations = TravelRecommendation::all();
         $layanans = Layanan::all();
         $galleries = Gallery::all();
-        $events = Event::all();
+
+        foreach ($headlineBerita as $item) {
+            $item->formatted_date = Carbon::parse($item->date)->translatedFormat('d F Y');
+        }
+    
+        foreach ($otherBerita as $item) {
+            $item->formatted_date = Carbon::parse($item->date)->translatedFormat('d F Y');
+        }
+    
+        foreach ($pengumuman as $item) {
+            $item->formatted_date = Carbon::parse($item->tanggal)->translatedFormat('d F Y');
+        }
+    
 
         return view('home', compact('headlineBerita', 'otherBerita', 'pengumuman', 'travelRecommendations', 'layanans', 'galleries', 'events'));
     }
@@ -41,6 +54,8 @@ class BeritaController extends Controller
         }
 
         $otherBerita = OtherBerita::latest()->take(5)->get();
+        $otherBerita->formatted_date = Carbon::parse($otherBerita->date)->translatedFormat('d F Y');
+
         $type = 'berita'; // or 'pengumuman' or 'travel'
 
 

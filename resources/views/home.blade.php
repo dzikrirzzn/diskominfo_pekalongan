@@ -12,6 +12,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('img/logopkl.png') }}" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
     <link rel="stylesheet" href="https://www.zabuto.com/dev/calendar/dist/zabuto_calendar.min.css">
@@ -253,7 +254,7 @@
                                             class="flex justify-between w-full no-underline">
                                             <span
                                                 class="hover:text-yellow-500 truncate max-w-xs">{{ $berita->title }}</span>
-                                            <span class="text-gray-500">| {{ $berita->date }}</span>
+                                            <span class="text-gray-500">| {{ $berita->formatted_date }}</span>
                                         </a>
                                     </li>
                                     @endforeach
@@ -263,11 +264,11 @@
                     </div>
                     <!-- Pengumuman Section -->
                     <div class="flex-1 md:flex-[1] bg-transparent rounded-lg p-4 h-full flex flex-col">
-                        <h2
-                            class="text-2xl md:text-3xl font-semibold mb-4 text-left text-white border-b-2 border-gray-300">
-                            Pengumuman</h2>
-                        <a href="{{ route('pengumuman.list') }}"
-                            class="text-sm text-yellow-500 hover:text-yellow-700">Lihat Semua</a>
+                        <div class="flex justify-between items-center mb-4 border-b-2 border-gray-300">
+                            <h2 class="text-2xl md:text-3xl font-semibold text-left text-white">Pengumuman</h2>
+                            <a href="{{ route('pengumuman.list') }}"
+                                class="text-sm text-white hover:text-blue-400">Lihat Semua</a>
+                        </div>
 
                         <div class="bg-white rounded-lg shadow-md p-4 overflow-y-scroll flex-1">
                             <ul class="space-y-2">
@@ -276,13 +277,14 @@
                                     <a href="{{ route('content.show', ['type' => 'pengumuman', 'id' => $item->id]) }}"
                                         class="flex justify-between w-full no-underline">
                                         <span class="hover:text-yellow-500 truncate max-w-xs">{{ $item->judul }}</span>
-                                        <span class="text-gray-500 text-right"> | {{ $item->tanggal }}</span>
+                                        <span class="text-gray-500 text-right"> | {{ $item->formatted_date }}</span>
                                     </a>
                                 </li>
                                 @endforeach
                             </ul>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -516,62 +518,30 @@
 
 
         <!-- Layanan Kota Pekalongan -->
-        <div class=" mx-10  mt-12 mb-20">
+        <div class="mx-10 mt-12 mb-20">
             <div class="container mx-auto py-8 px-4">
                 <h1 class="text-2xl font-bold mb-6 text-black">Layanan Kota Pekalongan</h1>
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
                         @foreach($layanans as $layanan)
-                        <a href="{{ $layanan->link }}">
-                            <div class="swiper-slide bg-white">
-                                <!-- Modified section: Added border styles -->
-                                <div
-                                    class="w-full max-w-md rounded overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 hover:border-yellow-500 border-2 border-gray-100 h-64 flex flex-col">
-                                    <img class="w-16 h-16 mt-4 ml-4 object-contain"
-                                        src="{{ asset('storage/' . $layanan->image) }}" alt="{{ $layanan->title }}">
-                                    <div class="px-6 py-4 flex flex-col justify-between flex-grow">
-                                        <div>
-                                            <div class="font-bold text-xl mb-2">{{ $layanan->title }}</div>
-                                            <p class="text-gray-700 text-base">{!! $layanan->description !!}</p>
-                                        </div>
-                                        <a href="{{ $layanan->link }}"
-                                            class="text-blue-500 hover:underline mt-2 inline-block">Selengkapnya..</a>
+                        <div class="swiper-slide bg-white">
+                            <!-- Modified section: Added border styles -->
+                            <div
+                                class="w-full max-w-md rounded overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 hover:border-yellow-500 border-2 border-gray-100 h-64 flex flex-col">
+                                <img class="w-16 h-16 mt-4 ml-4 object-contain"
+                                    src="{{ asset('storage/' . $layanan->image) }}" alt="{{ $layanan->title }}">
+                                <div class="px-6 py-4 flex flex-col justify-between flex-grow">
+                                    <div>
+                                        <div class="font-bold text-xl mb-2">{{ $layanan->title }}</div>
+                                        <p class="text-gray-700 text-base">{!! $layanan->description !!}</p>
                                     </div>
+                                    <a href="{{ $layanan->link }}"
+                                        class="text-blue-500 hover:underline mt-2 inline-block">Selengkapnya..</a>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                         @endforeach
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div
-            class="container mx-auto p-4 flex flex-col lg:flex-row lg:justify-between space-y-8 lg:space-y-0 lg:space-x-8 mb-2">
-            <!-- Kominfo widget on the left -->
-            <div class="flex flex-col space-y-4 w-full lg:w-1/3">
-                <div class="flex items-center justify-center h-full">
-                    <div id="gpr-kominfo-widget-container" class="w-full"></div>
-                    <script src="https://widget.kominfo.go.id/gpr-widget-kominfo.min.js" async></script>
-                </div>
-            </div>
-
-            <!-- Container for Twitter widgets -->
-            <div class="flex flex-wrap lg:flex-nowrap space-y-4 lg:space-y-0 lg:space-x-4 w-full lg:w-2/3">
-                <!-- Twitter feed for @pemkotpkl -->
-                <div class="flex flex-col space-y-4 w-full lg:w-1/2">
-                    <div class="font-bold mb-4 text-left">Postingan dari @pemkotpkl</div>
-                    <a class="twitter-timeline" href="https://twitter.com/pemkotpkl" data-tweet-limit="5"
-                        data-height="550" data-width="100%">Tweets by Pemkot Pekalongan</a>
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                </div>
-
-                <!-- Twitter feed for @officialbatiktv -->
-                <div class="flex flex-col space-y-4 w-full lg:w-1/2">
-                    <div class="font-bold mb-4 text-left">Postingan dari @officialbatiktv</div>
-                    <a class="twitter-timeline" href="https://twitter.com/officialbatiktv" data-tweet-limit="5"
-                        data-height="550" data-width="100%">Tweets by BATIK TV</a>
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
             </div>
         </div>
@@ -604,6 +574,36 @@
             });
         });
         </script>
+
+        <div
+            class="container mx-auto p-4 flex flex-col lg:flex-row lg:justify-between space-y-8 lg:space-y-0 lg:space-x-8 mb-2">
+            <!-- Kominfo widget on the left -->
+            <div class="flex flex-col space-y-4 w-full lg:w-1/3">
+                <div class="flex items-center justify-center h-full">
+                    <div id="gpr-kominfo-widget-container" class="w-full"></div>
+                    <script src="https://widget.kominfo.go.id/gpr-widget-kominfo.min.js" async></script>
+                </div>
+            </div>
+
+            <!-- Container for Twitter widgets -->
+            <div class="flex flex-wrap lg:flex-nowrap space-y-4 lg:space-y-0 lg:space-x-4 w-full lg:w-2/3">
+                <!-- Twitter feed for @pemkotpkl -->
+                <div class="flex flex-col space-y-4 w-full lg:w-1/2">
+                    <div class="font-bold mb-4 text-left">Postingan dari @pemkotpkl</div>
+                    <a class="twitter-timeline" href="https://twitter.com/pemkotpkl" data-tweet-limit="5"
+                        data-height="550" data-width="100%">Tweets by Pemkot Pekalongan</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+
+                <!-- Twitter feed for @officialbatiktv -->
+                <div class="flex flex-col space-y-4 w-full lg:w-1/2">
+                    <div class="font-bold mb-4 text-left">Postingan dari @officialbatiktv</div>
+                    <a class="twitter-timeline" href="https://twitter.com/officialbatiktv" data-tweet-limit="5"
+                        data-height="550" data-width="100%">Tweets by BATIK TV</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+            </div>
+        </div>
 
         <!-- Peta Kota -->
         <div class=" mx-16 mb-12">
