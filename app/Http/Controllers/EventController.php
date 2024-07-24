@@ -19,8 +19,19 @@ class EventController extends Controller
             'event_date' => 'required|date',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'subtitle' => 'nullable|string',
+            'location' => 'nullable|string',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'link' => 'required|url'
         ]);
-
+    
+        // Handle file upload
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagePath = $image->store('public/images');
+            $validated['image'] = basename($imagePath);
+        }
+    
         Event::create($validated);
         return redirect()->route('admin.event.index');
     }
@@ -37,16 +48,27 @@ class EventController extends Controller
     }
 
     public function update(Request $request, Event $event)
-    {
-        $validated = $request->validate([
-            'event_date' => 'required|date',
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-        ]);
+{
+    $validated = $request->validate([
+        'event_date' => 'required|date',
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'subtitle' => 'nullable|string',
+        'location' => 'nullable|string',
+        'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'link' => 'required|url'
+    ]);
 
-        $event->update($validated);
-        return redirect()->route('admin.event.index');
+    // Handle file upload
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imagePath = $image->store('public/images');
+        $validated['image'] = basename($imagePath);
     }
+
+    $event->update($validated);
+    return redirect()->route('admin.event.index');
+}
 
     public function destroy(Event $event)
     {
@@ -58,5 +80,15 @@ class EventController extends Controller
     {
         $events = Event::all();
         return view('admin.event.index', compact('events'));
+    }
+    public function edit($id)
+    {
+        $events = Event::findOrFail($id);
+
+        if (!$events) {
+            return redirect()->route('admin.event.index')->with('error', 'Event tidak ditemukan.');
+        }
+
+        return view('admin.event.edit', compact('events'));
     }
 }
