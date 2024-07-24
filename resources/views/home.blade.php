@@ -88,6 +88,7 @@
     max-width: 100%;
     overflow-x: hidden;
 }
+
 </style>
 
 <body class="flex flex-col min-h-screen bg-white">
@@ -204,205 +205,194 @@
 
 
         <!-- Berita & Pengumuman -->
-        <div class="relative h-screen">
-            <!-- Background Image Overlay -->
-            <div class="absolute inset-0 bg-cover bg-center h-full"
-                style="background-image: url('https://asset.kompas.com/crops/AsZwJgbHv7GOQqeOdxo1cCZ64Ak=/167x95:965x627/750x500/data/photo/2022/10/01/633807f7d7d67.png');">
-                <div class="absolute inset-0 bg-gray-500 opacity-60"></div>
-            </div>
-            <!-- Content Container -->
-            <div class="container mx-auto py-8 px-4 h-full relative z-10">
-                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 h-full px-4 md:px-20">
-                    <!-- Berita Section -->
-                    <div class="flex-1 md:flex-[3] bg-transparent rounded-lg p-4 h-full flex flex-col">
-                        <h2 class="text-2xl md:text-3xl font-semibold mb-4 text-white border-b-2 border-gray-300">Berita
-                            Kota</h2>
-                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-4">
-                            <!-- Image Box -->
+<div class="relative h-screen">
+    <!-- Background Image Overlay -->
+    <div class="absolute inset-0 bg-cover bg-center h-full"
+        style="background-image: url('https://asset.kompas.com/crops/AsZwJgbHv7GOQqeOdxo1cCZ64Ak=/167x95:965x627/750x500/data/photo/2022/10/01/633807f7d7d67.png');">
+        <div class="absolute inset-0 bg-gray-500 opacity-60"></div>
+    </div>
+    <!-- Content Container -->
+    <div class="container mx-auto py-8 px-4 h-full relative z-10">
+        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 h-full px-4 md:px-20">
+            <!-- Berita Section -->
+            <div class="w-3/4 bg-transparent rounded-lg p-4 h-full flex flex-col">
+                <div class="flex items-center justify-between border-b-2 border-gray-300 mb-4">
+                    <h2 class="text-2xl md:text-3xl font-semibold text-white">Berita Kota</h2>
+                    <a href="{{ route('berita.list') }}" class="text-sm text-white hover:text-blue-400">Lihat Semua</a>
+                </div>
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                    <!-- Image Box -->
+                    <div
+                        class="flex flex-col md:flex-row flex-wrap md:flex-nowrap space-y-4 md:space-y-0 md:space-x-4 mb-4">
+                        @foreach ($headlineBerita->take(2) as $berita)
+                        <!-- Each image box taking up half the space -->
+                        <a href="{{ route('content.show', ['type' => 'berita', 'id' => $berita->id]) }}"
+                            class="block no-underline text-black w-full md:w-1/2">
                             <div
-                                class="flex flex-col md:flex-row flex-wrap md:flex-nowrap space-y-4 md:space-y-0 md:space-x-4 mb-4">
-                                @foreach ($headlineBerita->take(2) as $berita)
-                                <!-- Each image box taking up half the space -->
+                                class="w-full h-64 rounded-lg shadow overflow-hidden relative transform hover:scale-90 hover:brightness-75 transition-transform duration-700">
+                                <img class="w-full h-full object-cover"
+                                    src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}">
+                                <div
+                                    class="absolute bottom-0 w-full p-2 bg-black bg-opacity-50 text-white text-center">
+                                    <h3 class="text-lg font-bold hover:text-gray-400 transition-colors duration-300">
+                                        {{ mb_substr($berita->title,0,50) }}...
+                                    </h3>
+                                </div>
+                            </div>
+                        </a>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-4 flex-1">
+                    <div class="flex justify-between mb-2">
+                        <span class="font-semibold text-black">Berita Lainnya</span>
+                    </div>
+                    <div class="overflow-y-auto max-h-32">
+                        <ul class="space-y-2">
+                            @foreach ($otherBerita as $berita)
+                            <li class="flex justify-between text-sm border-b border-gray-300 pb-2 mr-2">
                                 <a href="{{ route('content.show', ['type' => 'berita', 'id' => $berita->id]) }}"
-                                    class="block no-underline text-black w-full md:w-1/2">
-                                    <div
-                                        class="w-full h-full rounded-lg shadow overflow-hidden relative transform hover:scale-90 hover:brightness-75 transition-transform duration-700">
-                                        <img class=" w-screen h-64 object-cover"
-                                            src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}">
-                                        <div
-                                            class="absolute bottom-0 w-full p-2 bg-black bg-opacity-50 text-white text-center">
-                                            <h3
-                                                class="text-lg font-bold hover:text-gray-400 transition-colors duration-300">
-                                                {{ mb_substr($berita->title,0,50) }}...
-                                            </h3>
-                                        </div>
-                                    </div>
+                                    class="flex justify-between w-full no-underline">
+                                    <span class="hover:text-yellow-500 truncate max-w-xs">{{ $berita->title }}</span>
+                                    <span class="text-gray-500">| {{ $berita->formatted_date }}</span>
                                 </a>
-                                @endforeach
-                            </div>
-                        </div>
-                        <div class="bg-white rounded-lg shadow-md p-4 flex-1 h-24">
-                            <div class="flex justify-between mb-2 ">
-                                <span class="font-semibold text-black">Berita Lainnya</span>
-                                <span class="font-semibold"></span>
-                            </div>
-                            <div class="overflow-y-auto h-20">
-                                <ul class="space-y-2">
-                                    @foreach ($otherBerita as $berita)
-                                    <li class="flex justify-between text-sm border-b border-gray-300 pb-2 mr-2">
-                                        <a href="{{ route('content.show', ['type' => 'berita', 'id' => $berita->id]) }}"
-                                            class="flex justify-between w-full no-underline">
-                                            <span
-                                                class="hover:text-yellow-500 truncate max-w-xs">{{ $berita->title }}</span>
-                                            <span class="text-gray-500">| {{ $berita->formatted_date }}</span>
-                                        </a>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Pengumuman Section -->
-                    <div class="flex-1 md:flex-[1] bg-transparent rounded-lg p-4 h-full flex flex-col">
-                        <div class="flex justify-between items-center mb-4 border-b-2 border-gray-300">
-                            <h2 class="text-2xl md:text-3xl font-semibold text-left text-white">Pengumuman</h2>
-                            <a href="{{ route('pengumuman.list') }}"
-                                class="text-sm text-white hover:text-blue-400">Lihat Semua</a>
-                        </div>
-
-                        <div class="bg-white rounded-lg shadow-md p-4 overflow-y-scroll flex-1">
-                            <ul class="space-y-2">
-                                @foreach ($pengumuman as $item)
-                                <li class="flex justify-between text-sm border-b border-gray-300 pb-2">
-                                    <a href="{{ route('content.show', ['type' => 'pengumuman', 'id' => $item->id]) }}"
-                                        class="flex justify-between w-full no-underline">
-                                        <span class="hover:text-yellow-500 truncate max-w-xs">{{ $item->judul }}</span>
-                                        <span class="text-gray-500 text-right"> | {{ $item->formatted_date }}</span>
-                                    </a>
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Galeri -->
-        <div class="mx-4 md:mx-16 mt-10 mb-24">
-            <div class="container mx-auto py-8 px-4">
-                <h1 class="text-2xl font-bold mb-6 text-black">Galeri Kota Pekalongan</h1>
-
-                <!-- First Carousel -->
-                <div class="swiper-container first-carousel">
-                    <div class="swiper-wrapper">
-                        @foreach($galleries as $gallery)
-                        <div class="swiper-slide">
-                            <div class="gallery-item relative group rounded-lg overflow-hidden shadow-md">
-                                <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}"
-                                    class="w-full h-32 object-cover">
-                                <div
-                                    class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
-                                </div>
-                                <div
-                                    class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
-                                    {{ $gallery->title }}
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-
-                <!-- Second Carousel -->
-                <div class="swiper-container second-carousel mt-10">
-                    <div class="swiper-wrapper">
-                        @foreach($galleries as $gallery)
-                        <div class="swiper-slide">
-                            <div class="gallery-item relative group rounded-lg overflow-hidden shadow-md">
-                                <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}"
-                                    class="w-full h-32 object-cover">
-                                <div
-                                    class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
-                                </div>
-                                <div
-                                    class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
-                                    {{ $gallery->title }}
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
+                            </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>
+            <!-- Pengumuman Section -->
+            <div class="w-1/4 bg-transparent rounded-lg p-4 h-full flex flex-col">
+                <div class="flex justify-between items-center mb-4 border-b-2 border-gray-300">
+                    <h2 class="text-2xl md:text-3xl font-semibold text-left text-white">Pengumuman</h2>
+                    <a href="{{ route('pengumuman.list') }}" class="text-sm text-white hover:text-blue-400">Lihat Semua</a>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-4 overflow-y-auto flex-1">
+                    <ul class="space-y-2">
+                        @foreach ($pengumuman as $item)
+                        <li class="flex justify-between text-sm border-b border-gray-300 pb-2">
+                            <a href="{{ route('content.show', ['type' => 'pengumuman', 'id' => $item->id]) }}"
+                                class="flex justify-between w-full no-underline">
+                                <span class="hover:text-yellow-500 truncate max-w-xs">{{ $item->judul }}</span>
+                                <span class="text-gray-500 text-right"> | {{ $item->formatted_date }}</span>
+                            </a>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Galeri -->
+<div class="mx-4 md:mx-16 mt-10 mb-24">
+    <div class="container mx-auto py-8 px-4">
+        <h1 class="text-2xl font-bold mb-6 text-black">Galeri Kota Pekalongan</h1>
+
+        <!-- First Carousel -->
+        <div class="swiper-container first-carousel">
+            <div class="swiper-wrapper">
+                @foreach($galleries as $gallery)
+                <div class="swiper-slide">
+                    <div class="gallery-item relative group rounded-lg overflow-hidden shadow-md">
+                        <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}" class="w-full h-32 object-cover">
+                        <div class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
+                            {{ $gallery->title }}
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
         </div>
 
-        <!-- Include Swiper JS -->
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <!-- Second Carousel -->
+        <div class="swiper-container second-carousel mt-10">
+            <div class="swiper-wrapper">
+                @foreach($galleries as $gallery)
+                <div class="swiper-slide">
+                    <div class="gallery-item relative group rounded-lg overflow-hidden shadow-md">
+                        <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}" class="w-full h-32 object-cover">
+                        <div class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
+                            {{ $gallery->title }}
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
 
-        <!-- Initialize Swiper -->
-        <script>
-        var firstSwiper = new Swiper('.first-carousel', {
-            slidesPerView: 1,
-            slidesPerColumn: 2,
-            spaceBetween: 10,
-            slidesPerGroup: 1,
-            loop: true,
-            loopFillGroupWithBlank: true,
-            breakpoints: {
-                640: {
-                    slidesPerView: 2,
-                    slidesPerColumn: 2,
-                    slidesPerGroup: 2,
-                    spaceBetween: 20
-                },
-                768: {
-                    slidesPerView: 3,
-                    slidesPerColumn: 2,
-                    slidesPerGroup: 3,
-                    spaceBetween: 30
-                },
-                1024: {
-                    slidesPerView: 4,
-                    slidesPerColumn: 2,
-                    slidesPerGroup: 4,
-                    spaceBetween: 40
-                }
-            }
-        });
+<!-- Include Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-        var secondSwiper = new Swiper('.second-carousel', {
-            slidesPerView: 1,
-            slidesPerColumn: 2,
-            spaceBetween: 10,
-            slidesPerGroup: 1,
-            loop: true,
-            loopFillGroupWithBlank: true,
+<!-- Initialize Swiper -->
+<script>
+var firstSwiper = new Swiper('.first-carousel', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    slidesPerGroup: 1,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    grabCursor: true,
+    autoplay: {
+        delay: 5000,
+        disableOnInteraction: false
+    },
+    breakpoints: {
+        640: {
+            slidesPerView: 2,
+            slidesPerGroup: 2,
+            spaceBetween: 20
+        },
+        768: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+            spaceBetween: 30
+        },
+        1024: {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+            spaceBetween: 40
+        }
+    }
+});
 
-            breakpoints: {
-                640: {
-                    slidesPerView: 2,
-                    slidesPerColumn: 2,
-                    slidesPerGroup: 2,
-                    spaceBetween: 20
-                },
-                768: {
-                    slidesPerView: 3,
-                    slidesPerColumn: 2,
-                    slidesPerGroup: 3,
-                    spaceBetween: 30
-                },
-                1024: {
-                    slidesPerView: 4,
-                    slidesPerColumn: 2,
-                    slidesPerGroup: 4,
-                    spaceBetween: 40
-                }
-            }
-        });
-        </script>
+var secondSwiper = new Swiper('.second-carousel', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    slidesPerGroup: 1,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    grabCursor: true,
+    autoplay: {
+        delay: 5000,
+        disableOnInteraction: false
+    },
+    breakpoints: {
+        640: {
+            slidesPerView: 2,
+            slidesPerGroup: 2,
+            spaceBetween: 20
+        },
+        768: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+            spaceBetween: 30
+        },
+        1024: {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+            spaceBetween: 40
+        }
+    }
+});
+</script>
+
         <!-- Kalender Acara -->
         <div class="container mx-auto p-2 lg:p-4 relative mt-8 mb-6 overflow-hidden">
             <!-- Background kuning yang memenuhi lebar layar -->
