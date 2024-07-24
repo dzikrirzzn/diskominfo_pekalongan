@@ -1,5 +1,6 @@
 {{-- resources/views/layouts/navbar.blade.php --}}
 <style>
+/* Navbar styles */
 .group:hover .group-hover\:opacity-100 {
     pointer-events: auto;
 }
@@ -7,23 +8,53 @@
 .group .group-hover\:opacity-100 {
     pointer-events: none;
 }
+
+.navbar {
+    height: 4rem;
+    /* Adjust height based on your design */
+}
+
+.navbar-logo {
+    max-height: 3rem;
+    /* Ensure logo fits within the navbar */
+}
+
+.navbar-title {
+    font-size: 1rem;
+    /* Adjust title font size */
+}
+
+.navbar-title span {
+    display: block;
+    /* Make title responsive */
+}
+
+@media (max-width: 640px) {
+    .navbar-logo {
+        max-height: 2.5rem;
+        /* Adjust logo size for mobile */
+    }
+
+    .navbar-title {
+        font-size: 0.875rem;
+        /* Adjust title font size for mobile */
+    }
+}
 </style>
 
 <nav id="navbar" x-data="{ open: false, activeDropdown: null }"
-    class="fixed w-full bg-white shadow-md transition-all duration-300 ease-in-out z-50">
+    class="fixed w-full bg-white shadow-md transition-all duration-300 ease-in-out z-50  navbar">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <a href="{{ route('home') }}">
-                <div class="text-black font-bold flex items-center mt-4 ms-7">
-                    <img src="{{ asset('img/logopkl.png') }}" alt="Logo" class="h-12 mr-3">
-                    <div class="flex flex-col">
-                        <div class="text-l">PEMERINTAH</div>
-                        <div class="text-xl">KOTA PEKALONGAN</div>
-                    </div>
+        <div class="flex justify-between items-center h-16">
+            <a href="{{ route('home') }}" class="flex items-center">
+                <img src="{{ asset('img/logopkl.png') }}" alt="Logo" class="h-10 mr-3">
+                <div class="flex flex-col navbar-title">
+                    <div class="text-sm">Pemerintah</div>
+                    <div class="text-xl font-bold">Kota Pekalongan</div>
                 </div>
             </a>
 
-            <div class="hidden sm:ml-6 sm:flex sm:items-center">
+            <div class="hidden sm:flex sm:items-center">
                 @foreach($navItems as $item)
                 @if($item->parent_id === null)
                 @if($item->children->isEmpty())
@@ -61,6 +92,7 @@
                 @endif
                 @endforeach
             </div>
+
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = !open" type="button"
                     class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
@@ -143,7 +175,7 @@ function handleScroll() {
     if (prevScrollpos > currentScrollPos) {
         navbar.style.top = "0";
     } else {
-        navbar.style.top = "-64px"; // Sesuaikan nilai ini dengan tinggi navbar Anda
+        navbar.style.top = "-64px"; // Adjust this value to match your navbar's height
     }
     prevScrollpos = currentScrollPos;
 }
@@ -153,5 +185,5 @@ function showNavbar() {
 }
 
 window.addEventListener('scroll', handleScroll);
-window.addEventListener('scroll', debounce(showNavbar, 500)); // Navbar akan muncul 0.5 detik setelah scrolling berhenti
+window.addEventListener('scroll', debounce(showNavbar, 500)); // Navbar will reappear 0.5 seconds after scrolling stops
 </script>

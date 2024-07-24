@@ -133,26 +133,31 @@
                             <div class="relative" id="slides">
                                 @foreach ($travelRecommendations as $index => $recommendation)
                                 <div class="slide {{ $loop->first ? 'active' : '' }} w-full" data-index="{{ $index }}">
-                                    <div class="flex flex-col md:flex-row h-full">
-                                        <!-- Left side - Image -->
-                                        <div
-                                            class="w-full md:w-1/2 h-64 md:h-96 relative border-l-2 border-t-2 border-b-2 border-gray-200">
-                                            <img src="{{ asset('storage/' . $recommendation->image) }}"
-                                                alt="{{ $recommendation->judul }}" class="w-full h-full object-cover">
+                                    <a href="{{ route('content.show', ['type' => 'travel', 'id' => $recommendation->id]) }}"
+                                        class="block no-underline text-black w-full h-full">
+                                        <div class="flex flex-col md:flex-row h-full">
+                                            <!-- Left side - Image -->
+                                            <div
+                                                class="w-full md:w-1/2 h-64 md:h-96 relative border-l-2 border-t-2 border-b-2 border-gray-200">
+                                                <img src="{{ asset('storage/' . $recommendation->image) }}"
+                                                    alt="{{ $recommendation->judul }}"
+                                                    class="w-full h-full object-cover">
+                                            </div>
+                                            <!-- Right side - Content -->
+                                            <div
+                                                class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative shadow-lg border-t-2 border-r-2 border-b-2 border-gray-200">
+                                                <img src="{{ asset('img/pklbunga.png') }}"
+                                                    alt="{{ $recommendation->judul }} Logo"
+                                                    class="h-16 md:h-24 w-auto mb-2 absolute top-2 md:top-4 left-2 md:left-4 object-contain">
+                                                <h2
+                                                    class="text-lg md:text-2xl font-bold mb-2 text-black mt-20 md:mt-28">
+                                                    {{ $recommendation->judul }}</h2>
+                                                <p
+                                                    class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis mt-6">
+                                                    {{ $recommendation->isi }}</p>
+                                            </div>
                                         </div>
-                                        <!-- Right side - Content -->
-                                        <div
-                                            class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative shadow-lg border-t-2 border-r-2 border-b-2 border-gray-200">
-                                            <img src="{{ asset('img/pklbunga.png') }}"
-                                                alt="{{ $recommendation->judul }} Logo"
-                                                class="h-16 md:h-24 w-auto mb-2 absolute top-2 md:top-4 left-2 md:left-4 object-contain">
-                                            <h2 class="text-lg md:text-2xl font-bold mb-2 text-black mt-20 md:mt-28">
-                                                {{ $recommendation->judul }}</h2>
-                                            <p
-                                                class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis mt-6">
-                                                {{ $recommendation->isi }}</p>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </div>
                                 @endforeach
                             </div>
@@ -202,7 +207,6 @@
             showSlide(currentSlide);
         });
         </script>
-
 
         <!-- Berita & Pengumuman -->
 <div class="relative h-screen">
@@ -415,45 +419,41 @@ var secondSwiper = new Swiper('.second-carousel', {
                         <!-- Events Section -->
                         <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 mt-2">
                             <ul class="space-y-2">
-                                <?php foreach ($events as $event): ?>
-                                <li class="flex items-start space-x-2">
+                                @foreach ($events as $event)
+                                <li class="flex items-start space-x-2 event-item" data-title="{{ $event->title }}"
+                                    data-date="{{ \Carbon\Carbon::parse($event->event_date)->format('d M Y') }}"
+                                    data-description="{!! $event->description !!}"
+                                    data-image="{{ asset('storage/images/' . $event->image) }}"
+                                    data-location="{{ $event->location }}" data-link="{{ $event->link }}">
                                     <div class="flex-shrink-0">
                                         <div
                                             class="bg-black text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
                                             <span
-                                                class="text-lg font-bold"><?= \Carbon\Carbon::parse($event['event_date'])->format('d') ?></span>
+                                                class="text-lg font-bold">{{ \Carbon\Carbon::parse($event->event_date)->format('d') }}</span>
                                             <span
-                                                class="text-xs"><?= strtoupper(\Carbon\Carbon::parse($event['event_date'])->format('M')) ?></span>
+                                                class="text-xs">{{ strtoupper(\Carbon\Carbon::parse($event->event_date)->format('M')) }}</span>
                                         </div>
                                     </div>
                                     <div>
-                                        <h3 class="text-md font-semibold"><?= $event['title'] ?></h3>
-                                        <p class="text-gray-600 text-sm"><?= $event['description'] ?></p>
+                                        <h3 class="text-md font-semibold">{{ $event->title }}</h3>
+                                        <p class="text-gray-600 text-sm">{{ $event->subtitle }}</p>
                                     </div>
                                 </li>
-                                <?php endforeach; ?>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
 
                     <!-- Right Column -->
-                    <div class="lg:w-1/2 mt-8 lg:mt-0 lg:flex lg:flex-col">
+                    <div id="right-column" class="lg:w-1/2 mt-8 lg:mt-0 lg:flex lg:flex-col">
                         <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex-grow">
                             <img src="https://via.placeholder.com/150" alt="Event Image"
-                                class="w-full h-64 object-cover rounded-md mb-4">
-                            <h2 class="text-xl font-bold mb-2">PERIKLINDO ELECTRIC VEHICLE SHOW (PEVS) 2024</h2>
-                            <p class="text-gray-700 text-sm mb-2">
-                                Jakarta International Expo Kemayoran, 30 April - 5 Mei 2024
-                            </p>
-                            <p class="text-gray-700 text-sm mb-2">
-                                Perkumpulan Industri Kendaraan Listrik Indonesia (PERIKLINDO) bersama Dyandra Promosindo
-                                akan kembali menyelenggarakan pameran mobil listrik dan otomotif turunannya PERIKLINDO
-                                Electric Vehicle Show (PEVS) 2024. PEVS hadir sebagai wadah untuk menggencarkan
-                                kendaraan listrik di Indonesia. Acara ini diharapkan dapat memberikan peluang bagi
-                                pengunjung untuk mendapatkan wawasan mendalam tentang tren terbaru dalam kendaraan
-                                listrik, solusi pengisian daya, dan berbagai aspek terkait lainnya.
-                            </p>
-                            <a href="#" class="text-blue-500 text-sm hover:underline">Selengkapnya...</a>
+                                class="w-full h-64 object-cover rounded-md mb-4 event-image">
+                            <h2 class="text-xl font-bold mb-2 event-title">Detail Event</h2>
+                            <p class="text-gray-700 text-sm mb-2 event-date">Tanggal Event</p>
+                            <p class="text-gray-700 text-sm mb-2 event-location">Lokasi Event</p>
+                            <p class="text-gray-700 text-sm mb-2 event-description">Deskripsi Event</p>
+                            <a href="#" class="text-blue-500 text-sm hover:underline event-link">Selengkapnya...</a>
                         </div>
                     </div>
                 </div>
@@ -461,22 +461,19 @@ var secondSwiper = new Swiper('.second-carousel', {
         </div>
 
         <script>
-        // Pass PHP events to JavaScript
-        var events = <?php echo json_encode($events); ?>;
-
         $(document).ready(function() {
+            // Pass PHP events to JavaScript
+            var events = <?php echo json_encode($events); ?>;
+
             // Format events for Zabuto Calendar
             var calendarEvents = events.map(function(event) {
                 return {
                     date: event.event_date,
                     badge: true,
-                    title: event.title,
+                    title: event.name,
                     body: event.description
                 };
             });
-
-            // Debug: Log formatted events to the console
-            console.log(calendarEvents);
 
             // Initialize Zabuto Calendar
             $("#demo-calendar-apppearance").zabuto_calendar({
@@ -503,26 +500,27 @@ var secondSwiper = new Swiper('.second-carousel', {
                     $(this).closest('.day').addClass("clicked-date");
                 }
             });
+
+            // Handle click on event item
+            $('.event-item').on('click', function() {
+                var title = $(this).data('title');
+                var date = $(this).data('date');
+                var description = $(this).data('description');
+                var image = $(this).data('image');
+                var location = $(this).data('location');
+                var link = $(this).data('link');
+
+                // Update right column content
+                $('.event-image').attr('src', image);
+                $('.event-title').text(title);
+                $('.event-date').text(date);
+                $('.event-location').text(location);
+                $('.event-description').html(description);
+                $('.event-link').attr('href', link);
+            });
         });
         </script>
 
-        <style>
-        .clicked-date {
-            background-color: #ffeb3b !important;
-        }
-
-        .badge-day {
-            background-color: #ffeb3b !important;
-            border-radius: 50%;
-            display: inline-block;
-            width: 1em;
-            height: 1em;
-            line-height: 1em;
-            text-align: center;
-        }
-        </style>
-
-
 
         <style>
         .clicked-date {
@@ -542,6 +540,21 @@ var secondSwiper = new Swiper('.second-carousel', {
 
 
 
+        <style>
+        .clicked-date {
+            background-color: #ffeb3b !important;
+        }
+
+        .badge-day {
+            background-color: #ffeb3b !important;
+            border-radius: 50%;
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            line-height: 1em;
+            text-align: center;
+        }
+        </style>
 
         <!-- Layanan Kota Pekalongan -->
         <div class="mx-10 mt-12 mb-20">
