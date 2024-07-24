@@ -28,7 +28,7 @@
 
                         <h2 class="text-2xl font-bold mb-4">Add/Edit Navigation Item</h2>
 
-                        <form
+                        <form id="nav-form"
                             action="{{ isset($navItem) ? route('navItems.update', $navItem->id) : route('navItems.store') }}"
                             method="POST">
                             @csrf
@@ -74,7 +74,7 @@
 
                             <div class="mb-4">
                                 <label class="block text-gray-700">
-                                    <input type="checkbox" name="is_dropdown" class="mr-2"
+                                    <input type="checkbox" name="is_dropdown" id="is_dropdown" class="mr-2"
                                         {{ old('is_dropdown', isset($navItem) && $navItem->is_dropdown ? 'checked' : '') }}>
                                     Is Dropdown
                                 </label>
@@ -85,11 +85,10 @@
                                 <template id="child-item-template">
                                     <div class="child-item mb-4 p-4 border rounded">
                                         <label class="block text-gray-700">Child Item Title</label>
-                                        <input type="text" name="child_items[0][title]"
-                                            class="w-full p-2 border border-gray-300 rounded" required>
+                                        <input type="text" class="child-title w-full p-2 border border-gray-300 rounded"
+                                            required>
                                         <label class="block text-gray-700 mt-2">Child Item URL</label>
-                                        <input type="text" name="child_items[0][url]"
-                                            class="w-full p-2 border border-gray-300 rounded">
+                                        <input type="text" class="child-url w-full p-2 border border-gray-300 rounded">
                                         <button type="button"
                                             class="remove-child-item bg-red-500 text-white px-2 py-1 mt-2 rounded">Remove</button>
                                     </div>
@@ -124,7 +123,7 @@
                                     <button type="submit" class="text-red-500 ml-2">Delete</button>
                                 </form>
                                 @if($item->is_dropdown)
-                                <ul class="list-circle pl-5 mt-2">
+                                <ul class="list-disc pl-5 mt-2">
                                     @foreach($item->children as $child)
                                     <li>
                                         {{ $child->title }} ({{ $child->url }})
@@ -152,18 +151,24 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const isDropdownCheckbox = document.querySelector('input[name="is_dropdown"]');
+        const isDropdownCheckbox = document.querySelector('#is_dropdown');
         const childItemsSection = document.getElementById('child-items-section');
         const addChildItemButton = document.getElementById('add-child-item');
         const childItemsContainer = document.getElementById('child-items-container');
         const childItemTemplate = document.getElementById('child-item-template').content;
 
         function toggleChildItemsSection() {
-            if (isDropdownCheckbox.checked) {
-                childItemsSection.style.display = 'block';
-            } else {
-                childItemsSection.style.display = 'none';
-            }
+            childItemsSection.style.display = isDropdownCheckbox.checked ? 'block' : 'none';
+        }
+
+        function updateChildItemNames() {
+            const childItems = childItemsContainer.querySelectorAll('.child-item');
+            childItems.forEach((item, index) => {
+                const titleInput = item.querySelector('.child-title');
+                const urlInput = item.querySelector('.child-url');
+                titleInput.name = `child_items[${index}][title]`;
+                urlInput.name = `child_items[${index}][url]`;
+            });
         }
 
         isDropdownCheckbox.addEventListener('change', toggleChildItemsSection);
@@ -173,14 +178,26 @@
             const newChildItem = childItemTemplate.cloneNode(true);
             newChildItem.querySelector('.remove-child-item').addEventListener('click', function() {
                 newChildItem.remove();
+                updateChildItemNames();
             });
             childItemsContainer.appendChild(newChildItem);
+            updateChildItemNames();
         });
 
         document.querySelectorAll('.remove-child-item').forEach(button => {
             button.addEventListener('click', function() {
                 button.closest('.child-item').remove();
+                updateChildItemNames();
             });
+        });
+
+        // Handle form submission
+        document.getElementById('nav-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Simulate successful form submission
+            alert('Berhasil Ditambahkan');
+            this.submit(); // Uncomment this line to proceed with the form submission
         });
     });
     </script>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NavItemController;
 use App\Models\NavItem;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
 
 Route::get('/', [BeritaController::class, 'home'])->name('home');
 
@@ -129,6 +130,16 @@ Route::get('navItems/createContent', [NavItemController::class, 'createContent']
 Route::post('navItems/storeContent', [NavItemController::class, 'storeContent'])->name('navItems.storeContent');
 Route::get('content/{content}', [NavItemController::class, 'showContent'])->name('content.show');
 
+Route::get('/admin/event', [EventController::class, 'adminIndex'])->name('admin.event.index');
+Route::put('/admin/event', [EventController::class, 'adminIndex'])->name('admin.event.index');
+Route::delete('/admin/event', [EventController::class, 'adminIndex'])->name('admin.event.index');
+Route::get('/admin/event/create', [EventController::class, 'create'])->name('admin.event.create');
+Route::post('/admin/event/store', [EventController::class, 'store'])->name('admin.event.store');
+Route::get('/admin/event/{id}/edit', [EventController::class, 'edit'])->name('admin.event.edit');
+Route::put('/admin/event/{id}', [EventController::class, 'update'])->name('admin.event.update');
+Route::delete('/admin/event/{id}', [EventController::class, 'destroy'])->name('admin.event.destroy');
+Route::get('/admin/event/{id}/event', [EventController::class, 'show'])->name('admin.event.show');
+
 Route::get('/admin_create_content', function () {
     return view('admin_create_content');
 })->name('admin_create_content');
@@ -140,7 +151,7 @@ Route::get('/pengumuman', [ContentController::class, 'listPengumuman'])->name('p
 Route::get('/travel', [ContentController::class, 'listTravel'])->name('travel.list');
 Route::get('/{type}/{id}', [ContentController::class, 'show'])->name('content.show');
 
-
+Route::resource('events', EventController::class);
 
 
 Route::middleware('auth')->group(function () {

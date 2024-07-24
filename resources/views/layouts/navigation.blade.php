@@ -39,6 +39,9 @@
                         :active="request()->routeIs('admin_create_content')">
                         {{ __('Content') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.event.index')" :active="request()->routeIs('admin.event.index')">
+                        {{ __('Event Kalender') }}
+                    </x-nav-link>
                 </div>
             </div>
 

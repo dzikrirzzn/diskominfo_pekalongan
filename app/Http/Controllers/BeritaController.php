@@ -9,6 +9,7 @@ use App\Models\OtherBerita;
 use App\Models\Pengumuman;
 use App\Models\TravelRecommendation;
 use Illuminate\Http\Request;
+use App\Models\Event;
 
 class BeritaController extends Controller
 {
@@ -26,8 +27,9 @@ class BeritaController extends Controller
         $travelRecommendations = TravelRecommendation::all();
         $layanans = Layanan::all();
         $galleries = Gallery::all();
+        $events = Event::all();
 
-        return view('home', compact('headlineBerita', 'otherBerita', 'pengumuman', 'travelRecommendations', 'layanans', 'galleries'));
+        return view('home', compact('headlineBerita', 'otherBerita', 'pengumuman', 'travelRecommendations', 'layanans', 'galleries', 'events'));
     }
 
     public function show($id)
