@@ -604,10 +604,10 @@ document.getElementById('focusButton').addEventListener('click', () => {
             <div class="flex items-center justify-center md:justify-start mb-4 md:mb-0">
                 <img src="{{ asset('img/pklbunga.png') }}" alt="Logo" class="h-26 max-w-full">
             </div>
-            <div class="flex items-center space-x-2 justify-center md:justify-end">
-                <img src="https://pekalongankota.go.id/template/frontend/img/widget/logo-evp.png" alt="Logo EVP" class="h-12 md:h-16 max-w-full">
-                <img src="https://pekalongankota.go.id/template/frontend/img/widget/logo-berakhlak.png" alt="Logo Berakhlak" class="h-12 md:h-16 max-w-full">
-                <img src="https://api-pse.layanan.go.id/storage/badge/badge_643.png" alt="Logo Kominfo" class="h-12 md:h-16 max-w-full">
+            <div class="flex flex-wrap items-center space-x-2 justify-center md:justify-end">
+                <img src="https://pekalongankota.go.id/template/frontend/img/widget/logo-evp.png" alt="Logo EVP" class="h-12 md:h-16 max-w-full mx-2">
+                <img src="https://pekalongankota.go.id/template/frontend/img/widget/logo-berakhlak.png" alt="Logo Berakhlak" class="h-12 md:h-16 max-w-full mx-2">
+                <img src="https://api-pse.layanan.go.id/storage/badge/badge_643.png" alt="Logo Kominfo" class="h-12 md:h-16 max-w-full mx-2">
             </div>
         </div>
         <!-- Middle Section with Address and Contact Info -->
