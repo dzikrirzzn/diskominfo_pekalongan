@@ -314,7 +314,6 @@
                         </div>
                         @endforeach
                     </div>
-                    <div class="swiper-pagination"></div>
                 </div>
 
                 <!-- Second Carousel -->
@@ -336,7 +335,6 @@
                         </div>
                         @endforeach
                     </div>
-                    <div class="swiper-pagination"></div>
                 </div>
             </div>
         </div>
@@ -353,10 +351,6 @@
             slidesPerGroup: 1,
             loop: true,
             loopFillGroupWithBlank: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
             breakpoints: {
                 640: {
                     slidesPerView: 2,
@@ -386,10 +380,7 @@
             slidesPerGroup: 1,
             loop: true,
             loopFillGroupWithBlank: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
+
             breakpoints: {
                 640: {
                     slidesPerView: 2,
@@ -598,10 +589,7 @@
                 slidesPerView: 1,
                 spaceBetween: 10,
                 loop: true,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
+
                 breakpoints: {
                     640: {
                         slidesPerView: 1,
