@@ -96,6 +96,8 @@ Route::post('/admin/event/store', [EventController::class, 'store'])->name('admi
 Route::get('/admin/event/{id}/edit', [EventController::class, 'edit'])->name('admin.event.edit');
 Route::put('/admin/event/{id}', [EventController::class, 'update'])->name('admin.event.update');
 Route::delete('/admin/event/{id}', [EventController::class, 'destroy'])->name('admin.event.destroy');
+Route::get('/admin/event/show', [EventController::class, 'show'])->name('admin.event.show');
+
 
 // routes/web.php
 Route::get('/navItems/create', [NavItemController::class, 'create'])->name('navItems.create');
