@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NavItemController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\EventController;
 
 Route::get('/', [BeritaController::class, 'home'])->name('home');
 
@@ -82,7 +83,19 @@ Route::put('admin/galeri/{id}', [GalleryController::class, 'update'])->name('adm
 Route::delete('admin/galeri/{id}', [GalleryController::class, 'destroy'])->name('admin.galeri.destroy');
 Route::delete('admin/galeri', [GalleryController::class, 'destroyAll'])->name('admin.galeri.destroyAll');
 
+Route::get('/admin/navbar', [NavItemController::class, 'adminIndex'])->name('admin.navbar.index');
+Route::get('/admin/navbar/create', [NavItemController::class, 'create'])->name('admin.navbar.create');
+Route::post('/admin/navbar/store', [NavItemController::class, 'store'])->name('admin.navbar.store');
+Route::get('/admin/navbar/{id}/edit', [NavItemController::class, 'edit'])->name('admin.navbar.edit');
+Route::put('/admin/navbar/{id}', [NavItemController::class, 'update'])->name('admin.navbar.update');
+Route::delete('/admin/navbar/{id}', [NavItemController::class, 'destroy'])->name('admin.navbar.destroy');
 
+Route::get('/admin/event', [EventController::class, 'adminIndex'])->name('admin.event.index');
+Route::get('/admin/event/create', [EventController::class, 'create'])->name('admin.event.create');
+Route::post('/admin/event/store', [EventController::class, 'store'])->name('admin.event.store');
+Route::get('/admin/event/{id}/edit', [EventController::class, 'edit'])->name('admin.event.edit');
+Route::put('/admin/event/{id}', [EventController::class, 'update'])->name('admin.event.update');
+Route::delete('/admin/event/{id}', [EventController::class, 'destroy'])->name('admin.event.destroy');
 
 // routes/web.php
 Route::get('/navItems/create', [NavItemController::class, 'create'])->name('navItems.create');

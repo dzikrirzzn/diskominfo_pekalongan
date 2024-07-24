@@ -7,7 +7,7 @@
     <title>Website Resmi Pemerintah Kota Pekalongan</title>
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-  
+
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <link rel="icon" type="image/x-icon" href="{{ asset('img/logopkl.png') }}" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -22,7 +22,7 @@
     <script src="https://www.zabuto.com/dev/calendar/dist/zabuto_calendar.min.js"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
+
 </head>
 
 <style>
@@ -81,8 +81,8 @@
 
 .swiper-container {
     width: 100%;
-    overflow: hidden;
 }
+
 
 .container {
     max-width: 100%;
@@ -291,228 +291,273 @@
 
 
         <!-- Galeri -->
-    <div class="mx-16 mt-10 mb-24">
-        <div class="container mx-auto py-8 px-4">
-            <h1 class="text-2xl font-bold mb-6 text-black">Galeri Kota Pekalongan</h1>
+        <div class="mx-4 md:mx-16 mt-10 mb-24">
+            <div class="container mx-auto py-8 px-4">
+                <h1 class="text-2xl font-bold mb-6 text-black">Galeri Kota Pekalongan</h1>
 
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    @foreach($galleries as $gallery)
-                    <div class="swiper-slide">
-                        <div class="relative group rounded-lg overflow-hidden shadow-md">
-                            <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}" class="w-full h-32 object-cover">
-                            <div class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300"></div>
-                            <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
-                                {{ $gallery->title }}
+                <!-- First Carousel -->
+                <div class="swiper-container first-carousel">
+                    <div class="swiper-wrapper">
+                        @foreach($galleries as $gallery)
+                        <div class="swiper-slide">
+                            <div class="gallery-item relative group rounded-lg overflow-hidden shadow-md">
+                                <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}"
+                                    class="w-full h-32 object-cover">
+                                <div
+                                    class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
+                                </div>
+                                <div
+                                    class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
+                                    {{ $gallery->title }}
+                                </div>
                             </div>
                         </div>
+                        @endforeach
                     </div>
-                    @endforeach
+                    <div class="swiper-pagination"></div>
                 </div>
-            </div>
 
-            <div class="swiper-container mt-10">
-                <div class="swiper-wrapper">
-                    @foreach($galleries as $gallery)
-                    <div class="swiper-slide">
-                        <div class="relative group rounded-lg overflow-hidden shadow-md">
-                            <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}" class="w-full h-32 object-cover">
-                            <div class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300"></div>
-                            <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
-                                {{ $gallery->title }}
+                <!-- Second Carousel -->
+                <div class="swiper-container second-carousel mt-10">
+                    <div class="swiper-wrapper">
+                        @foreach($galleries as $gallery)
+                        <div class="swiper-slide">
+                            <div class="gallery-item relative group rounded-lg overflow-hidden shadow-md">
+                                <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}"
+                                    class="w-full h-32 object-cover">
+                                <div
+                                    class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
+                                </div>
+                                <div
+                                    class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
+                                    {{ $gallery->title }}
+                                </div>
                             </div>
                         </div>
+                        @endforeach
                     </div>
-                    @endforeach
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var swiperContainers = document.querySelectorAll('.swiper-container');
-            swiperContainers.forEach(function(container) {
-                new Swiper(container, {
-                    loop: true,
-                    autoplay: {
-                        delay: 2500,
-                        disableOnInteraction: false,
-                    },
-                    pagination: {
-                        el: '.swiper-pagination',
-                        clickable: true,
-                    },
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
-                });
+        <!-- Include Swiper JS -->
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+        <!-- Initialize Swiper -->
+        <script>
+        var firstSwiper = new Swiper('.first-carousel', {
+            slidesPerView: 1,
+            slidesPerColumn: 2,
+            spaceBetween: 10,
+            slidesPerGroup: 1,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    slidesPerColumn: 2,
+                    slidesPerGroup: 2,
+                    spaceBetween: 20
+                },
+                768: {
+                    slidesPerView: 3,
+                    slidesPerColumn: 2,
+                    slidesPerGroup: 3,
+                    spaceBetween: 30
+                },
+                1024: {
+                    slidesPerView: 4,
+                    slidesPerColumn: 2,
+                    slidesPerGroup: 4,
+                    spaceBetween: 40
+                }
+            }
+        });
+
+        var secondSwiper = new Swiper('.second-carousel', {
+            slidesPerView: 1,
+            slidesPerColumn: 2,
+            spaceBetween: 10,
+            slidesPerGroup: 1,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    slidesPerColumn: 2,
+                    slidesPerGroup: 2,
+                    spaceBetween: 20
+                },
+                768: {
+                    slidesPerView: 3,
+                    slidesPerColumn: 2,
+                    slidesPerGroup: 3,
+                    spaceBetween: 30
+                },
+                1024: {
+                    slidesPerView: 4,
+                    slidesPerColumn: 2,
+                    slidesPerGroup: 4,
+                    spaceBetween: 40
+                }
+            }
+        });
+        </script>
+        <!-- Kalender Acara -->
+        <div class="container mx-auto p-2 lg:p-4 relative mt-8 mb-6 overflow-hidden">
+            <!-- Background kuning yang memenuhi lebar layar -->
+            <div
+                class="absolute top-0 left-1/2 transform -translate-x-1/2 w-screen h-2/3 bg-yellow-500 bg-opacity-75 z-0">
+            </div>
+
+            <!-- Wrapper untuk konten -->
+            <div class="relative z-10">
+                <div class="flex flex-col lg:flex-row lg:space-x-4">
+                    <!-- Left Column -->
+                    <div class="flex flex-col lg:w-1/2 space-y-4">
+                        <!-- Kalender Text -->
+                        <div class="text-2xl font-bold text-gray-700">Kalender Acara</div>
+                        <!-- Calendar Section -->
+                        <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 mt-2">
+                            <div id="demo-calendar-apppearance"></div>
+                        </div>
+
+                        <!-- Events Section -->
+                        <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 mt-2">
+                            <ul class="space-y-2">
+                                <?php foreach ($events as $event): ?>
+                                <li class="flex items-start space-x-2">
+                                    <div class="flex-shrink-0">
+                                        <div
+                                            class="bg-black text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
+                                            <span
+                                                class="text-lg font-bold"><?= \Carbon\Carbon::parse($event['event_date'])->format('d') ?></span>
+                                            <span
+                                                class="text-xs"><?= strtoupper(\Carbon\Carbon::parse($event['event_date'])->format('M')) ?></span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-md font-semibold"><?= $event['title'] ?></h3>
+                                        <p class="text-gray-600 text-sm"><?= $event['description'] ?></p>
+                                    </div>
+                                </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="lg:w-1/2 mt-8 lg:mt-0 lg:flex lg:flex-col">
+                        <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex-grow">
+                            <img src="https://via.placeholder.com/150" alt="Event Image"
+                                class="w-full h-64 object-cover rounded-md mb-4">
+                            <h2 class="text-xl font-bold mb-2">PERIKLINDO ELECTRIC VEHICLE SHOW (PEVS) 2024</h2>
+                            <p class="text-gray-700 text-sm mb-2">
+                                Jakarta International Expo Kemayoran, 30 April - 5 Mei 2024
+                            </p>
+                            <p class="text-gray-700 text-sm mb-2">
+                                Perkumpulan Industri Kendaraan Listrik Indonesia (PERIKLINDO) bersama Dyandra Promosindo
+                                akan kembali menyelenggarakan pameran mobil listrik dan otomotif turunannya PERIKLINDO
+                                Electric Vehicle Show (PEVS) 2024. PEVS hadir sebagai wadah untuk menggencarkan
+                                kendaraan listrik di Indonesia. Acara ini diharapkan dapat memberikan peluang bagi
+                                pengunjung untuk mendapatkan wawasan mendalam tentang tren terbaru dalam kendaraan
+                                listrik, solusi pengisian daya, dan berbagai aspek terkait lainnya.
+                            </p>
+                            <a href="#" class="text-blue-500 text-sm hover:underline">Selengkapnya...</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        // Pass PHP events to JavaScript
+        var events = <?php echo json_encode($events); ?>;
+
+        $(document).ready(function() {
+            // Format events for Zabuto Calendar
+            var calendarEvents = events.map(function(event) {
+                return {
+                    date: event.event_date,
+                    badge: true,
+                    title: event.title,
+                    body: event.description
+                };
+            });
+
+            // Debug: Log formatted events to the console
+            console.log(calendarEvents);
+
+            // Initialize Zabuto Calendar
+            $("#demo-calendar-apppearance").zabuto_calendar({
+                header_format: '[year] // [month]',
+                week_starts: 'sunday',
+                show_days: true,
+                today_markup: '<span class="bg-blue-500 text-white rounded-full px-2 py-1">[day]</span>',
+                navigation_markup: {
+                    prev: '<i class="fas fa-chevron-circle-left text-gray-600 hover:text-gray-800"></i>',
+                    next: '<i class="fas fa-chevron-circle-right text-gray-600 hover:text-gray-800"></i>'
+                },
+                data: calendarEvents,
+                action: function() {
+                    var date = $(this).data("date");
+                    var hasEvent = $(this).data("hasEvent");
+                    if (hasEvent) {
+                        alert("You clicked on a date with events: " + date);
+                    } else {
+                        alert("You clicked on a date with no events: " + date);
+                    }
+
+                    // Toggle clicked date color
+                    $(".zabuto_calendar .day").removeClass("clicked-date");
+                    $(this).closest('.day').addClass("clicked-date");
+                }
             });
         });
-    </script>
+        </script>
 
-<!-- Kalender Acara -->
-<div class="container mx-auto p-2 lg:p-4 relative mt-8 mb-6 overflow-hidden">
-    <!-- Background kuning yang memenuhi lebar layar -->
-    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-screen h-2/3 bg-yellow-500 bg-opacity-75 z-0"></div>
+        <style>
+        .clicked-date {
+            background-color: #ffeb3b !important;
+        }
 
-    <!-- Wrapper untuk konten -->
-    <div class="relative z-10">
-        <div class="flex flex-col lg:flex-row lg:space-x-4">
-            <!-- Left Column -->
-            <div class="flex flex-col lg:w-1/2 space-y-4">
-                <!-- Kalender Text -->
-                <div class="text-2xl font-bold text-gray-700">Kalender Acara</div>
-                <!-- Calendar Section -->
-                <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 mt-2">
-                    <div id="demo-calendar-apppearance"></div>
-                </div>
+        .badge-day {
+            background-color: #ffeb3b !important;
+            border-radius: 50%;
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            line-height: 1em;
+            text-align: center;
+        }
+        </style>
 
-                <!-- Events Section -->
-                <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 mt-2">
-                    <ul class="space-y-2">
-                        <?php foreach ($events as $event): ?>
-                            <li class="flex items-start space-x-2">
-                                <div class="flex-shrink-0">
-                                    <div class="bg-black text-white rounded-lg w-12 h-12 flex flex-col items-center justify-center">
-                                        <span class="text-lg font-bold"><?= \Carbon\Carbon::parse($event['event_date'])->format('d') ?></span>
-                                        <span class="text-xs"><?= strtoupper(\Carbon\Carbon::parse($event['event_date'])->format('M')) ?></span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h3 class="text-md font-semibold"><?= $event['title'] ?></h3>
-                                    <p class="text-gray-600 text-sm"><?= $event['description'] ?></p>
-                                </div>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            </div>
 
-            <!-- Right Column -->
-            <div class="lg:w-1/2 mt-8 lg:mt-0 lg:flex lg:flex-col">
-                <div class="bg-white border border-gray-300 rounded-lg shadow-md p-4 flex-grow">
-                    <img src="https://via.placeholder.com/150" alt="Event Image" class="w-full h-64 object-cover rounded-md mb-4">
-                    <h2 class="text-xl font-bold mb-2">PERIKLINDO ELECTRIC VEHICLE SHOW (PEVS) 2024</h2>
-                    <p class="text-gray-700 text-sm mb-2">
-                        Jakarta International Expo Kemayoran, 30 April - 5 Mei 2024
-                    </p>
-                    <p class="text-gray-700 text-sm mb-2">
-                        Perkumpulan Industri Kendaraan Listrik Indonesia (PERIKLINDO) bersama Dyandra Promosindo akan kembali menyelenggarakan pameran mobil listrik dan otomotif turunannya PERIKLINDO Electric Vehicle Show (PEVS) 2024. PEVS hadir sebagai wadah untuk menggencarkan kendaraan listrik di Indonesia. Acara ini diharapkan dapat memberikan peluang bagi pengunjung untuk mendapatkan wawasan mendalam tentang tren terbaru dalam kendaraan listrik, solusi pengisian daya, dan berbagai aspek terkait lainnya.
-                    </p>
-                    <a href="#" class="text-blue-500 text-sm hover:underline">Selengkapnya...</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<script>
-    // Pass PHP events to JavaScript
-    var events = <?php echo json_encode($events); ?>;
+        <style>
+        .clicked-date {
+            background-color: #ffeb3b !important;
+        }
 
-    $(document).ready(function () {
-        // Format events for Zabuto Calendar
-        var calendarEvents = events.map(function(event) {
-            return {
-                date: event.event_date,
-                badge: true,
-                title: event.title,
-                body: event.description
-            };
-        });
-
-        // Debug: Log formatted events to the console
-        console.log(calendarEvents);
-
-        // Initialize Zabuto Calendar
-        $("#demo-calendar-apppearance").zabuto_calendar({
-            header_format: '[year] // [month]',
-            week_starts: 'sunday',
-            show_days: true,
-            today_markup: '<span class="bg-blue-500 text-white rounded-full px-2 py-1">[day]</span>',
-            navigation_markup: {
-                prev: '<i class="fas fa-chevron-circle-left text-gray-600 hover:text-gray-800"></i>',
-                next: '<i class="fas fa-chevron-circle-right text-gray-600 hover:text-gray-800"></i>'
-            },
-            data: calendarEvents,
-            action: function () {
-                var date = $(this).data("date");
-                var hasEvent = $(this).data("hasEvent");
-                if (hasEvent) {
-                    alert("You clicked on a date with events: " + date);
-                } else {
-                    alert("You clicked on a date with no events: " + date);
-                }
-
-                // Toggle clicked date color
-                $(".zabuto_calendar .day").removeClass("clicked-date");
-                $(this).closest('.day').addClass("clicked-date");
-            }
-        });
-    });
-</script>
-
-<style>
-    .clicked-date {
-        background-color: #ffeb3b !important;
-    }
-    .badge-day {
-        background-color: #ffeb3b !important;
-        border-radius: 50%;
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-        line-height: 1em;
-        text-align: center;
-    }
-</style>
-
-        // Initialize Zabuto Calendar
-        $("#my-calendar").zabuto_calendar({
-            language: "id",
-            today: true,
-            show_days: true,
-            navigation_enabled: true,
-            nav_icon: {
-                prev: '<i class="fa fa-chevron-circle-left"></i>',
-                next: '<i class="fa fa-chevron-circle-right"></i>'
-            },
-            data: calendarEvents,
-            action: function () {
-                var date = $(this).data("date");
-                var hasEvent = $(this).data("hasEvent");
-                if (hasEvent) {
-                    alert("You clicked on a date with events: " + date);
-                } else {
-                    alert("You clicked on a date with no events: " + date);
-                }
-
-                // Toggle clicked date color
-                $(".zabuto_calendar .day").removeClass("clicked-date");
-                $(this).closest('.day').addClass("clicked-date");
-            }
-        });
-    });
-</script>
-
-<style>
-    .clicked-date {
-        background-color: #ffeb3b !important;
-    }
-    .badge-day {
-        background-color: #ffeb3b !important;
-        border-radius: 50%;
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-        line-height: 1em;
-        text-align: center;
-    }
-</style>
+        .badge-day {
+            background-color: #ffeb3b !important;
+            border-radius: 50%;
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            line-height: 1em;
+            text-align: center;
+        }
+        </style>
 
 
 
@@ -546,7 +591,7 @@
             </div>
         </div>
         <!-- Swiper JS -->
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <sc src="https://unpkg.com/swiper/swiper-bundle.min.js"></sc>
         <script>
         document.addEventListener('DOMContentLoaded', function() {
             var swiper = new Swiper('.swiper-container', {
