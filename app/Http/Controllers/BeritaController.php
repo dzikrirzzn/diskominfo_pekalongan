@@ -28,6 +28,7 @@ class BeritaController extends Controller
         $travelRecommendations = TravelRecommendation::all();
         $layanans = Layanan::all();
         $galleries = Gallery::all();
+        $events = Event::all();
 
         foreach ($headlineBerita as $item) {
             $item->formatted_date = Carbon::parse($item->date)->translatedFormat('d F Y');
