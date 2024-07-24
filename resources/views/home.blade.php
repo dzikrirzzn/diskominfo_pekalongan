@@ -205,9 +205,9 @@
 
 
         <!-- Berita & Pengumuman -->
-<div class="relative h-screen">
+<div class="relative min-h-screen">
     <!-- Background Image Overlay -->
-    <div class="absolute inset-0 bg-cover bg-center h-full"
+    <div class="absolute inset-0 bg-cover bg-center min-h-screen"
         style="background-image: url('https://asset.kompas.com/crops/AsZwJgbHv7GOQqeOdxo1cCZ64Ak=/167x95:965x627/750x500/data/photo/2022/10/01/633807f7d7d67.png');">
         <div class="absolute inset-0 bg-gray-500 opacity-60"></div>
     </div>
@@ -215,7 +215,7 @@
     <div class="container mx-auto py-8 px-4 h-full relative z-10">
         <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 h-full px-4 md:px-20">
             <!-- Berita Section -->
-            <div class="w-3/4 bg-transparent rounded-lg p-4 h-full flex flex-col">
+            <div class="w-full md:w-3/4 bg-transparent rounded-lg p-4 h-full flex flex-col">
                 <div class="flex items-center justify-between border-b-2 border-gray-300 mb-4">
                     <h2 class="text-2xl md:text-3xl font-semibold text-white">Berita Kota</h2>
                     <a href="{{ route('berita.list') }}" class="text-sm text-white hover:text-blue-400">Lihat Semua</a>
@@ -263,7 +263,7 @@
                 </div>
             </div>
             <!-- Pengumuman Section -->
-            <div class="w-1/4 bg-transparent rounded-lg p-4 h-full flex flex-col">
+            <div class="w-full md:w-1/4 bg-transparent rounded-lg p-4 h-full flex flex-col">
                 <div class="flex justify-between items-center mb-4 border-b-2 border-gray-300">
                     <h2 class="text-2xl md:text-3xl font-semibold text-left text-white">Pengumuman</h2>
                     <a href="{{ route('pengumuman.list') }}" class="text-sm text-white hover:text-blue-400">Lihat Semua</a>
@@ -285,6 +285,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Galeri -->
 <div class="mx-4 md:mx-16 mt-10 mb-24">
@@ -541,8 +542,6 @@ var secondSwiper = new Swiper('.second-carousel', {
         </style>
 
 
-
-
         <!-- Layanan Kota Pekalongan -->
         <div class="mx-10 mt-12 mb-20">
             <div class="container mx-auto py-8 px-4">
@@ -614,7 +613,7 @@ var secondSwiper = new Swiper('.second-carousel', {
                 <div class="flex flex-col space-y-4 w-full lg:w-1/2">
                     <div class="font-bold mb-4 text-left">Postingan dari @pemkotpkl</div>
                     <a class="twitter-timeline" href="https://twitter.com/pemkotpkl" data-tweet-limit="5"
-                        data-height="550" data-width="100%">Tweets by Pemkot Pekalongan</a>
+                        data-height="600" data-width="100%">Tweets by Pemkot Pekalongan</a>
                     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
 
