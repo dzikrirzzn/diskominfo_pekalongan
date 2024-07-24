@@ -27,8 +27,11 @@ class ContentController extends Controller
         return view('content.list_content', ['data' => $data, 'type' => 'travel']);
     }
 
+
     public function show($type, $id)
     {
+    // Fetch other related content
+    
         if ($type === 'berita') {
             $content = HeadlineBerita::find($id);
             $otherContent = OtherBerita::all();

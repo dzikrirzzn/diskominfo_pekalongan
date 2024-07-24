@@ -64,7 +64,7 @@
                 <ul class="space-y-4">
                     @foreach ($otherContent as $content)
                     <li class="flex items-center">
-                        <a href="{{ route($type . '.show', ['id' => $content->id]) }}"
+                        <a href="{{ route('content.show', ['type' => 'berita', 'id' => $content->id]) }}"
                             class="flex justify-between w-full no-underline text-black">
                             <img class="w-16 h-16 object-cover rounded-lg mr-4"
                                 src="{{ asset('storage/' . $content->image) }}" alt="{{ $content->title }}">

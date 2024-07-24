@@ -41,7 +41,7 @@ class BeritaController extends Controller
         }
 
         $otherBerita = OtherBerita::latest()->take(5)->get();
-        $type = $berita instanceof HeadlineBerita ? 'kota' : 'lainnya';
+        $type = 'berita'; // or 'pengumuman' or 'travel'
 
 
         return view('content.detail_content', compact('berita', 'otherBerita'));
