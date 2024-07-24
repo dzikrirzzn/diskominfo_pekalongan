@@ -6,6 +6,8 @@ use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\TravelRecommendationController;
 use App\Http\Controllers\LayananController; // Add this line
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\PageController;
 
 Route::get('/', [BeritaController::class, 'home'])->name('home');
 
@@ -61,5 +63,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// routes views
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
+Route::get('/{page}', [PageController::class, 'show']);
 
 require __DIR__.'/auth.php';
