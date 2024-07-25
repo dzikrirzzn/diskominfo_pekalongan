@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
 <style>
@@ -43,119 +44,258 @@
     cursor: grab;
 }
 
+body { 
+    overflow-x: hidden;
+}
+
+/* headline */
+        .search-button {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .search-button:hover {
+            color: #333;
+        }
+
+        #leftSection {
+            width: 100%;
+            height: 500px;
+            background-color: #fbbf24;
+            border-top-right-radius: 10% 70%;
+            border-bottom-right-radius: 10% 80%;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            clip-path: ellipse(100% 130% at 0% 55%);
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @media (min-width: 1024px) {
+            #leftSection {
+                height: 92vh;
+            }
+        }
+
+        #rightSection {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .swiper-slide {
+            width: 500px; /* Adjust width considering spaceBetween */
+            max-width: 700px; /* Ensure slides don't exceed a certain width */
+            height: 100%;
+
+        }
+
+        .swiper-slide img:hover {
+            transform: scale(0.95);
+        }
+
+        .carousel-image {
+            width: 400vh;
+            height: auto;
+            object-fit: cover;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        #leftSection h1,
+        #leftSection p,
+        #leftSection .relative {
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        #rightSection .swiper-slide {
+            animation: fadeIn 1s ease-in;
+        }
+        
 </style>
 
 <body class="flex flex-col min-h-screen bg-white">
     @include('layouts.navbarhome')
-    <!-- Rest of your page content -->
 
-    <main class="flex-1 relative z-0 pt-4 md:pt-8 lg:pt-16 mt-16">
+    <main class="flex-1 relative z-0 pt-4 md:pt-8 lg:pt-16">
+<!-- Headline -->
+<div class="flex flex-col lg:flex-row h-auto lg:h-[92vh]">
+        <div id="leftSection" class="relative bg-yellow-500 text-white p-6 md:p-12 lg:p-24 flex flex-col justify-start z-10" style="min-height: 500px;">
+            <h1 class="text-3xl md:text-5xl lg:text-7xl font-bold mb-4 md:mb-8 mt-20">Welcome to<br>City of<br>Pekalongan</h1>
+            <p class="mb-4 md:mb-8 text-lg md:text-xl lg:text-2xl">World City of Batik</p>
+            <div class="relative">
+                <input type="text" placeholder="How can we help?" class="w-full p-3 md:p-4 pr-12 rounded-full text-black text-lg md:text-xl">
+            </div>  
+        </div>
 
-        <div class="flex flex-col lg:flex-row h-auto lg:h-[92vh]">
-            <!-- Left side (yellow section) -->
-            <div class="transform scale-100 md:scale-110 lg:scale-125 relative lg:w-6/12 bg-yellow-500 text-white p-6 md:p-12 lg:p-24 flex flex-col justify-start z-10 h-screen"
-                style="clip-path: ellipse(100% 100% at 0% 50%);">
-                <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-8">Welcome to<br>City of<br>Pekalongan
-                </h1>
-                <p class="mb-4 md:mb-8 text-lg md:text-xl lg:text-2xl">World City of Batik</p>
-                <div class="relative">
-                    <input type="text" placeholder="How can we help?"
-                        class="w-full p-3 md:p-4 pr-12 rounded-full text-black text-lg md:text-xl">
-                    <button class="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2">
-                        <svg class="w-6 md:w-8 h-6 md:h-8 text-gray-500" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </button>
+        <div id="rightSection" class="relative lg:w-5/12 flex items-center justify-end lg:h-screen z-0">
+            <div class="swiper-container w-auto h-full">
+                <div class="swiper-wrapper vh-100 vw-400 mx-48">
+                    @foreach ($headlineBerita as $berita)
+                        <div class="swiper-slide">
+                                <img src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}" class="carousel-image">
+                        </div>
+                    @endforeach
                 </div>
             </div>
-            <!-- Right side (image) -->
-             
-            <div class="relative w-full lg:w-6/12 flex items-center justify-end lg:h-auto z-0">
-                <img src="{{ asset('img/pemkot.png') }}" alt="foto wali dan walikota pekalongan"
-                    class="absolute w-full h-full object-cover">
-            </div>
         </div>
-        
-        <!-- carousel travel -->
-<div class="mx-48 mt-20 mb-4">
-        <div class="relative py-4 md:py-8 bg-no-repeat bg-left-top">
-        <div class="relative w-full max-w-6xl mx-auto my-4 md:my-8" x-data="{
-    activeSlide: 1,
-    slides: [
-        @foreach ($travelRecommendations as $recommendation)
-            { id: {{ $recommendation->id }}, image: '{{ asset('storage/' . $recommendation->image) }}', logo: '{{ asset('img/pklbunga.png') }}', title: '{{ $recommendation->judul }}', description: '{{ $recommendation->isi }}' },
-        @endforeach
-    ],
-    cleanHTML(html) {
-        let tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
-        return tempDiv.innerText || tempDiv.textContent;
-    }
-}">
+    </div>
 
-                <div class="container mx-auto p-4">
-                    <div class="overflow-hidden rounded-lg shadow-2xl my-8 mx-auto max-w-screen-lg relative">
-                        <div class="absolute top-0 left-0 right-0 h-4 bg-white shadow-2xl"></div>
-                        <div class="flex transition-transform duration-300 ease-in-out"
-                            :style="{ transform: translateX(-${(activeSlide - 1) * 100}%) }">
-                            <template x-for="slide in slides" :key="slide.id">
-                                <div class="flex-none w-full">
-                                    <div class="flex flex-col md:flex-row h-full">
-                                        <!-- Left side - Image -->
-                                        <div class="w-full md:w-1/2 h-64 md:h-96 relative border-l-2 border-t-2 border-b-2 border-gray-200">
-                                            <img :src="slide.image" :alt="slide.title"
-                                                class="w-full h-full object-cover">
-                                        </div>
-                                        <!-- Right side - Content -->
-                                        <div class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative shadow-lg border-t-2 border-r-2 border-b-2 border-gray-200">
-                                    <img :src="slide.logo" :alt="slide.title + ' Logo'"
-                                        class="h-16 md:h-24 w-auto mb-2 absolute top-2 md:top-4 left-2 md:left-4 object-contain">
-                                    <h2 class="text-lg md:text-2xl font-bold mb-2 text-black mt-20 md:mt-28"
-                                        x-text="slide.title"></h2>
-                                    <p class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis mt-6"
-                                        x-text="slide.description"></p>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var swiper = new Swiper('.swiper-container', {
+                loop: true,
+                slidesPerView: 3,
+                spaceBetween: 30,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                    reverseDirection: false,
+                },
+                allowTouchMove: false,
+            });
+        });
+    </script>
+
+    <!-- carousel travel -->
+    <div class="mx-16 mt-10">
+        <div class="container mx-auto py-8 px-4">
+            <div class="mx-4 md:mx-16">
+                <div class="relative py-4 md:py-8 bg-no-repeat bg-left-top">
+                    <div class="relative w-full max-w-6xl mx-auto my-4 md:my-8">
+                        <h1 class="text-2xl font-bold text-black">Rekomendasi Wisata Kota Pekalongan</h1>
+                        <div class="container mx-auto p-4">
+                            <div class="overflow-hidden rounded-lg shadow-2xl my-8 mx-auto max-w-screen-lg relative">
+                                <div class="absolute top-0 left-0 right-0 h-4 bg-white shadow-2xl"></div>
+                                <div class="relative flex transition-transform duration-500 ease-in-out" id="slides">
+                                    @foreach ($travelRecommendations as $index => $recommendation)
+                                    <div class="slide w-full flex-shrink-0" data-index="{{ $index }}">
+                                        <div class="flex flex-col md:flex-row h-full">
+                                            <!-- Left side - Image -->
+                                            <div class="w-full md:w-1/2 h-96 md:h-auto relative border-l-2 border-t-2 border-b-2 border-gray-200">
+                                                <img src="{{ asset('storage/' . $recommendation->image) }}"
+                                                    alt="{{ $recommendation->judul }}" class="w-full h-full object-cover">
+                                            </div>
+                                            <!-- Right side - Content -->
+                                            <div class="w-full md:w-1/2 bg-white p-4 md:p-6 flex flex-col justify-start relative shadow-lg border-t-2 border-r-2 border-b-2 border-gray-200">
+                                                <img src="{{ asset('img/pklbunga.png') }}" alt="{{ $recommendation->judul }} Logo"
+                                                    class="h-16 md:h-24 w-auto mb-2 absolute top-2 md:top-4 left-2 md:left-4 object-contain">
+                                                <h2 class="text-lg md:text-2xl font-bold mb-2 text-black mt-20 md:mt-28">
+                                                    {{ $recommendation->judul }}</h2>
+                                                <p class="text-sm md:text-base text-gray-700 overflow-hidden overflow-ellipsis mt-6">
+                                                    {{ $recommendation->isi }}</p>
+                                            </div>
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
-                            </template>
+                            </div>
+                            <!-- Navigation buttons -->
+                            <button onclick="prevSlide()"
+                                class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-20">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    class="h-4 w-4 md:h-6 md:w-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                            <button onclick="nextSlide()"
+                                class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-20">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    class="h-4 w-4 md:h-6 md:w-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </div>
-                </div>
-                <!-- Navigation buttons -->
-                <button @click="prev"
-            class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                class="h-4 w-4 md:h-6 md:w-6">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-        </button>
-        <button @click="next"
-            class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                class="h-4 w-4 md:h-6 md:w-6">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-                </button>
             </div>
         </div>
+    </div>
 
-        <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('navbar', () => ({
-                isOpen: false,
-                scrolled: false,
-                init() {
-                    window.addEventListener('scroll', () => {
-                        this.scrolled = window.scrollY > 50;
-                    });
-                },
-            }));
-        });
-        </script>
+    <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const slidesContainer = document.getElementById('slides');
 
+    function showSlide(index) {
+        const slideWidth = slides[0].clientWidth;
+        const offset = -index * slideWidth;
+        slidesContainer.style.transform = `translateX(${offset}px)`;
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide > 0) ? currentSlide - 1 : slides.length - 1;
+        showSlide(currentSlide);
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide < slides.length - 1) ? currentSlide + 1 : 0;
+        showSlide(currentSlide);
+    }
+
+    // Automatically show the first slide on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        showSlide(currentSlide);
+        setInterval(nextSlide, 5000); // Auto-slide every 5 seconds
+    });
+    </script>
 
 <!-- Berita & Pengumuman -->
 <div class="relative h-screen">
@@ -240,62 +380,116 @@
 
 
 <!-- Galeri -->
-<div class=" mx-16  mt-10 mb-24">
-        <div class="container mx-auto py-8 px-4">
-            <h1 class="text-2xl font-bold mb-6 text-black">Galeri Kota Pekalongan</h1>
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    @foreach($galleries as $gallery)
-                    <div class="swiper-slide">
-                        <div class="relative group rounded-lg overflow-hidden shadow-md">
-                            <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}"
-                                class="w-full h-32 object-cover">
-                            <div
-                                class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300">
-                            </div>
-                            <div
-                                class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
-                                {{ $gallery->title }}
-                            </div>
+<div class="mx-4 md:mx-16 mt-10 mb-24">
+    <div class="container mx-auto py-8 px-4">
+        <h1 class="text-2xl font-bold mb-6 text-black">Galeri Kota Pekalongan</h1>
+
+        <!-- First Carousel -->
+        <div class="swiper-container first-carousel">
+            <div class="swiper-wrapper">
+                @foreach($galleries as $index => $gallery)
+                @if($index % 2 == 0)
+                <div class="swiper-slide">
+                    <div class="gallery-item relative group rounded-lg overflow-hidden shadow-md h-48">
+                        <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}" class="w-full h-32 object-cover">
+                        <div class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
+                            {{ $gallery->title }}
                         </div>
                     </div>
-                    @endforeach
                 </div>
+                @endif
+                @endforeach
             </div>
         </div>
+
+        <!-- Second Carousel -->
+        <div class="swiper-container second-carousel mt-10">
+            <div class="swiper-wrapper">
+                @foreach($galleries as $index => $gallery)
+                @if($index % 2 != 0)
+                <div class="swiper-slide">
+                    <div class="gallery-item relative group rounded-lg overflow-hidden shadow-md h-48">
+                        <img src="{{ asset('storage/' . $gallery->image) }}" alt="{{ $gallery->title }}" class="w-full h-32 object-cover">
+                        <div class="absolute inset-0 bg-yellow-500 opacity-70 group-hover:opacity-0 transition-opacity duration-300"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-white font-bold text-center">
+                            {{ $gallery->title }}
+                        </div>
+                    </div>
+                </div>
+                @endif
+                @endforeach
+            </div>
         </div>
+    </div>
+</div>
 
-        <!-- Include Swiper JS -->
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<!-- Include Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-        <!-- Initialize Swiper -->
-        <script>
-        var swiper = new Swiper('.swiper-container', {
+<!-- Initialize Swiper -->
+<script>
+var firstSwiper = new Swiper('.first-carousel', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    slidesPerGroup: 1,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    grabCursor: true,
+    autoplay: {
+        delay: 5000,
+        disableOnInteraction: false
+    },
+    breakpoints: {
+        640: {
             slidesPerView: 2,
-            spaceBetween: 10,
             slidesPerGroup: 2,
-            loop: true,
-            loopFillGroupWithBlank: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            breakpoints: {
-                // when window width is >= 640px
-                640: {
-                    slidesPerView: 3,
-                    slidesPerGroup: 3,
-                    spaceBetween: 20
-                },
-                // when window width is >= 768px
-                768: {
-                    slidesPerView: 4,
-                    slidesPerGroup: 4,
-                    spaceBetween: 30
-                }
-            }
-        });
-        </script>
+            spaceBetween: 20
+        },
+        768: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+            spaceBetween: 30
+        },
+        1024: {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+            spaceBetween: 40
+        }
+    }
+});
+
+var secondSwiper = new Swiper('.second-carousel', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    slidesPerGroup: 1,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    grabCursor: true,
+    autoplay: {
+        delay: 5000,
+        disableOnInteraction: false
+    },
+    breakpoints: {
+        640: {
+            slidesPerView: 2,
+            slidesPerGroup: 2,
+            spaceBetween: 20
+        },
+        768: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+            spaceBetween: 30
+        },
+        1024: {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+            spaceBetween: 40
+        }
+    }
+});
+</script>
+
 
 
        
@@ -642,6 +836,33 @@ document.getElementById('focusButton').addEventListener('click', () => {
         </div>
     </div>
 </footer>
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Include other scripts here -->
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+
 </body>
+<script>
+window.onload = function() {
+        // Function to adjust height
+        function adjustHeight() {
+            var rightHeight = document.getElementById('rightSection').clientHeight;
+            var leftSection = document.getElementById('leftSection');
+            leftSection.style.minHeight = rightHeight + 'px';
+        }
+
+        // Call adjustHeight on page load
+        adjustHeight();
+
+        // Optional: Adjust height on window resize to remain responsive
+        window.onresize = adjustHeight;
+    }
+</script>
 
 </html>
