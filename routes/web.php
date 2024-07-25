@@ -98,6 +98,14 @@ Route::put('/admin/event/{id}', [EventController::class, 'update'])->name('admin
 Route::delete('/admin/event/{id}', [EventController::class, 'destroy'])->name('admin.event.destroy');
 Route::get('/admin/event/show', [EventController::class, 'show'])->name('admin.event.show');
 
+Route::get('/content/{id}', [BeritaController::class, 'show'])->name('content.show');
+
+Route::get('/berita', [ContentController::class, 'listBerita'])->name('content.list_berita');
+Route::get('/galeri',[ContentController::class, 'listGaleri'])->name('content.list_galeri');
+Route::get('/pengumuman', [ContentController::class, 'listPengumuman'])->name('content.list_pengumuman');
+Route::get('/travel', [ContentController::class, 'listTravel'])->name('content.list_travel');
+Route::get('/otherBerita', [ContentController::class, 'listOtherBerita'])->name('content.list_otherBerita');
+Route::get('/content/{type}/{id}', [ContentController::class, 'show'])->name('content.show');
 
 // routes/web.php
 Route::get('/navItems/create', [NavItemController::class, 'create'])->name('navItems.create');

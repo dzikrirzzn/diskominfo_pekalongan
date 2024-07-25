@@ -50,10 +50,6 @@
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Subtitle
-                                    </th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Location
                                     </th>
                                     <th scope="col"
@@ -75,8 +71,6 @@
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap truncate max-w-xs"
                                         title="{{ $event->title }}">{{ $event->title }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap truncate max-w-xs"
-                                        title="{{ $event->subtitle }}">{{ $event->subtitle }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $event->location }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $event->event_date }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $event->link }}</td>

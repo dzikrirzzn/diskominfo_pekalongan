@@ -33,15 +33,14 @@ class BeritaController extends Controller
         foreach ($headlineBerita as $item) {
             $item->formatted_date = Carbon::parse($item->date)->translatedFormat('d F Y');
         }
-    
+
         foreach ($otherBerita as $item) {
             $item->formatted_date = Carbon::parse($item->date)->translatedFormat('d F Y');
         }
-    
+
         foreach ($pengumuman as $item) {
             $item->formatted_date = Carbon::parse($item->tanggal)->translatedFormat('d F Y');
         }
-    
 
         return view('home', compact('headlineBerita', 'otherBerita', 'pengumuman', 'travelRecommendations', 'layanans', 'galleries', 'events'));
     }
@@ -55,10 +54,9 @@ class BeritaController extends Controller
         }
 
         $otherBerita = OtherBerita::latest()->take(5)->get();
-        $otherBerita->formatted_date = Carbon::parse($otherBerita->date)->translatedFormat('d F Y');
-
-        $type = 'berita'; // or 'pengumuman' or 'travel'
-
+        foreach ($otherBerita as $item) {
+            $item->formatted_date = Carbon::parse($item->date)->translatedFormat('d F Y');
+        }
 
         return view('content.detail_content', compact('berita', 'otherBerita'));
     }

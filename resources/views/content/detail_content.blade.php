@@ -27,8 +27,27 @@
                     <h1 class="text-4xl font-bold mb-2">{{ $content->title }}</h1>
                     <div class="text-gray-600 text-sm mb-4">
                         <span>Ditulis oleh {{ $content->author }}</span> | <span>{{ $content->formatted_date }}</span> |
-                        <span>2449
-                            views</span>
+                        <span>2449 views</span>
+                    </div>
+                    <img class="max-h-80 max-w-96 rounded-lg mb-4 content-center"
+                        src="{{ asset('storage/' . $content->image) }}" alt="{{ $content->title }}">
+                    <p class="leading-7 mb-4 text-justify">{{ $content->subtitle }}</p>
+                    <p class="leading-7 mb-4 text-justify">{!! $content->content !!}</p>
+                    @elseif($type === 'otherBerita')
+                    <h1 class="text-4xl font-bold mb-2">{{ $content->title }}</h1>
+                    <div class="text-gray-600 text-sm mb-4">
+                        <span>Ditulis oleh {{ $content->author }}</span> | <span>{{ $content->formatted_date }}</span> |
+                        <span>2449 views</span>
+                    </div>
+                    <img class="max-h-80 max-w-96 rounded-lg mb-4 content-center"
+                        src="{{ asset('storage/' . $content->image) }}" alt="{{ $content->title }}">
+                    <p class="leading-7 mb-4 text-justify">{{ $content->subtitle }}</p>
+                    <p class="leading-7 mb-4 text-justify">{!! $content->content !!}</p>
+                    @elseif($type === 'galeri')
+                    <h1 class="text-4xl font-bold mb-2">{{ $content->title }}</h1>
+                    <div class="text-gray-600 text-sm mb-4">
+                        <span>Ditulis oleh {{ $content->author }}</span> | <span>{{ $content->formatted_date }}</span> |
+                        <span>2449 views</span>
                     </div>
                     <img class="max-h-80 max-w-96 rounded-lg mb-4 content-center"
                         src="{{ asset('storage/' . $content->image) }}" alt="{{ $content->title }}">
@@ -64,15 +83,15 @@
                 style="max-height: 500px; overflow-y: auto;">
                 <h2 class="text-2xl font-bold mb-6 border-gray-400 border-b-2 mr-1">Lainnya</h2>
                 <ul class="space-y-4">
-                    @foreach ($otherContent as $content)
+                    @foreach ($otherContent as $item)
                     <li class="flex items-center">
-                        <a href="{{ route('content.show', ['type' => 'berita', 'id' => $content->id]) }}"
-                            class="flex justify-between w-full no-underline text-black">
+                        <a href="{{ route('content.show', ['type' => 'otherBerita', 'id' => $item->id]) }}"
+                            class="flex justify-between w-full no-underline">
                             <img class="w-16 h-16 object-cover rounded-lg mr-4"
-                                src="{{ asset('storage/' . $content->image) }}" alt="{{ $content->title }}">
+                                src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}">
                             <div class="flex-1">
-                                <h3 class="text-lg font-semibold">{{ $content->title }}</h3>
-                                <p class="text-gray-600 text-sm">{{ $content->formatted_date }}</p>
+                                <h3 class="text-lg font-semibold">{{ $item->title }}</h3>
+                                <p class="text-gray-600 text-sm">{{ $item->formatted_date }}</p>
                             </div>
                         </a>
                     </li>

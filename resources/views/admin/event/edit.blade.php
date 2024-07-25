@@ -71,24 +71,23 @@
                             </div>
                             <div class="mb-4">
                                 <label for="event_date" class="block text-gray-700 text-sm font-bold mb-2">Date:</label>
-                                <input type="date" id="event_date" name="event_date"
-                                    value="{{ old('event_date', $events->event_date->format('Y-m-d')) }}"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    required>
+                                <input type="date" name="event_date" class="form-control"
+                                    value="{{ old('event_date', $events->event_date ? $events->event_date->format('Y-m-d') : '') }}">
                             </div>
 
                             <div class="mb-4">
-                                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Gambar:</label>
+                                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Gambar :</label>
                                 <div class="flex items-center">
                                     <label for="image"
                                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer">
                                         Pilih File
                                     </label>
-                                    <span id="file-chosen"
-                                        class="ml-2 text-gray-700">{{ $events->image ? $events->image : 'No file chosen' }}</span>
+                                    <span id="file-chosen" class="ml-2 text-gray-700">No file chosen</span>
                                 </div>
-                                <input type="file" accept="image/jpeg,image/png,image/jpg" id="image" name="image"
-                                    class="hidden">
+                                <input type="file" id="image" name="image" class="hidden">
+                                @if($events->image)
+                                <img src="{{ asset('storage/' . $events->image) }}" alt="Current Image" width="100">
+                                @endif
                             </div>
                             <div class="mb-4">
                                 <label for="link" class="block text-gray-700 text-sm font-bold mb-2">Link:</label>

@@ -10,12 +10,17 @@ class GalleryController extends Controller
     public function index()
     {
         $galleries = Gallery::all();
+        $shuffledGalleries = $galleries->shuffle();
+
+        // Bagi item galeri menjadi dua grup dengan masing-masing 3 item
+        $chunks = $shuffledGalleries->chunk(3);
         return view('home', compact('galleries'));
     }
 
     public function adminIndex()
     {
         $galleries = Gallery::all();
+        
         return view('admin.galeri.index', compact('galleries'));
     }
 
@@ -26,6 +31,9 @@ class GalleryController extends Controller
         if (!$gallery) {
             return redirect()->route('admin.galeri.index')->with('error', 'Galeri tidak ditemukan.');
         }
+
+        $type = 'galeri';
+
 
         return view('galeri.show', compact('gallery'));
     }
