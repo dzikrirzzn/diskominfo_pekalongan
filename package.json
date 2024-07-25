@@ -18,6 +18,8 @@
         "vite": "^5.3.3"
     },
     "dependencies": {
+        "evo-calendar": "^1.1.3",
+        "js-year-calendar": "^2.0.0",
         "swiper": "^11.1.4",
         "vue": "^3.4.31"
     }

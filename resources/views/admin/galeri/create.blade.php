@@ -15,7 +15,7 @@
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Upload Travel') }}
+                {{ __('Upload Galeri') }}
             </h2>
         </x-slot>
         <div class="py-12">
@@ -33,31 +33,30 @@
                             {{ session('error') }}
                         </div>
                         @endif
-                        <form method="POST" action="{{ route('admin.travel_recommendations.store') }}"
-                            enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.galeri.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-4">
-                                <label for="judul" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
-                                <input type="text" id="judul" name="judul"
+                                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
+                                <input type="text" id="title" name="title"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     required>
                             </div>
                             <div class="mb-4">
-                                <label for="sub_judul"
+                                <label for="subtitle"
                                     class="block text-gray-700 text-sm font-bold mb-2">Subtitle:</label>
-                                <input type="text" id="sub_judul" name="sub_judul"
+                                <input type="text" id="subtitle" name="subtitle"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     required>
                             </div>
                             <div class="mb-4">
-                                <label for="isi" class="block text-gray-700 text-sm font-bold mb-2">Content:</label>
-                                <textarea id="isi" name="isi" rows="5"
+                                <label for="content" class="block text-gray-700 text-sm font-bold mb-2">Content:</label>
+                                <textarea id="content" name="content" rows="5"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     required></textarea>
                             </div>
                             <div class="mb-4">
                                 <label for="author" class="block text-gray-700 text-sm font-bold mb-2">Author:</label>
-                                <input type="text" id="author" name="author"
+                                <input type="text" id="author" name="author" value="{{Auth::user()->name}}" readonly
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     required>
                             </div>
@@ -76,11 +75,11 @@
                                     </label>
                                     <span id="file-chosen" class="ml-2 text-gray-700">No file chosen</span>
                                 </div>
-                                <input type="file" id="image" name="image" class="hidden">
+                                <input type="file" accept="image/jpeg,image/png,image/jpg" id="image" name="image" class="hidden">
                             </div>
                             <div class="mb-4">
-                                <label for="map" class="block text-gray-700 text-sm font-bold mb-2">Map:</label>
-                                <input type="text" id="map" name="map"
+                                <label for="link" class="block text-gray-700 text-sm font-bold mb-2">Link:</label>
+                                <input type="url" id="link" name="link"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     required>
                             </div>
@@ -102,7 +101,7 @@
                 dateFormat: 'yy-mm-dd'
             });
         });
-        CKEDITOR.replace('isi');
+        CKEDITOR.replace('content');
 
         const imageInput = document.getElementById('image');
         const fileChosen = document.getElementById('file-chosen');

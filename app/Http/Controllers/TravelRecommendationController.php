@@ -56,6 +56,18 @@ class TravelRecommendationController extends Controller
         $travelRecommendation = TravelRecommendation::findOrFail($id);
         return view('admin.travel.edit', compact('travelRecommendation'));
     }
+    public function show($id)
+    {
+        $travelRecommendation = TravelRecommendation::findOrFail($id);
+
+        if (!$travelRecommendation) {
+            return redirect()->route('travel.index')->with('error', 'Travel tidak ditemukan.');
+        }
+        $type = 'travel';
+
+
+        return view('content.detail_content', compact('travelRecommendation'));
+    }
 
     public function update(Request $request, $id)
     {

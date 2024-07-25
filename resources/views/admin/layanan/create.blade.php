@@ -1,23 +1,21 @@
-<!-- resources/views/admin/berita/create.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Berita</title>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <title>Upload Layanan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 </head>
 
 <body>
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Upload Berita') }}
+                {{ __('Upload Layanan') }}
             </h2>
         </x-slot>
 
@@ -36,38 +34,20 @@
                             {{ session('error') }}
                         </div>
                         @endif
-                        <form method="POST" action="{{ route('admin.berita.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('layanans.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-4">
-                                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
+                                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Judul:</label>
                                 <input type="text" id="title" name="title"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     required>
                             </div>
                             <div class="mb-4">
-                                <label for="subtitle"
-                                    class="block text-gray-700 text-sm font-bold mb-2">Subtitle:</label>
-                                <input type="text" id="subtitle" name="subtitle"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    required>
-                            </div>
-                            <div class="mb-4">
-                                <label for="content" class="block text-gray-700 text-sm font-bold mb-2">Content:</label>
-                                <textarea id="content" name="content" rows="5"
+                                <label for="description" class="block text-gray-700 text-sm font-bold mb-2">
+                                    Deskripsi:</label>
+                                <textarea id="description" name="description" rows="5"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     required></textarea>
-                            </div>
-                            <div class="mb-4">
-                                <label for="author" class="block text-gray-700 text-sm font-bold mb-2">Author:</label>
-                                <input type="text" id="author" name="author" value="{{Auth::user()->name}}" readonly
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    required>
-                            </div>
-                            <div class="mb-4">
-                                <label for="date" class="block text-gray-700 text-sm font-bold mb-2">Date:</label>
-                                <input type="date" id="date" name="date"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline datepicker"
-                                    required>
                             </div>
                             <div class="mb-4">
                                 <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Gambar :</label>
@@ -78,16 +58,13 @@
                                     </label>
                                     <span id="file-chosen" class="ml-2 text-gray-700">No file chosen</span>
                                 </div>
-                                <input type="file" accept="image/jpeg,image/png,image/jpg" id="image" name="image" class="hidden">
+                                <input type="file" id="image" accept="image/jpeg,image/png,image/jpg" name="image" class="hidden">
                             </div>
                             <div class="mb-4">
-                                <label for="type" class="block text-gray-700 text-sm font-bold mb-2">Type:</label>
-                                <select id="type" name="type"
+                                <label for="link" class="block text-gray-700 text-sm font-bold mb-2">Link:</label>
+                                <input type="url" id="link" name="link"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     required>
-                                    <option value="kota">Berita Kota</option>
-                                    <option value="lainnya">Berita Lainnya</option>
-                                </select>
                             </div>
                             <div class="mb-4">
                                 <button type="submit"
@@ -107,7 +84,7 @@
                 dateFormat: 'yy-mm-dd'
             });
         });
-        CKEDITOR.replace('content');
+        CKEDITOR.replace('description');
 
         const imageInput = document.getElementById('image');
         const fileChosen = document.getElementById('file-chosen');

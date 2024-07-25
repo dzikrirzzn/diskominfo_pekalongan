@@ -8,7 +8,9 @@ use App\Models\Layanan;
 use App\Models\OtherBerita;
 use App\Models\Pengumuman;
 use App\Models\TravelRecommendation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\Event;
 
 class BeritaController extends Controller
 {
@@ -26,8 +28,21 @@ class BeritaController extends Controller
         $travelRecommendations = TravelRecommendation::all();
         $layanans = Layanan::all();
         $galleries = Gallery::all();
+        $events = Event::all();
 
-        return view('home', compact('headlineBerita', 'otherBerita', 'pengumuman', 'travelRecommendations', 'layanans', 'galleries'));
+        foreach ($headlineBerita as $item) {
+            $item->formatted_date = Carbon::parse($item->date)->translatedFormat('d F Y');
+        }
+
+        foreach ($otherBerita as $item) {
+            $item->formatted_date = Carbon::parse($item->date)->translatedFormat('d F Y');
+        }
+
+        foreach ($pengumuman as $item) {
+            $item->formatted_date = Carbon::parse($item->tanggal)->translatedFormat('d F Y');
+        }
+
+        return view('home', compact('headlineBerita', 'otherBerita', 'pengumuman', 'travelRecommendations', 'layanans', 'galleries', 'events'));
     }
 
     public function show($id)
@@ -35,12 +50,15 @@ class BeritaController extends Controller
         $berita = $this->findBeritaById($id);
 
         if (!$berita) {
-            return redirect()->route('berita.listberita')->with('error', 'Berita tidak ditemukan.');
+            return redirect()->route('content.list_content')->with('error', 'Berita tidak ditemukan.');
         }
 
         $otherBerita = OtherBerita::latest()->take(5)->get();
+        foreach ($otherBerita as $item) {
+            $item->formatted_date = Carbon::parse($item->date)->translatedFormat('d F Y');
+        }
 
-        return view('berita.berita_content', compact('berita', 'otherBerita'));
+        return view('content.detail_content', compact('berita', 'otherBerita'));
     }
 
     public function store(Request $request)
@@ -58,9 +76,9 @@ class BeritaController extends Controller
                 OtherBerita::create($data);
             }
 
-            return redirect()->back()->with('success', 'Berita berhasil diupload!');
+            return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diupload!');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupload berita: ' . $e->getMessage());
+            return redirect()->route('admin.berita.index')->with('error', 'Terjadi kesalahan saat mengupload berita: ' . $e->getMessage());
         }
     }
 

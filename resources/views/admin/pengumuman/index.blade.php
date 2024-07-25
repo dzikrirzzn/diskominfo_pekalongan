@@ -65,7 +65,8 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach($allPengumuman as $pengumuman)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $pengumuman->judul }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap truncate max-w-xs"
+                                        title="{{ $pengumuman->judul }}">{{ $pengumuman->judul }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $pengumuman->penulis }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $pengumuman->tanggal }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">

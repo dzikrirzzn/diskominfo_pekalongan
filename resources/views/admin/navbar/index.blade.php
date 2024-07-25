@@ -4,17 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Travel</title>
+    <title>Admin Navbar</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Admin Travel') }}
+                {{ __('Admin Navbar') }}
             </h2>
         </x-slot>
 
@@ -35,9 +33,9 @@
                         @endif
 
                         <div class="mb-4">
-                            <a href="{{ route('admin.travel.create') }}"
+                            <a href="{{ route('admin.navbar.create') }}"
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                Tambah Travel
+                                Tambah Navbar
                             </a>
                         </div>
 
@@ -50,15 +48,7 @@
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Sub Title
-                                    </th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Author
-                                    </th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Date
+                                        Link
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -67,18 +57,14 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach($allTravel as $travel)
+                                @foreach($navItems as $item)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap truncate max-w-xs"
-                                        title="{{ $travel->judul }}">{{ $travel->judul }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap truncate max-w-xs"
-                                        title="{{ $travel->sub_judul }}">{{ $travel->sub_judul }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $travel->author }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $travel->date }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $item->title }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $item->url }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <a href="{{ route('admin.travel.edit', $travel->id) }}"
+                                        <a href="{{ route('admin.navbar.edit', $item->id) }}"
                                             class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                        <button onclick="confirmDelete(event)" data-id="{{ $travel->id }}"
+                                        <button onclick="confirmDelete(event)" data-id="{{ $item->id }}"
                                             class="text-red-600 hover:text-red-900 ml-2">Delete</button>
                                     </td>
                                 </tr>
@@ -120,7 +106,7 @@
                             event.preventDefault();
                             const id = event.target.getAttribute('data-id');
                             const form = document.getElementById('delete-form');
-                            form.action = `/admin/travel/${id}`;
+                            form.action = `/admin/navbar/${id}`;
                             document.getElementById('delete-confirmation-modal').style.display = 'flex';
                         }
 

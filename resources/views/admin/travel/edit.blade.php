@@ -107,7 +107,6 @@
                 dateFormat: 'yy-mm-dd'
             });
         });
-        CKEDITOR.replace('isi');
 
         const imageInput = document.getElementById('image');
         const fileChosen = document.getElementById('file-chosen');

@@ -50,7 +50,7 @@
                             </div>
                             <div class="mb-4">
                                 <label for="penulis" class="block text-gray-700 text-sm font-bold mb-2">Penulis:</label>
-                                <input type="text" id="penulis" name="penulis"
+                                <input type="text" id="penulis" name="penulis" value="{{Auth::user()->name}}" readonly
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     required>
                             </div>
@@ -76,7 +76,7 @@
                             <div class="mb-4">
                                 <label for="link_pdf_pengumuman" class="block text-gray-700 text-sm font-bold mb-2">Link
                                     PDF Pengumuman:</label>
-                                <input type="file" id="link_pdf_pengumuman" name="link_pdf_pengumuman"
+                                <input type="file" accept=".pdf" id="link_pdf_pengumuman" name="link_pdf_pengumuman"
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                             </div>
                             <div class="mb-4">

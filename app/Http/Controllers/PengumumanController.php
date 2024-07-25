@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Pengumuman;
 
@@ -26,8 +26,10 @@ class PengumumanController extends Controller
         if (!$pengumuman) {
             return redirect()->route('pengumuman.index')->with('error', 'Pengumuman tidak ditemukan.');
         }
+        $type = 'pengumuman';
 
-        return view('pengumuman.show', compact('pengumuman'));
+
+        return view('content.detail_content', compact('pengumuman'));
     }
 
     public function store(Request $request)
@@ -53,7 +55,7 @@ class PengumumanController extends Controller
 
             $pengumuman->save();
 
-            return redirect()->back()->with('success', 'Pengumuman berhasil diupload!');
+            return redirect()->route('admin.pengumuman.index')->with('success', 'Pengumuman berhasil diupload!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat mengupload pengumuman: ' . $e->getMessage());
         }
@@ -62,6 +64,9 @@ class PengumumanController extends Controller
     public function adminIndex()
     {
         $allPengumuman = Pengumuman::all();
+        foreach ($allPengumuman as $pengumuman) {
+            $pengumuman->formatted_date = Carbon::parse($pengumuman->tanggal)->translatedFormat('d F Y');
+        }
         return view('admin.pengumuman.index', compact('allPengumuman'));
     }
 
