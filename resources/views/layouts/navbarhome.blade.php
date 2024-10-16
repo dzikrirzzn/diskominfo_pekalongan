@@ -52,21 +52,17 @@
             </a>
 
             <div class="hidden sm:flex sm:items-center">
-                @foreach($navItems as $item)
-                @if($item->parent_id === null)
-                @if($item->children->isEmpty())
+    @foreach($navItems as $item)
+        @if($item->parent_id === null)
+            @if($item->children->isEmpty())
                 <a href="{{ $item->url }}"
                     class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">{{ $item->title }}</a>
-                @else
-                <div class="relative" @mouseenter="activeDropdown = {{ $item->id }}"
-                    @mouseleave="activeDropdown = null">
-                    <button
-                        class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 inline-flex items-center">
+            @else
+                <div class="relative" @mouseenter="activeDropdown = {{ $item->id }}" @mouseleave="activeDropdown = null">
+                    <button class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 inline-flex items-center">
                         {{ $item->title }}
                         <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd" />
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
                     </button>
                     <div x-show="activeDropdown === {{ $item->id }}"
@@ -79,21 +75,48 @@
                         class="absolute z-10 left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                         <div class="py-1" role="menu" aria-orientation="vertical">
                             @foreach($item->children as $child)
-                            <a href="{{ $child->url }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                role="menuitem">{{ $child->title }}</a>
+                                <a href="{{ $child->url }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">{{ $child->title }}</a>
                             @endforeach
                         </div>
-                    </li>
-                    @else
-                    <li><a href="{{ $item->url }}" class="block text-black hover:text-gray-200 text-sm">{{ $item->title }}</a></li>
-                    @endif
-                    @endforeach
+                    </div> <!-- Correctly close the dropdown div -->
                 </div>
-            </div>
             @endif
+        @endif
+    @endforeach
+</div>
+<div class="hidden sm:flex sm:items-center">
+    @foreach($navItems as $item)
+        @if($item->parent_id === null)
+            @if($item->children->isEmpty())
+                <a href="{{ $item->url }}"
+                    class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">{{ $item->title }}</a>
+            @else
+                <div class="relative" @mouseenter="activeDropdown = {{ $item->id }}" @mouseleave="activeDropdown = null">
+                    <button class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 inline-flex items-center">
+                        {{ $item->title }}
+                        <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div x-show="activeDropdown === {{ $item->id }}"
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="transform opacity-0 scale-95"
+                        x-transition:enter-end="transform opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="transform opacity-100 scale-100"
+                        x-transition:leave-end="transform opacity-0 scale-95"
+                        class="absolute z-10 left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                        <div class="py-1" role="menu" aria-orientation="vertical">
+                            @foreach($item->children as $child)
+                                <a href="{{ $child->url }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">{{ $child->title }}</a>
+                            @endforeach
+                        </div>
+                    </div> <!-- Correctly close the dropdown div -->
+                </div>
             @endif
-            @endforeach
-        </div>
+        @endif
+    @endforeach
+</div>
     </div>
 </nav>
 
